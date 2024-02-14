@@ -1,29 +1,38 @@
 package edu.esprit.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 public class Actualite {
     private int idAct;
     private String titre;
     private String Contenue;
-    private String date_pub ;
+    private LocalDate date_pub ;
 
 
-    public Actualite (int idAct, String titre, String contenue, String date_pub) {
+    public Actualite (int idAct, String titre, String contenue, LocalDate date_pub) {
         this.idAct = idAct;
         this.titre = titre;
         this.Contenue = contenue;
         this.date_pub = date_pub;
     }
 
-    public Actualite(String titre, String contenue, String date_pub) {
+    public Actualite(String titre, String contenue) {
         this.titre = titre;
         this.Contenue = contenue;
-        this.date_pub = date_pub;
+        this.date_pub = LocalDate.now();
     }
 
     public Actualite() {
 
+    }
+
+    public Actualite(int idAct, String titre, String contenue) {
+        this.idAct = idAct;
+        this.titre = titre;
+        Contenue = contenue;
     }
 
     public Actualite(int idAct) {
@@ -42,7 +51,7 @@ public class Actualite {
         return Contenue;
     }
 
-    public String getDate_pub() {
+    public LocalDate getDate_pub() {
         return date_pub;
     }
 
@@ -60,7 +69,7 @@ public class Actualite {
 
 
 
-    public void setDate_pub(String date_pub) {
+    public void setDate_pub(LocalDate date_pub) {
         this.date_pub = date_pub;
     }
 

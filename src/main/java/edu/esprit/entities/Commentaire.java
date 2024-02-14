@@ -1,13 +1,15 @@
 package edu.esprit.entities;
 
+import java.time.LocalDate;
+
 public class Commentaire {
     private int idComnt;
     private String Contenuec;
-    private String date_pubc ;
+    private LocalDate date_pubc ;
     private  int nbrLike ;
     private  String reponse ;
 
-    public Commentaire(int idComnt, String contenuec, String date_pubc, int nbrLike, String reponse) {
+    public Commentaire(int idComnt, String contenuec, LocalDate date_pubc, int nbrLike, String reponse) {
         this.idComnt = idComnt;
         this.Contenuec = contenuec;
         this.date_pubc = date_pubc;
@@ -15,9 +17,9 @@ public class Commentaire {
         this.reponse = reponse;
     }
 
-    public Commentaire(String contenuec, String date_pubc, int nbrLike, String reponse) {
+    public Commentaire(String contenuec, int nbrLike, String reponse) {
         this.Contenuec = contenuec;
-        this.date_pubc = date_pubc;
+        this.date_pubc = LocalDate.now();
         this.nbrLike = nbrLike;
         this.reponse = reponse;
     }
@@ -30,6 +32,13 @@ public class Commentaire {
 
     }
 
+    public Commentaire(int idComnt, String contenuec, int nbrLike, String reponse) {
+        this.idComnt = idComnt;
+        this.Contenuec = contenuec;
+        this.nbrLike = nbrLike;
+        this.reponse = reponse;
+    }
+
     public int getIdComnt() {
         return idComnt;
     }
@@ -38,7 +47,7 @@ public class Commentaire {
         return Contenuec;
     }
 
-    public String getDate_pubc() {
+    public LocalDate getDate_pubc() {
         return date_pubc;
     }
 
@@ -58,7 +67,7 @@ public class Commentaire {
         Contenuec = contenuec;
     }
 
-    public void setDate_pubc(String date_pubc) {
+    public void setDate_pubc(LocalDate date_pubc) {
         this.date_pubc = date_pubc;
     }
 

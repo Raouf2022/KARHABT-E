@@ -18,7 +18,7 @@ public Actualiteservice () {
         String req = "INSERT INTO Actualite (titre, Contenue, date_pub) VALUES ('"
                 + actualite.getTitre() + "', '"
                 + actualite.getContenue() + "', '"
-                + actualite.getDate_pub() + "')";
+                + Date.valueOf(actualite.getDate_pub()) + "')";
 
         Statement statement = connection.createStatement();
         statement.executeUpdate(req);
@@ -30,15 +30,14 @@ public Actualiteservice () {
 
     @Override
     public void modifier(Actualite actualite) throws SQLException {
-        String req = "Update actualite set titre = ? , Contenue = ? , Date_pub = ? , idAct =?  ";
+        String req = "UPDATE actualite SET titre = ?, Contenue = ?, idAct = ? WHERE idAct = ?";
         PreparedStatement  prepardstatement = connection.prepareStatement(req);
-        prepardstatement.setString(1,actualite.getTitre());
-        prepardstatement.setString(2,actualite.getContenue());
-        prepardstatement.setString(3,actualite.getDate_pub());
-        prepardstatement.setInt(4,actualite.getIdAct());
+        prepardstatement.setString(1, actualite.getTitre());
+        prepardstatement.setString(2, actualite.getContenue());
+        prepardstatement.setInt(3, actualite.getIdAct());
+        prepardstatement.setInt(4, actualite.getIdAct());
         prepardstatement.executeUpdate();
         System.out.println("Actualite modifié");
-
     }
 
 
@@ -67,7 +66,7 @@ public Actualiteservice () {
             a.setIdAct(rs.getInt("idAct"));
             a.setTitre(rs.getString("titre"));
             a.setContenue(rs.getString("Contenue"));
-            a.setDate_pub(rs.getString("date_pub"));
+            a.setDate_pub(rs.getDate("date_pub").toLocalDate());
             list.add(a);
         }
         return list;

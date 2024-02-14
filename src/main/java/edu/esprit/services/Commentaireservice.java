@@ -17,7 +17,7 @@ public class Commentaireservice implements Iservice <Commentaire> {
     public void ajouter(Commentaire commentaire) throws SQLException {
         String req = "INSERT INTO Commentaire ( Contenuec, date_pubc,nbrLike,reponse) VALUES ('"
                 + commentaire.getContenuec() + "', '"
-                + commentaire.getDate_pubc() + "', '"
+                + Date.valueOf(commentaire.getDate_pubc()) + "', '"
                 + commentaire.getNbrLike() + "', '"
                 +commentaire.getReponse() + "')";
 
@@ -26,17 +26,20 @@ public class Commentaireservice implements Iservice <Commentaire> {
 
     }
 
+
+
+
+
     @Override
     public void modifier(Commentaire commentaire) throws SQLException {
-        String req = "Update commentaire set Contenuec = ? , NbrLike = ? , Date_pubc = ? , idComnt =? , Reponse=?  ";
+        String req = "Update commentaire set Contenuec = ? , NbrLike = ?  , Reponse=? where idComnt =?  ";
         PreparedStatement  prepardstatement = connection.prepareStatement(req);
         prepardstatement.setString(1,commentaire.getContenuec());
         prepardstatement.setInt(2,commentaire.getNbrLike());
-        prepardstatement.setString(3,commentaire.getDate_pubc());
         prepardstatement.setInt(4,commentaire.getIdComnt());
-        prepardstatement.setString(5,commentaire.getReponse());
+        prepardstatement.setString(3,commentaire.getReponse());
         prepardstatement.executeUpdate();
-        System.out.println("Actualite modifié");
+        System.out.println("Commentaire modifié");
 
     }
 
@@ -48,6 +51,8 @@ public class Commentaireservice implements Iservice <Commentaire> {
         preparedStatement.executeUpdate();
 
     }
+
+
 
 
     @Override
@@ -62,13 +67,15 @@ public class Commentaireservice implements Iservice <Commentaire> {
             c.setIdComnt(cs.getInt("idComnt"));
             c.setContenuec(cs.getString("Contenuec"));
             c.setReponse(cs.getString("reponse"));
-            c.setDate_pubc(cs.getString("date_pubc"));
+            c.setDate_pubc(cs.getDate("date_pubc").toLocalDate());
             c.setNbrLike(cs.getInt("nbrLike"));
 
             list.add(c);
         }
         return list;
     }
+
+
 
 
 }

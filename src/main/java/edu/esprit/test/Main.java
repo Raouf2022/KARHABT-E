@@ -19,21 +19,23 @@ public class Main {
 
 
 
-
+/*
 
         try {
-            as.ajouter(new Actualite("cherry", "contenue", "20 / 03 / 2024"));
+            as.ajouter(new Actualite("cherry", "contenue"));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
 
 
+
        try {
-            as.modifier(new Actualite( 1 , "clio", "contenue12", "20 / 12 / 2027"));
+            as.modifier(new Actualite( 3, "xxxx", "contenue2"));
        } catch (SQLException e) {
            System.out.println(e.getMessage());
        }
+
 
 
 
@@ -54,16 +56,20 @@ public class Main {
         }
 
 
-
+*/
 ///////////////Commentaire ////////////////////////
 
 
+/*
 
         try {
-            cs.ajouter(new Commentaire( "jjjj" , "kkkk",4,"hhhh"));
+            cs.ajouter(new Commentaire( "Leila" ,4,"hhhh"));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+
+        /*
 
 
         try {
@@ -74,16 +80,16 @@ public class Main {
 
 
 
-
+*/
         try {
-            cs.modifier(new Commentaire( 1,"llll" , "eeee",6,"ok"));
+            cs.modifier(new Commentaire( 2,"xxxxxx" ,6,"ok"));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
 
 
-
+/*
         try {
             cs.supprimer(new Commentaire( 1 ).getIdComnt());
         } catch (SQLException e) {
@@ -97,8 +103,11 @@ public class Main {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        */
+
 
 
 
     }
 }
+
