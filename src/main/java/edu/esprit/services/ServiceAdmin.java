@@ -1,12 +1,14 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Admin;
+import edu.esprit.entities.User;
 import edu.esprit.tools.DataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ServiceAdmin implements IUserService <Admin> {
 
@@ -72,13 +74,58 @@ public class ServiceAdmin implements IUserService <Admin> {
 
     @Override
     public Admin getOneById(int id) {
-        return null;
+        String req = "SELECT *  from `User` where idU="+id;
+        Admin admin=null;
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery(req);
+
+            if (res.next())
+            {
+                int idU = res.getInt("idU");
+                String nom = res.getString("nom");
+                String prenom = res.getString("prenom");
+
+                Date dateNaissance = res.getDate("dateNaissance");
+                String numTel = res.getString("numTel");
+                String eMail  = res.getString("eMAIL");
+
+                String passwd = res.getString("passwd");
+                String role = res.getString("role");
+                admin = new Admin(idU,nom,prenom,dateNaissance,numTel,eMail,passwd,role);            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return admin;
     }
 
     @Override
-    public List<Admin> getAll() {
+    public Set<Admin> getAll() {
+        Set<Admin> admin = new HashSet<>();
 
+        String req = "Select * from User";
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery(req);
+            while (res.next()){
+                int idU = res.getInt("idU");
+                String nom = res.getString("nom");
+                String prenom = res.getString("prenom");
 
-        return null;
+                Date dateNaissance = res.getDate("dateNaissance");
+                String numTel = res.getString("numTel");
+                String eMail  = res.getString("eMAIL");
+
+                String passwd = res.getString("passwd");
+                String role = res.getString("role");
+                Admin a = new Admin(idU,nom,prenom,dateNaissance,numTel,eMail,passwd,role);
+                admin.add(a);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return admin;
     }
 }

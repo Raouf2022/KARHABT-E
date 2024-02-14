@@ -5,6 +5,7 @@ import edu.esprit.entities.User;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Set;
 
 
 public class ServiceUser implements IUserService <User>{
@@ -42,7 +43,7 @@ public class ServiceUser implements IUserService <User>{
     }
 
     @Override
-    public List<User> getAll() {
+    public Set<User> getAll() {
         return null;
     }
 }

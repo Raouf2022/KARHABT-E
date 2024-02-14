@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 public class ServiceClient implements IUserService <Client>{
 
@@ -77,7 +78,7 @@ public class ServiceClient implements IUserService <Client>{
     }
 
     @Override
-    public List<Client> getAll() {
+    public Set<Client> getAll() {
         return null;
     }
 }

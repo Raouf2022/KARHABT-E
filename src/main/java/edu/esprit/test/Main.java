@@ -28,12 +28,14 @@ public class Main {
         ServiceClient serviceClient = new ServiceClient();
         ServiceUser serviceUser = new ServiceUser();
 
-        serviceAdmin.ajouterUser(admin1);
+        //serviceAdmin.ajouterUser(admin1);
         //serviceClient.ajouterUser(client1);
         //serviceUser.supprimerUser(3);
         //client1.setIdU(17);
         //client1.setNom("dhoubeba");
         //serviceClient.modifierUser(client1);
         //serviceClient.supprimerUser(16);
+        //System.out.println(serviceAdmin.getOneById(19));
+        //System.out.println(serviceAdmin.getAll());
     }
 }
