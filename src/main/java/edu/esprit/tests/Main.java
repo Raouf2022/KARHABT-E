@@ -35,15 +35,16 @@ public class Main {
 
 
 //AvisReclamation av1= new AvisReclamation(3,"positif","belle voiture",new Date());
+        AvisReclamation av2= new AvisReclamation(6,"autre","belle voiture",new Date());
 
-//sar.addAvisReclamation(av1);
+sar.addAvisReclamation(av2);
 //System.out.println(sar.getAllAvisReclamations());
 //sar.updateCommentaire(1,"couleur cv");
 
 
 //sar.deleteAvisReclamation(2);
 
-
+/*
        Messagerie m1=new Messagerie("quel est l'etat de cette voiture", new Date(),1,2,5);
         Messagerie m2=new Messagerie("quel est l'etat de mouteur", new Date(),1,2,5);
 
@@ -53,7 +54,7 @@ public class Main {
         sm.modifierMessagerie(m2,1);
 
         sm.supprimerMessagerie(2);
-
+*/
 
 
 

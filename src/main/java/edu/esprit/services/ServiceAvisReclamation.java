@@ -5,6 +5,7 @@ import edu.esprit.tools.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ServiceAvisReclamation implements  IServiceAvisReclamation<AvisReclamation> {
@@ -16,6 +17,22 @@ public class ServiceAvisReclamation implements  IServiceAvisReclamation<AvisRecl
 
     @Override
     public void addAvisReclamation(AvisReclamation avisReclamation) {
+
+        if (avisReclamation == null || avisReclamation.getAvis() == null || avisReclamation.getCommentaire() == null || avisReclamation.getDateAR() == null) {
+            System.out.println("Invalid input for adding AvisReclamation. Please provide valid data.");
+            return;
+        }
+
+        // Check if avis is one of the allowed values
+        String allowedAvis[] = {"positif", "negatif", "neutre"};
+        String inputAvis = avisReclamation.getAvis().toLowerCase();  // Convert to lowercase for case-insensitive check
+//Cette ligne récupère l’avis de la réclamation (probablement une chaîne de caractères) en utilisant la méthode getAvis()
+// de l’objet avisReclamation. Elle convertit ensuite cet avis en minuscules avec la méthode toLowerCase().
+// Cela permet de rendre la vérification insensible à la casse
+        if (!Arrays.asList(allowedAvis).contains(inputAvis)) {
+            System.out.println("Invalid value for 'avis'. Please choose from 'positif', 'negatif', or 'neutre'.");
+            return;
+        }
         String query = "INSERT INTO AvisReclamation (idR, avis, commentaire, dateAR) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {

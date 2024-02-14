@@ -113,6 +113,8 @@ public class ServiceMessagerie implements IServiceMessagerie<Messagerie> {
         }
     }
 
+
+    //La méthode mapResultSetToReclamation(ResultSet resultSet) est utilisée pour convertir une ligne de cette table (représentée par le ResultSet) en un objet Messagerie.
     private Messagerie mapResultSetToMessagerie(ResultSet resultSet) throws SQLException {
         Messagerie messagerie = new Messagerie();
         messagerie.setIdM(resultSet.getInt("idM"));

@@ -41,7 +41,8 @@ public class ServiceReclamation implements IServiceReclamation<Reclamation> {
             e.printStackTrace();
         }
     }
-
+//La méthode prepareStatement prend une chaîne query qui est une instruction SQL avec des emplacements
+// de paramètres, et renvoie un nouvel objet PreparedStatement qui représente cette instruction SQL précompilée.
 
     @Override
         public Reclamation getReclamationById(int idR) {
@@ -68,8 +69,10 @@ public class ServiceReclamation implements IServiceReclamation<Reclamation> {
             try {
                 String query = "SELECT * FROM Reclamation";
                 try (Statement statement = cnx.createStatement();
+                     //ResultSet est une interface qui représente le résultat d’une requête SQL.
+                     // Il contient les données récupérées de la base de données
                      ResultSet resultSet = statement.executeQuery(query)) {
-                    while (resultSet.next()) {
+                    while (resultSet.next()) { //vérifie s’il y a une autre ligne dans le ResultSet.
                         Reclamation reclamation = mapResultSetToReclamation(resultSet);
                         reclamations.add(reclamation);
                     }
