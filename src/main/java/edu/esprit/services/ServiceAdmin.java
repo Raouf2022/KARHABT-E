@@ -23,7 +23,7 @@ public class ServiceAdmin implements IUserService <Admin> {
             ps.setString(2,admin.getPrenom());
             // convertit b string.valueOf bch nekhou el date khaterha mahich string
             ps.setString(3, String.valueOf(admin.getDateNaissance()));
-            ps.setString(4,admin.getNumTel());
+            ps.setInt(4,admin.getNumTel());
             ps.setString(5,admin.geteMAIL());
             ps.setString(6,admin.getPasswd());
             ps.setString(7,"Admin");
@@ -43,7 +43,7 @@ public class ServiceAdmin implements IUserService <Admin> {
             ps.setString(2, admin.getPrenom());
             // Convertir la date en String pour l'insertion dans la base de données
             ps.setString(3, String.valueOf(admin.getDateNaissance()));
-            ps.setString(4, admin.getNumTel());
+            ps.setInt(4, admin.getNumTel());
             ps.setString(5, admin.geteMAIL());
             ps.setString(6, admin.getPasswd());
             // Supposons que l'ID de l'utilisateur soit disponible dans la classe Admin
@@ -87,7 +87,7 @@ public class ServiceAdmin implements IUserService <Admin> {
                 String prenom = res.getString("prenom");
 
                 Date dateNaissance = res.getDate("dateNaissance");
-                String numTel = res.getString("numTel");
+                int numTel = res.getInt("numTel");
                 String eMail  = res.getString("eMAIL");
 
                 String passwd = res.getString("passwd");
@@ -114,7 +114,7 @@ public class ServiceAdmin implements IUserService <Admin> {
                 String prenom = res.getString("prenom");
 
                 Date dateNaissance = res.getDate("dateNaissance");
-                String numTel = res.getString("numTel");
+                int numTel = res.getInt("numTel");
                 String eMail  = res.getString("eMAIL");
 
                 String passwd = res.getString("passwd");

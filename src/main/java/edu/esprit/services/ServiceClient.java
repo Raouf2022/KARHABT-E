@@ -23,7 +23,7 @@ public class ServiceClient implements IUserService <Client>{
             ps.setString(2,client.getPrenom());
             // convertit b string.valueOf bch nekhou el date khaterha mahich string
             ps.setString(3, String.valueOf(client.getDateNaissance()));
-            ps.setString(4,client.getNumTel());
+            ps.setInt(4,client.getNumTel());
             ps.setString(5,client.geteMAIL());
             ps.setString(6,client.getPasswd());
             ps.setString(7,"Client");
@@ -43,7 +43,7 @@ public class ServiceClient implements IUserService <Client>{
             ps.setString(2, client.getPrenom());
             // Convertir la date en String pour l'insertion dans la base de données
             ps.setString(3, String.valueOf(client.getDateNaissance()));
-            ps.setString(4, client.getNumTel());
+            ps.setInt(4, client.getNumTel());
             ps.setString(5, client.geteMAIL());
             ps.setString(6, client.getPasswd());
             // Supposons que l'ID de l'utilisateur soit disponible dans la classe Admin

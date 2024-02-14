@@ -8,7 +8,7 @@ public class User {
     private String nom;
     private String prenom;
     private Date DateNaissance;
-    private String numTel;
+    private int numTel;
     private String eMAIL;
     private String passwd;
     private String role;
@@ -17,7 +17,7 @@ public class User {
         return idU;
     }
 
-    public User(String nom, String prenom, Date dateNaissance, String numTel, String eMAIL, String passwd, String role) {
+    public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {
         this.nom = nom;
         this.prenom = prenom;
         DateNaissance = dateNaissance;
@@ -55,11 +55,11 @@ public class User {
         DateNaissance = dateNaissance;
     }
 
-    public String getNumTel() {
+    public int getNumTel() {
         return numTel;
     }
 
-    public void setNumTel(String numTel) {
+    public void setNumTel(int numTel) {
         this.numTel = numTel;
     }
 
@@ -91,7 +91,7 @@ public class User {
 
     };
 
-    public User(int idU, String nom, String prenom, Date dateNaissance, String numTel, String eMAIL, String passwd, String role) {
+    public User(int idU, String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {
         this.idU = idU;
         this.nom = nom;
         this.prenom = prenom;
@@ -102,7 +102,7 @@ public class User {
         this.role = role;
     }
 
-    public User(String nom, String prenom, Date dateNaissance, String numTel, String eMAIL, String passwd) {
+    public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd) {
         this.nom = nom;
         this.prenom = prenom;
         DateNaissance = dateNaissance;
