@@ -23,7 +23,7 @@ public class Main {
         ServiceAvisReclamation sar=new ServiceAvisReclamation(cnx);
         ServiceMessagerie sm =new ServiceMessagerie(cnx);
 
-        Reclamation r1= new Reclamation("Probleme de moteur","pppppppppppppppp",new Date(),"mariem.abouda@gmail.com",1,2);
+        Reclamation r1= new Reclamation("Probleme de moteur","pppppppppppppppp",new Date(),"/*//-----",1,2);
         Reclamation r2= new Reclamation("couleur non","cccccccccc",new Date(),"mariem.abouda@gmail.com",5,2);
          // sr.ajouterReclamation(r1);
          // System.out.println(sr.getReclamationById(1));
@@ -57,6 +57,11 @@ sar.addAvisReclamation(av2);
 */
 
 
+
+
+sr.ajouterReclamation(r1);
+
+       sm.modifierContenuMessagerie(4,"Encourager moi de l'acheter ");
 
 
 

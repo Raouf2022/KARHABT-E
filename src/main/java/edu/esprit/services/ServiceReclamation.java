@@ -18,13 +18,19 @@ public class ServiceReclamation implements IServiceReclamation<Reclamation> {
 
     @Override
     public void ajouterReclamation(Reclamation reclamation) {
-        // Vérification de la longueur du sujet et de l'emailUtilisateur
-        if (reclamation.getSujet().length() > 255 || reclamation.getEmailUtilisateur().length() > 255) {
-            System.out.println("Erreur : La longueur du sujet ou de l'emailUtilisateur dépasse la limite autorisée.");
-            return; // Arrêter l'opération si la validation échoue
-        }
-
         try {
+            // Vérification de la longueur du sujet et de l'emailUtilisateur
+            if (isInvalidLength(reclamation.getSujet(), 255) || isInvalidLength(reclamation.getEmailUtilisateur(), 255)) {
+                System.out.println("Erreur : La longueur du sujet ou de l'emailUtilisateur dépasse la limite autorisée.");
+                return; // Arrêter l'opération si la validation échoue
+            }
+
+            // Vérification de la validité de l'email
+            if (isInvalidEmail(reclamation.getEmailUtilisateur())) {
+                System.out.println("Erreur : L'email Utilisateur n'est pas valide.");
+                return;
+            }
+
             String query = "INSERT INTO Reclamation (sujet, description, dateReclamation, idUser, idVoiture, emailUser) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
                 preparedStatement.setString(1, reclamation.getSujet());
@@ -38,9 +44,24 @@ public class ServiceReclamation implements IServiceReclamation<Reclamation> {
                 System.out.println("Réclamation ajoutée avec succès !");
             }
         } catch (SQLException e) {
+            System.out.println("Erreur lors de l'ajout de la réclamation : " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+    // Vérifie la validité de la longueur d'une chaîne
+    private boolean isInvalidLength(String value, int maxLength) {
+        return value == null || value.isEmpty() || value.length() > maxLength;
+    }
+
+    // Vérifie la validité de l'email avec une expression régulière
+    private boolean isInvalidEmail(String email) {
+        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
+        return !email.matches(regex);
+    }
+
+
+
 //La méthode prepareStatement prend une chaîne query qui est une instruction SQL avec des emplacements
 // de paramètres, et renvoie un nouvel objet PreparedStatement qui représente cette instruction SQL précompilée.
 

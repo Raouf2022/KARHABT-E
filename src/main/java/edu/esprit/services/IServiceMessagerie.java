@@ -2,6 +2,7 @@ package edu.esprit.services;
 
 import edu.esprit.entities.Messagerie;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface IServiceMessagerie <M>{
@@ -15,4 +16,7 @@ public interface IServiceMessagerie <M>{
     void modifierMessagerie(Messagerie messagerie, int idM);
 
     void supprimerMessagerie(int idM);
+
+
+    void modifierContenuMessagerie(int idM, String nouveauContenu);
 }

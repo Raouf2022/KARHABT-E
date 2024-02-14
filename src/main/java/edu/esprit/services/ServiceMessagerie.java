@@ -114,6 +114,29 @@ public class ServiceMessagerie implements IServiceMessagerie<Messagerie> {
     }
 
 
+    @Override
+    public void modifierContenuMessagerie(int idM, String nouveauContenu) {
+        try {
+            String query = "UPDATE Messagerie SET contenu = ?, dateEnvoie = CURRENT_DATE WHERE idM = ?";
+            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+                preparedStatement.setString(1, nouveauContenu);
+                preparedStatement.setInt(2, idM);
+
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Messagerie (ID: " + idM + ") modifiée avec succès !");
+                } else {
+                    System.out.println("Aucune messagerie trouvée avec l'ID : " + idM);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     //La méthode mapResultSetToReclamation(ResultSet resultSet) est utilisée pour convertir une ligne de cette table (représentée par le ResultSet) en un objet Messagerie.
     private Messagerie mapResultSetToMessagerie(ResultSet resultSet) throws SQLException {
         Messagerie messagerie = new Messagerie();
