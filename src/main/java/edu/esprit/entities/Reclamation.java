@@ -36,6 +36,9 @@ public class Reclamation {
         this.idVoiture = idVoiture;
     }
 
+    public Reclamation(int idR, String sujet, String description, java.sql.Date dateReclamation, int idUser, int idVoiture, String emailUser) {
+    }
+
 
     public int getIdR() {
         return idR;

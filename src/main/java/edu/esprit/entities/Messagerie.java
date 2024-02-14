@@ -31,6 +31,9 @@ public class Messagerie {
         this.idV = idV;
     }
 
+    public Messagerie(int idMessagerie, String contenu, java.sql.Date dateEnvoi, int idExpediteur, int idDestinataire) {
+    }
+
     public int getIdM() {
         return idM;
     }

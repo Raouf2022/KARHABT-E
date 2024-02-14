@@ -4,6 +4,7 @@ import edu.esprit.entities.Messagerie;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 public interface IServiceMessagerie <M>{
 
@@ -11,7 +12,7 @@ public interface IServiceMessagerie <M>{
 
     Messagerie getMessagerieById(int idM);
 
-    List<Messagerie> getAllMessageries();
+    Set<Messagerie> getAllMessageries();
 
     void modifierMessagerie(Messagerie messagerie, int idM);
 

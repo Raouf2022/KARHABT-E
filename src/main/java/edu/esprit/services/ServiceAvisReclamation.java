@@ -4,9 +4,8 @@ import edu.esprit.entities.AvisReclamation;
 import edu.esprit.tools.DataSource;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 public class ServiceAvisReclamation implements  IServiceAvisReclamation<AvisReclamation> {
 
@@ -74,21 +73,22 @@ public class ServiceAvisReclamation implements  IServiceAvisReclamation<AvisRecl
     }
 
     @Override
-    public List<AvisReclamation> getAllAvisReclamations() {
-        List<AvisReclamation> avisReclamations = new ArrayList<>();
+    public Set<AvisReclamation> getAllAvisReclamations() {
+        Set<AvisReclamation> avisReclamations = new HashSet<>();
+
         String query = "SELECT * FROM AvisReclamation";
 
         try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                AvisReclamation avisReclamation = new AvisReclamation(
-                        resultSet.getInt("idAR"),
-                        resultSet.getInt("idR"),
-                        resultSet.getString("avis"),
-                        resultSet.getString("commentaire"),
-                        new Date(resultSet.getDate("dateAR").getTime())
-                );
+                int idAR = resultSet.getInt("idAR");
+                int idR = resultSet.getInt("idR");
+                String avis = resultSet.getString("avis");
+                String commentaire = resultSet.getString("commentaire");
+                Date dateAR = new Date(resultSet.getDate("dateAR").getTime());
+
+                AvisReclamation avisReclamation = new AvisReclamation(idAR, idR, avis, commentaire, dateAR);
                 avisReclamations.add(avisReclamation);
             }
         } catch (SQLException e) {

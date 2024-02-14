@@ -4,6 +4,7 @@ import edu.esprit.entities.AvisReclamation;
 import edu.esprit.entities.Reclamation;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IServiceAvisReclamation <T>{
 
@@ -11,7 +12,7 @@ public interface IServiceAvisReclamation <T>{
 
     // Read operation
     T getAvisReclamationById(int idAR);
-    List<T> getAllAvisReclamations();
+    Set<AvisReclamation> getAllAvisReclamations();
 
     // Update operation
 

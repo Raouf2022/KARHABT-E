@@ -5,7 +5,9 @@ import edu.esprit.tools.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ServiceReclamation implements IServiceReclamation<Reclamation> {
 
@@ -84,25 +86,35 @@ public class ServiceReclamation implements IServiceReclamation<Reclamation> {
             return reclamation;
         }
 
-        @Override
-        public List<Reclamation> getAllReclamations() {
-            List<Reclamation> reclamations = new ArrayList<>();
-            try {
-                String query = "SELECT * FROM Reclamation";
-                try (Statement statement = cnx.createStatement();
-                     //ResultSet est une interface qui représente le résultat d’une requête SQL.
-                     // Il contient les données récupérées de la base de données
-                     ResultSet resultSet = statement.executeQuery(query)) {
-                    while (resultSet.next()) { //vérifie s’il y a une autre ligne dans le ResultSet.
-                        Reclamation reclamation = mapResultSetToReclamation(resultSet);
-                        reclamations.add(reclamation);
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+    @Override
+    public Set<Reclamation> getAllReclamations() {
+        Set<Reclamation> reclamations = new HashSet<>();
+
+        String query = "SELECT * FROM Reclamation";
+        try {
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int idR = resultSet.getInt("idR");
+                // Modifier les noms des attributs pour correspondre à votre modèle de données
+                String sujet = resultSet.getString("sujet");
+                String description = resultSet.getString("description");
+                Date dateReclamation = resultSet.getDate("dateReclamation");
+                int idUser = resultSet.getInt("idUser");
+                int idVoiture = resultSet.getInt("idVoiture");
+                String emailUser = resultSet.getString("emailUser");
+
+                Reclamation reclamation = new Reclamation(idR, sujet, description, dateReclamation, idUser, idVoiture, emailUser);
+                reclamations.add(reclamation);
             }
-            return reclamations;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return reclamations;
+    }
+
+
 
     @Override
     public void modifierReclamation(Reclamation reclamation, int idR) {

@@ -5,7 +5,9 @@ import edu.esprit.tools.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ServiceMessagerie implements IServiceMessagerie<Messagerie> {
 
@@ -61,22 +63,31 @@ public class ServiceMessagerie implements IServiceMessagerie<Messagerie> {
     }
 
     @Override
-    public List<Messagerie> getAllMessageries() {
-        List<Messagerie> messageries = new ArrayList<>();
+    public Set<Messagerie> getAllMessageries() {
+        Set<Messagerie> messageries = new HashSet<>();
+
+        String query = "SELECT * FROM Messagerie";
         try {
-            String query = "SELECT * FROM Messagerie";
-            try (Statement statement = cnx.createStatement();
-                 ResultSet resultSet = statement.executeQuery(query)) {
-                while (resultSet.next()) {
-                    Messagerie messagerie = mapResultSetToMessagerie(resultSet);
-                    messageries.add(messagerie);
-                }
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int idMessagerie = resultSet.getInt("idM");
+                String contenu = resultSet.getString("contenu");
+                Date dateEnvoi = resultSet.getDate("dateEnvoie");
+                // Modifier les noms des attributs pour correspondre à votre modèle de données
+                int idExpediteur = resultSet.getInt("idUSender");
+                int idDestinataire = resultSet.getInt("idUReceiver");
+
+                Messagerie messagerie = new Messagerie(idMessagerie, contenu, dateEnvoi, idExpediteur, idDestinataire);
+                messageries.add(messagerie);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return messageries;
     }
+
 
     @Override
     public void modifierMessagerie(Messagerie messagerie, int idM) {

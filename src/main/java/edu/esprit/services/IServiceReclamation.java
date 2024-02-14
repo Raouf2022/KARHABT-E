@@ -5,6 +5,7 @@ import edu.esprit.tools.DataSource;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Set;
 
 public interface IServiceReclamation<T> {
 
@@ -14,7 +15,7 @@ public interface IServiceReclamation<T> {
 
 
     T getReclamationById(int idR);
-    List<T> getAllReclamations();
+    Set<T> getAllReclamations();
 
 
 
