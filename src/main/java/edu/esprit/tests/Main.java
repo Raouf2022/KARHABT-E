@@ -34,8 +34,10 @@ public class Main {
         //sr.supprimerReclamation(2);
 
 
-//AvisReclamation av1= new AvisReclamation(3,"positif","belle voiture",new Date());
-    //    AvisReclamation av2= new AvisReclamation(6,"autre","belle voiture",new Date());
+AvisReclamation av1= new AvisReclamation(3,"positif","belle voiture",new Date());
+      AvisReclamation av2= new AvisReclamation(20000,"neutre","pas mal",new Date());
+
+
 
 //sar.addAvisReclamation(av2);
 System.out.println(sar.getAllAvisReclamations());
@@ -67,7 +69,7 @@ System.out.println(sar.getAllAvisReclamations());
 
       // sm.modifierContenuMessagerie(4,"Encourager moi de l'acheter ");
 
-
+sar.updateAvisReclamation(av2,6);
 
     }
 

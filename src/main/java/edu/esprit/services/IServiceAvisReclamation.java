@@ -19,6 +19,8 @@ public interface IServiceAvisReclamation <T>{
 
     void updateCommentaire(int idAR, String newCommentaire);
 
+    void updateAvisReclamation(AvisReclamation avisReclamation, int idAR);
+
     // Delete operation
     void deleteAvisReclamation(int idAR);
 

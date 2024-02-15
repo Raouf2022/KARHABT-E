@@ -113,6 +113,27 @@ public class ServiceAvisReclamation implements  IServiceAvisReclamation<AvisRecl
         }
 
     }
+    @Override
+    public void updateAvisReclamation(AvisReclamation avisReclamation, int idAR) {
+        if (avisReclamation == null || avisReclamation.getAvis() == null || avisReclamation.getCommentaire() == null || avisReclamation.getDateAR() == null) {
+            System.out.println("Invalid input for updating AvisReclamation. Please provide valid data.");
+            return;
+        }
+
+        String query = "UPDATE AvisReclamation SET avis = ?, commentaire = ?, dateAR = ? WHERE idAR = ?";
+
+        try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
+            preparedStatement.setString(1, avisReclamation.getAvis());
+            preparedStatement.setString(2, avisReclamation.getCommentaire());
+            preparedStatement.setDate(3, new java.sql.Date(avisReclamation.getDateAR().getTime()));
+            preparedStatement.setInt(4, idAR);
+
+            preparedStatement.executeUpdate();
+            System.out.println("AvisReclamation updated successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void deleteAvisReclamation(int idAR) {
