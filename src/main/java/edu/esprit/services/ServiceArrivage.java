@@ -46,12 +46,7 @@ public class ServiceArrivage implements IService <Arrivage> {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-
-
-
-
-    }
+        }
 
     @Override
     public void supprimer(int id) {
@@ -72,24 +67,54 @@ public class ServiceArrivage implements IService <Arrivage> {
 
     @Override
     public Arrivage getOneById(int id) {
-        return null;
+
+        Arrivage arrivage = null;
+        String req = "SELECT * FROM Arrivage WHERE idA = ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet res = ps.executeQuery();
+            if (res.next()) {
+                int quantite = res.getInt("quantite");
+                Date dateEntree = res.getDate("DateEntree");
+                ServiceVoiture serviceVoiture = new ServiceVoiture(); // Créez une instance de ServiceVoiture
+                Voiture v = serviceVoiture.getOneById(res.getInt("idV")); // Appelez getOneById sur l'instance
+                arrivage = new Arrivage(id, quantite, dateEntree, v);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return arrivage;
     }
+
+
 
     @Override
     public Set<Arrivage> getAll() {
-        return null;
+        Set<Arrivage> arrivages = new HashSet<>();
+        ServiceVoiture serviceVoiture = new ServiceVoiture(); // Créez une instance de ServiceVoiture
+
+        String req = "SELECT * FROM Arrivage";
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery(req);
+            while (res.next()){
+                int idA = res.getInt("idA");
+                int quantite = res.getInt("quantite");
+                Date dateEntree = res.getDate("DateEntree");
+                Voiture v = serviceVoiture.getOneById(res.getInt("idV")); // Utilisez la méthode getOneById de ServiceVoiture
+                Arrivage a = new Arrivage(idA, quantite, dateEntree, v);
+                arrivages.add(a);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return arrivages;
     }
 
 
 }
 
-    @Override
-    public Arrivage getOneById(int id){
-    return null;
-    }
 
-    @Override
-    public Set<Arrivage> getAll() {
-        return null;
-    }
-}
+

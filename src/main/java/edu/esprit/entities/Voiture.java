@@ -96,7 +96,7 @@ public class Voiture {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idV);
+        return Objects.hash(idV, marque, modele, couleur, prix, description);
     }
 }
 

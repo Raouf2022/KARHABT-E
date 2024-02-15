@@ -62,6 +62,7 @@ public class ServiceVoiture implements IService <Voiture>{
             ps.setInt(1, id);
             int rowsDeleted = ps.executeUpdate();
             if (rowsDeleted > 0) {
+
                 System.out.println("Voiture avec l'ID " + id + " a été supprimée avec succès.");
             }
             else {
@@ -74,7 +75,7 @@ public class ServiceVoiture implements IService <Voiture>{
     }
 
     @Override
-    public Voiture getOneById(int id) {
+    public  Voiture getOneById(int id) {
         Voiture voiture = null;
         String req = "SELECT * FROM Voiture WHERE idV = ?";
         try {
