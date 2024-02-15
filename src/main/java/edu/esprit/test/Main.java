@@ -50,21 +50,44 @@ public class Main {
         //v.setPrix(25000); // Remplacez par le nouveau prix
         //v.setDescription("neuve,efficace");
         //serviceVoiture.modifier(v);
-
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        // Date dateEntree = null;
-        // try {
-        //     dateEntree = sdf.parse("2024-01-01");
-        // } catch (ParseException e) {
-        //     e.printStackTrace();
-        // }
-
-
-        //Arrivage arrivage = new Arrivage( 10, dateEntree, v);
-        //ServiceArrivage sa = new ServiceArrivage();
-        //sa.ajouter(arrivage);
+        /*ServiceVoiture sv =  new ServiceVoiture();
+        Voiture v = sv.getOneById(26);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+         Date dateEntree = null;
+         try {
+             dateEntree = sdf.parse("2024-02-15");
+         } catch (ParseException e) {
+             e.printStackTrace();
+         }
 
 
+        Arrivage arrivage = new Arrivage( 10, dateEntree, v);
+        ServiceArrivage sa = new ServiceArrivage();
+        sa.ajouter(arrivage);*/
+
+        //ServiceArrivage serviceArrivage = new ServiceArrivage();
+
+        // Créez une instance de ServiceVoiture
+       // ServiceVoiture serviceVoiture = new ServiceVoiture();
+        //Arrivage arrivage = serviceArrivage.getOneById(3);
+
+        // Utilisez la méthode getOneById pour obtenir la Voiture existante
+
+
+        //arrivage.setQuantite(20);
+        //serviceArrivage.modifier(arrivage);
+        ServiceVoiture sv = new ServiceVoiture();
+        Voiture v = sv.getOneById(26);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateEntree = null;
+        try {
+            dateEntree = sdf.parse("2025-01-5");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+          Arrivage arrivage = new Arrivage(15,dateEntree,v);
+        ServiceArrivage serviceArrivage = new ServiceArrivage();
+serviceArrivage.ajouter(arrivage);
     }
 
 }

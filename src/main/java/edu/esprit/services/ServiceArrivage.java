@@ -2,6 +2,7 @@ package edu.esprit.services;
 import edu.esprit.entities.Arrivage;
 import edu.esprit.tools.DataSource;
 import edu.esprit.entities.Voiture;
+import java.util.Date;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +14,25 @@ public class ServiceArrivage implements IService <Arrivage> {
     Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void ajouter(Arrivage arrivage) {
+// Vérifiez que la quantité est positive
+        if (arrivage.getQuantite() <= 0) {
+            System.out.println("Erreur : la quantité doit être positive.");
+            return;
+        }
+
+        // Vérifiez que la date d'entrée n'est pas dans le futur
+        if (arrivage.getDateEntree().after(new Date())) {
+            System.out.println("Erreur : la date d'entrée ne peut pas être dans le futur.");
+            return;
+        }
+
+        // Vérifiez que la voiture existe dans la base de données
+        ServiceVoiture serviceVoiture = new ServiceVoiture();
+        Voiture voiture = serviceVoiture.getOneById(arrivage.getV().getIdV());
+        if (voiture == null) {
+            System.out.println("Erreur : aucune voiture trouvée avec l'ID " + arrivage.getV().getIdV());
+            return;
+        }
 
         String req = "INSERT INTO `Arrivage`( `quantite`, `DateEntree`, `idV`) VALUES (?,?,?)";
         try {
