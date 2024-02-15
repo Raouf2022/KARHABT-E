@@ -23,18 +23,18 @@ public class Main {
 
         //User user1 = new User("raouf" , "mahmoudi" ,java.sql.Date.valueOf(dateNaissance),"96094504","abderraouf.mahmoudi@esprit.tn" , "roufewi123" );
         Admin admin1 = new Admin("monjiiiz","mahmoudi",java.sql.Date.valueOf(dateNaissance),67567800,"admin@es.tn","si za3bolla");
-        Client client1 = new Client("client","client",java.sql.Date.valueOf(dateNaissance),12345689,"client@bh.rh","degla");
+        Client client1 = new Client("client","client",java.sql.Date.valueOf(dateNaissance),12345689,"client@eft.tjbknl","degla");
         ServiceAdmin serviceAdmin = new ServiceAdmin();
         ServiceClient serviceClient = new ServiceClient();
         ServiceUser serviceUser = new ServiceUser();
 
 
-        //serviceAdmin.ajouterUser(admin1);
-        //serviceClient.ajouterUser(client1);
+        serviceAdmin.ajouterUser(admin1);
+        serviceClient.ajouterUser(client1);
         //serviceUser.supprimerUser(3);
-        client1.setIdU(26);
-        client1.setNom("dhoubeba");
-        serviceClient.modifierUser(client1);
+        //client1.setIdU(26);
+        //client1.setNom("dhoubeba");
+        //serviceClient.modifierUser(client1);
         //serviceClient.supprimerUser(16);
         //System.out.println(serviceAdmin.getOneById(19));
         //System.out.println(serviceAdmin.getAll());
