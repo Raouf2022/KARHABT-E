@@ -23,7 +23,15 @@ public class ServiceClient implements IUserService <Client>{
             ps.setString(2,client.getPrenom());
             // convertit b string.valueOf bch nekhou el date khaterha mahich string
             ps.setString(3, String.valueOf(client.getDateNaissance()));
+            if (!isValidPhoneNumber(client.getNumTel())) {
+                System.out.println("Le numéro de téléphone doit contenir exactement 8 chiffres !");
+                return;
+            }
             ps.setInt(4,client.getNumTel());
+            if (!isValidEmail(client.geteMAIL())) {
+                System.out.println("Adresse e-mail invalide !");
+                return;
+            }
             ps.setString(5,client.geteMAIL());
             ps.setString(6,client.getPasswd());
             ps.setString(7,"Client");
@@ -36,6 +44,17 @@ public class ServiceClient implements IUserService <Client>{
 
     @Override
     public void modifierUser(Client client) {
+
+        // Vérification que tous les champs sont remplis
+        if (client.getNom().isEmpty() ||
+                client.getPrenom().isEmpty() ||
+                client.getDateNaissance() == null ||
+                client.geteMAIL().isEmpty() ||
+                client.getPasswd().isEmpty()) {
+            System.out.println("Tous les champs doivent être remplis !");
+            return;
+        }
+
         String req = "UPDATE User SET `nom`=?, `prenom`=?, `dateNaissance`=?, `numTel`=?, `eMail`=?, `passwd`=? WHERE `idU`=? AND `Role`='Client'";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
@@ -43,7 +62,16 @@ public class ServiceClient implements IUserService <Client>{
             ps.setString(2, client.getPrenom());
             // Convertir la date en String pour l'insertion dans la base de données
             ps.setString(3, String.valueOf(client.getDateNaissance()));
+            if (!isValidPhoneNumber(client.getNumTel())) {
+                System.out.println("Le numéro de téléphone doit contenir exactement 8 chiffres !");
+                return;
+            }
             ps.setInt(4, client.getNumTel());
+            // Vérification de la validité de l'adresse e-mail
+            if (!isValidEmail(client.geteMAIL())) {
+                System.out.println("Adresse e-mail invalide !");
+                return;
+            }
             ps.setString(5, client.geteMAIL());
             ps.setString(6, client.getPasswd());
             // Supposons que l'ID de l'utilisateur soit disponible dans la classe Admin
@@ -54,6 +82,7 @@ public class ServiceClient implements IUserService <Client>{
             System.out.println(e.getMessage());
         }
     }
+
 
     @Override
     public void supprimerUser(int id) {
@@ -80,5 +109,17 @@ public class ServiceClient implements IUserService <Client>{
     @Override
     public Set<Client> getAll() {
         return null;
+    }
+
+    private boolean isValidEmail(String email) {
+        // Utilisation d'une expression régulière pour vérifier le format de l'e-mail
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
+    }
+    // Vérifie si le numéro de téléphone contient exactement 8 chiffres
+    private boolean isValidPhoneNumber(int numTel) {
+        // Conversion du numéro de téléphone en une chaîne pour obtenir sa longueur
+        String numTelStr = String.valueOf(numTel);
+        return numTelStr.length() == 8;
     }
 }
