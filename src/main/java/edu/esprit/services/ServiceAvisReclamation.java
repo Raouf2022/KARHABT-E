@@ -1,6 +1,7 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.AvisReclamation;
+import edu.esprit.entities.AvisType;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.tools.DataSource;
 
@@ -18,22 +19,24 @@ public class ServiceAvisReclamation implements  IService<AvisReclamation> {
     public void create(AvisReclamation entity) {
         try {
             if (!isValidAvis(entity.getAvis())) {
-                System.out.println("Invalid 'avis' value. Must be one of: positive, negative, neutral.");
+                System.out.println("Invalid 'avis' value. Must be one of: positive, negative, neutre.");
                 return;
             }
 
             String query = "INSERT INTO AvisReclamation (idR, avis, commentaire, DateAR) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement pstmt = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement pstmt = cnx.prepareStatement(query, new String[]{"idAR"})) {
                 pstmt.setInt(1, entity.getReclamation().getIdR());
                 pstmt.setString(2, entity.getAvis());
                 pstmt.setString(3, entity.getCommentaire());
                 pstmt.setDate(4, new java.sql.Date(entity.getDateAR().getTime()));
 
-                pstmt.executeUpdate();
+                int affectedRows = pstmt.executeUpdate();
 
-                try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        entity.setIdAR(generatedKeys.getInt(1));
+                if (affectedRows > 0) {
+                    try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            entity.setIdAR(generatedKeys.getInt(1));
+                        }
                     }
                 }
             }
@@ -42,10 +45,15 @@ public class ServiceAvisReclamation implements  IService<AvisReclamation> {
         }
     }
 
-    // Validate AvisReclamation using Bean Validation
+    // Validate AvisReclamation using Enum
     private boolean isValidAvis(String avis) {
-        Set<String> allowedAvisValues = new HashSet<>(Arrays.asList("positive", "negative", "neutral"));
-        return allowedAvisValues.contains(avis);
+        try {
+            AvisType.valueOf(avis.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid 'avis' value. Must be one of: positive, negative, neutre.");
+            return false;
+        }
     }
 
 

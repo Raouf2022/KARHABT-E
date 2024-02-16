@@ -31,28 +31,38 @@ User u2 =new User();
 u2.setIdU(25);
 Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem.abouda@gmail.com",u1);
         Reclamation r2=new Reclamation("couleur pas bonne","heyyyyy",new Date(),"mariem.abouda@gmail.com",u1);
+        Reclamation r3=new Reclamation("mauvais service","pas respect ",new Date(),"hafsa.alia@gmail.com",u1);
+        Reclamation r4=new Reclamation("stock limité ","pourquoi",new Date(),"heifa.wahbi@gmail.com",u2);
 
-//sr.create(r2);
+//sr.create(r3);
+//sr.create(r4);
 //System.out.println(sr.getById(14));
 
 //System.out.println(sr.getAll());
 
-//sr.delete(16);
-       // Reclamation rr= new Reclamation();
-       // rr.setIdR(15);
-//AvisReclamation av1= new AvisReclamation(rr,"positive","non panne",new Date());
+//sr.delete(17);
+       Reclamation rr1= new Reclamation();
+        Reclamation rr2= new Reclamation();
+        rr1.setIdR(15);
+        rr2.setIdR(22);
+        AvisReclamation av1= new AvisReclamation(rr1,"positive","non panne",new Date());
+        AvisReclamation av2= new AvisReclamation(rr2,"negative","oui mauvais service",new Date());
+        AvisReclamation av3= new AvisReclamation(rr2,"neutreEEE","jai pas une idée",new Date());
 
-//sar.create(av1);
+      // sar.create(av2);
+        sar.create(av3);
 
 
        // sar.delete(16);
 
         Messagerie m1= new Messagerie("c quoi letatat de moteur",new Date(),u1,u2,false,false);
         Messagerie m2= new Messagerie("couleur bonne",new Date(),u1,u2,true,false);
-        sm.create(m2);
+        Messagerie m3= new Messagerie("pouvez vous de me parler sur la voiture",new Date(),u1,u2,false,true);
 
-        //System.out.println(sm.getById(9));
-        //System.out.println(sm.getAll());
+     //  sm.create(m3);
+
+       // System.out.println(sm.getById(9));
+      // System.out.println(sm.getAll());
         //sm.delete(11);
 
     }
