@@ -5,25 +5,24 @@ import java.util.Objects;
 
 public class AvisReclamation {
     private int idAR;
-    private int idR;
+    private Reclamation reclamation;
     private String avis;
     private String commentaire;
     private Date dateAR;
 
 
-    public AvisReclamation(){
+    public AvisReclamation() {}
 
-    }
-    public AvisReclamation(int idAR, int idR, String avis, String commentaire, Date dateAR) {
-        this.idAR = idAR;
-        this.idR = idR;
+    public AvisReclamation(Reclamation reclamation, String avis, String commentaire, Date dateAR) {
+        this.reclamation = reclamation;
         this.avis = avis;
         this.commentaire = commentaire;
         this.dateAR = dateAR;
     }
 
-    public AvisReclamation(int idR, String avis, String commentaire, Date dateAR) {
-        this.idR = idR;
+    public AvisReclamation(int idAR, Reclamation reclamation, String avis, String commentaire, Date dateAR) {
+        this.idAR = idAR;
+        this.reclamation = reclamation;
         this.avis = avis;
         this.commentaire = commentaire;
         this.dateAR = dateAR;
@@ -38,12 +37,12 @@ public class AvisReclamation {
         this.idAR = idAR;
     }
 
-    public int getIdR() {
-        return idR;
+    public Reclamation getReclamation() {
+        return reclamation;
     }
 
-    public void setIdR(int idR) {
-        this.idR = idR;
+    public void setReclamation(Reclamation reclamation) {
+        this.reclamation = reclamation;
     }
 
     public String getAvis() {
@@ -66,7 +65,7 @@ public class AvisReclamation {
         return dateAR;
     }
 
-    public void Date(Date dateAR) {
+    public void setDateAR(Date dateAR) {
         this.dateAR = dateAR;
     }
 
@@ -74,10 +73,10 @@ public class AvisReclamation {
     public String toString() {
         return "AvisReclamation{" +
                 "idAR=" + idAR +
-                ", idR=" + idR +
+                ", reclamation=" + reclamation +
                 ", avis='" + avis + '\'' +
                 ", commentaire='" + commentaire + '\'' +
-                ", dateAR='" + dateAR + '\'' +
+                ", dateAR=" + dateAR +
                 '}';
     }
 
@@ -86,11 +85,12 @@ public class AvisReclamation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AvisReclamation that = (AvisReclamation) o;
-        return idAR == that.idAR && idR == that.idR && Objects.equals(avis, that.avis) && Objects.equals(commentaire, that.commentaire) && Objects.equals(dateAR, that.dateAR);
+        return idAR == that.idAR && Objects.equals(reclamation, that.reclamation) && Objects.equals(avis, that.avis) && Objects.equals(commentaire, that.commentaire) && Objects.equals(dateAR, that.dateAR);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idAR, idR, avis, commentaire, dateAR);
+        return Objects.hash(idAR, reclamation, avis, commentaire, dateAR);
     }
+
 }

@@ -3,43 +3,45 @@ package edu.esprit.entities;
 import java.util.Date;
 import java.util.Objects;
 
+
 public class Messagerie {
 
-    private int idM;
+    private int idMessage;
     private String contenu;
     private Date dateEnvoie;
-    private int idUSender;
-    private int idUReceiver;
-    private int idV;
+    private User sender;
+    private User receiver;
+    private boolean vu;
+    private boolean deleted;
 
     public Messagerie(){}
 
-    public Messagerie(int idM, String contenu, Date dateEnvoie, int idUSender, int idUReceiver, int idV) {
-        this.idM = idM;
+    public Messagerie(int idMessage, String contenu, Date dateEnvoie, User sender, User receiver, boolean vu, boolean deleted) {
+        this.idMessage = idMessage;
         this.contenu = contenu;
         this.dateEnvoie = dateEnvoie;
-        this.idUSender = idUSender;
-        this.idUReceiver = idUReceiver;
-        this.idV = idV;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.vu = vu;
+        this.deleted = deleted;
     }
 
-    public Messagerie(String contenu, Date dateEnvoie, int idUSender, int idUReceiver, int idV) {
+
+    public Messagerie(String contenu, Date dateEnvoie, User sender, User receiver, boolean vu, boolean deleted) {
         this.contenu = contenu;
         this.dateEnvoie = dateEnvoie;
-        this.idUSender = idUSender;
-        this.idUReceiver = idUReceiver;
-        this.idV = idV;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.vu = vu;
+        this.deleted = deleted;
     }
 
-    public Messagerie(int idMessagerie, String contenu, java.sql.Date dateEnvoi, int idExpediteur, int idDestinataire) {
+    public int getIdMessage() {
+        return idMessage;
     }
 
-    public int getIdM() {
-        return idM;
-    }
-
-    public void setIdM(int idM) {
-        this.idM = idM;
+    public void setIdMessage(int idMessage) {
+        this.idMessage = idMessage;
     }
 
     public String getContenu() {
@@ -58,52 +60,63 @@ public class Messagerie {
         this.dateEnvoie = dateEnvoie;
     }
 
-    public int getIdUSender() {
-        return idUSender;
+    public User getSender() {
+        return sender;
     }
 
-    public void setIdUSender(int idUSender) {
-        this.idUSender = idUSender;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public int getIdUReceiver() {
-        return idUReceiver;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setIdUReceiver(int idUReceiver) {
-        this.idUReceiver = idUReceiver;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
-    public int getIdV() {
-        return idV;
+    public boolean isVu() {
+        return vu;
     }
 
-    public void setIdV(int idV) {
-        this.idV = idV;
+    public void setVu(boolean vu) {
+        this.vu = vu;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override
     public String toString() {
         return "Messagerie{" +
-                "idM=" + idM +
+                "idMessage=" + idMessage +
                 ", contenu='" + contenu + '\'' +
                 ", dateEnvoie=" + dateEnvoie +
-                ", idUSender=" + idUSender +
-                ", idUReceiver=" + idUReceiver +
-                ", idV=" + idV +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
+                ", vu=" + vu +
+                ", deleted=" + deleted +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Messagerie that = (Messagerie) o;
-        return idM == that.idM && idUSender == that.idUSender && idUReceiver == that.idUReceiver && idV == that.idV && Objects.equals(contenu, that.contenu) && Objects.equals(dateEnvoie, that.dateEnvoie);
+        return idMessage == that.idMessage && vu == that.vu && deleted == that.deleted && Objects.equals(contenu, that.contenu) && Objects.equals(dateEnvoie, that.dateEnvoie) && Objects.equals(sender, that.sender) && Objects.equals(receiver, that.receiver);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idM, contenu, dateEnvoie, idUSender, idUReceiver, idV);
+        return Objects.hash(idMessage, contenu, dateEnvoie, sender, receiver, vu, deleted);
     }
+
 }

@@ -1,6 +1,7 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Messagerie;
+import edu.esprit.entities.User;
 import edu.esprit.tools.DataSource;
 
 import java.sql.*;
@@ -9,33 +10,31 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ServiceMessagerie implements IServiceMessagerie<Messagerie> {
+public class ServiceMessagerie implements IService<Messagerie> {
 
     Connection cnx = DataSource.getInstance().getCnx();
 
     public ServiceMessagerie(Connection cnx) {
     }
 
+
     @Override
-    public void ajouterMessagerie(Messagerie messagerie) {
+    public void create(Messagerie entity) {
         try {
-            String query = "INSERT INTO Messagerie (contenu, dateEnvoie, idUSender, idUReceiver, idV) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, messagerie.getContenu());
-                preparedStatement.setDate(2, new java.sql.Date(messagerie.getDateEnvoie().getTime()));
-                preparedStatement.setInt(3, messagerie.getIdUSender());
-                preparedStatement.setInt(4, messagerie.getIdUReceiver());
-                preparedStatement.setInt(5, messagerie.getIdV());
+            String query = "INSERT INTO Messagerie (contenu, dateEnvoie, Sender, Receiver, vu, deleted) VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement pst = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                pst.setString(1, entity.getContenu());
+                pst.setTimestamp(2, new Timestamp(entity.getDateEnvoie().getTime()));
+                pst.setInt(3, entity.getSender().getIdU());
+                pst.setInt(4, entity.getReceiver().getIdU());
+                pst.setBoolean(5, entity.isVu());
+                pst.setBoolean(6, entity.isDeleted());
 
-                preparedStatement.executeUpdate();
+                pst.executeUpdate();
 
-                // Récupérer l'ID généré pour la nouvelle messagerie
-                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int idM = generatedKeys.getInt(1);
-                        messagerie.setIdM(idM);
-                        System.out.println("Messagerie ajoutée avec succès, ID : " + idM);
-                    }
+                ResultSet rs = pst.getGeneratedKeys();
+                if (rs.next()) {
+                    entity.setIdMessage(rs.getInt(1));
                 }
             }
         } catch (SQLException e) {
@@ -44,16 +43,15 @@ public class ServiceMessagerie implements IServiceMessagerie<Messagerie> {
     }
 
     @Override
-    public Messagerie getMessagerieById(int idM) {
+    public Messagerie getById(int id) {
         Messagerie messagerie = null;
         try {
-            String query = "SELECT * FROM Messagerie WHERE idM = ?";
-            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
-                preparedStatement.setInt(1, idM);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        messagerie = mapResultSetToMessagerie(resultSet);
-                    }
+            String query = "SELECT * FROM Messagerie WHERE idMessage = ?";
+            try (PreparedStatement pst = cnx.prepareStatement(query)) {
+                pst.setInt(1, id);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    messagerie = mapResultSetToMessagerie(rs);
                 }
             }
         } catch (SQLException e) {
@@ -63,100 +61,75 @@ public class ServiceMessagerie implements IServiceMessagerie<Messagerie> {
     }
 
     @Override
-    public Set<Messagerie> getAllMessageries() {
-        Set<Messagerie> messageries = new HashSet<>();
-
-        String query = "SELECT * FROM Messagerie";
+    public Set<Messagerie> getAll() {
+        Set<Messagerie> messages = new HashSet<>();
         try {
-            Statement statement = cnx.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                int idMessagerie = resultSet.getInt("idM");
-                String contenu = resultSet.getString("contenu");
-                Date dateEnvoi = resultSet.getDate("dateEnvoie");
-                // Modifier les noms des attributs pour correspondre à votre modèle de données
-                int idExpediteur = resultSet.getInt("idUSender");
-                int idDestinataire = resultSet.getInt("idUReceiver");
-
-                Messagerie messagerie = new Messagerie(idMessagerie, contenu, dateEnvoi, idExpediteur, idDestinataire);
-                messageries.add(messagerie);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return messageries;
-    }
-
-
-    @Override
-    public void modifierMessagerie(Messagerie messagerie, int idM) {
-        try {
-            String query = "UPDATE Messagerie SET contenu = ?, dateEnvoie = ?, idUSender = ?, idUReceiver = ?, idV = ? WHERE idM = ?";
-            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
-                preparedStatement.setString(1, messagerie.getContenu());
-                preparedStatement.setDate(2, new java.sql.Date(messagerie.getDateEnvoie().getTime()));
-                preparedStatement.setInt(3, messagerie.getIdUSender());
-                preparedStatement.setInt(4, messagerie.getIdUReceiver());
-                preparedStatement.setInt(5, messagerie.getIdV());
-                preparedStatement.setInt(6, idM);
-
-                preparedStatement.executeUpdate();
-                System.out.println("Messagerie modifiée avec succès !");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void supprimerMessagerie(int idM) {
-        try {
-            String query = "DELETE FROM Messagerie WHERE idM = ?";
-            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
-                preparedStatement.setInt(1, idM);
-
-                preparedStatement.executeUpdate();
-                System.out.println("Messagerie supprimée avec succès !");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @Override
-    public void modifierContenuMessagerie(int idM, String nouveauContenu) {
-        try {
-            String query = "UPDATE Messagerie SET contenu = ?, dateEnvoie = CURRENT_DATE WHERE idM = ?";
-            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
-                preparedStatement.setString(1, nouveauContenu);
-                preparedStatement.setInt(2, idM);
-
-                int rowsAffected = preparedStatement.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    System.out.println("Messagerie (ID: " + idM + ") modifiée avec succès !");
-                } else {
-                    System.out.println("Aucune messagerie trouvée avec l'ID : " + idM);
+            String query = "SELECT * FROM Messagerie";
+            try (Statement st = cnx.createStatement()) {
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    Messagerie messagerie = mapResultSetToMessagerie(rs);
+                    messages.add(messagerie);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return messages;
     }
 
+    @Override
+    public void update(Messagerie entity) {
+        try {
+            String query = "UPDATE Messagerie SET contenu=?, dateEnvoie=?, Sender=?, Receiver=?, vu=?, deleted=? WHERE idMessage=?";
+            try (PreparedStatement pst = cnx.prepareStatement(query)) {
+                pst.setString(1, entity.getContenu());
+                pst.setTimestamp(2, new Timestamp(entity.getDateEnvoie().getTime()));
+                pst.setInt(3, entity.getSender().getIdU());
+                pst.setInt(4, entity.getReceiver().getIdU());
+                pst.setBoolean(5, entity.isVu());
+                pst.setBoolean(6, entity.isDeleted());
+                pst.setInt(7, entity.getIdMessage());
 
+                pst.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-    //La méthode mapResultSetToReclamation(ResultSet resultSet) est utilisée pour convertir une ligne de cette table (représentée par le ResultSet) en un objet Messagerie.
-    private Messagerie mapResultSetToMessagerie(ResultSet resultSet) throws SQLException {
+    @Override
+    public void delete(int id) {
+        try {
+            String query = "DELETE FROM Messagerie WHERE idMessage=?";
+            try (PreparedStatement pst = cnx.prepareStatement(query)) {
+                pst.setInt(1, id);
+                pst.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Messagerie mapResultSetToMessagerie(ResultSet rs) throws SQLException {
         Messagerie messagerie = new Messagerie();
-        messagerie.setIdM(resultSet.getInt("idM"));
-        messagerie.setContenu(resultSet.getString("contenu"));
-        messagerie.setDateEnvoie(resultSet.getDate("dateEnvoie"));
-        messagerie.setIdUSender(resultSet.getInt("idUSender"));
-        messagerie.setIdUReceiver(resultSet.getInt("idUReceiver"));
-        messagerie.setIdV(resultSet.getInt("idV"));
+        messagerie.setIdMessage(rs.getInt("idMessage"));
+        messagerie.setContenu(rs.getString("contenu"));
+        messagerie.setDateEnvoie(rs.getTimestamp("dateEnvoie"));
+        // Set sender and receiver using User IDs and retrieve User objects from the database
+        messagerie.setSender(getUserById(rs.getInt("Sender")));
+        messagerie.setReceiver(getUserById(rs.getInt("Receiver")));
+        messagerie.setVu(rs.getBoolean("vu"));
+        messagerie.setDeleted(rs.getBoolean("deleted"));
         return messagerie;
+    }
+
+    private User getUserById(int userId) throws SQLException {
+        // Implement logic to retrieve User from the database using the provided userId
+        // This is just a placeholder, replace it with your actual logic
+        User user = new User();
+        user.setIdU(userId);
+        return user;
     }
 }
+

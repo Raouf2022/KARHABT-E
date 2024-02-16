@@ -11,32 +11,26 @@ public class Reclamation {
     private String description;
     private Date dateReclamation;
     private String emailUtilisateur;
-    private int idUser;
-    private int idVoiture;
+    private User user;
 
 
     public  Reclamation(){}
 
-    public Reclamation(int idR, String sujet, String description, Date dateReclamation, String emailUtilisateur, int idUser, int idVoiture) {
+    public Reclamation(String sujet, String description, Date dateReclamation, String emailUtilisateur, User user) {
+        this.sujet = sujet;
+        this.description = description;
+        this.dateReclamation = dateReclamation;
+        this.emailUtilisateur = emailUtilisateur;
+        this.user = user;
+    }
+
+    public Reclamation(int idR, String sujet, String description, Date dateReclamation, String emailUtilisateur, User user) {
         this.idR = idR;
         this.sujet = sujet;
         this.description = description;
         this.dateReclamation = dateReclamation;
         this.emailUtilisateur = emailUtilisateur;
-        this.idUser = idUser;
-        this.idVoiture = idVoiture;
-    }
-
-    public Reclamation(String sujet, String description, Date dateReclamation, String emailUtilisateur, int idUser, int idVoiture) {
-        this.sujet = sujet;
-        this.description = description;
-        this.dateReclamation = dateReclamation;
-        this.emailUtilisateur = emailUtilisateur;
-        this.idUser = idUser;
-        this.idVoiture = idVoiture;
-    }
-
-    public Reclamation(int idR, String sujet, String description, java.sql.Date dateReclamation, int idUser, int idVoiture, String emailUser) {
+        this.user = user;
     }
 
 
@@ -80,20 +74,12 @@ public class Reclamation {
         this.emailUtilisateur = emailUtilisateur;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
-    public int getIdVoiture() {
-        return idVoiture;
-    }
-
-    public void setIdVoiture(int idVoiture) {
-        this.idVoiture = idVoiture;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -104,8 +90,7 @@ public class Reclamation {
                 ", description='" + description + '\'' +
                 ", dateReclamation=" + dateReclamation +
                 ", emailUtilisateur='" + emailUtilisateur + '\'' +
-                ", idUser=" + idUser +
-                ", idVoiture=" + idVoiture +
+                ", user=" + user +
                 '}';
     }
 
@@ -114,12 +99,12 @@ public class Reclamation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reclamation that = (Reclamation) o;
-        return Objects.equals(idR, that.idR) && Objects.equals(sujet, that.sujet) && Objects.equals(description, that.description) && Objects.equals(dateReclamation, that.dateReclamation) && Objects.equals(emailUtilisateur, that.emailUtilisateur) && Objects.equals(idUser, that.idUser) && Objects.equals(idVoiture, that.idVoiture);
+        return idR == that.idR && Objects.equals(sujet, that.sujet) && Objects.equals(description, that.description) && Objects.equals(dateReclamation, that.dateReclamation) && Objects.equals(emailUtilisateur, that.emailUtilisateur) && Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idR, sujet, description, dateReclamation, emailUtilisateur, idUser, idVoiture);
+        return Objects.hash(idR, sujet, description, dateReclamation, emailUtilisateur);
     }
 }
 

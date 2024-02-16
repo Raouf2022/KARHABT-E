@@ -3,6 +3,7 @@ package edu.esprit.tests;
 import edu.esprit.entities.AvisReclamation;
 import edu.esprit.entities.Messagerie;
 import edu.esprit.entities.Reclamation;
+import edu.esprit.entities.User;
 import edu.esprit.services.ServiceAvisReclamation;
 import edu.esprit.services.ServiceMessagerie;
 import edu.esprit.services.ServiceReclamation;
@@ -23,54 +24,39 @@ public class Main {
         ServiceAvisReclamation sar=new ServiceAvisReclamation(cnx);
         ServiceMessagerie sm =new ServiceMessagerie(cnx);
 
-        Reclamation r1= new Reclamation("Probleme de moteur","pppppppppppppppp",new Date(),"/*//-----",1,2);
-        Reclamation r2= new Reclamation("couleur non","cccccccccc",new Date(),"mariem.abouda@gmail.com",5,2);
-         // sr.ajouterReclamation(r1);
-         // System.out.println(sr.getReclamationById(1));
 
-        System.out.println(sr.getAllReclamations());
-      //  System.out.println(r1.getIdR());
-        //sr.modifierReclamation(r2,2);
-        //sr.supprimerReclamation(2);
+User u1 = new User();
+u1.setIdU(24);
+User u2 =new User();
+u2.setIdU(25);
+Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem.abouda@gmail.com",u1);
+        Reclamation r2=new Reclamation("couleur pas bonne","heyyyyy",new Date(),"mariem.abouda@gmail.com",u1);
 
+//sr.create(r2);
+//System.out.println(sr.getById(14));
 
-AvisReclamation av1= new AvisReclamation(3,"positif","belle voiture",new Date());
-      AvisReclamation av2= new AvisReclamation(20000,"neutre","pas mal",new Date());
+//System.out.println(sr.getAll());
 
+//sr.delete(16);
+       // Reclamation rr= new Reclamation();
+       // rr.setIdR(15);
+//AvisReclamation av1= new AvisReclamation(rr,"positive","non panne",new Date());
 
-
-//sar.addAvisReclamation(av2);
-System.out.println(sar.getAllAvisReclamations());
-//sar.updateCommentaire(1,"couleur cv");
-
-
-//sar.deleteAvisReclamation(2);
-
-/*
-       Messagerie m1=new Messagerie("quel est l'etat de cette voiture", new Date(),1,2,5);
-        Messagerie m2=new Messagerie("quel est l'etat de mouteur", new Date(),1,2,5);
-
- */
-
-              // sm.ajouterMessagerie(m1);
-              //System.out.println( sm.getMessagerieById(1));
+//sar.create(av1);
 
 
-        System.out.println( sm.getAllMessageries());
-        /*
-        sm.modifierMessagerie(m2,1);
+       // sar.delete(16);
 
-        sm.supprimerMessagerie(2);
+        Messagerie m1= new Messagerie("c quoi letatat de moteur",new Date(),u1,u2,false,false);
+        Messagerie m2= new Messagerie("couleur bonne",new Date(),u1,u2,true,false);
+        sm.create(m2);
 
-
-*/
-
-//sr.ajouterReclamation(r1);
-
-      // sm.modifierContenuMessagerie(4,"Encourager moi de l'acheter ");
-
-sar.updateAvisReclamation(av2,6);
+        //System.out.println(sm.getById(9));
+        //System.out.println(sm.getAll());
+        //sm.delete(11);
 
     }
+
+
 
 }

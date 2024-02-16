@@ -1,171 +1,136 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Reclamation;
+import edu.esprit.entities.User;
 import edu.esprit.tools.DataSource;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-public class ServiceReclamation implements IServiceReclamation<Reclamation> {
+public class ServiceReclamation implements IService<Reclamation> {
 
-
-
-        Connection cnx = DataSource.getInstance().getCnx();
+    Connection cnx = DataSource.getInstance().getCnx();
 
     public ServiceReclamation(Connection cnx) {
     }
 
     @Override
-    public void ajouterReclamation(Reclamation reclamation) {
+    public void create(Reclamation entity) {
         try {
-            // Vérification de la longueur du sujet et de l'emailUtilisateur
-            if (isInvalidLength(reclamation.getSujet(), 255) || isInvalidLength(reclamation.getEmailUtilisateur(), 255)) {
-                System.out.println("Erreur : La longueur du sujet ou de l'emailUtilisateur dépasse la limite autorisée.");
-                return; // Arrêter l'opération si la validation échoue
+            // Validate email format
+            if (!isValidEmail(entity.getEmailUtilisateur())) {
+                System.out.println("Invalid email format");
+                return; // You might want to throw an exception or handle it differently
             }
 
-            // Vérification de la validité de l'email
-            if (isInvalidEmail(reclamation.getEmailUtilisateur())) {
-                System.out.println("Erreur : L'email Utilisateur n'est pas valide.");
-                return;
-            }
+            String query = "INSERT INTO reclamation (sujet, description, dateReclamation, emailUser, idU) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            String query = "INSERT INTO Reclamation (sujet, description, dateReclamation, idUser, idVoiture, emailUser) VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
-                preparedStatement.setString(1, reclamation.getSujet());
-                preparedStatement.setString(2, reclamation.getDescription());
-                preparedStatement.setDate(3, new java.sql.Date(reclamation.getDateReclamation().getTime()));
-                preparedStatement.setLong(4, reclamation.getIdUser());
-                preparedStatement.setLong(5, reclamation.getIdVoiture());
-                preparedStatement.setString(6, reclamation.getEmailUtilisateur());
+            pstmt.setString(1, entity.getSujet());
+            pstmt.setString(2, entity.getDescription());
+            pstmt.setDate(3, new java.sql.Date(entity.getDateReclamation().getTime()));
+            pstmt.setString(4, entity.getEmailUtilisateur());
+            pstmt.setInt(5, entity.getUser().getIdU());
 
-                preparedStatement.executeUpdate();
-                System.out.println("Réclamation ajoutée avec succès !");
+            pstmt.executeUpdate();
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                entity.setIdR(generatedKeys.getInt(1));
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de l'ajout de la réclamation : " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    // Vérifie la validité de la longueur d'une chaîne
-    private boolean isInvalidLength(String value, int maxLength) {
-        return value == null || value.isEmpty() || value.length() > maxLength;
+    // Helper method for email validation using a simple regular expression
+    private boolean isValidEmail(String email) {
+        // Adjust the regular expression as needed for your email format requirements
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
     }
 
-    // Vérifie la validité de l'email avec une expression régulière
-    private boolean isInvalidEmail(String email) {
-        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
-        return !email.matches(regex);
-    }
-
-
-
-//La méthode prepareStatement prend une chaîne query qui est une instruction SQL avec des emplacements
-// de paramètres, et renvoie un nouvel objet PreparedStatement qui représente cette instruction SQL précompilée.
-
     @Override
-        public Reclamation getReclamationById(int idR) {
-            Reclamation reclamation = null;
-            try {
-                String query = "SELECT * FROM Reclamation WHERE idR = ?";
-                try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
-                    preparedStatement.setInt(1, idR);
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        if (resultSet.next()) {
-                            reclamation = mapResultSetToReclamation(resultSet);
-                        }
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return reclamation;
-        }
-
-    @Override
-    public Set<Reclamation> getAllReclamations() {
-        Set<Reclamation> reclamations = new HashSet<>();
-
-        String query = "SELECT * FROM Reclamation";
+    public Reclamation getById(int id) {
+        Reclamation reclamation = null;
         try {
-            Statement statement = cnx.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                int idR = resultSet.getInt("idR");
-                // Modifier les noms des attributs pour correspondre à votre modèle de données
-                String sujet = resultSet.getString("sujet");
-                String description = resultSet.getString("description");
-                Date dateReclamation = resultSet.getDate("dateReclamation");
-                int idUser = resultSet.getInt("idUser");
-                int idVoiture = resultSet.getInt("idVoiture");
-                String emailUser = resultSet.getString("emailUser");
+            String query = "SELECT * FROM reclamation WHERE idR = ?";
+            PreparedStatement pstmt = cnx.prepareStatement(query);
+            pstmt.setInt(1, id);
 
-                Reclamation reclamation = new Reclamation(idR, sujet, description, dateReclamation, idUser, idVoiture, emailUser);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                reclamation = mapResultSetToReclamation(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reclamation;
+    }
+
+    @Override
+    public Set<Reclamation> getAll() {
+        Set<Reclamation> reclamations = new HashSet<>();
+        try {
+            String query = "SELECT * FROM reclamation";
+            Statement stmt = cnx.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                Reclamation reclamation = mapResultSetToReclamation(rs);
                 reclamations.add(reclamation);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return reclamations;
     }
 
-
-
     @Override
-    public void modifierReclamation(Reclamation reclamation, int idR) {
+    public void update(Reclamation entity) {
         try {
-            String query = "UPDATE Reclamation SET sujet = ?, description = ?, dateReclamation = ?, idUser = ?, idVoiture = ?, emailUser = ? WHERE idR = ?";
-            try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
-                preparedStatement.setString(1, reclamation.getSujet());
-                preparedStatement.setString(2, reclamation.getDescription());
-                preparedStatement.setDate(3, new java.sql.Date(reclamation.getDateReclamation().getTime()));
-                preparedStatement.setLong(4, reclamation.getIdUser());
-                preparedStatement.setLong(5, reclamation.getIdVoiture());
-                preparedStatement.setString(6, reclamation.getEmailUtilisateur());
+            String query = "UPDATE reclamation SET sujet=?, description=?, dateReclamation=?, emailUser=?, idU=? WHERE idR=?";
+            PreparedStatement pstmt = cnx.prepareStatement(query);
 
-                // Utiliser l'ID fourni en paramètre
-                preparedStatement.setInt(7, idR);
+            pstmt.setString(1, entity.getSujet());
+            pstmt.setString(2, entity.getDescription());
+            pstmt.setDate(3, new java.sql.Date(entity.getDateReclamation().getTime()));
+            pstmt.setString(4, entity.getEmailUtilisateur());
+            pstmt.setInt(5, entity.getUser().getIdU());
+            pstmt.setInt(6, entity.getIdR());
 
-                preparedStatement.executeUpdate();
-                System.out.println("Réclamation modifiée avec succès !");
-            }
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
-
     @Override
-        public void supprimerReclamation(int idR) {
-            try {
-                String query = "DELETE FROM Reclamation WHERE idR = ?";
-                try (PreparedStatement preparedStatement = cnx.prepareStatement(query)) {
-                    preparedStatement.setLong(1, idR);
+    public void delete(int id) {
+        try {
+            String query = "DELETE FROM reclamation WHERE idR=?";
+            PreparedStatement pstmt = cnx.prepareStatement(query);
+            pstmt.setInt(1, id);
 
-                    preparedStatement.executeUpdate();
-                    System.out.println("Réclamation supprimée avec succès !");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // Méthode utilitaire pour mapper un ResultSet à un objet Reclamation
-        private Reclamation mapResultSetToReclamation(ResultSet resultSet) throws SQLException {
-            Reclamation reclamation = new Reclamation();
-            reclamation.setIdR(resultSet.getInt("idR")); // Utiliser getInt pour un ID de type INT
-            reclamation.setSujet(resultSet.getString("sujet"));
-            reclamation.setDescription(resultSet.getString("description"));
-            reclamation.setDateReclamation(resultSet.getDate("dateReclamation"));
-            reclamation.setIdUser(resultSet.getInt("idUser"));
-            reclamation.setIdVoiture(resultSet.getInt("idVoiture"));
-            reclamation.setEmailUtilisateur(resultSet.getString("emailUser"));
-            return reclamation;
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
+    private Reclamation mapResultSetToReclamation(ResultSet rs) throws SQLException {
+        Reclamation reclamation = new Reclamation();
+        reclamation.setIdR(rs.getInt("idR"));
+        reclamation.setSujet(rs.getString("sujet"));
+        reclamation.setDescription(rs.getString("description"));
+        reclamation.setDateReclamation(rs.getDate("dateReclamation"));
+        reclamation.setEmailUtilisateur(rs.getString("emailUser"));
+        User user = new User();
+        user.setIdU(rs.getInt("idU"));
+        reclamation.setUser(user);
+
+        return reclamation;
+    }
+}
