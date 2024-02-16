@@ -1,28 +1,144 @@
 package edu.esprit.entities;
 
+import java.util.Date;
+import java.util.Objects;
+
 public class User {
-
-    int idU;
-
-    public User(){
-
-    }
-    public User(int idU) {
-        this.idU = idU;
-    }
+    private int idU;
+    private String nom;
+    private String prenom;
+    private Date DateNaissance;
+    private int numTel;
+    private String eMAIL;
+    private String passwd;
+    private String role;
 
     public int getIdU() {
         return idU;
+    }
+
+    public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        DateNaissance = dateNaissance;
+        this.numTel = numTel;
+        this.eMAIL = eMAIL;
+        this.passwd = passwd;
+        this.role = role;
     }
 
     public void setIdU(int idU) {
         this.idU = idU;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public Date getDateNaissance() {
+        return DateNaissance;
+    }
+
+    public void setDateNaissance(Date dateNaissance) {
+        DateNaissance = dateNaissance;
+    }
+
+    public int getNumTel() {
+        return numTel;
+    }
+
+    public void setNumTel(int numTel) {
+        this.numTel = numTel;
+    }
+
+    public String geteMAIL() {
+        return eMAIL;
+    }
+
+    public void seteMAIL(String eMAIL) {
+        this.eMAIL = eMAIL;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public User(){
+
+    };
+
+    public User(int idU, String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {
+        this.idU = idU;
+        this.nom = nom;
+        this.prenom = prenom;
+        DateNaissance = dateNaissance;
+        this.numTel = numTel;
+        this.eMAIL = eMAIL;
+        this.passwd = passwd;
+        this.role = role;
+    }
+
+    public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd) {
+        this.nom = nom;
+        this.prenom = prenom;
+        DateNaissance = dateNaissance;
+        this.numTel = numTel;
+        this.eMAIL = eMAIL;
+        this.passwd = passwd;
+    }
+
+    public User(String eMAIL, String passwd) {
+        this.eMAIL = eMAIL;
+        this.passwd = passwd;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "idU=" + idU +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", DateNaissance=" + DateNaissance +
+                ", numTel='" + numTel + '\'' +
+                ", eMAIL='" + eMAIL + '\'' +
+                ", passwd='" + passwd + '\'' +
+                ", role='" + role + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return idU == user.idU;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idU);
     }
 }
