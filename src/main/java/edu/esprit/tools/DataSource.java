@@ -19,7 +19,8 @@ public class DataSource {
     }
 
 //solution pour faire la connexion  une seule fois au chaque req
-    public static DataSource getInstance (){
+    public static DataSource getInstance (
+    ){
        if(instance == null)
             instance =new DataSource ();
        return instance;

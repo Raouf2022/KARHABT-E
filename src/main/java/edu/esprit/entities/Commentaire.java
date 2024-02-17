@@ -5,24 +5,47 @@ import java.time.LocalDate;
 public class Commentaire {
     private int idComnt;
     private String Contenuec;
-    private LocalDate date_pubc ;
-    private  int nbrLike ;
-    private  String reponse ;
+    private LocalDate date_pubc;
+    private int Rating ;
 
-    public Commentaire(int idComnt, String contenuec, LocalDate date_pubc, int nbrLike, String reponse) {
+
+    private User user;
+
+    private Actualite act;
+
+    public Commentaire(int idComnt, String contenuec, LocalDate date_pubc, int rating, User user, Actualite act) {
         this.idComnt = idComnt;
         this.Contenuec = contenuec;
         this.date_pubc = date_pubc;
-        this.nbrLike = nbrLike;
-        this.reponse = reponse;
+        this.Rating = rating;
+        this.user = user;
+        this.act = act;
     }
 
-    public Commentaire(String contenuec, int nbrLike, String reponse) {
+    public Commentaire(String contenuec, int Rating , User user, Actualite act) {
+        this.Contenuec = contenuec;
+        this.Rating=Rating;
+        this.date_pubc = LocalDate.now();
+        this.user = user;
+        this.act = act;
+    }
+
+    public Commentaire(String contenuec, int Rating) {
         this.Contenuec = contenuec;
         this.date_pubc = LocalDate.now();
-        this.nbrLike = nbrLike;
-        this.reponse = reponse;
+        this.Rating = Rating;
     }
+
+    public Commentaire(int idComnt, int Rating, String contenuec, User user, Actualite act ) {
+        this.idComnt = idComnt;
+        this.Contenuec = contenuec;
+        this.Rating=Rating;
+        this.date_pubc = LocalDate.now();
+        this.user = user;
+        this.act = act;
+    }
+
+
 
     public Commentaire(int idComnt) {
         this.idComnt = idComnt;
@@ -32,11 +55,10 @@ public class Commentaire {
 
     }
 
-    public Commentaire(int idComnt, String contenuec, int nbrLike, String reponse) {
+    public Commentaire(int idComnt, String contenuec,  User user) {
         this.idComnt = idComnt;
         this.Contenuec = contenuec;
-        this.nbrLike = nbrLike;
-        this.reponse = reponse;
+        this.user = user;
     }
 
     public int getIdComnt() {
@@ -51,17 +73,23 @@ public class Commentaire {
         return date_pubc;
     }
 
-    public int getNbrLike() {
-        return nbrLike;
+    public int getRating() {
+        return Rating;
     }
 
-    public String getReponse() {
-        return reponse;
+    public User getUser() {
+        return user;
     }
+
+    public Actualite getAct() {
+        return act;
+    }
+
 
     public void setIdComnt(int idComnt) {
         this.idComnt = idComnt;
     }
+
 
     public void setContenuec(String contenuec) {
         Contenuec = contenuec;
@@ -71,12 +99,16 @@ public class Commentaire {
         this.date_pubc = date_pubc;
     }
 
-    public void setNbrLike(int nbrLike) {
-        this.nbrLike = nbrLike;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setReponse(String reponse) {
-        this.reponse = reponse;
+    public void setRating(int rating) {
+        Rating = rating;
+    }
+
+    public void setAct(Actualite act) {
+        this.act = act;
     }
 
     @Override
@@ -84,11 +116,14 @@ public class Commentaire {
         return "Commentaire{" +
                 "idComnt=" + idComnt +
                 ", Contenuec='" + Contenuec + '\'' +
-                ", date_pubc='" + date_pubc + '\'' +
-                ", nbrLike=" + nbrLike +
-                ", reponse='" + reponse + '\'' +
+                ", date_pubc=" + date_pubc +
+                ", Rating=" + Rating +
+                ", user=" + user.getNom() +
+                ", act=" + act.getTitre() +
                 '}';
     }
 }
+
+
 
 
