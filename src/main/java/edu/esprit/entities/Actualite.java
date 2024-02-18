@@ -19,6 +19,13 @@ public class Actualite {
         this.user=user;
     }
 
+    public Actualite( String titre, String contenue, LocalDate date_pub, User user) {
+        this.titre = titre;
+        Contenue = contenue;
+        this.date_pub = date_pub;
+        this.user = user;
+    }
+
     public Actualite(String titre, String contenue) {
         this.titre = titre;
         this.Contenue = contenue;
@@ -88,8 +95,7 @@ public class Actualite {
     @Override
     public String toString() {
         return "Actualite{" +
-                "idAct=" + idAct +
-                ", titre='" + titre + '\'' +
+                " titre='" + titre + '\'' +
                 ", Contenue='" + Contenue + '\'' +
                 ", date_pub=" + date_pub +
                 ", user=" + user.getNom() +

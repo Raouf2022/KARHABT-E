@@ -1,9 +1,11 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Actualite;
+import edu.esprit.entities.Commentaire;
 import edu.esprit.entities.User;
 import edu.esprit.tools.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +113,7 @@ public Actualiteservice () {
         List<Actualite> list = new ArrayList<>();
         while (rs.next()) {
             Actualite actualite = new Actualite();
-            actualite.setIdAct(rs.getInt("idAct"));
+           // actualite.setIdAct(rs.getInt("idAct"));
             actualite.setTitre(rs.getString("titre"));
             actualite.setContenue(rs.getString("Contenue"));
             actualite.setDate_pub(rs.getDate("date_pub").toLocalDate());
@@ -126,10 +128,31 @@ public Actualiteservice () {
         return list;
     }
 
-
-
-
+    @Override
+    public Actualite getOneById(int id) throws SQLException {
+        Actualite actualite = null;
+        String req = "SELECT a.*, u.nom as nom " +
+                "FROM actualite a " +
+                "INNER JOIN user u ON a.idU = u.idU WHERE a.idAct = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet res = ps.executeQuery();
+            User user = new User();
+            if (res.next()) {
+                LocalDate date_pub = res.getDate("date_pub").toLocalDate();
+                String contenu = res.getString("contenue");
+                user.setNom(res.getString("nom")); // Fix the column name to user_nom
+                String titre = res.getString("titre");
+                actualite = new Actualite(titre, contenu, date_pub, user);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return actualite;
     }
+
+}
 
 
 

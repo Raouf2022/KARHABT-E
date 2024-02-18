@@ -35,11 +35,11 @@ public class Main {
 
                       ///////////// Actualite ///////////
 
-        try {
-            as.ajouter(new Actualite("hamdoulhh", "hamdoulh123" , u2));
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            as.ajouter(new Actualite("hamdoulhh", "hamdoulh123" , u2));
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
 
 
 
@@ -112,13 +112,13 @@ public class Main {
 
 
 
-/*
+
 
                       ///////////////Reponse //////////////
 
 
 //        try {
-//            rs.ajouter(new Reponse( "nnnnnn" ,comt ));
+//            rs.ajouter(new Reponse( "lllll" ,comt ,u1 ));
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
@@ -137,7 +137,7 @@ public class Main {
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //      }
-*/
+
 
 
 //        try {
@@ -146,6 +146,25 @@ public class Main {
 //            System.out.println(e.getMessage());
 //        }
 
+
+        /////////// getOneById////////////////
+
+//
+//        try {
+//         System.out.println((as.getOneById(5)));
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        try {
+//            System.out.println((cs.getOneById(7)));
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+        try {
+            System.out.println((rs.getOneById(5)));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
 
 

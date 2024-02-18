@@ -7,6 +7,7 @@ public class Reponse {
     private  String continueR;
     private LocalDate Date_Rep;
     private  Commentaire comnt;
+    private  User user;
 
 
     public Reponse(int idR, String continueR, LocalDate date_Rep) {
@@ -15,10 +16,18 @@ public class Reponse {
         Date_Rep = date_Rep;
     }
 
-    public Reponse(String continueR, Commentaire comnt) {
+    public Reponse(String continueR, Commentaire comnt , User user) {
         this.continueR = continueR;
+        this.user=user;
         this.comnt = comnt;
-        Date_Rep = LocalDate.now();
+        this.Date_Rep = LocalDate.now();
+    }
+
+    public Reponse(String continueR, LocalDate date_Rep, Commentaire comnt, User user) {
+        this.continueR = continueR;
+        this.Date_Rep = date_Rep;
+        this.comnt = comnt;
+        this.user = user;
     }
 
     public Reponse(String continueR) {
@@ -60,6 +69,10 @@ public class Reponse {
         return Date_Rep;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public void setDate_Rep(LocalDate date_Rep) {
         Date_Rep = date_Rep;
     }
@@ -76,14 +89,17 @@ public class Reponse {
         this.continueR = continueR;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
         return "Reponse{" +
-                "idR=" + idR +
-                ", continueR='" + continueR + '\'' +
+                "continueR='" + continueR + '\'' +
                 ", Date_Rep=" + Date_Rep +
                 ", comnt=" + comnt.getContenuec() +
+                ", user=" + user.getNom() +
                 '}';
     }
 }

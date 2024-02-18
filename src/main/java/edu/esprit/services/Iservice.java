@@ -9,5 +9,6 @@ public interface Iservice <T> {
 
     void supprimer (int idAct) throws SQLException;
     List<T> recuperer () throws SQLException;
+    T getOneById(int id) throws SQLException;
 
 }

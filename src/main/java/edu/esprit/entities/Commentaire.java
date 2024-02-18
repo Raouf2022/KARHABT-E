@@ -13,14 +13,16 @@ public class Commentaire {
 
     private Actualite act;
 
-    public Commentaire(int idComnt, String contenuec, LocalDate date_pubc, int rating, User user, Actualite act) {
-        this.idComnt = idComnt;
+    public Commentaire( String contenuec, LocalDate date_pubc, int rating, User user, Actualite act) {
         this.Contenuec = contenuec;
         this.date_pubc = date_pubc;
         this.Rating = rating;
         this.user = user;
         this.act = act;
     }
+
+
+
 
     public Commentaire(String contenuec, int Rating , User user, Actualite act) {
         this.Contenuec = contenuec;
@@ -114,8 +116,7 @@ public class Commentaire {
     @Override
     public String toString() {
         return "Commentaire{" +
-                "idComnt=" + idComnt +
-                ", Contenuec='" + Contenuec + '\'' +
+                " Contenuec='" + Contenuec + '\'' +
                 ", date_pubc=" + date_pubc +
                 ", Rating=" + Rating +
                 ", user=" + user.getNom() +

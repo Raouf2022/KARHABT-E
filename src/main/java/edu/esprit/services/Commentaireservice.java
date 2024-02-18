@@ -4,6 +4,7 @@ import edu.esprit.entities.Commentaire;
 import edu.esprit.entities.User;
 import edu.esprit.tools.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,10 +110,28 @@ public class Commentaireservice implements Iservice <Commentaire> {
         return list;
     }
 
+    @Override
+    public Commentaire getOneById(int id) throws SQLException {
+            Commentaire commentaire = null;
+            String req = "SELECT c.*, u.nom , a.titre  FROM commentaire c   INNER JOIN user u ON c.idU = u.idU INNER JOIN actualite a ON c.idAct = a.idAct WHERE c.idComnt = ?";
+            try {
+                PreparedStatement ps = connection.prepareStatement(req);
+                ps.setInt(1, id);
+                ResultSet res = ps.executeQuery();
+                User user = new User();
+                Actualite actualite= new Actualite();
+                if (res.next()) {
+                    LocalDate date_pubc = res.getDate("date_pubc").toLocalDate();
+                    String contenuc = res.getString("contenuec");
+                    user.setNom(res.getString("nom"));
+                    actualite.setTitre(res.getString("titre"));
+                    int Rating = res.getInt("Rating");
+                    commentaire= new Commentaire( contenuc,date_pubc,Rating,  user,actualite);
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return commentaire;
+        }
+    }
 
-
-
-
-
-
-}

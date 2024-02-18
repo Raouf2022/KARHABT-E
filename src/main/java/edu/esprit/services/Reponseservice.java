@@ -1,10 +1,13 @@
 package edu.esprit.services;
 
+import edu.esprit.entities.Actualite;
 import edu.esprit.entities.Commentaire;
 import edu.esprit.entities.Reponse;
+import edu.esprit.entities.User;
 import edu.esprit.tools.DataSource;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +31,7 @@ public class Reponseservice implements Iservice<Reponse> {
         }
 
         // Requête SQL paramétrée
-        String req = "INSERT INTO Reponse (ContenueR, date_Rep, idComnt) VALUES (?, ?, ?)";
+        String req = "INSERT INTO Reponse (ContenueR, date_Rep, idComnt,idU) VALUES (?, ?, ?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
             preparedStatement.setString(1, reponse.getContinueR());
@@ -36,6 +39,7 @@ public class Reponseservice implements Iservice<Reponse> {
 
             // Supposons que idComnt soit l'identifiant du commentaire associé à la réponse
             preparedStatement.setInt(3, reponse.getComnt().getIdComnt());
+            preparedStatement.setInt(4, reponse.getUser().getIdU());
 
             // Exécution de la requête
             preparedStatement.executeUpdate();
@@ -74,10 +78,7 @@ public class Reponseservice implements Iservice<Reponse> {
 
     @Override
     public List<Reponse> recuperer() throws SQLException {
-        String req = "SELECT r.*, c.contenuec as commentaire_contenuec " +
-                "FROM reponse r " +
-                "INNER JOIN commentaire c ON r.idcomnt = c.idcomnt";
-
+        String req = "SELECT r.*, c.contenuec , u.nom FROM reponse r  INNER JOIN commentaire c ON r.idcomnt = c.idcomnt INNER JOIN user u ON r.idU= u.idU ";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(req);
 
@@ -90,14 +91,40 @@ public class Reponseservice implements Iservice<Reponse> {
 
             // Créer un objet Commentaire
             Commentaire commentaire = new Commentaire();
-            commentaire.setContenuec(rs.getString("commentaire_contenuec"));
+            commentaire.setContenuec(rs.getString("contenuec"));
             r.setComnt(commentaire);
+
+            User user= new User();
+            user.setNom(rs.getString("nom"));
+            r.setUser(user);
 
             list.add(r);
         }
         return list;
     }
 
+    @Override
+    public Reponse getOneById(int id) throws SQLException {
+            Reponse reponse = null;
+            String req = "SELECT r.*, c.contenuec , u.nom FROM reponse r  INNER JOIN commentaire c ON r.idcomnt = c.idcomnt INNER JOIN user u ON r.idU= u.idU  WHERE r.idR = ?";
+            try {
+                PreparedStatement ps = connection.prepareStatement(req);
+                ps.setInt(1, id);
+                ResultSet res = ps.executeQuery();
+                User user = new User();
+                Commentaire commentaire= new Commentaire();
+                if (res.next()) {
+                    LocalDate date_Rep = res.getDate("date_Rep").toLocalDate();
+                    String contenueR = res.getString("contenueR");
+                    user.setNom(res.getString("nom"));
+                 commentaire.setContenuec(res.getString("contenuec"));
+                reponse= new Reponse( contenueR,date_Rep,  commentaire,user);
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return reponse;
+        }
+    }
 
-}
 
