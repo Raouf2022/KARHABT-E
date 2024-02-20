@@ -173,13 +173,13 @@ public class ServiceUser implements IUserService<User> {
         }
         return users;
     }
-    private boolean isValidEmail(String email) {
+    public boolean isValidEmail(String email) {
         // Utilisation d'une expression régulière pour vérifier le format de l'e-mail
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
     }
     // Vérifie si le numéro de téléphone contient exactement 8 chiffres
-    private boolean isValidPhoneNumber(int numTel) {
+    public boolean isValidPhoneNumber(int numTel) {
         // Conversion du numéro de téléphone en une chaîne pour obtenir sa longueur
         String numTelStr = String.valueOf(numTel);
         return numTelStr.length() == 8;

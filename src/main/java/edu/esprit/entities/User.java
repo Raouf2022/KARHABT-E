@@ -118,15 +118,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "nom='" + nom + '\'' +
+        return "nom=" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", DateNaissance=" + DateNaissance +
                 ", numTel='" + numTel + '\'' +
                 ", eMAIL='" + eMAIL + '\'' +
                 ", passwd='" + passwd + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+                ", role='" + role + '\'';
     }
 
     @Override
