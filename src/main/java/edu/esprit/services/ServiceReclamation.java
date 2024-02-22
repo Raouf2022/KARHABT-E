@@ -12,7 +12,13 @@ public class ServiceReclamation implements IService<Reclamation> {
 
     Connection cnx = DataSource.getInstance().getCnx();
 
+
+
     public ServiceReclamation(Connection cnx) {
+    }
+
+    public ServiceReclamation() {
+        
     }
 
     @Override
@@ -29,7 +35,7 @@ public class ServiceReclamation implements IService<Reclamation> {
 
             pstmt.setString(1, entity.getSujet());
             pstmt.setString(2, entity.getDescription());
-            pstmt.setDate(3, new java.sql.Date(entity.getDateReclamation().getTime()));
+            pstmt.setDate(3, new Date(entity.getDateReclamation().getTime()));
             pstmt.setString(4, entity.getEmailUtilisateur());
             pstmt.setInt(5, entity.getUser().getIdU());
 
@@ -96,7 +102,7 @@ public class ServiceReclamation implements IService<Reclamation> {
 
             pstmt.setString(1, entity.getSujet());
             pstmt.setString(2, entity.getDescription());
-            pstmt.setDate(3, new java.sql.Date(entity.getDateReclamation().getTime()));
+            pstmt.setDate(3, new Date(entity.getDateReclamation().getTime()));
             pstmt.setString(4, entity.getEmailUtilisateur());
             pstmt.setInt(5, entity.getUser().getIdU());
             pstmt.setInt(6, entity.getIdR());

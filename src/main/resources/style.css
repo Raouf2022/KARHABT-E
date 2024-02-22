@@ -1,0 +1,47 @@
+/* Ajoutez ces styles à votre fichier style.css */
+
+/* Style pour le TilePane */
+.tile-pane {
+    -fx-background-color: #FFFFFF; /* Couleur de fond */
+    -fx-padding: 20; /* Marge intérieure */
+    -fx-border-radius: 10; /* Coins arrondis */
+}
+
+/* Style pour les panes individuels des réclamations */
+.pane {
+    -fx-background-color: #D3E0F5; /* Couleur de fond */
+    -fx-padding: 10; /* Marge intérieure */
+    -fx-border-color: #084e99; /* Couleur de la bordure */
+    -fx-border-width: 2; /* Largeur de la bordure */
+    -fx-border-radius: 5; /* Coins arrondis */
+}
+
+/* Style pour les boutons Modifier et Supprimer */
+.button-modifier, .button-supprimer {
+    -fx-background-color: #6b7fab; /* Couleur de fond */
+    -fx-text-fill: #FFFFFF; /* Couleur du texte */
+    -fx-font-size: 12; /* Taille de la police */
+    -fx-padding: 5 10; /* Marge intérieure */
+    -fx-border-radius: 5; /* Coins arrondis */
+}
+
+/* Style pour l'étiquette "Mes réclamations" */
+.label-title {
+    -fx-font-size: 20; /* Taille de la police */
+    -fx-fill: #084e99; /* Couleur du texte */
+    -fx-font-weight: bold; /* Gras */
+}
+
+/* Style pour le label vide */
+.empty-label {
+    -fx-font-size: 18; /* Taille de la police */
+    -fx-fill: #084e99; /* Couleur du texte */
+    -fx-font-weight: bold; /* Gras */
+}
+
+/* Style pour les étiquettes des attributs de réclamation */
+.label-attribute {
+    -fx-font-size: 14; /* Taille de la police */
+    -fx-fill: rgba(20, 29, 203, 0.4); /* Couleur du texte */
+}
+
