@@ -10,16 +10,16 @@
 
 <AnchorPane prefHeight="393.0" prefWidth="614.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierReclamation">
     <children>
-        <Label layoutX="72.0" layoutY="268.0" text="Sujet:" />
+        <Label layoutX="72.0" layoutY="268.0" text="Sujet:" underline="true" />
         <TextField fx:id="sujetTextField" layoutX="169.0" layoutY="124.0" prefHeight="62.0" prefWidth="358.0" promptText="Entrez le sujet" />
 
-        <Label layoutX="55.0" layoutY="146.0" text="Description:" />
+        <Label layoutX="55.0" layoutY="146.0" text="Description:" underline="true" />
         <TextField fx:id="descriptionTextField" layoutX="165.0" layoutY="206.0" prefHeight="124.0" prefWidth="366.0" promptText="Entrez la description" />
 
         <!-- Ajoutez d'autres champs de saisie pour les autres attributs si nécessaire -->
 
-        <Button fx:id="enregistrerButton" layoutX="265.0" layoutY="351.0" onAction="#handleEnregistrer" text="Enregistrer" />
-        <Button fx:id="annulerButton" layoutX="372.0" layoutY="351.0" onAction="#handleAnnuler" text="Annuler" />
+        <Button fx:id="enregistrerButton" layoutX="265.0" layoutY="351.0" onAction="#handleEnregistrer" style="-fx-background-color: #013069;" text="Enregistrer" textFill="WHITE" />
+        <Button fx:id="annulerButton" layoutX="372.0" layoutY="351.0" onAction="#handleAnnuler" style="-fx-background-color: red;" text="Annuler" textFill="WHITE" />
       <Pane prefHeight="91.0" prefWidth="696.0" style="-fx-background-color: #0d156e;">
          <children>
             <Text fx:id="textGestion" fill="#dade8a" layoutX="169.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier votre réclamation" textAlignment="CENTER" wrappingWidth="365.68988037109375">

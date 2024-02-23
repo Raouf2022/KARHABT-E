@@ -78,6 +78,8 @@ public class ServiceMessagerie implements IService<Messagerie> {
         return messages;
     }
 
+
+
     @Override
     public void update(Messagerie entity) {
         try {
@@ -97,6 +99,30 @@ public class ServiceMessagerie implements IService<Messagerie> {
             e.printStackTrace();
         }
     }
+
+
+
+    @Override
+    public void update2(int id, Messagerie newMessagerie) {
+        try {
+            String query = "UPDATE Messagerie SET contenu=?, dateEnvoie=?, Sender=?, Receiver=?, vu=?, deleted=? WHERE idMessage=?";
+            try (PreparedStatement pst = cnx.prepareStatement(query)) {
+                pst.setString(1, newMessagerie.getContenu());
+                pst.setTimestamp(2, new Timestamp(newMessagerie.getDateEnvoie().getTime()));
+                pst.setInt(3, newMessagerie.getSender().getIdU());
+                pst.setInt(4, newMessagerie.getReceiver().getIdU());
+                pst.setBoolean(5, newMessagerie.isVu());
+                pst.setBoolean(6, newMessagerie.isDeleted());
+                pst.setInt(7, id);  // Utilisez l'ID fourni en paramètre pour identifier le message à mettre à jour.
+
+                pst.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Assurez-vous de traiter correctement l'exception SQLException dans votre application.
+        }
+    }
+
 
     @Override
     public void delete(int id) {

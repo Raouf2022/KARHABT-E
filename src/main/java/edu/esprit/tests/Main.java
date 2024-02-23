@@ -1,10 +1,10 @@
 package edu.esprit.tests;
 
-import edu.esprit.entities.AvisReclamation;
+import edu.esprit.entities.ReponseReclamation;
 import edu.esprit.entities.Messagerie;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.User;
-import edu.esprit.services.ServiceAvisReclamation;
+import edu.esprit.services.ServiceReponseReclamation;
 import edu.esprit.services.ServiceMessagerie;
 import edu.esprit.services.ServiceReclamation;
 import edu.esprit.tools.DataSource;
@@ -21,7 +21,7 @@ public class Main {
 
 
         ServiceReclamation sr=new ServiceReclamation(cnx);
-        ServiceAvisReclamation sar=new ServiceAvisReclamation(cnx);
+        ServiceReponseReclamation srepr=new ServiceReponseReclamation(cnx);
         ServiceMessagerie sm =new ServiceMessagerie(cnx);
 
 
@@ -43,14 +43,18 @@ Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem
 //sr.delete(17);
        Reclamation rr1= new Reclamation();
         Reclamation rr2= new Reclamation();
-        rr1.setIdR(15);
+        rr1.setIdR(18);
         rr2.setIdR(22);
-        AvisReclamation av1= new AvisReclamation(rr1,"positive","non panne",new Date());
-        AvisReclamation av2= new AvisReclamation(rr2,"negative","oui mauvais service",new Date());
-        AvisReclamation av3= new AvisReclamation(rr2,"neutreEEE","jai pas une idée",new Date());
+        ReponseReclamation repr1= new ReponseReclamation(rr1,"on va prendre en considerations merci",new Date() );
+        ReponseReclamation repr2=new ReponseReclamation(rr2,"merci",new Date() );
+        ReponseReclamation repr3= new ReponseReclamation(rr1,"non monsieur",new Date() );
 
       // sar.create(av2);
-        sar.create(av3);
+        //srepr.create(repr1);
+        //srepr.create(repr2);
+        //srepr.create(repr3);
+
+           srepr.update2(32,repr2);
 
 
        // sar.delete(16);

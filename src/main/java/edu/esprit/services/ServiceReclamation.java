@@ -94,7 +94,7 @@ public class ServiceReclamation implements IService<Reclamation> {
         return reclamations;
     }
 
-    @Override
+     @Override
     public void update(Reclamation entity) {
         try {
             String query = "UPDATE reclamation SET sujet=?, description=?, dateReclamation=?, emailUser=?, idU=? WHERE idR=?";
@@ -112,6 +112,26 @@ public class ServiceReclamation implements IService<Reclamation> {
             e.printStackTrace();
         }
     }
+
+    public void update2(int id, Reclamation newReclamation) {
+        try {
+            String query = "UPDATE reclamation SET sujet=?, description=?, dateReclamation=?, emailUser=?, idU=? WHERE idR=?";
+            PreparedStatement pstmt = cnx.prepareStatement(query);
+
+            pstmt.setString(1, newReclamation.getSujet());
+            pstmt.setString(2, newReclamation.getDescription());
+            pstmt.setDate(3, new java.sql.Date(newReclamation.getDateReclamation().getTime()));
+            pstmt.setString(4, newReclamation.getEmailUtilisateur());
+            pstmt.setInt(5, newReclamation.getUser().getIdU());
+            pstmt.setInt(6, id);  // Utilisez l'ID fourni en paramètre pour identifier la réclamation à mettre à jour.
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Assurez-vous de traiter correctement l'exception SQLException dans votre application.
+        }
+    }
+
 
     @Override
     public void delete(int id) {

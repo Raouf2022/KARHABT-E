@@ -3,6 +3,7 @@ package edu.esprit.controllers;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.User;
 import edu.esprit.services.ServiceReclamation;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -132,6 +134,13 @@ public class AjouterReclamation {
 
             // Obtenir la scène actuelle et le stage
             Stage currentStage = (Stage) bMesReclamations.getScene().getWindow();
+
+
+            // Créer une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), root);
+            fadeTransition.setFromValue(0.0);
+            fadeTransition.setToValue(1.0);
+            fadeTransition.play();
 
             // Définir la nouvelle scène sur le stage et l'afficher
             currentStage.setScene(scene);

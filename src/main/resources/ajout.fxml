@@ -1,79 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="460.0" prefWidth="831.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterReclamation">
+<AnchorPane prefHeight="640.0" prefWidth="960.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterReclamation">
    <children>
-      <Pane layoutX="280.0" prefHeight="51.0" prefWidth="575.0" style="-fx-background-color: #6b7fab99;">
+      <Pane layoutX="-1.0" layoutY="49.0" prefHeight="51.0" prefWidth="960.0" style="-fx-background-color: #6b7fab99;">
          <children>
-            <Pane layoutX="14.0" layoutY="10.0" prefHeight="34.0" prefWidth="172.0" style="-fx-background-color: #6b7fab08;" />
-            <Button fx:id="bMesReclamations" cache="true" focusTraversable="false" layoutX="191.0" layoutY="9.0" mnemonicParsing="false" onAction="#openMesReclamations" prefHeight="34.0" prefWidth="161.0" style="-fx-background-color: #6b7fab08;" text="Mes Reclamations" textFill="WHITE" underline="true">
+            <Pane layoutX="14.0" layoutY="10.0" prefHeight="34.0" prefWidth="477.0" style="-fx-background-color: #6b7fab08;">
+               <children>
+                  <Text fill="#084e99" layoutX="82.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouvelle réclamation" underline="true" wrappingWidth="195.9999877929688">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children></Pane>
+            <Button fx:id="bMesReclamations" cache="true" focusTraversable="false" layoutX="374.0" layoutY="9.0" mnemonicParsing="false" onAction="#openMesReclamations" prefHeight="34.0" prefWidth="211.0" style="-fx-background-color: #6b7fab08;" text="Mes Reclamations" textFill="WHITE" underline="true">
                <font>
-                  <Font name="Arial Bold" size="15.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="bMessagerie" layoutX="372.0" layoutY="9.0" mnemonicParsing="false" onAction="#openMessagerie" prefHeight="34.0" prefWidth="136.0" style="-fx-background-color: #6b7fab08;" text="Méssagerie" textFill="WHITE" underline="true">
+            <Button fx:id="bMessagerie" layoutX="785.0" layoutY="9.0" mnemonicParsing="false" onAction="#openMessagerie" prefHeight="34.0" prefWidth="136.0" style="-fx-background-color: #6b7fab08;" text="Méssagerie" textFill="WHITE" underline="true">
                <font>
-                  <Font name="Arial Bold" size="15.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Button>
-            <Text fill="#084e99" layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouvelle réclamation" underline="true" wrappingWidth="151.20000000000005">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Text>
          </children>
       </Pane>
-      <Label layoutX="366.0" layoutY="132.0" prefHeight="18.0" prefWidth="61.0" text="Email" textFill="#313d5d">
+      <Label layoutX="254.0" layoutY="160.0" prefHeight="34.0" prefWidth="100.0" text="Email" textFill="#313d5d">
          <font>
             <Font name="Arial Unicode MS" size="16.0" />
          </font></Label>
-      <Label layoutX="367.0" layoutY="198.0" prefHeight="18.0" prefWidth="50.0" text="Sujet" textFill="#313d5d">
+      <Label layoutX="268.0" layoutY="246.0" prefHeight="18.0" prefWidth="50.0" text="Sujet" textFill="#313d5d">
          <font>
             <Font name="Arial Unicode MS" size="16.0" />
          </font></Label>
-      <TextField fx:id="tfEmail" layoutX="361.0" layoutY="170.0" prefHeight="27.0" prefWidth="357.0" promptText="\@gmail.com" />
-      <TextField fx:id="tfDescription" layoutX="350.0" layoutY="331.0" prefHeight="120.0" prefWidth="379.0" promptText="Donner une description" />
+      <TextField fx:id="tfEmail" layoutX="247.0" layoutY="209.0" prefHeight="27.0" prefWidth="450.0" promptText="\@gmail.com" />
+      <TextField fx:id="tfDescription" layoutX="255.0" layoutY="364.0" prefHeight="189.0" prefWidth="439.0" promptText="Donner une description">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></TextField>
 
-      <Button fx:id="bvalider" layoutX="484.0" layoutY="460.0" mnemonicParsing="false" onAction="#validerReclamation" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #007bff;" text="Valider" textFill="WHITE">
+      <Button fx:id="bvalider" layoutX="459.0" layoutY="587.0" mnemonicParsing="false" onAction="#validerReclamation" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #013069;" text="Valider" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font></Button>
       <TextField fx:id="tfidUser" disable="true" editable="false" layoutX="169.0" layoutY="62.0" visible="false" />
-      <Accordion layoutX="420.0" layoutY="198.0" />
+      <Accordion layoutX="332.0" layoutY="246.0" />
       <FontAwesomeIconView fill="#f4f2f2" glyphName="CHECK" layoutX="337.0" layoutY="503.0" wrappingWidth="25.999999999999943" />
       <FontAwesomeIconView fill="#f7f0f0" glyphName="TIMES" layoutX="466.0" layoutY="503.0" text="" wrappingWidth="18.449999809265137" />
-      <Label layoutX="356.0" layoutY="298.0" prefHeight="22.0" prefWidth="100.0" text="Description" textFill="#313d5d">
+      <Label layoutX="260.0" layoutY="320.0" prefHeight="21.0" prefWidth="87.0" text="Description" textFill="#313d5d">
          <font>
             <Font name="Arial Unicode MS" size="15.0" />
          </font></Label>
-      <ImageView fitHeight="661.0" fitWidth="284.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/voiture2.jpg" />
-         </image>
-      </ImageView>
-      <Pane layoutX="-1.0" prefHeight="510.0" prefWidth="284.0" style="-fx-background-color: #007bff4D;" />
-      <TextField fx:id="tfSujet" layoutX="361.0" layoutY="237.0" prefHeight="27.0" prefWidth="358.0" promptText="Ecriver le sujet de reclamation" />
-      <Text fill="#007bff" layoutX="717.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/Quitter" textAlignment="RIGHT" underline="true" wrappingWidth="100.20263671875">
+      <TextField fx:id="tfSujet" layoutX="247.0" layoutY="274.0" prefHeight="27.0" prefWidth="450.0" promptText="Ecriver le sujet de reclamation" />
+      <Text fill="#007bff" layoutX="837.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/Quitter" textAlignment="RIGHT" underline="true" wrappingWidth="100.20263671875">
          <font>
-            <Font size="13.0" />
+            <Font size="17.0" />
          </font>
       </Text>
-      <Text fx:id="textGestion" fill="#007bff" layoutX="357.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation clientèle" wrappingWidth="365.68988037109375">
-         <font>
-            <Font name="System Bold" size="21.0" />
-         </font>
-      </Text>
+      <Pane layoutX="-1.0" layoutY="-3.0" prefHeight="51.0" prefWidth="960.0" style="-fx-background-color: #013069;">
+         <children>
+            <Text fx:id="textGestion" fill="#fcfcfc" layoutX="327.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation clientèle" wrappingWidth="365.68988037109375">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
 
    </children>
 

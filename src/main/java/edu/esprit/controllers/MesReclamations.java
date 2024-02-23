@@ -2,16 +2,20 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Reclamation;
 import edu.esprit.services.ServiceReclamation;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -54,58 +58,63 @@ public class MesReclamations {
     }
 
     private Pane createReclamationPane(Reclamation reclamation) {
-        Pane pane = new Pane();
-        pane.setPrefSize(180, 120);
-        pane.getStyleClass().add("pane");  // Ajouter une classe CSS pour le style du pane
+        VBox mainVBox = new VBox();
+        mainVBox.setPrefSize(180, 120);
+        mainVBox.getStyleClass().add("pane");
 
-        // Ajouter des étiquettes pour afficher les attributs de la réclamation
+        // Labels for the main reclamation details
         Label sujetLabel = new Label("Sujet: " + reclamation.getSujet());
         sujetLabel.getStyleClass().addAll("label", "label-attribute");
-        sujetLabel.getStyleClass().add("label");
         sujetLabel.getStyleClass().add("label-title");
-        sujetLabel.setLayoutX(10);
-        sujetLabel.setLayoutY(40);
 
         Label descriptionLabel = new Label("Description: " + reclamation.getDescription());
-   descriptionLabel.getStyleClass().addAll("label", "label-attribute");
-        descriptionLabel.getStyleClass().add("label");
-        descriptionLabel.setLayoutX(10);
-        descriptionLabel.setLayoutY(60);
+        descriptionLabel.getStyleClass().addAll("label", "label-attribute");
 
         Label dateLabel = new Label("Date: " + formatDate(reclamation.getDateReclamation()));
-   dateLabel.getStyleClass().addAll("label", "label-attribute");
-        dateLabel.getStyleClass().add("label");
-        dateLabel.setLayoutX(10);
-        dateLabel.setLayoutY(80);
+        dateLabel.getStyleClass().addAll("label", "label-attribute");
 
         Label emailLabel = new Label("Email: " + reclamation.getEmailUtilisateur());
-     emailLabel.getStyleClass().addAll("label", "label-attribute");
-        emailLabel.getStyleClass().add("label");
-        emailLabel.setLayoutX(10);
-        emailLabel.setLayoutY(100);
+        emailLabel.getStyleClass().addAll("label", "label-attribute");
 
-        // Ajouter les étiquettes au pane
-        pane.getChildren().addAll(sujetLabel, descriptionLabel, dateLabel, emailLabel);
-
-        // Ajouter des boutons de modification et suppression
+        // Buttons for modification and deletion
         Button modifierButton = new Button("Modifier");
         modifierButton.getStyleClass().add("button-modifier");
-        modifierButton.setLayoutX(10);
-        modifierButton.setLayoutY(130);
         modifierButton.setOnAction(event -> handleModifierButton(reclamation));
 
         Button supprimerButton = new Button("Supprimer");
         supprimerButton.getStyleClass().add("button-supprimer");
-        supprimerButton.setLayoutX(80);
-        supprimerButton.setLayoutY(130);
         supprimerButton.setOnAction(event -> handleSupprimerButton(reclamation.getIdR()));
 
-        pane.getChildren().addAll(modifierButton, supprimerButton);
+        // Nested Pane for additional details
+        Pane detailsPane = new Pane();
+        detailsPane.getStyleClass().add("details-pane");
+        detailsPane.setLayoutY(130); // Adjust the layout position as needed
 
-        // Ajouter des gestionnaires d'événements pour les actions sur le Pane si nécessaire
+        // Add details to the nested Pane
+        Label additionalDetailsLabel = new Label("Additional Details:");
+        additionalDetailsLabel.getStyleClass().add("label-title");
+        additionalDetailsLabel.setLayoutX(10);
+        additionalDetailsLabel.setLayoutY(10);
 
-        return pane;
+        // Add additional details specific to your application
+        // For example:
+        // Label detail1Label = new Label("Detail 1: " + reclamation.getDetail1());
+        // detail1Label.getStyleClass().addAll("label", "label-attribute");
+        // detail1Label.setLayoutX(10);
+        // detail1Label.setLayoutY(30);
+
+        // Add additional details labels to the nested Pane
+        // detailsPane.getChildren().addAll(detail1Label);
+
+        // Add labels and buttons to the main VBox
+        mainVBox.getChildren().addAll(sujetLabel, descriptionLabel, dateLabel, emailLabel, modifierButton, supprimerButton, detailsPane);
+
+        // Add main VBox to a Pane
+        Pane mainPane = new Pane(mainVBox);
+
+        return mainPane;
     }
+
 
     private void handleModifierButton(Reclamation reclamation) {
         try {
@@ -155,7 +164,31 @@ public class MesReclamations {
     }
 
     public void openNouvelleReclamation(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML pour la page d'ajout
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajout.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle et le stage
+            Stage currentStage = (Stage) reclamationsTilePane.getScene().getWindow();
+
+            // Créer une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), root);
+            fadeTransition.setFromValue(0.0);
+            fadeTransition.setToValue(1.0);
+            fadeTransition.play();
+
+            // Définir la nouvelle scène sur le stage et l'afficher
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void openMessagerie(ActionEvent actionEvent) {
     }
