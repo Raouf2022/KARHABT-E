@@ -11,27 +11,29 @@ import java.util.List;
 
 
 public class Actualiteservice implements Iservice <Actualite> {
-        private Connection connection ;
-public Actualiteservice () {
-    connection = DataSource.getInstance().getConnection();
-}
+    private Connection connection ;
+    public Actualiteservice () {
+        connection = DataSource.getInstance().getConnection();
+    }
 
     @Override
     public void ajouter(Actualite actualite) throws SQLException {
         // Vérification de saisie
+
         if (actualite.getTitre() == null || actualite.getTitre().isEmpty() || actualite.getContenue() == null || actualite.getContenue().isEmpty()) {
-            System.out.println("Le titre et le contenu ne peuvent pas être vides.");
+            System.out.println("Le titre et le contenu ne peuvent pas etre vides.");
             return; // Sortir de la méthode si la saisie est invalide
         }
 
         // Requête SQL paramétrée
-        String req = "INSERT INTO Actualite (titre, Contenue, date_pub , idU) VALUES (?, ?, ? , ?)";
+        String req = "INSERT INTO Actualite (titre, Image, Contenue, date_pub ) VALUES (?, ?, ? , ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
             preparedStatement.setString(1, actualite.getTitre());
-            preparedStatement.setString(2, actualite.getContenue());
-            preparedStatement.setDate(3, Date.valueOf(actualite.getDate_pub()));
-            preparedStatement.setInt(4, actualite.getUser().getIdU());
+            preparedStatement.setString(2, actualite.getImage());
+            preparedStatement.setString(3, actualite.getContenue());
+            preparedStatement.setDate(4, Date.valueOf(actualite.getDate_pub()));
+
 
             // Exécution de la requête
             preparedStatement.executeUpdate();
@@ -54,11 +56,12 @@ public Actualiteservice () {
         if (actualite.getTitre() != null && !actualite.getTitre().isEmpty() &&
                 actualite.getContenue() != null && !actualite.getContenue().isEmpty()) {
 
-            String req = "UPDATE actualite SET titre = ?, Contenue = ?  WHERE idAct = ?";
+            String req = "UPDATE actualite SET titre = ?, Image =?, Contenue = ?  WHERE idAct = ?";
             PreparedStatement prepardstatement = connection.prepareStatement(req);
             prepardstatement.setString(1, actualite.getTitre());
-            prepardstatement.setString(2, actualite.getContenue());
-            prepardstatement.setInt(3, actualite.getIdAct());
+            prepardstatement.setString(2, actualite.getImage());
+            prepardstatement.setString(3, actualite.getContenue());
+            prepardstatement.setInt(4, actualite.getIdAct());
             prepardstatement.executeUpdate();
             System.out.println("Actualite modifié");
 
@@ -104,29 +107,24 @@ public Actualiteservice () {
 
     @Override
     public List<Actualite> recuperer() throws SQLException {
-        String req = "SELECT a.*, u.nom as user_nom " +
-                "FROM actualite a " +
-                "INNER JOIN user u ON a.idU = u.idU";
+        String req = "SELECT * FROM actualite";
         Statement statement = connection.createStatement();
 
         ResultSet rs = statement.executeQuery(req);
         List<Actualite> list = new ArrayList<>();
         while (rs.next()) {
             Actualite actualite = new Actualite();
-           // actualite.setIdAct(rs.getInt("idAct"));
+            actualite.setIdAct(rs.getInt("idAct"));
             actualite.setTitre(rs.getString("titre"));
+            actualite.setImage(rs.getString("Image"));
             actualite.setContenue(rs.getString("Contenue"));
             actualite.setDate_pub(rs.getDate("date_pub").toLocalDate());
-
-            // Créer un objet User
-            User user = new User();
-            user.setNom(rs.getString("user_nom"));
-            actualite.setUser(user);
 
             list.add(actualite);
         }
         return list;
     }
+
 
     @Override
     public Actualite getOneById(int id) throws SQLException {
@@ -144,7 +142,8 @@ public Actualiteservice () {
                 String contenu = res.getString("contenue");
                 user.setNom(res.getString("nom")); // Fix the column name to user_nom
                 String titre = res.getString("titre");
-                actualite = new Actualite(titre, contenu, date_pub, user);
+                String Image = res.getString("Image");
+                actualite = new Actualite(titre, Image, contenu, date_pub, user);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -153,6 +152,3 @@ public Actualiteservice () {
     }
 
 }
-
-
-

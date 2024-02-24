@@ -7,46 +7,51 @@ public class Actualite {
     private String titre;
     private String Contenue;
     private LocalDate date_pub ;
-    private  User user;
+    private  String Image;
 
 
 
-    public Actualite (String titre, String contenue, User user) {
-        this.idAct = idAct;
+
+
+
+    public Actualite( String titre, String Image ,String contenue, LocalDate date_pub, User user) {
         this.titre = titre;
+        this.Image=Image;
         this.Contenue = contenue;
-        this.date_pub = LocalDate.now();
-        this.user=user;
-    }
-
-    public Actualite( String titre, String contenue, LocalDate date_pub, User user) {
-        this.titre = titre;
-        Contenue = contenue;
         this.date_pub = date_pub;
-        this.user = user;
+
     }
 
-    public Actualite(String titre, String contenue) {
+    public Actualite(String titre, String Image , String contenue) {
         this.titre = titre;
+        this.Image=Image;
         this.Contenue = contenue;
         this.date_pub = LocalDate.now();
-        this.user =user;
+
     }
 
     public Actualite() {
 
     }
 
-    public Actualite(int idAct, String titre, String contenue,User user) {
+    public Actualite(int idAct, String titre, String Image , String contenue) {
         this.idAct = idAct;
         this.titre = titre;
+        this.Image=Image;
         Contenue = contenue;
-        this.user =user;
+
     }
 
     public Actualite(int idAct) {
         this.idAct = idAct;
     }
+
+    public Actualite(String titre, String contenue, User user) {
+        this.titre = titre;
+        Contenue = contenue;
+
+    }
+
 
 
 
@@ -66,8 +71,12 @@ public class Actualite {
         return date_pub;
     }
 
-    public User getUser() {
-        return user;
+
+
+
+
+    public String getImage() {
+        return Image;
     }
 
     public void setIdAct(int idAct) {
@@ -88,17 +97,19 @@ public class Actualite {
         this.date_pub = date_pub;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+
+    public void setImage(String image) {
+        Image = image;
     }
 
     @Override
     public String toString() {
         return "Actualite{" +
-                " titre='" + titre + '\'' +
+                "titre='" + titre + '\'' +
                 ", Contenue='" + Contenue + '\'' +
                 ", date_pub=" + date_pub +
-                ", user=" + user.getNom() +
+                ", Image='" + Image +
+
                 '}';
     }
 }

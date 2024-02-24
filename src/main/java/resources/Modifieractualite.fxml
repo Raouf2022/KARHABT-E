@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="598.0" prefWidth="825.0" style="-fx-background-color: CEDDDE;" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Modifieractualite">
+    <stylesheets>
+        <URL value="@StyleCss.css" />
+    </stylesheets>
+    <children>
+        <Pane prefHeight="598.0" prefWidth="204.0" style="-fx-background-color: #5784BA;">
+            <children>
+                <FontAwesomeIconView glyphName="USER" layoutX="73.0" layoutY="103.0" size="80" />
+                <Text layoutX="46.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome !">
+                    <font>
+                        <Font name="Arial Rounded MT Bold" size="21.0" />
+                    </font>
+                </Text>
+                <Line endX="100.0" layoutX="77.0" layoutY="146.0" startX="-52.5000114440918" />
+                <FontAwesomeIconView glyphName="CAR" layoutX="93.0" layoutY="165.0" />
+            </children>
+        </Pane>
+        <Button layoutX="611.0" layoutY="161.0" mnemonicParsing="false" onAction="#Importerimage" prefHeight="26.0" prefWidth="82.0" text="Importer" />
+        <Button fx:id="btnmodiff" layoutX="457.0" layoutY="523.0" mnemonicParsing="false" onAction="#Modifieractualite" prefHeight="26.0" prefWidth="95.0" text="Modifier" />
+        <!--      <Button layoutX="557.0" layoutY="523.0" mnemonicParsing="false" onAction="#annuler" prefHeight="26.0" prefWidth="95.0" text="Annuler" />-->
+        <TextField fx:id="image" layoutX="384.0" layoutY="161.0" promptText="image de actualité" />
+        <TextField fx:id="titre" layoutX="384.0" layoutY="210.0" promptText="Titre" />
+        <Text fill="WHITE" layoutX="357.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier une actualité ! " wrappingWidth="238.21368408203125">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="20.0" />
+            </font>
+        </Text>
+        <TextArea fx:id="contenue" layoutX="383.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" promptText="Contenue" />
+        <Button layoutX="726.0" layoutY="34.0" mnemonicParsing="false" onAction="#goBack" text="&lt;--" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AddAct">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="50.0" style="-fx-background-color: #5784BA;" />
+      <TextField fx:id="importerimage" alignment="CENTER" layoutX="203.0" layoutY="113.0" />
+      <Text layoutX="137.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="img" fitHeight="47.0" fitWidth="39.0" layoutX="52.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../imageeee.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="titre" layoutX="204.0" layoutY="151.0" />
+      <Text layoutX="141.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="contenue" layoutX="203.0" layoutY="193.0" prefHeight="118.0" prefWidth="178.0" />
+      <Text layoutX="132.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contenue">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Text>
+      <Button layoutX="217.0" layoutY="340.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #5784BA;" text="Ajouter">
+         <onAction>#ajouterActualite</onAction>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="365.0" layoutY="340.0" mnemonicParsing="false" onAction="#Annuler" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #5784BA;" text="Annuler">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="360.0" layoutY="115.0" mnemonicParsing="false" onAction="#importerimage" prefHeight="19.0" prefWidth="98.0" style="-fx-background-color: #5784BA;" text="Importer">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Button>
+      <Text layoutX="212.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une actualité" wrappingWidth="199.6343994140625">
+         <font>
+            <Font name="Britannic Bold" size="19.0" />
+         </font>
+      </Text>
+      <FontAwesomeIconView glyphName="PHOTO" layoutX="439.0" layoutY="131.0" />
+      <Button fx:id="close" onAction="#Annuler" text="Close" />
+
+      <FontAwesomeIconView glyphName="CLOSE" layoutX="571.0" layoutY="19.0" size="12" />
+   </children>
+</AnchorPane>

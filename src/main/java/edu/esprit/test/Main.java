@@ -28,15 +28,15 @@ public class Main {
         Actualite act=new Actualite();
        act.setIdAct(5);
       Commentaire comt =new Commentaire();
-      comt.setIdComnt(7);
+      comt.setIdComnt(12);
 
 
 
 
                       ///////////// Actualite ///////////
-
+//
 //        try {
-//            as.ajouter(new Actualite("hamdoulhh", "hamdoulh123" , u2));
+//            as.ajouter(new Actualite("tiiiiiiiiiiiitre", "hamdoulh123" , "hhhhh" ,u2));
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
@@ -45,7 +45,7 @@ public class Main {
 
 
 //       try {
-//            as.modifier(new Actualite( 5, "beeeehi", "beeeehi123" ,u1));
+//            as.modifier(new Actualite( 5, "beee", "hhh", "beeeehi123" ,u1));
 //       } catch (SQLException e) {
 //           System.out.println(e.getMessage());
 //       }
@@ -53,7 +53,7 @@ public class Main {
 
 
 //        try {
-//            as.supprimer(new Actualite( 26 ).getIdAct());
+//            as.supprimer(31);
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
@@ -78,9 +78,9 @@ public class Main {
 
 
 
-
+//
 //        try {
-//            cs.ajouter(new Commentaire( "okok" ,15,u2,act));
+//            cs.ajouter(new Commentaire( "excellent" ,15,u2,act));
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
@@ -89,7 +89,7 @@ public class Main {
 
 
 //        try {
-//            cs.modifier(new Commentaire( 11,2,"tsssss", u2, act));
+//            cs.modifier(new Commentaire( 11,2,"ffffsssss", u2, act));
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
@@ -97,7 +97,7 @@ public class Main {
 
 
 //        try {
-//            cs.supprimer(new Commentaire( 10).getIdComnt());
+//            cs.supprimer(new Commentaire( 7).getIdComnt());
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
@@ -118,14 +118,14 @@ public class Main {
 
 
 //        try {
-//            rs.ajouter(new Reponse( "lllll" ,comt ,u1 ));
+//            rs.ajouter(new Reponse( "lllll" ,comt ,u2 ));
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
 
 
 //        try {
-//           rs.modifier(new Reponse( 2,"sssssoooo",comt));
+//           rs.modifier(new Reponse( 6,"okkkk",comt));
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
@@ -133,7 +133,7 @@ public class Main {
 
 
 //        try {
-//            rs.supprimer(new Reponse( 2 ).getIdR());
+//            rs.supprimer(new Reponse( 4).getIdR());
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //      }
@@ -149,19 +149,19 @@ public class Main {
 
         /////////// getOneById////////////////
 
-//
+
 //        try {
 //         System.out.println((as.getOneById(5)));
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
 //        try {
-//            System.out.println((cs.getOneById(7)));
+//            System.out.println((cs.getOneById(8)));
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
-//        }
+//             }
         try {
-            System.out.println((rs.getOneById(5)));
+            System.out.println((rs.getOneById(6)));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

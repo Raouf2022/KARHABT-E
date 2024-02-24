@@ -4,6 +4,13 @@ public class User {
     private  int idU;
     private  String nom;
 
+    public User(int idU) {
+    }
+
+    public User() {
+
+    }
+
 
     public int getIdU() {
         return idU;
