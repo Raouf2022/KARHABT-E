@@ -4,6 +4,7 @@ package edu.esprit.controllers;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.services.ServiceReclamation;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -13,8 +14,7 @@ public class ModifierReclamation {
     private TextField sujetTextField;
 
     @FXML
-    private TextField descriptionTextField;
-
+    private TextArea taDescription;
     // Autres champs de saisie pour les autres attributs...
 
     private Reclamation reclamation;
@@ -38,7 +38,7 @@ public class ModifierReclamation {
 
     private void remplirChamps() {
         sujetTextField.setText(reclamation.getSujet());
-        descriptionTextField.setText(reclamation.getDescription());
+        taDescription.setText(reclamation.getDescription());
         // Remplissez les autres champs de saisie avec les valeurs actuelles...
     }
 
@@ -46,7 +46,7 @@ public class ModifierReclamation {
     private void handleEnregistrer() {
         // Appliquer les modifications à la réclamation
         reclamation.setSujet(sujetTextField.getText());
-        reclamation.setDescription(descriptionTextField.getText());
+        reclamation.setDescription(taDescription.getText());
         // Appliquez les autres modifications aux autres attributs...
         serviceReclamation.update(reclamation);
         // Fermer la fenêtre de modification

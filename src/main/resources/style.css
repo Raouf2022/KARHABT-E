@@ -1,51 +1,45 @@
-/* Style pour le TilePane */
-.tile-pane {
-    -fx-background-color: #FFFFFF; /* Couleur de fond */
-    -fx-padding: 120; /* Marge intérieure */
-    -fx-border-radius: 60; /* Coins arrondis */
+.root {
+    -fx-background-color: #EBF2FA;
 }
 
-/* Style pour les panes individuels des réclamations */
-.pane {
-    -fx-background-color: #D3E0F5; /* Couleur de fond */
-    -fx-padding: 40; /* Marge intérieure */
-    -fx-border-color: #084e99; /* Couleur de la bordure */
-    -fx-border-width: 8; /* Largeur de la bordure */
-    -fx-border-radius: 10; /* Coins arrondis */
+.reclamation-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color:  #94BDF2;
+    -fx-border-width: 7px; /* Supprimé une des duplications */
+    -fx-border-radius: 5px;
+    -fx-padding: 20px;
 }
 
-/* Style pour les boutons Modifier et Supprimer */
-.button-modifier, .button-supprimer {
-    -fx-background-color: #6b7fab; /* Couleur de fond */
-    -fx-text-fill: #FFFFFF; /* Couleur du texte */
-    -fx-font-size: 20; /* Taille de la police */
-    -fx-padding: 15 25; /* Marge intérieure */
-    -fx-border-radius: 2; /* Coins arrondis */
-}
-
-/* Style pour l'étiquette "Mes réclamations" */
 .label-title {
-    -fx-font-size: 20; /* Taille de la police */
-    -fx-fill: #084e99; /* Couleur du texte */
-    -fx-font-weight: bold; /* Gras */
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333; /* Set text color for consistency */
 }
 
-/* Style pour le label vide */
-.empty-label {
-    -fx-font-size: 18; /* Taille de la police */
-    -fx-fill: #084e99; /* Couleur du texte */
-    -fx-font-weight: bold; /* Gras */
-}
-
-/* Style pour les étiquettes des attributs de réclamation */
 .label-attribute {
-    -fx-font-size: 14; /* Taille de la police */
-    -fx-fill: rgba(20, 29, 203, 0.4); /* Couleur du texte */
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555; /* Slightly lighter text color */
 }
 
-/* Style pour le VBox */
-.vbox {
-    /* Add your styling properties for the VBox here */
-    -fx-background-color: #ffffff; /* Example background color */
-    -fx-padding: 10; /* Example padding */
+.button-modifier, .button-supprimer {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-pref-width: 100px; /* Set a preferred width for consistency */
+}
+
+.button-modifier {
+    -fx-background-color:  #0460D9; /* Green */
+}
+
+.button-supprimer {
+    -fx-background-color: #D9325E /* Red */
+}
+
+.reclamation-attribute-vbox {
+    -fx-spacing: 8px; /* Slightly increase spacing between attributes */
+}
+
+/* Hover effect for buttons */
+.button-modifier:hover, .button-supprimer:hover {
+    -fx-background-color: derive(-fx-background-color, 20%);
 }

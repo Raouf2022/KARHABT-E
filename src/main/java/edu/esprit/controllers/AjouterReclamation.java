@@ -4,6 +4,7 @@ import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.User;
 import edu.esprit.services.ServiceReclamation;
 import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,34 +27,20 @@ import java.util.Date;
 public class AjouterReclamation {
 
     @FXML
-    private Button bDéconnexion;
-
-    @FXML
     private Button bMesReclamations;
 
     @FXML
-    private Button bMesReclamations1;
-
-    @FXML
-    private Button bMessagerie;
-
-    @FXML
-    private Button bQuiter;
+    private Button bRetour;
 
     @FXML
     private Button bvalider;
 
     @FXML
-    private ImageView logo;
+    private Text textGestion1;
 
     @FXML
-    private Text textGestion;
+    private TextArea taDescription;
 
-    @FXML
-    private Text textN;
-
-    @FXML
-    private TextField tfDescription;
 
     @FXML
     private TextField tfEmail;
@@ -62,7 +50,6 @@ public class AjouterReclamation {
 
     @FXML
     private TextField tfidUser;
-
 
 
     @FXML
@@ -90,7 +77,7 @@ public class AjouterReclamation {
         try {
             String email = tfEmail.getText();
             String sujet = tfSujet.getText();
-            String description = tfDescription.getText();
+            String description = taDescription.getText();
 
             String idUserText = tfidUser.getText();
             int idU;
@@ -151,6 +138,38 @@ public class AjouterReclamation {
     }
 
 
+    @FXML
+    void retourAcueilR(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de l'accueil
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilReclamation.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène avec le contenu de AccuielReclamation.fxml
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir du bouton cliqué
+            Scene currentScene = bRetour.getScene();
+
+            // Configurer la transition
+            TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
+            transition.setFromX(-currentScene.getWidth());
+            transition.setToX(0);
+
+            // Afficher la nouvelle scène avec une transition
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setScene(scene);
+
+            // Démarrer la transition
+            transition.play();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Gérer les exceptions correctement dans votre application
+        }
+    }
+
+    }
 
 
-}
+
+

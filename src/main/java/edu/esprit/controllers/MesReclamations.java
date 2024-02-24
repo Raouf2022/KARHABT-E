@@ -3,41 +3,110 @@ package edu.esprit.controllers;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.services.ServiceReclamation;
 import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public class MesReclamations {
 
     @FXML
-    private TilePane reclamationsTilePane;
+    private Button bNouvelleR;
+
+    @FXML
+    private Button bRetour;
 
     @FXML
     private Label emptyLabel;
+
+    @FXML
+    private TilePane reclamationsTilePane;
+
+    @FXML
+    private Text textGestion1;
+
+
+
+    @FXML
+    private Pagination fxPagination;
+
+    @FXML
+    private Button previousButton;
+
+    // Other code...
+
+    @FXML
+    private void handlePrevious() {
+        // Your handling logic here
+        System.out.println("Previous Button Clicked");
+    }
+
+    @FXML
+    private Button nextButton;
+
+    // Other code...
+
+    @FXML
+    private void handleNext() {
+        // Your handling logic here
+        System.out.println("Next Button Clicked");
+    }
+
+    @FXML
+    void retourAcueilR(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de l'accueil
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilReclamation.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène avec le contenu de AccuielReclamation.fxml
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir du bouton cliqué
+            Scene currentScene = bRetour.getScene();
+
+            // Configurer la transition
+            TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
+            transition.setFromX(-currentScene.getWidth());
+            transition.setToX(0);
+
+            // Afficher la nouvelle scène avec une transition
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setScene(scene);
+
+            // Démarrer la transition
+            transition.play();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Gérer les exceptions correctement dans votre application
+        }
+
+    }
 
     private ServiceReclamation serviceReclamation = new ServiceReclamation();
 
     @FXML
     public void initialize() {
-        // Appeler votre service pour obtenir la liste de réclamations
-
-        reclamationsTilePane.getChildren().clear();
-
         // Appeler votre service pour obtenir la liste de réclamations
         Set<Reclamation> reclamations = serviceReclamation.getAll();
 
@@ -45,36 +114,57 @@ public class MesReclamations {
         if (reclamations.isEmpty()) {
             emptyLabel.setVisible(true);
             reclamationsTilePane.setVisible(false);
+            fxPagination.setVisible(false); // Masquer la pagination si la liste est vide
         } else {
             emptyLabel.setVisible(false);
             reclamationsTilePane.setVisible(true);
+            fxPagination.setVisible(true); // Afficher la pagination
 
-            // Ajouter des panes pour chaque réclamation
-            for (Reclamation reclamation : reclamations) {
-                Pane pane = createReclamationPane(reclamation);
-                reclamationsTilePane.getChildren().add(pane);
-            }
+            // Configurer la pagination
+            int itemsPerPage = 4; // Nombre d'éléments par page
+            int pageCount = (int) Math.ceil((double) reclamations.size() / itemsPerPage);
+            fxPagination.setPageCount(pageCount);
+
+            // Ajouter une usine de pages pour la pagination
+            fxPagination.setPageFactory(pageIndex -> createPage(reclamations, pageIndex));
         }
     }
 
-    private Pane createReclamationPane(Reclamation reclamation) {
+    // Méthode pour créer une page de la pagination
+    private Node createPage(Set<Reclamation> reclamations, int pageIndex) {
+        int itemsPerPage = 4; // Nombre d'éléments par page
+        int fromIndex = pageIndex * itemsPerPage;
+        int toIndex = Math.min(fromIndex + itemsPerPage, reclamations.size());
+
+        // Afficher les éléments de la liste dans la plage spécifiée
+        List<Reclamation> currentPageData = new ArrayList<>(reclamations).subList(fromIndex, toIndex);
+        updateTilePane(currentPageData);
+
+        return reclamationsTilePane; // Retourner le TilePane mis à jour comme une page de la pagination
+    }
+
+    // Méthode pour mettre à jour le TilePane avec les éléments de la page actuelle
+    private void updateTilePane(List<Reclamation> currentPageData) {
+        reclamationsTilePane.getChildren().clear();
+
+        for (Reclamation reclamation : currentPageData) {
+            Node pane = createReclamationPane(reclamation);
+            reclamationsTilePane.getChildren().add(pane);
+        }
+    }
+
+    // Méthode de création de page pour la pagination
+    private Node createReclamationPane(Reclamation reclamation) {
         VBox mainVBox = new VBox();
-        mainVBox.setPrefSize(180, 120);
-        mainVBox.getStyleClass().add("pane");
+        mainVBox.setPrefSize(300, 200);
+        mainVBox.getStyleClass().add("reclamation-pane");
+        mainVBox.setSpacing(10);  // Set the vertical spacing between the children
 
-        // Labels for the main reclamation details
-        Label sujetLabel = new Label("Sujet: " + reclamation.getSujet());
-        sujetLabel.getStyleClass().addAll("label", "label-attribute");
-        sujetLabel.getStyleClass().add("label-title");
-
-        Label descriptionLabel = new Label("Description: " + reclamation.getDescription());
-        descriptionLabel.getStyleClass().addAll("label", "label-attribute");
-
-        Label dateLabel = new Label("Date: " + formatDate(reclamation.getDateReclamation()));
-        dateLabel.getStyleClass().addAll("label", "label-attribute");
-
-        Label emailLabel = new Label("Email: " + reclamation.getEmailUtilisateur());
-        emailLabel.getStyleClass().addAll("label", "label-attribute");
+        // VBox for each attribute
+        VBox sujetVBox = createAttributeVBox("Sujet", reclamation.getSujet());
+        VBox descriptionVBox = createAttributeVBox("Description", reclamation.getDescription());
+        VBox dateVBox = createAttributeVBox("Date", formatDate(reclamation.getDateReclamation()));
+        VBox emailVBox = createAttributeVBox("Email", reclamation.getEmailUtilisateur());
 
         // Buttons for modification and deletion
         Button modifierButton = new Button("Modifier");
@@ -85,34 +175,32 @@ public class MesReclamations {
         supprimerButton.getStyleClass().add("button-supprimer");
         supprimerButton.setOnAction(event -> handleSupprimerButton(reclamation.getIdR()));
 
-        // Nested Pane for additional details
-        Pane detailsPane = new Pane();
-        detailsPane.getStyleClass().add("details-pane");
-        detailsPane.setLayoutY(130); // Adjust the layout position as needed
-
-        // Add details to the nested Pane
-        Label additionalDetailsLabel = new Label("Additional Details:");
-        additionalDetailsLabel.getStyleClass().add("label-title");
-        additionalDetailsLabel.setLayoutX(10);
-        additionalDetailsLabel.setLayoutY(10);
-
-        // Add additional details specific to your application
-        // For example:
-        // Label detail1Label = new Label("Detail 1: " + reclamation.getDetail1());
-        // detail1Label.getStyleClass().addAll("label", "label-attribute");
-        // detail1Label.setLayoutX(10);
-        // detail1Label.setLayoutY(30);
-
-        // Add additional details labels to the nested Pane
-        // detailsPane.getChildren().addAll(detail1Label);
-
-        // Add labels and buttons to the main VBox
-        mainVBox.getChildren().addAll(sujetLabel, descriptionLabel, dateLabel, emailLabel, modifierButton, supprimerButton, detailsPane);
+        // Add VBoxes and buttons to the main VBox
+        mainVBox.getChildren().addAll(sujetVBox, descriptionVBox, dateVBox, emailVBox, modifierButton, supprimerButton);
 
         // Add main VBox to a Pane
         Pane mainPane = new Pane(mainVBox);
+        mainPane.getStyleClass().add("reclamation-pane");
 
         return mainPane;
+    }
+
+    private VBox createAttributeVBox(String label, String value) {
+        VBox attributeVBox = new VBox();
+
+        // Label for attribute
+        Label attributeLabel = new Label(label + ":");
+        attributeLabel.getStyleClass().addAll("label", "label-attribute");
+        attributeLabel.getStyleClass().add("label-title");
+
+        // Value for attribute
+        Label attributeValueLabel = new Label(value);
+        attributeValueLabel.getStyleClass().addAll("label", "label-attribute");
+
+        // Add labels to the VBox
+        attributeVBox.getChildren().addAll(attributeLabel, attributeValueLabel);
+
+        return attributeVBox;
     }
 
 
@@ -120,10 +208,6 @@ public class MesReclamations {
         try {
         // Charger la fenêtre de modification depuis le fichier FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierReclamation.fxml"));
-
-
-
-
 
             Pane root = loader.load();
 
@@ -155,6 +239,41 @@ public class MesReclamations {
         // Utilisez reclamationId pour obtenir l'ID de la réclamation
         // Exemple : serviceReclamation.delete(reclamationId);
         serviceReclamation.delete(reclamationId);
+
+        // Supprimer la réclamation du TilePane
+        removeReclamationPane(reclamationId);
+
+        // Rafraîchir l'interface principale après la suppression
+        initialize();
+    }
+
+    private void removeReclamationPane(int reclamationId) {
+        // Recherchez le Pane correspondant à la réclamation avec l'ID donné
+        Pane paneToRemove = null;
+
+        for (Node node : reclamationsTilePane.getChildren()) {
+            if (node instanceof Pane) {
+                Pane pane = (Pane) node;
+                Reclamation reclamation = getReclamationFromPane(pane);
+
+                if (reclamation != null && reclamation.getIdR() == reclamationId) {
+                    paneToRemove = pane;
+                    break;
+                }
+            }
+        }
+
+        // Supprimer le Pane du TilePane
+        if (paneToRemove != null) {
+            reclamationsTilePane.getChildren().remove(paneToRemove);
+        }
+    }
+
+    private Reclamation getReclamationFromPane(Pane pane) {
+        // Extrayez les informations de la réclamation du Pane
+        // (Vous devrez peut-être ajuster cela en fonction de votre structure de Pane)
+        // Exemple : retourner une instance de Reclamation avec les informations extraites
+        return null;
     }
 
     // Méthode pour formater la date
