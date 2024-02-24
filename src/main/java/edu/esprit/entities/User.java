@@ -14,7 +14,7 @@ public class User {
     private String role;
 
     public int getIdU() {
-        return idU;
+        return this.idU;
     }
 
     public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {

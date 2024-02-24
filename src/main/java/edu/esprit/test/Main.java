@@ -20,14 +20,16 @@ public class Main {
 
         LocalDate dateNaissance = LocalDate.of(2001, 10, 20);
 
-        User admin1 = new Admin("rdrd","riahii",java.sql.Date.valueOf(dateNaissance),67567800,"admin@es.tn","si za3bolla");
-        User client1 = new Client("ftft","client",java.sql.Date.valueOf(dateNaissance),12345689,"client@eft.tjbknl","degla");
+        //User admin1 = new Admin("sfvwsbsbvs","thrhrh",java.sql.Date.valueOf(dateNaissance),67567800,"admin@es.tn","si za3bolla");
+        //User client1 = new Client("dek  ","khouna",java.sql.Date.valueOf(dateNaissance),12345689,"client@eft.tjbknl","degla");
 
         ServiceUser serviceUser = new ServiceUser();
+        System.out.println(serviceUser.login("admin","admin"));
 
-        serviceUser.ajouterUser(admin1);
-        serviceUser.ajouterUser(client1);
-        //serviceUser.supprimerUser(3);
+        //serviceUser.ajouterUser(admin1);
+        //serviceUser.ajouterUser(client1);
+
+        //serviceUser.supprimerUser(47);
         //client1.setIdU(26);
         //client1.setNom("dhoubeba");
         //serviceClient.modifierUser(client1);

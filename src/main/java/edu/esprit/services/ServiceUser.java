@@ -5,13 +5,24 @@ import edu.esprit.entities.Client;
 import edu.esprit.entities.User;
 import edu.esprit.tools.DataSource;
 
+
+
+
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ServiceUser implements IUserService<User> {
 
-    Connection cnx = DataSource.getInstance().getCnx();
+    private Connection cnx ;
+
+    public Connection getCnx() {
+        return cnx;
+    }
+
+    public ServiceUser() {
+        this.cnx = DataSource.getInstance().getCnx();
+    }
 
     @Override
     public void ajouterUser(User user) {
@@ -103,8 +114,10 @@ public class ServiceUser implements IUserService<User> {
     @Override
     public void supprimerUser(int id) {
         String req = "DELETE FROM `User` WHERE idU = ?";
+
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
+
             ps.setInt(1, id);
             int rowsDeleted = ps.executeUpdate();
             if (rowsDeleted > 0) {
@@ -175,7 +188,7 @@ public class ServiceUser implements IUserService<User> {
     }
     public boolean isValidEmail(String email) {
         // Utilisation d'une expression régulière pour vérifier le format de l'e-mail
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*\\.?[a-zA-Z0-9_+&*-]+@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
     }
     // Vérifie si le numéro de téléphone contient exactement 8 chiffres
@@ -184,4 +197,23 @@ public class ServiceUser implements IUserService<User> {
         String numTelStr = String.valueOf(numTel);
         return numTelStr.length() == 8;
     }
+
+    public String login (String email , String password){
+        String req = "SELECT * FROM `User` WHERE eMAIL=? AND passwd=?";
+        String role = "";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet res = ps.executeQuery();
+            if (res.next()) {
+                role = res.getString("role");
+            }
+
+            }catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
+        }
+        return role;
+    }
+
 }
