@@ -1,6 +1,11 @@
 package edu.esprit.controller;
 
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
+
 import edu.esprit.entities.Client;
 import edu.esprit.services.ServiceUser;
 import javafx.animation.FadeTransition;
@@ -54,6 +59,10 @@ public class InscriptionApplication{
     @FXML
     private ProgressBar progressBar;
 
+    public static final String ACCOUNT_SID = "ACdeb3ac77312a4d6c224e0572404e95aa";
+    public static final String AUTH_TOKEN = "e8deb0ffaa2061a0f7631748de36cc67";
+    public static final String TWILIO_PHONE_NUMBER = "+14159699264";
+    public String verificationCode; // This will hold the generated verification code
 
 
     ServiceUser serviceUser = new ServiceUser();
@@ -77,11 +86,10 @@ public class InscriptionApplication{
 
             } else {
             serviceUser.ajouterUser(new Client(fxnom.getText(),fxprenom.getText(),d,a, fxmail.getText(),fxpwd.getText()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("GG");
-            alert.show();
-                Parent root = FXMLLoader.load(getClass().getResource("/loginApplication.fxml"));
+
+                this.verificationCode = generateVerificationCode();
+                sendVerificationCode(String.valueOf(a), this.verificationCode);
+                Parent root = FXMLLoader.load(getClass().getResource("/verifyNumber.fxml"));
                 Scene newScene = new Scene(root);
 
                 Stage stage = (Stage) ToLog.getScene().getWindow();
@@ -95,6 +103,10 @@ public class InscriptionApplication{
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }
+    public String generateVerificationCode() {
+        // This is a simple 6-digit code generator. Customize it as needed.
+        return String.format("%06d", new Random().nextInt(999999));
     }
     @FXML
     void ToLogin(ActionEvent event) throws IOException {
@@ -122,6 +134,15 @@ public class InscriptionApplication{
 
         // Play the fade out transition
         fadeOutTransition.play();
+    }
+    private void sendVerificationCode(String toPhoneNumber, String code) {
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        String fullPhoneNumber = "+216" + toPhoneNumber;
+        Message.creator(
+                new PhoneNumber(fullPhoneNumber),
+                new PhoneNumber(TWILIO_PHONE_NUMBER),
+                "Your verification code is: " + code
+        ).create();
     }
 
 }

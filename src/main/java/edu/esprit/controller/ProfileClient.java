@@ -36,11 +36,12 @@ public class ProfileClient {
 
     private User user;
 
+
     public void setUser(User user) {
         this.user = user;
         if (user != null) {
             profileMail.setText(user.geteMAIL());
-            profileMdp.setText(user.getPasswd()); // Assuming getPassword() returns the password
+            profileMdp.setText(user.getPasswd());
             Date dateOfBirth = user.getDateNaissance();
             LocalDate localDateOfBirth = LocalDate.ofInstant(dateOfBirth.toInstant(), ZoneId.systemDefault());
             profileNaissance.setValue(localDateOfBirth);
