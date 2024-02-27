@@ -85,18 +85,48 @@ public class InscriptionApplication{
                 fxerrorMail.setVisible(true);
 
             } else {
-            serviceUser.ajouterUser(new Client(fxnom.getText(),fxprenom.getText(),d,a, fxmail.getText(),fxpwd.getText()));
 
                 this.verificationCode = generateVerificationCode();
                 sendVerificationCode(String.valueOf(a), this.verificationCode);
-                Parent root = FXMLLoader.load(getClass().getResource("/verifyNumber.fxml"));
-                Scene newScene = new Scene(root);
 
-                Stage stage = (Stage) ToLog.getScene().getWindow();
-                stage.setScene(newScene);
-                stage.show();
-                fxTelError.setVisible(false);
-                fxerrorMail.setVisible(false);}
+                boolean isCodeVerified = false;
+                while (!isCodeVerified) {
+                    TextInputDialog dialog = new TextInputDialog();
+                    dialog.setTitle("Verification Code");
+                    dialog.setHeaderText("Enter the verification code sent to your phone:");
+                    dialog.setContentText("Code:");
+
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+                        String inputCode = result.get();
+                        if (inputCode.equals(this.verificationCode)) {
+                            isCodeVerified = true;
+                            //ken shih l code waktha najouti ala rouhi
+                            serviceUser.ajouterUser(new Client(fxnom.getText(), fxprenom.getText(), d, a, fxmail.getText(), fxpwd.getText()));
+                            Parent root = null;
+                            try {
+                                root = FXMLLoader.load(getClass().getResource("/loginApplication.fxml"));
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            Scene newScene = new Scene(root);
+                            Stage stage = (Stage) ToLog.getScene().getWindow();
+                            stage.setScene(newScene);
+                            stage.show();
+                            fxTelError.setVisible(false);
+                            fxerrorMail.setVisible(false);
+                        } else {
+                            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                            errorAlert.setHeaderText("Incorrect Code");
+                            errorAlert.setContentText("The verification code you entered is incorrect. Please try again.");
+                            errorAlert.showAndWait();
+                        }
+                    } else {
+                        // hedhi khaliha ken sakart ysaker wala oumourou manhebech njareb nahiha meme si mahich bch tkalak
+                        break;
+                    }
+                }
+            }
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("SQL Exception");
@@ -105,7 +135,6 @@ public class InscriptionApplication{
         }
     }
     public String generateVerificationCode() {
-        // This is a simple 6-digit code generator. Customize it as needed.
         return String.format("%06d", new Random().nextInt(999999));
     }
     @FXML
@@ -114,15 +143,9 @@ public class InscriptionApplication{
         Scene newScene = new Scene(root);
 
         Stage stage = (Stage) ToLog.getScene().getWindow();
-
-        // Set opacity of new scene's root to 0 to make it invisible initially
         root.setOpacity(0);
-
-        // Create a fade transition for the old scene
         FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(0.5), stage.getScene().getRoot());
         fadeOutTransition.setToValue(0); // Fade out to fully transparent
-
-        // Set the action to be performed after the transition
         fadeOutTransition.setOnFinished(e -> {
             // Set the new scene and perform the fade in transition
             stage.setScene(newScene);
@@ -131,7 +154,6 @@ public class InscriptionApplication{
             fadeInTransition.setToValue(1); // Fade in to fully opaque
             fadeInTransition.play();
         });
-
         // Play the fade out transition
         fadeOutTransition.play();
     }
@@ -144,5 +166,4 @@ public class InscriptionApplication{
                 "Your verification code is: " + code
         ).create();
     }
-
 }

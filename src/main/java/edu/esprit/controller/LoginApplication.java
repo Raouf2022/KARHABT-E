@@ -1,9 +1,7 @@
 package edu.esprit.controller;
+import javafx.scene.control.Alert;
 
-
-import edu.esprit.entities.User;
 import edu.esprit.services.ServiceUser;
-import edu.esprit.tools.DataSource;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,17 +12,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.Random;
+
 
 public class LoginApplication {
     @FXML
@@ -44,54 +45,42 @@ public class LoginApplication {
 
     @FXML
     void loginAccount(ActionEvent event) {
-        String email = fxLogin.getText(); // Assuming fxLogin is a TextField for email
-        String password = fxPass.getText(); // Assuming fxPass is a PasswordField for password
-
+        String email = fxLogin.getText();
+        String password = fxPass.getText();
 
         ServiceUser serviceUser = new ServiceUser();
-        User user = new User();
-        if (serviceUser.login(email,password).equals("Admin")){
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/adminPage.fxml"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        if (serviceUser.login(email, password).equals("Admin")) {
+            loadScene("/adminPage.fxml", event);
+        } else if (serviceUser.login(email, password).equals("Client")) {
+            // Generate OTP
+            String otp = generateOTP();
+            // Assuming you send the OTP via email
+            sendEmailWithOTP(email, otp);
+            // Dialog to enter OTP
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("2FA Verification");
+            dialog.setHeaderText("Two-Factor Authentication");
+            dialog.setContentText("Please, Enter the Code sent to your email:");
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent() && result.get().equals(otp)) {
+                loadScene("/ProfileClient.fxml", event);
+            } else {
+                showAlert("Incorrect OTP", "Please try again.");
             }
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-            //if mail and passwd matches with DB where role is Client
-        } else if(serviceUser.login(email,password).equals("Client")) {
-
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/ProfileClient.fxml"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-
+        } else {
+            showAlert("Login Failed", "Incorrect email or password!");
         }
-        else
-            System.out.println("Incorrect email or password!");
     }
     @FXML
     void ToInscription(ActionEvent event) throws IOException {
-
         Parent root = FXMLLoader.load(getClass().getResource("/inscriptionApplication.fxml"));
         Scene newScene = new Scene(root);
-
         Stage stage = (Stage) ToInscri.getScene().getWindow();
-
         // Set opacity of new scene's root to 0 to make it invisible initially
         root.setOpacity(0);
-
         // Create a fade transition for the old scene
         FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(0.5), stage.getScene().getRoot());
         fadeOutTransition.setToValue(0); // Fade out to fully transparent
-
         // Set the action to be performed after the transition
         fadeOutTransition.setOnFinished(e -> {
             stage.setScene(newScene);
@@ -99,9 +88,69 @@ public class LoginApplication {
             fadeInTransition.setToValue(1);
             fadeInTransition.play();
         });
-
         // Play the fade out transition
         fadeOutTransition.play();
     }
 
+
+    private void sendEmailWithOTP(String toEmail, String otp) {
+        final String username = "karhabte@gmail.com";
+        final String password = "eara rwqr nlyi zuyl";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true"); //marafthech chnia ama lezma hhhhhhh
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP server
+        props.put("mail.smtp.port", "587"); //port
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("karhabte@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(toEmail));
+            message.setSubject("2FA Authentication");
+            message.setText("Dear user,\n\nYour OTP is: " + otp);
+
+            Transport.send(message);
+
+            System.out.println("OTP email sent successfully!");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+    private String generateOTP() {
+        int length = 6;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random rnd = new Random();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(characters.charAt(rnd.nextInt(characters.length())));
+        }
+        return sb.toString();
+    }
+    private void loadScene(String fxmlPath, ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
+
