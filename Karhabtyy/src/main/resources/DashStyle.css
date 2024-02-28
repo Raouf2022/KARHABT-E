@@ -1,0 +1,129 @@
+.root
+{
+    fx-background-color: rgba(0, 148, 253, 0.55);
+
+
+}
+.tfsideBar{
+-fx-background-color: rgba(0, 148, 253, 0.55);
+    -fx-border-color: #07b5bb;
+    -fx-border-width : 2px 2px 2px 2px ;
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+    -fx-border-style:solid;
+}
+.tfinnerPane {
+    -fx-background-color: #FFFF;
+    -fx-border-width : 2px 2px 2px 2px ;
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+    -fx-border-style:solid;
+    -fx-border-color: #00DFFD8C;
+}
+.most_inner_pane
+{
+    -fx-background-color: #FFFF;
+    -fx-border-width : 2px 2px 2px 2px ;
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+    -fx-border-style:solid;
+    -fx-border-color: rgba(0, 223, 253, 0.55);
+
+}
+.butt_usr
+{
+    -fx-background-color: #FFF;
+    -fx-border-width : 2px 2px 2px 2px ;
+    -fx-border-radius:50px;
+    -fx-background-radius: 50px;
+    -fx-border-style:solid;
+    -fx-border-color:#00DFFD8C;
+
+}
+.most_inner_pane2
+{
+    -fx-background-color: #141313;
+    -fx-border-width : 2px 2px 2px 2px ;
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+    -fx-border-style:solid;
+    -fx-border-color: #141313;
+}
+#search
+{
+    -fx-background-color: rgb(241, 242, 244);
+    -fx-border-width : 2px 2px 2px 2px ;
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+    -fx-border-style:solid;
+    -fx-border-color: #07b5bb;
+}
+.shadowpane
+{
+
+    -fx-background-color: rgba(255, 255, 255, 0.32);
+    -fx-border-width : 2px 2px 2px 2px ;
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+
+}
+#buttadd{
+
+    -fx-background-color: rgb(241, 242, 244);
+    -fx-border-width : 2px 2px 2px 2px ;
+    -fx-border-radius:20px;
+    -fx-background-radius: 20px;
+    -fx-border-style:solid;
+    -fx-border-color: #07b5bb;
+}
+
+.button:hover {
+    -fx-background-color: #0056b3; /* Set background color on hover */
+}
+#tfvalider
+{
+    -fx-background-color: #ffffff; /* Set background color */
+    -fx-text-fill: rgb(7, 181, 187); /* Set text color */
+    -fx-font-family: "Arial", sans-serif; /* Set font family */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 8px 16px; /* Set padding */
+    -fx-border-radius: 4px; /* Set border radius */
+    -fx-border-color: #07b5bb; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+}
+#tfmodify
+{
+
+    -fx-background-color: #ffffff; /* Set background color */
+    -fx-text-fill: rgb(7, 181, 187); /* Set text color */
+    -fx-font-family: "Arial", sans-serif; /* Set font family */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 8px 16px; /* Set padding */
+    -fx-border-radius: 4px; /* Set border radius */
+    -fx-border-color: #07b5bb; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+}
+#tfdelete
+{
+    -fx-background-color: #ffffff; /* Set background color */
+    -fx-text-fill: rgb(7, 181, 187); /* Set text color */
+    -fx-font-family: "Arial", sans-serif; /* Set font family */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 8px 16px; /* Set padding */
+    -fx-border-radius: 4px; /* Set border radius */
+    -fx-border-color: #07b5bb; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+
+}
+#tfshow
+{
+
+    -fx-background-color: #ffffff; /* Set background color */
+    -fx-text-fill: rgb(7, 181, 187); /* Set text color */
+    -fx-font-family: "Arial", sans-serif; /* Set font family */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 8px 16px; /* Set padding */
+    -fx-border-radius: 4px; /* Set border radius */
+    -fx-border-color: #07b5bb; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+}

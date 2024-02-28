@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierDossier">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@SL-122019-26260-09.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="43.0" layoutY="118.0" text="Cin" AnchorPane.leftAnchor="43.0" />
+      <Label layoutX="43.0" layoutY="185.0" text="Nom" AnchorPane.leftAnchor="43.0" />
+      <Label layoutX="43.0" layoutY="262.0" text="Prenom" AnchorPane.leftAnchor="43.0" />
+      <Label layoutX="318.0" layoutY="113.0" text="Date" textFill="WHITE" AnchorPane.leftAnchor="318.0" />
+      <Label layoutX="318.0" layoutY="180.0" text="Region" textFill="WHITE" AnchorPane.leftAnchor="318.0" />
+      <Label layoutX="318.0" layoutY="257.0" text="Montant" textFill="WHITE" AnchorPane.leftAnchor="318.0" />
+      <TextField fx:id="tfcinm" layoutX="100.0" layoutY="114.0" AnchorPane.leftAnchor="100.0" />
+      <TextField fx:id="tfnomm" layoutX="100.0" layoutY="180.0" AnchorPane.leftAnchor="100.0" />
+      <TextField fx:id="tfprenomm" layoutX="100.0" layoutY="262.0" AnchorPane.leftAnchor="100.0" />
+      <DatePicker fx:id="tfdatem" layoutX="374.0" layoutY="110.0" AnchorPane.leftAnchor="374.0" />
+      <TextField fx:id="tfregionm" layoutX="374.0" layoutY="175.0" prefHeight="27.0" prefWidth="217.0" AnchorPane.leftAnchor="374.0" />
+      <TextField fx:id="tfmontantm" layoutX="374.0" layoutY="252.0" prefHeight="27.0" prefWidth="217.0" AnchorPane.leftAnchor="374.0" />
+      <Button fx:id="tfsaveDossier" layoutX="265.0" layoutY="338.0" mnemonicParsing="false" onAction="#ModifierDossier" text="Save" />
+      <Button fx:id="tfbackmenu" layoutX="16.0" layoutY="14.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#backAction" prefHeight="27.0" prefWidth="26.0" style="-fx-background-color: transparent;" />
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="23.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Downloads/BCK.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="86.0" layoutY="304.0">
+         <image>
+            <Image url="@karhabt-e-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

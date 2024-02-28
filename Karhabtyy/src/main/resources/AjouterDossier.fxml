@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterDossier">
+    <children>
+      <ImageView fitHeight="400.0" fitWidth="614.0" layoutX="-10.0">
+         <image>
+            <Image url="@SL-122019-26260-09.jpg" />
+         </image>
+      </ImageView>
+        <Label layoutX="369.0" layoutY="102.0" text="Cin" textFill="WHITE" AnchorPane.leftAnchor="369.0" />
+        <Label layoutX="369.0" layoutY="136.0" text="Nom" textFill="WHITE" AnchorPane.leftAnchor="369.0" />
+        <Label layoutX="369.0" layoutY="171.0" text="Prenom" textFill="WHITE" AnchorPane.leftAnchor="369.0" />
+        <Label layoutX="369.0" layoutY="280.0" text="Date" textFill="WHITE" AnchorPane.leftAnchor="369.0" />
+        <Label layoutX="369.0" layoutY="206.0" text="Region" textFill="WHITE" AnchorPane.leftAnchor="369.0" />
+        <Label layoutX="369.0" layoutY="237.0" prefWidth="54.0" text="Montant" textFill="WHITE" AnchorPane.leftAnchor="369.0" />
+        <TextField fx:id="tfcin" layoutX="423.2" layoutY="97.0" stylesheets="@Style.css" AnchorPane.leftAnchor="423.2" />
+        <TextField fx:id="tfnom" layoutX="423.2" layoutY="131.0" stylesheets="@Style.css" AnchorPane.leftAnchor="423.2" />
+        <TextField fx:id="tfprenom" layoutX="423.2" layoutY="166.0" stylesheets="@Style.css" AnchorPane.leftAnchor="423.2" />
+        <TextField fx:id="tfregion" layoutX="423.2" layoutY="201.0" stylesheets="@Style.css" AnchorPane.leftAnchor="423.2" />
+        <TextField fx:id="tfmontant" layoutX="423.2" layoutY="232.0" stylesheets="@Style.css" AnchorPane.leftAnchor="423.2" />
+        <Button fx:id="tfvalider" layoutX="475.0" layoutY="349.0" mnemonicParsing="false" onAction="#SaveDossier" text="Submit" AnchorPane.bottomAnchor="17.4" AnchorPane.topAnchor="348.79999999999995" />
+      <DatePicker fx:id="tfdate" layoutX="423.2" layoutY="275.0" prefHeight="26.0" prefWidth="150.0" stylesheets="@Style.css" AnchorPane.leftAnchor="423.2" />
+      <Button fx:id="tfshow" layoutX="336.0" layoutY="349.0" mnemonicParsing="false" onAction="#showdossier" text="Show" AnchorPane.bottomAnchor="17.4" AnchorPane.topAnchor="348.79999999999995" />
+          <!-- Your existing elements -->
+
+          <!-- Add fx:id attribute for the ListView -->
+          <ListView fx:id="tflistview" layoutX="44.0" layoutY="124.0" onMouseClicked="#ModifierDossier" prefHeight="198.0" prefWidth="306.0" />
+      <Button fx:id="tfdelete" layoutX="175.0" layoutY="349.0" mnemonicParsing="false" onAction="#SupprimerDossier" text="Delete" AnchorPane.bottomAnchor="17.4" AnchorPane.topAnchor="348.79999999999995" />
+      <Button fx:id="tfmodify" layoutX="44.0" layoutY="349.0" mnemonicParsing="false" onAction="#ModifierDossier" text="Modify" AnchorPane.bottomAnchor="17.4" AnchorPane.topAnchor="348.79999999999995" />
+      <ImageView fitHeight="62.0" fitWidth="74.0">
+         <image>
+
+
+         </image>
+      </ImageView>
+      <ImageView fitHeight="129.0" fitWidth="132.0" layoutX="-22.0" layoutY="-18.0">
+         <image>
+            <Image url="@karhabt-e-removebg-preview.png" />
+         </image>
+      </ImageView>
+
+
+    </children>
+</AnchorPane>
