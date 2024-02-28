@@ -7,7 +7,10 @@ public class Voiture {
     private String modele;
     private String couleur;
     private double prix;
+    private String img;
     private String description;
+
+
 
     public int getIdV() {
         return idV;
@@ -45,6 +48,14 @@ public class Voiture {
         return prix;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public void setPrix(double prix) {
         this.prix = prix;
     }
@@ -58,20 +69,22 @@ public class Voiture {
     }
     public Voiture(){};
 
-    public Voiture(int id, String marque, String modele, String couleur, double prix, String description) {
-        this.idV = id;
+    public Voiture(int idV, String marque, String modele, String couleur, double prix, String img, String description) {
+        this.idV = idV;
         this.marque = marque;
         this.modele = modele;
         this.couleur = couleur;
         this.prix = prix;
+        this.img = img;
         this.description = description;
     }
 
-    public Voiture(String marque, String modele, String couleur, double prix, String description) {
+    public Voiture(String marque, String modele, String couleur, double prix, String img, String description) {
         this.marque = marque;
         this.modele = modele;
         this.couleur = couleur;
         this.prix = prix;
+        this.img = img;
         this.description = description;
     }
 
@@ -82,6 +95,7 @@ public class Voiture {
                 ", modele='" + modele + '\'' +
                 ", couleur='" + couleur + '\'' +
                 ", prix=" + prix +
+                ", img='" + img + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
@@ -91,12 +105,12 @@ public class Voiture {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Voiture voiture = (Voiture) o;
-        return idV == voiture.idV && Double.compare(prix, voiture.prix) == 0 && Objects.equals(marque, voiture.marque) && Objects.equals(modele, voiture.modele) && Objects.equals(couleur, voiture.couleur) && Objects.equals(description, voiture.description);
+        return idV == voiture.idV && Double.compare(prix, voiture.prix) == 0 && Objects.equals(marque, voiture.marque) && Objects.equals(modele, voiture.modele) && Objects.equals(couleur, voiture.couleur) && Objects.equals(img, voiture.img) && Objects.equals(description, voiture.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idV, marque, modele, couleur, prix, description);
+        return Objects.hash(idV, marque, modele, couleur, prix, img, description);
     }
 }
 

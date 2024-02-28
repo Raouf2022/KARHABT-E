@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Arrivage {
-    int idA;
-    int quantite;
-    Date DateEntree;
-    Voiture v;
+    private int idA;
+    private int quantite;
+    private Date DateEntree;
+   private Voiture v;
 
     public int getIdA() {
         return idA;
@@ -35,6 +35,7 @@ public class Arrivage {
     public Voiture getV() {
         return v;
     }
+
     public void setV(Voiture v) {
         this.v = v;
     }

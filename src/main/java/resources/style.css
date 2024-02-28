@@ -1,0 +1,36 @@
+./* Style des panneaux de voiture */
+.pane {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+}
+
+/* Style des images de voiture */
+.pane .image-view {
+    -fx-fit-width: 120px;
+    -fx-fit-height: 120px;
+    -fx-smooth: true;
+}
+
+/* Style des labels dans les panneaux de voiture */
+.pane .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+/* Style du bouton Modifier dans les panneaux de voiture */
+.pane .button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+}
+
+/* Style du bouton Modifier lorsqu'il est survolé */
+.pane .button:hover {
+    -fx-background-color: #0056b3;
+}

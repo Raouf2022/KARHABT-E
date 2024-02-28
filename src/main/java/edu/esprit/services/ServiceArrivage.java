@@ -22,7 +22,8 @@ public class ServiceArrivage implements IService <Arrivage> {
 
         // Vérifiez que la date d'entrée n'est pas dans le futur
         if (arrivage.getDateEntree().after(new Date())) {
-            System.out.println("Erreur : la date d'entrée ne peut pas être dans le futur.");
+            System.out.println("Erreur : la date d'entrée" +
+                    " ne peut pas être dans le futur.");
             return;
         }
 
@@ -34,7 +35,7 @@ public class ServiceArrivage implements IService <Arrivage> {
             return;
         }
 
-        String req = "INSERT INTO `Arrivage`( `quantite`, `DateEntree`, `idV`) VALUES (?,?,?)";
+        String req = "INSERT INTO `arrivage`( `quantite`, `DateEntree`, `idV`) VALUES (?,?,?)";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, arrivage.getQuantite());
