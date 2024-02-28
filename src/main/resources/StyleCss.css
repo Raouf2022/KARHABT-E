@@ -1,0 +1,77 @@
+.transparent {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent; /* Modifier la couleur de la bordure à transparent */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 0);
+}
+
+
+.root {
+    -fx-background-image: url('background.jpg');
+    -fx-background-size: cover; /* Ajustez selon vos besoins (cover, contain, etc.) */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+.actualite-item {
+    -fx-padding: 0;
+    -fx-background-color: #34495e; /* Adjust the color to match your design */
+    -fx-background-radius: 5; /* Optional: if you want rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Optional: for shadow effect */
+}
+.scroll-pane .scroll-bar {
+    -fx-background-color: #34495e;
+    -fx-background-insets: 0, 0, 1, 2;
+}
+
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: #EEE6D8; /* Color of the scroll thumb */
+    -fx-background-insets: 0, 0, 1, 2;
+}
+.button-response {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+}
+
+.button-response:hover {
+    -fx-background-color: #45a049;
+}
+
+.label-response-count {
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-text-fill: white; /* Change text color to white */
+}
+
+
+.textfield-response {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 30px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+}
+
+.response-container {
+    -fx-background-color: #F0F0F0;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-spacing: 5px;
+}
+
+.response-item {
+    -fx-padding: 5px;
+    -fx-background-color: #E7E7E7;
+    -fx-background-radius: 5px;
+}
+
+.response-item:hover {
+    -fx-background-color: #d7d7d7;
+}

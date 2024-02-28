@@ -4,23 +4,27 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="639.0" prefWidth="975.0" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Listactualite">
+<?import javafx.scene.layout.VBox?>
+<AnchorPane prefHeight="510.0" prefWidth="1189.0" styleClass="root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Listactualite">
     <stylesheets>
         <URL value="@StyleCss.css" />
     </stylesheets>
 
     <children>
-        <Pane layoutY="36.0" prefHeight="608.0" prefWidth="223.0" style="-fx-background-color: #427AA1;">
+        <Pane layoutY="36.0" prefHeight="685.0" prefWidth="223.0" style="-fx-background-color: #427AA1;">
             <children>
-                <FontAwesomeIconView glyphName="USER" layoutX="89.0" layoutY="120.0" selectionStart="1" size="80" tabSize="17" text="" wrappingWidth="28.942845344543457" />
+                <FontAwesomeIconView glyphName="USER" layoutX="89.0" layoutY="120.0" size="80" text="" wrappingWidth="28.942845344543457" />
                 <Label layoutX="62.0" layoutY="140.0" text="Welcome !">
                     <font>
                         <Font name="Arial Rounded MT Bold" size="22.0" />
@@ -43,8 +47,12 @@
                     </font>
                 </Text>
                 <Button fx:id="Ajouter" layoutX="54.0" layoutY="290.0" mnemonicParsing="false" onAction="#ajouteract" prefHeight="48.0" prefWidth="113.0" styleClass="transparent" />
+                <HBox alignment="CENTER_LEFT" spacing="5">
+                    <FontAwesomeIconView glyphName="SEARCH" size="20" styleClass="search-icon" />
+                    <TextField fx:id="searchField" onKeyReleased="#onSearchKeyReleased" prefHeight="50.0" prefWidth="942.0" promptText="Search actualité..." />
+                </HBox>
             </children></Pane>
-        <Pane layoutX="-15.0" prefHeight="34.0" prefWidth="997.0" style="-fx-background-color: CEDDDE;">
+        <Pane layoutX="-15.0" prefHeight="40.0" prefWidth="1204.0" style="-fx-background-color: CEDDDE;">
             <children>
                 <Label layoutX="20.0" layoutY="9.0" text="Liste des actualité ">
                     <font>
@@ -55,30 +63,14 @@
         </Pane>
         <Label layoutX="233.0" layoutY="44.0" prefHeight="18.0" prefWidth="211.0" />
         <Label layoutX="423.0" layoutY="75.0" />
-        <Label fx:id="titre" layoutX="366.0" layoutY="67.0" text="Peugeot : Élégance Automobile et Performance Inégalée&quot;">
-            <font>
-                <Font name="Arial Rounded MT Bold" size="12.0" />
-            </font>
-        </Label>
-        <!--        <Button layoutX="866.0" layoutY="96.0" mnemonicParsing="false" onAction="#details" text="Details" />-->
-        <Text fx:id="contenue" layoutX="364.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plongez dans l'univers de Peugeot, où l'élégance rencontre la performance exceptionnelle. Découvrez les dernières actualités sur des modèles emblématiques tels que la Peugeot 308, " wrappingWidth="246.85546875" />
-        <Line endX="614.0000610351562" layoutX="328.0" layoutY="209.0" startX="-100.0" />
-        <ImageView fx:id="image" fitHeight="105.0" fitWidth="111.0" layoutX="233.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="peugeot.jpg" />
-            </image>
-        </ImageView>
-        <Button layoutX="885.0" layoutY="130.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="34.0" prefWidth="54.0">
-            <font>
-                <Font name="Arial Rounded MT Bold" size="12.0" />
-            </font>
-            <graphic>
-                <FontAwesomeIconView fill="#ef0c0c" glyphName="TRASH" selectionFill="#e10b0b" size="15" text="" wrappingWidth="8.628644943237305" />
-            </graphic>
-        </Button>
-        <Button fx:id="modifier" layoutX="823.0" layoutY="130.0" mnemonicParsing="false" onAction="#Modifieractualite" prefHeight="34.0" prefWidth="54.0">
-         <graphic>
-            <FontAwesomeIconView glyphName="PENCIL" size="15" />
-         </graphic></Button>
+        <ScrollPane fitToWidth="true" layoutX="223.0" layoutY="36.0" prefHeight="685.0" prefWidth="966.0" style="-fx-background-color: #D3D3D3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+
+            <content>
+                <VBox fx:id="actualitesContainer" prefHeight="0.0" prefWidth="611.0" spacing="10" style="-fx-background-color: #2c3e50;">
+
+                    <!-- Actualité items will be added here dynamically -->
+                </VBox>
+            </content>
+        </ScrollPane>
     </children>
 </AnchorPane>

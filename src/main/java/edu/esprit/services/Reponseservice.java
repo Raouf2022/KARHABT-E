@@ -30,18 +30,16 @@ public class Reponseservice implements Iservice<Reponse> {
             return; // Sortir de la méthode si la saisie est invalide
         }
 
-        // Requête SQL paramétrée
+
         String req = "INSERT INTO Reponse (ContenueR, date_Rep, idComnt,idU) VALUES (?, ?, ?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
             preparedStatement.setString(1, reponse.getContinueR());
             preparedStatement.setDate(2, valueOf(reponse.getDate_Rep()));
 
-            // Supposons que idComnt soit l'identifiant du commentaire associé à la réponse
             preparedStatement.setInt(3, reponse.getComnt().getIdComnt());
             preparedStatement.setInt(4, reponse.getUser().getIdU());
 
-            // Exécution de la requête
             preparedStatement.executeUpdate();
             System.out.println("Réponse ajoutée avec succès");
         } catch (SQLException e) {
@@ -72,8 +70,61 @@ public class Reponseservice implements Iservice<Reponse> {
         System.out.println("Reponse supprimer");
 
     }
+    public int getNumberOfResponses(int commentId) {
+        int responseCount = 0;
+        String query = "SELECT COUNT(*) AS responseCount FROM Reponse WHERE idComnt = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, commentId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    responseCount = resultSet.getInt("responseCount");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return responseCount;
+    }
+    public List<Reponse> getResponsesForComment(int commentId) {
+        List<Reponse> responses = new ArrayList<>();
+        // Update your query to also fetch user details along with comment details
+        String query = "SELECT r.*, c.*, u.* FROM Reponse r " +
+                "INNER JOIN Commentaire c ON r.idComnt = c.idComnt " +
+                "INNER JOIN User u ON r.idU = u.idU " +
+                "WHERE r.idComnt = ?";
 
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, commentId);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                Reponse response = new Reponse();
+                response.setIdR(rs.getInt("idR"));
+                response.setContinueR(rs.getString("ContenueR"));
+                response.setDate_Rep(rs.getDate("date_Rep").toLocalDate());
+
+                // Set comment details
+                Commentaire comnt = new Commentaire();
+                comnt.setIdComnt(rs.getInt("idComnt"));
+                comnt.setContenuec(rs.getString("contenuec"));
+                // Add other fields of Commentaire if necessary
+                response.setComnt(comnt);
+
+                // Set user details
+                User user = new User();
+                user.setIdU(rs.getInt("idU")); // Assuming your User class has this method
+                user.setNom(rs.getString("nom")); // Assuming your User class has this method
+                // Add other fields of User if necessary
+                response.setUser(user);
+
+                responses.add(response);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return responses;
+    }
 
 
     @Override
@@ -89,7 +140,6 @@ public class Reponseservice implements Iservice<Reponse> {
             r.setContinueR(rs.getString("ContenueR"));
             r.setDate_Rep(rs.getDate("date_Rep").toLocalDate());
 
-            // Créer un objet Commentaire
             Commentaire commentaire = new Commentaire();
             commentaire.setContenuec(rs.getString("contenuec"));
             r.setComnt(commentaire);

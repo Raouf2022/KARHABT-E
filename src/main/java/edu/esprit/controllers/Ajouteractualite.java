@@ -5,6 +5,9 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -40,20 +43,6 @@ public class Ajouteractualite {
     @FXML
     private TextField titre;
 
-
-
-
-//
-//    public void initialize() {
-//        // Initialisez le champ iduser avec l'ID de l'utilisateur
-//        iduser.setText("12");
-//
-//    }
-
-
-
-
-
     @FXML
     void Ajouteractualite(ActionEvent event) {
 
@@ -62,7 +51,7 @@ public class Ajouteractualite {
             String titreText = titre.getText();
             String contenueText = contenue.getText();
             String imageText = image.getText();
-           // String idUserText = iduser.getText();
+
 
             // Validation des champs
             if (titreText.isEmpty() || contenueText.isEmpty() || imageText.isEmpty() ) {
@@ -97,14 +86,35 @@ public class Ajouteractualite {
 
         @FXML
         void Importerimage(ActionEvent event) {
+            // Création d'un objet FileChooser pour permettre à l'utilisateur de choisir un fichier
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Sélectionner une image");
-            File selectedFile = fileChooser.showOpenDialog(null);
+            fileChooser.setTitle("Choose an Image");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+            );
+            // Affichage de la boîte de dialogue pour choisir un fichier
+            File selectedFile = fileChooser.showOpenDialog(new Stage());
+            // Vérification si un fichier a été choisi
             if (selectedFile != null) {
-                // Utilisez la variable de classe 'image' pour stocker le chemin de l'image
-                image.setText(selectedFile.getAbsolutePath());
-                // Vous pouvez également afficher l'image dans un ImageView si nécessaire
-                // Exemple : imageView.setImage(new Image("file:" + selectedFile.getAbsolutePath()));
+                try {
+                    //iploder direct dans dossier /resources/images
+
+                    Path resourcesDir = Path.of("src/main/resources/images");
+                    if (!Files.exists(resourcesDir)) {
+                        Files.createDirectories(resourcesDir);
+                    }
+
+                         //energester dans la base avecle nom de l'image
+                    Path imagePath = resourcesDir.resolve(selectedFile.getName());
+                    Files.copy(selectedFile.toPath(), imagePath, StandardCopyOption.REPLACE_EXISTING);
+
+                       // Affichage du nom du fichier dans le champ de texte
+                    image.setText(selectedFile.getName());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to upload image.");
+                    alert.showAndWait();
+                }
             }
         }
 

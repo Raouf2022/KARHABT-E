@@ -1,0 +1,20 @@
+
+`
+java:S1192"JDefine a constant instead of duplicating this literal "date_pubc" 3 times.(â¥Ğè
+f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â¥Ğè
+g	java:S117™"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•äƒİ
+q
+java:S2095g"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¿œ÷îùÿÿÿÿ8²Í¢–Ş1
+b
+java:S2095t"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+k
+java:S2095“"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ò…âÑıÿÿÿÿ
+@	java:S106/"+Replace this use of System.err by a logger.(½«Ùá
+@	java:S1069"+Replace this use of System.out by a logger.(«ºçê
+E	java:S106H"+Replace this use of System.out by a logger.(ÈÂ°“úÿÿÿÿ
+@	java:S106J"+Replace this use of System.out by a logger.(¶ğäÌ
+E	java:S106\"+Replace this use of System.out by a logger.(Ï‡äÕıÿÿÿÿ
+G	java:S106^"+Replace this use of System.out by a logger.(‘ë«¡8»îÕşİ1
+L	java:S106j"+Replace this use of System.out by a logger.(°»“Æúÿÿÿÿ8¼îÕşİ1
+M	java:S106 "+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ8ÀîÕşİ1
+H	java:S106³"+Replace this use of System.err by a logger.(Àş«8ÜŸ×ŠŞ1

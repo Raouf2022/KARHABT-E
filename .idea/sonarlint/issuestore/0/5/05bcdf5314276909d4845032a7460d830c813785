@@ -1,0 +1,21 @@
+
+g
+java:S1192m"JDefine a constant instead of duplicating this literal "contenuec" 3 times.(Êü£…8Ö²Ş1
+k
+java:S1192h"IDefine a constant instead of duplicating this literal "date_Rep" 3 times.(ß…Êíùÿÿÿÿ8Ö²Ş1
+m	java:S117§"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´ÓÅh8Ö²Ş1
+q
+java:S2095C"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¿œ÷îùÿÿÿÿ8ê²Ş1
+r
+java:S2095¡"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ò…âÑıÿÿÿÿ8ê²Ş1
+j
+java:S2095…"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê²Ş1
+F	java:S106"+Replace this use of System.out by a logger.(‰Ñ‘8î²Ş1
+L	java:S106,"+Replace this use of System.out by a logger.(®Ö¢óşÿÿÿÿ8ï²Ş1
+F	java:S106."+Replace this use of System.out by a logger.(ÆŸŒ8ï²Ş1
+L	java:S106:"+Replace this use of System.out by a logger.(Ï‡äÕıÿÿÿÿ8ğ²Ş1
+G	java:S106<"+Replace this use of System.out by a logger.(‘ë«¡8ğ²Ş1
+G	java:S106F"+Replace this use of System.out by a logger.(Ö¯ã8ñ²Ş1
+M	java:S106®"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ8õ²Ş1
+\
+java:S1128":Remove this unused import 'edu.esprit.entities.Actualite'.(ğ«‡âúÿÿÿÿ8õ²Ş1

@@ -1,0 +1,32 @@
+
+e
+java:S1192ç"GDefine a constant instead of duplicating this literal "Delete" 3 times.(”šîÎ8ƒ²ù¥Ş1
+d
+java:S1192®"FDefine a constant instead of duplicating this literal "Error" 6 times.(ˆ×°ü8êç÷¥Ş1
+j
+java:S3655€"LCall "result.isPresent()" or "!result.isEmpty()" before accessing the value.(ÃÇûŞ8¶²ù¥Ş1
+n	java:S1160"RRename this field "Ajouter" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—óÆµ8©áÊ•Ş1
+H	java:S106 "+Replace this use of System.out by a logger.(—ÄˆÑ8®è÷¥Ş1
+G	java:S106«"+Replace this use of System.out by a logger.(ºôĞ78¯è÷¥Ş1
+J
+java:S1602ù",Remove useless curly braces around statement(·ù«€8Î²ù¥Ş1
+J
+java:S1602",Remove useless curly braces around statement(šè¯Ã8Ï²ù¥Ş1
+`
+java:S1612§"=Replace this lambda with method reference 'VBox.class::cast'.(Ó±•Ÿùÿÿÿÿ8Ò²ù¥Ş1
+Œ
+java:S1130ë"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(ä›çâ8İ¢ü¥Ş1
+‘
+java:S1130¶"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(ô œ»şÿÿÿÿ8ä¢ü¥Ş1
+Œ
+java:S1130ù"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(Ÿİ¥ß8ğ¢ü¥Ş1
+p
+java:S6204®"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8õ¢ü¥Ş1
+X
+java:S1128";Remove this unused import 'javafx.scene.layout.AnchorPane'.(Ø µ8™í¥Ş1
+W
+java:S1128"5Remove this unused import 'javafx.scene.layout.Pane'.(êÄƒÄşÿÿÿÿ8™í¥Ş1
+Q
+java:S1128"4Remove this unused import 'javafx.scene.shape.Line'.( ó×Ä8™í¥Ş1
+K
+java:S1128(")Remove this unused import 'java.net.URL'.(ñìÁ„üÿÿÿÿ8ÙÚ‚¦Ş1

@@ -1,0 +1,16 @@
+
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ùıúø8ºìË–Ş1
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ùıúø8ºìË–Ş1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô­êûÿÿÿÿ8ºìË–Ş1
+m	java:S117&"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ûØÎ8ºìË–Ş1
+r	java:S117d"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Éãşıÿÿÿÿÿ8ºìË–Ş1
+o	java:S116"SRename this field "Contenue" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôë²Ì8ÁìË–Ş1
+t	java:S116
+"SRename this field "date_pub" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öêî°ùÿÿÿÿ8ÁìË–Ş1
+l	java:S116"PRename this field "Image" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£”Õ8ÁìË–Ş1
+H
+java:S1172"+Remove this unused method parameter "user".(ùıúø8ÄìË–Ş1
+H
+java:S11722"+Remove this unused method parameter "user".(®ëùî8ÆìË–Ş1
+o	java:S100J"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥ıèÊúÿÿÿÿ8ÈìË–Ş1
+o	java:S100d"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Éãşıÿÿÿÿÿ8ÉìË–Ş1

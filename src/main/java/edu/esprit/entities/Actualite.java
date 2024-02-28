@@ -6,6 +6,7 @@ public class Actualite {
     private int idAct;
     private String titre;
     private String Contenue;
+    private double rating;
     private LocalDate date_pub ;
     private  String Image;
 
@@ -54,7 +55,10 @@ public class Actualite {
 
 
 
-
+    public double getRating() {return rating;}
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
     public int getIdAct() {
         return idAct;
     }

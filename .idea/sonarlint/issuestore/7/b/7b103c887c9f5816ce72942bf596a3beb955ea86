@@ -1,0 +1,8 @@
+
+i
+java:S1223@"LRename this method to prevent any misunderstanding or make it a constructor.(¹ıĞÓ8ò–‰áİ1
+j	java:S100@"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ıĞÓ8ˆ—‰áİ1
+G	java:S106S"+Replace this use of System.out by a logger.(¯¹¨ë8‰—‰áİ1
+L	java:S106\"+Replace this use of System.out by a logger.(¶ú”Åüÿÿÿÿ8Š—‰áİ1
+L	java:S106_"+Replace this use of System.out by a logger.(­çÍùúÿÿÿÿ8Š—‰áİ1
+j	java:S100d"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì¼ƒü8—Œáİ1

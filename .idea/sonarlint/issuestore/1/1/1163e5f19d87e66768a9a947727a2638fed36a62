@@ -1,0 +1,10 @@
+
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸¤Œ”þÿÿÿÿ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶ªìœúÿÿÿÿ
+k	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÄíÖûÿÿÿÿ
+k	java:S117L"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿èî¢þÿÿÿÿ
+m	java:S116"SRename this field "Date_Rep" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶¯‡ëûÿÿÿÿ
+J
+java:S1172%"/Remove this unused method parameter "date_Rep".(ßÄíÖûÿÿÿÿ
+c	java:S100D"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÞÄÓ
+h	java:S100L"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿èî¢þÿÿÿÿ

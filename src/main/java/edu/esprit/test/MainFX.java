@@ -10,11 +10,12 @@ import java.io.IOException;
 
 public class MainFX extends Application {
 
-
-
+    public static void main(String[] args) {
+        launch(args);
+    }
     @Override
     public void start(Stage primaryStage)  {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Listeactualite.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/listeactualite.fxml"));
 
         try {
             Parent root =loader.load();
@@ -28,7 +29,4 @@ public class MainFX extends Application {
 
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

@@ -1,0 +1,21 @@
+
+l	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹…åïıÿÿÿÿ
+g	java:S117”"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÓÄîÆ
+l
+java:S2095="OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÊÓ¡‰8ŸŠĞ–Ş1
+j
+java:S2095R"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¿œ÷îùÿÿÿÿ
+k
+java:S2095‹"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ò…âÑıÿÿÿÿ
+b
+java:S2095q"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(îÀ•üÿÿÿÿ
+@	java:S106)"+Replace this use of System.out by a logger.(Şö˜ô
+E	java:S106+"+Replace this use of System.out by a logger.(¬ï¦èøÿÿÿÿ
+E	java:S106D"+Replace this use of System.out by a logger.(‰ğ™áùÿÿÿÿ
+E	java:S106G"+Replace this use of System.out by a logger.(üó´İúÿÿÿÿ
+E	java:S106U"+Replace this use of System.out by a logger.(ç€×ìøÿÿÿÿ
+@	java:S106W"+Replace this use of System.out by a logger.(¦ƒÁĞ
+F	java:S106˜"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ
+Y
+java:S1128"<Remove this unused import 'edu.esprit.entities.Commentaire'.(«¼„÷8³óş°Ş1

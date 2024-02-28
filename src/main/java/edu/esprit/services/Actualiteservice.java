@@ -26,13 +26,14 @@ public class Actualiteservice implements Iservice <Actualite> {
         }
 
         // Requête SQL paramétrée
-        String req = "INSERT INTO Actualite (titre, Image, Contenue, date_pub ) VALUES (?, ?, ? , ?)";
+        String req = "INSERT INTO Actualite (titre, Image, rating ,Contenue, date_pub ) VALUES (?, ?, ? ,?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
             preparedStatement.setString(1, actualite.getTitre());
             preparedStatement.setString(2, actualite.getImage());
-            preparedStatement.setString(3, actualite.getContenue());
-            preparedStatement.setDate(4, Date.valueOf(actualite.getDate_pub()));
+            preparedStatement.setString(3, "0");
+            preparedStatement.setString(4, actualite.getContenue());
+            preparedStatement.setDate(5, Date.valueOf(actualite.getDate_pub()));
 
 
             // Exécution de la requête
@@ -56,12 +57,13 @@ public class Actualiteservice implements Iservice <Actualite> {
         if (actualite.getTitre() != null && !actualite.getTitre().isEmpty() &&
                 actualite.getContenue() != null && !actualite.getContenue().isEmpty()) {
 
-            String req = "UPDATE actualite SET titre = ?, Image =?, Contenue = ?  WHERE idAct = ?";
+            String req = "UPDATE actualite SET titre = ?, Image = ?, Contenue = ?, rating = ? WHERE idAct = ?";
             PreparedStatement prepardstatement = connection.prepareStatement(req);
             prepardstatement.setString(1, actualite.getTitre());
             prepardstatement.setString(2, actualite.getImage());
             prepardstatement.setString(3, actualite.getContenue());
-            prepardstatement.setInt(4, actualite.getIdAct());
+            prepardstatement.setDouble(4, actualite.getRating());
+            prepardstatement.setInt(5, actualite.getIdAct());
             prepardstatement.executeUpdate();
             System.out.println("Actualite modifié");
 
@@ -118,6 +120,7 @@ public class Actualiteservice implements Iservice <Actualite> {
             actualite.setTitre(rs.getString("titre"));
             actualite.setImage(rs.getString("Image"));
             actualite.setContenue(rs.getString("Contenue"));
+            actualite.setRating(rs.getDouble("rating"));
             actualite.setDate_pub(rs.getDate("date_pub").toLocalDate());
 
             list.add(actualite);

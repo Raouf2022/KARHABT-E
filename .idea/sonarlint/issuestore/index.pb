@@ -1,0 +1,27 @@
+
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+j
+:src/main/java/edu/esprit/controllers/Ajouteractualite.java,5\9\598c98ae504ab3de37c4c6b684dd75f6e6e43d3d
+g
+7src/main/java/edu/esprit/controllers/Listactualite.java,e\6\e639ac5b73527ac072a0a03babaa9f47a599898c
+W
+'src/main/java/edu/esprit/test/Main.java,6\7\671118cafa056682b04c145fdff3128ccbbc4edc
+Y
+)src/main/java/edu/esprit/test/MainFX.java,f\8\f8150c9c76063401ef265b08225d22a5fedf38d1
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+`
+0src/main/java/edu/esprit/entities/Actualite.java,1\1\111238b8fa19bb921d87b3b63173d103c900c253
+g
+7src/main/java/edu/esprit/services/Actualiteservice.java,a\4\a4a65fa866026a09d1c5abd0074ab6408e85d828
+k
+;src/main/java/edu/esprit/controllers/Modifieractualite.java,7\b\7b103c887c9f5816ce72942bf596a3beb955ea86
+b
+2src/main/java/edu/esprit/entities/Commentaire.java,a\c\ac0846d7031a2b59f3408f13d7d89af453ab127d
+i
+9src/main/java/edu/esprit/services/Commentaireservice.java,d\4\d402fdeef8174f16b67951e3134364bf187d2b25
+^
+.src/main/java/edu/esprit/entities/Reponse.java,1\1\1163e5f19d87e66768a9a947727a2638fed36a62
+e
+5src/main/java/edu/esprit/services/Reponseservice.java,0\5\05bcdf5314276909d4845032a7460d830c813785

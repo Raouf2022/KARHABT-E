@@ -16,6 +16,39 @@ public class Commentaireservice implements Iservice <Commentaire> {
     }
 
 
+    public List<Commentaire> getCommentsForActualite(int actualiteId) {
+        List<Commentaire> comments = new ArrayList<>();
+        String req = "SELECT c.*, u.nom FROM commentaire c JOIN user u ON c.idU = u.idU WHERE c.idAct = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
+            preparedStatement.setInt(1, actualiteId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int idComnt = rs.getInt("idComnt");
+                String contenuec = rs.getString("Contenuec");
+                LocalDate date_pubc = rs.getDate("date_pubc").toLocalDate();
+                String userName = rs.getString("nom");
+
+                User user = new User();
+                user.setNom(userName);
+                // Assuming User class has a method to set the name. You might need to adjust based on your User class implementation.
+
+                Actualite act = new Actualite();
+                act.setIdAct(actualiteId); // Setting only ID, assuming there's a method setIdAct in Actualite class
+
+                Commentaire commentaire = new Commentaire(idComnt, contenuec, user);
+                commentaire.setDate_pubc(date_pubc);
+                commentaire.setAct(act);
+
+                comments.add(commentaire);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching comments for Actualite ID " + actualiteId + ": " + e.getMessage());
+        }
+
+        return comments;
+    }
 
 
     public void ajouter(Commentaire commentaire) throws SQLException {
@@ -26,17 +59,13 @@ public class Commentaireservice implements Iservice <Commentaire> {
         }
 
         // Requête SQL paramétrée
-        String req = "INSERT INTO Commentaire (Contenuec,Rating, date_pubc, idU , idAct) VALUES (?, ?, ?, ?, ?)";
+        String req = "INSERT INTO Commentaire (Contenuec,date_pubc, idU, idAct) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
             preparedStatement.setString(1, commentaire.getContenuec());
-            preparedStatement.setInt(2, commentaire.getRating());
-            preparedStatement.setDate(3, Date.valueOf(commentaire.getDate_pubc()));
-
-
-            // Supposons que idUtilisateur soit l'identifiant de l'utilisateur associé au commentaire
-            preparedStatement.setInt(4, commentaire.getUser().getIdU());
-            preparedStatement.setInt(5, commentaire.getAct().getIdAct());
+            preparedStatement.setDate(2, Date.valueOf(commentaire.getDate_pubc()));
+            preparedStatement.setInt(3, commentaire.getUser().getIdU()); // Ensure this is 12
+            preparedStatement.setInt(4, commentaire.getAct().getIdAct());
 
             // Exécution de la requête
             preparedStatement.executeUpdate();
@@ -51,13 +80,13 @@ public class Commentaireservice implements Iservice <Commentaire> {
 
 
 
+
     @Override
     public void modifier(Commentaire commentaire) throws SQLException {
-        String req = "UPDATE commentaire SET Contenuec = ?, Rating = ? WHERE idComnt = ?";
+        String req = "UPDATE commentaire SET Contenuec = ? WHERE idComnt = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
             preparedStatement.setString(1, commentaire.getContenuec());
-            preparedStatement.setInt(2, commentaire.getRating());
-            preparedStatement.setInt(3, commentaire.getIdComnt());
+            preparedStatement.setInt(2, commentaire.getIdComnt());
 
             preparedStatement.executeUpdate();
             System.out.println("Commentaire modifié");
@@ -91,7 +120,7 @@ public class Commentaireservice implements Iservice <Commentaire> {
         while (cs.next()) {
             Commentaire c = new Commentaire();
             c.setIdComnt(cs.getInt("idComnt"));
-            c.setRating(cs.getInt("Rating"));
+
             c.setContenuec(cs.getString("Contenuec"));
             c.setDate_pubc(cs.getDate("date_pubc").toLocalDate());
 
@@ -125,13 +154,34 @@ public class Commentaireservice implements Iservice <Commentaire> {
                     String contenuc = res.getString("contenuec");
                     user.setNom(res.getString("nom"));
                     actualite.setTitre(res.getString("titre"));
-                    int Rating = res.getInt("Rating");
-                    commentaire= new Commentaire( contenuc,date_pubc,Rating,  user,actualite);
+                    commentaire= new Commentaire( contenuc,date_pubc,  user,actualite);
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
             return commentaire;
         }
+    public User fetchUserById(int id) throws SQLException {
+        User user = null;
+        String query = "SELECT * FROM user WHERE idU = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                user = new User();
+                user.setIdU(resultSet.getInt("idU"));
+                user.setNom(resultSet.getString("nom"));
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching user by ID: " + e.getMessage());
+            throw e;
+        }
+
+        return user;
     }
+
+}
 
