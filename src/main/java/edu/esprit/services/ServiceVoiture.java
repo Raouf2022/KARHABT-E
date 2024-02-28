@@ -52,8 +52,6 @@ public class ServiceVoiture implements IService <Voiture>{
             System.out.println(e.getMessage());
         }
 
-
-
     }
 
     @Override

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="664.0" prefWidth="936.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierVoiture">
+   <children>
+      <AnchorPane prefHeight="664.0" prefWidth="219.0" styleClass="sidebar-pane">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="28.0" prefHeight="594.0" prefWidth="200.0" styleClass="sidebar-pane">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" styleClass="sidebar-image">
+                     <image>
+                        <Image url="@416744892_1122423038769416_6907435235726289881_n.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+      <Label layoutX="246.0" layoutY="74.0" styleClass="form-label" text="Marque" />
+      <Label layoutX="246.0" layoutY="150.0" styleClass="form-label" text="Modèle" />
+      <Label layoutX="246.0" layoutY="230.0" styleClass="form-label" text="Couleur" />
+      <Label layoutX="246.0" layoutY="301.0" styleClass="form-label" text="Prix" />
+      <Label layoutX="246.0" layoutY="365.0" styleClass="form-label" text="Image" />
+      <TextField fx:id="TFmarque" layoutX="377.0" layoutY="77.0" styleClass="form-text-field" />
+      <TextField fx:id="TFmodele" layoutX="377.0" layoutY="152.0" styleClass="form-text-field" />
+      <TextField fx:id="TFcouleur" layoutX="377.0" layoutY="232.0" styleClass="form-text-field" />
+      <Button fx:id="btnAjouterV" layoutX="445.0" layoutY="505.0" onAction="#ModifierVoitureAction" styleClass="form-button" text="Modifer" />
+      <TextField fx:id="TFprix" layoutX="377.0" layoutY="303.0" styleClass="form-text-field" />
+      <TextField fx:id="TFimage" layoutX="377.0" layoutY="367.0" styleClass="form-text-field" />
+      <Button fx:id="btnImporter" layoutX="627.0" layoutY="365.0" onAction="#ImageImportAction" styleClass="form-button" text="Importer" />
+
+      <Label layoutX="246.0" layoutY="423.0" styleClass="form-label" text="Description" />
+      <TextField fx:id="TFdescription" layoutX="377.0" layoutY="417.0" styleClass="form-text-field" />
+   </children>
+</AnchorPane>

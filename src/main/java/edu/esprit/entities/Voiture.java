@@ -90,15 +90,9 @@ public class Voiture {
 
     @Override
     public String toString() {
-        return "Voiture{" +
-                "marque='" + marque + '\'' +
-                ", modele='" + modele + '\'' +
-                ", couleur='" + couleur + '\'' +
-                ", prix=" + prix +
-                ", img='" + img + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return modele + " / " + marque;
     }
+
 
     @Override
     public boolean equals(Object o) {

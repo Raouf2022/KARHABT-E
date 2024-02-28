@@ -3,6 +3,7 @@ import edu.esprit.entities.Arrivage;
 import edu.esprit.tools.DataSource;
 import edu.esprit.entities.Voiture;
 import java.util.Date;
+
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class ServiceArrivage implements IService <Arrivage> {
         }
 
         // Vérifiez que la date d'entrée n'est pas dans le futur
-        if (arrivage.getDateEntree().after(new Date())) {
+        if (arrivage.getDateEntree().after (new Date())) {
             System.out.println("Erreur : la date d'entrée" +
                     " ne peut pas être dans le futur.");
             return;

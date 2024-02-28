@@ -1,4 +1,3 @@
-
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Voiture;
@@ -16,6 +15,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.io.File;
 public class AjouterVoiture {
@@ -40,7 +42,8 @@ public class AjouterVoiture {
 
     @FXML
     private Button btnAjouterV;
-
+    @FXML
+    private Button btnRetour;
     @FXML
     private Button btnImporter;
 
@@ -83,24 +86,48 @@ private final ServiceVoiture sv = new ServiceVoiture();
     @FXML
     void ImageImportAction(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Sélectionner une image");
-        File selectedFile = fileChooser.showOpenDialog(null);
+        fileChooser.setTitle("Choose an Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
         if (selectedFile != null) {
-            String imagePath = selectedFile.getAbsolutePath();
-            TFimage.setText(imagePath); // Mettez à jour le champ de texte avec le chemin de l'image
+            try {
+
+                Path resourcesDir = Path.of("src/main/resources/images");
+                if (!Files.exists(resourcesDir)) {
+                    Files.createDirectories(resourcesDir);
+                }
+
+
+                Path imagePath = resourcesDir.resolve(selectedFile.getName());
+                Files.copy(selectedFile.toPath(), imagePath, StandardCopyOption.REPLACE_EXISTING);
+
+
+                TFimage.setText(selectedFile.getName());
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to upload image.");
+                alert.showAndWait();
+            }
         }
+
 
     }
 
-
-
-
-
-
-
-
-
-
+    @FXML
+    private void retourAction(ActionEvent event) {
+        try {
+            // Load the Afficher Voiture view
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherVoiture.fxml"));
+            btnRetour.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load the Afficher Voiture view.");
+            alert.showAndWait();
+        }
+    }
 
 
 }

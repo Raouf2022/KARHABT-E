@@ -1,0 +1,180 @@
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-base: #ffffff;
+    -fx-background: #f4f4f4;
+}
+
+.button {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.2) , 5, 0.0 , 0 , 1 );
+}
+.image-view {
+    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 2 );
+}
+.button:hover {
+    -fx-background-color: #005a9e;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+}
+.scroll-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+    -fx-padding: 10;
+}
+
+.hbox {
+    -fx-spacing: 15;
+    -fx-alignment: center-left;
+    -fx-padding: 10;
+}
+
+/* Car listing tile */
+.car-tile {
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 5);
+}
+
+.car-tile:hover {
+    -fx-background-color: #e6e6e6;
+}
+
+.button {
+    -fx-background-radius: 5;
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+.car-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 5);
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+
+.car-image {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+.label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #333;
+}
+
+.modify-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+
+.modify-button:hover {
+    -fx-background-color: #2980b9;
+}
+.form-pane {
+    -fx-background-color: white;
+}
+
+.sidebar-pane {
+    -fx-background-color: #82CEF9;
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.form-text-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.form-button {
+    -fx-background-color: #82CEF9;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+
+.form-button:hover {
+    -fx-background-color: #70B3E0;
+}
+
+.sidebar-image {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0,10);
+}
+.arrivage-box {
+    -fx-border-color: #2c3e50;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-color: #ecf0f1;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+    -fx-spacing: 5; /* Spacing between elements inside the VBox */
+}
+
+.arrivage-detail, .voiture-detail {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
+}
+
+.delete-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand; /* Change cursor to hand when hovering over the button */
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5 15; /* Padding around text inside the button */
+}
+
+.delete-button:hover {
+    -fx-background-color: #c0392b; /* Slightly darker shade for hover effect */
+}
+.form-combo-box {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+}
+
+.title-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #34495e;
+}

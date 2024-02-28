@@ -5,19 +5,17 @@ import edu.esprit.services.ServiceVoiture;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Set;
 
 public class AfficherVoiture {
@@ -35,106 +33,170 @@ public class AfficherVoiture {
 
     @FXML
     public void initialize() {
-
         voitureTitlePane.getChildren().clear();
 
-
-// Appeler votre service pour obtenir la liste de voitures
         Set<Voiture> voitures = sv.getAll();
 
-        // Gérer l'affichage du message si la liste est vide
         if (voitures.isEmpty()) {
             emptyLabel.setVisible(true);
             voitureTitlePane.setVisible(false);
         } else {
-
             emptyLabel.setVisible(false);
             voitureTitlePane.setVisible(true);
-            // Ajouter des panes pour chaque voiture
+
             TilePane voituresTilePane = new TilePane();
+            voituresTilePane.setPrefColumns(3); // Set the preferred number of columns to 3
+            voituresTilePane.setHgap(10); // Horizontal gap between elements
+            voituresTilePane.setVgap(10); // Vertical gap between elements
+            voituresTilePane.setAlignment(Pos.TOP_CENTER); // Align to the top center
+
             for (Voiture voiture : voitures) {
                 Pane pane = createVoiturePane(voiture);
                 voituresTilePane.getChildren().add(pane);
             }
+
             voitureTitlePane.getChildren().add(voituresTilePane);
         }
     }
 
 
-// ...
 
     private Pane createVoiturePane(Voiture voiture) {
-        Pane pane = new Pane();
-        pane.setPrefSize(200, 240);  // Augmenter la hauteur à 200 pour accueillir l'ImageView
-        pane.setStyle("-fx-border-color: blue; -fx-border-width: 2;");  // Ajouter une bordure
-        pane.getStyleClass().add("pane");
+        // Use VBox for vertical layout
+        VBox vbox = new VBox(10); // Use VBox for vertical layout with spacing of 10
+        vbox.setAlignment(Pos.CENTER); // Center the content
+        vbox.setPadding(new Insets(10)); // Add padding around the VBox
+        vbox.setPrefSize(200, 300); // Set a preferred size for VBox
+        vbox.getStyleClass().add("car-pane"); // Add the CSS class for styling
 
-        // Créer un ImageView pour afficher l'image de la voiture
+        // Create an ImageView for the car image
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(120);  // Ajuster la largeur de l'ImageView
-        imageView.setFitHeight(120);  // Ajuster la hauteur de l'ImageView
-        imageView.setLayoutX(20);  // Positionner l'ImageView
-        imageView.setLayoutY(10);  // Positionner l'ImageView
+        imageView.setFitWidth(180);
+        imageView.setFitHeight(120);
+        imageView.setPreserveRatio(true);
+        imageView.getStyleClass().add("car-image");
+        try {
+            File file = new File("src/main/resources/images/" + voiture.getImg());
+            String imageUrl = file.toURI().toURL().toExternalForm();
+            Image image = new Image(imageUrl);
+            imageView.setImage(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Consider having a default image if the specific image is not found.
+        }
 
-        // Définir l'image de l'ImageView à partir du chemin de l'image de la voiture
-        Image image = new Image("file:" + voiture.getImg());
-        imageView.setImage(image);
+        vbox.getChildren().add(imageView); // Add ImageView to VBox
 
-        // Ajouter l'ImageView au pane
-        pane.getChildren().add(imageView);
-
-        // Ajouter des étiquettes pour afficher les attributs de la voiture
+        // Create labels for car attributes
         Label marqueLabel = new Label("Marque: " + voiture.getMarque());
-        marqueLabel.getStyleClass().add("label");
-        marqueLabel.getStyleClass().add("label-title");
-        marqueLabel.setLayoutX(10);
-        marqueLabel.setLayoutY(140);
-
         Label modeleLabel = new Label("Modele: " + voiture.getModele());
-        modeleLabel.getStyleClass().add("label");
-        modeleLabel.setLayoutX(10);
-        modeleLabel.setLayoutY(160);
-
         Label couleurLabel = new Label("Couleur: " + voiture.getCouleur());
-        couleurLabel.getStyleClass().add("label");
-        couleurLabel.setLayoutX(10);
-        couleurLabel.setLayoutY(180);
-
         Label prixLabel = new Label("Prix: " + voiture.getPrix());
-        prixLabel.getStyleClass().add("label");
-        prixLabel.setLayoutX(10);
-        prixLabel.setLayoutY(200);
-
         Label descriptionLabel = new Label("Description: " + voiture.getDescription());
-        descriptionLabel.getStyleClass().add("label");
-        descriptionLabel.setLayoutX(10);
-        descriptionLabel.setLayoutY(220);
 
+        // Add labels to VBox
+        vbox.getChildren().addAll(marqueLabel, modeleLabel, couleurLabel, prixLabel, descriptionLabel);
 
-        // Ajoutez les étiquettes au pane
-        pane.getChildren().addAll(marqueLabel, modeleLabel, couleurLabel, prixLabel, descriptionLabel);
-        // Créez un bouton Modifier
+        // Create a Modify button
         Button modifierButton = new Button("Modifier");
-        modifierButton.setLayoutX(120);  // Positionnez le bouton
-        modifierButton.setLayoutY(210);  // Positionnez le bouton
-        pane.getChildren().addAll(modifierButton);
+        modifierButton.getStyleClass().add("modify-button");
+        modifierButton.setOnAction(event -> navigatetoModifierVoiture(voiture));
+        Button deleteButton = new Button();
+        ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/images/delete_icon.png"))); // Replace with your delete icon path
+        deleteIcon.setFitWidth(15);
+        deleteIcon.setFitHeight(15);
+        deleteButton.setGraphic(deleteIcon);
+        deleteButton.getStyleClass().add("delete-button");
+        deleteButton.setOnAction(event -> confirmAndDeleteVoiture(voiture.getIdV()));
+        HBox buttonLayout = new HBox(10, modifierButton, deleteButton);
 
+        vbox.getChildren().add(buttonLayout);
 
+        // Enclose the VBox in a Pane for border/styling if needed
+        Pane pane = new Pane(vbox);
+        pane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         return pane;
+    }
+    private void confirmAndDeleteVoiture(int voitureId) {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this car?");
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText(null);
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            sv.supprimer(voitureId);
+            refreshVoitures(); // Refresh the list of cars
+        }
+    }
+    private void refreshVoitures() {
+        // Similar to the initial load, clear the existing content and repopulate
+        voitureTitlePane.getChildren().clear();
+
+        Set<Voiture> voitures = sv.getAll();
+        if (voitures.isEmpty()) {
+            emptyLabel.setVisible(true);
+            voitureTitlePane.setVisible(false);
+        } else {
+            emptyLabel.setVisible(false);
+            voitureTitlePane.setVisible(true);
+
+            TilePane voituresTilePane = new TilePane();
+            voituresTilePane.setPrefColumns(3);
+            voituresTilePane.setHgap(10);
+            voituresTilePane.setVgap(10);
+            voituresTilePane.setAlignment(Pos.TOP_CENTER);
+
+            for (Voiture voiture : voitures) {
+                Pane pane = createVoiturePane(voiture);
+                voituresTilePane.getChildren().add(pane);
+            }
+
+            voitureTitlePane.getChildren().add(voituresTilePane);
+        }
+    }
+
+    private void navigatetoModifierVoiture(Voiture voiture) {
+        try {
+            // Load the modifier view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierVoiture.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller of the modify view and set the voiture
+            ModifierVoiture controller = loader.getController();
+            controller.setVoiture(voiture); // You will need to implement this method in ModifierVoiture
+
+            // Set the scene to the modify view
+            NouvelleV.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load the Modify Car view.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
 
     public void navigatetoAjouterVoitureAction(ActionEvent event){
-
-
-
-
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/AjouterVoiture.fxml"));
             NouvelleV.getScene().setRoot(root);
         } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Désolé");
+            alert.setTitle("Erreur");
+            alert.show();
+
+
+        }
+    }
+
+    public void navigatetoAfficherArrivageAction(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherArrivage.fxml"));
+            NouvelleV.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Désolé");
             alert.setTitle("Erreur");

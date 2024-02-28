@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1011.0" prefWidth="1389.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherArrivage">
+    <children>
+      <AnchorPane prefHeight="656.0" prefWidth="191.0" />
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutX="186.0" layoutY="54.0" prefHeight="600.0" prefWidth="709.0" styleClass="scroll-pane">
+            <content>
+                <TilePane fx:id="arrivageTilePane" alignment="TOP_CENTER" hgap="10.0" prefColumns="3" vgap="10.0" />
+            </content>
+        </ScrollPane>
+        <VBox fx:id="sidebar" layoutX="733.0" layoutY="662.0" prefHeight="49.0" prefWidth="171.0" styleClass="sidebar-pane">
+            <children>
+                <Button fx:id="btnRetour" onAction="#retourAction" styleClass="sidebar-button" text="Retour" />
+                <Label fx:id="emptyLabel" styleClass="sidebar-label" text="Aucun arrivage disponible" />
+            </children>
+        </VBox>
+      <Pane layoutY="-1.0" prefHeight="656.0" prefWidth="178.0" style="-fx-background-color: blue;" styleClass="pane">
+         <children>
+            <Button fx:id="NouvelleV" layoutX="14.0" layoutY="184.0" mnemonicParsing="false" onAction="#navigatetoAjouterVoitureAction" prefHeight="41.0" prefWidth="155.0" styleClass="button" text="Nouvelle Voiture" />
+            <Button fx:id="GetArrivage" layoutX="14.0" layoutY="264.0" mnemonicParsing="false" onAction="#navigatetoAfficherArrivageAction" prefHeight="41.0" prefWidth="155.0" styleClass="button" text="Afficher Arrivage" />
+            <ImageView fitHeight="137.0" fitWidth="142.0" layoutX="44.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+               <image>
+                  <Image url="@416744892_1122423038769416_6907435235726289881_n.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+        <Canvas fx:id="chartCanvas" height="361.0" layoutX="896.0" layoutY="128.0" styleClass="arrivage-detail" width="535.0" />
+
+        <Button fx:id="btnRetour1" layoutX="755.0" layoutY="14.0" onAction="#navigatetoAjouterArrivageAction" styleClass="sidebar-button" text="Ajouter Arrivage" />
+    </children>
+</AnchorPane>
