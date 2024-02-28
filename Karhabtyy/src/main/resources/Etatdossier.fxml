@@ -108,7 +108,7 @@
                                         <Button fx:id="tfvalider" layoutX="19.0" layoutY="111.0" mnemonicParsing="false" onAction="#SaveEtatDossier" prefHeight="34.0" prefWidth="88.0" text="Ajouter" />
                                         <Button fx:id="tfmodify" layoutX="135.0" layoutY="111.0" mnemonicParsing="false" onAction="#ModifierEtatDossier" prefHeight="34.0" prefWidth="92.0" text="Modifier" />
                                         <Button fx:id="tfdelete" layoutX="132.0" layoutY="170.0" mnemonicParsing="false" onAction="#SupprimerEtatDossier" text="Supprimer" />
-                                        <Button fx:id="tfshow" layoutX="252.0" layoutY="112.0" mnemonicParsing="false" onAction="#showEtatdossier" prefHeight="27.0" prefWidth="84.0" text="Afficher" />
+                                        <Button fx:id="tfshowetat" layoutX="252.0" layoutY="112.0" mnemonicParsing="false" onAction="#showEtatdossier" prefHeight="27.0" prefWidth="84.0" text="Afficher" />
                                     </children>
                                     <cursor>
                                         <Cursor fx:constant="S_RESIZE" />

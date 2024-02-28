@@ -1,10 +1,11 @@
 package edu.esprit.controllers;
 import java.io.IOException;
-import edu.esprit.entities.Dossier;
+
 import edu.esprit.entities.etatDeDossier;
-import edu.esprit.services.ServiceDossier;
 import edu.esprit.services.ServiceEtatDossier;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,17 +17,17 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.sql.Date;
 
 public class Etatdossier {
 
     @FXML
-    private ListView<?> tflistview1;
+    private ListView<etatDeDossier> tflistview1;
     @FXML
     private Button but_demande;
 
@@ -59,7 +60,7 @@ public class Etatdossier {
     private Button tfmodify;
 
     @FXML
-    private Button tfshow;
+    private Button tfshowetat;
 
     @FXML
     private AnchorPane tfsideBar;
@@ -120,6 +121,34 @@ public class Etatdossier {
 
     @FXML
     void showEtatdossier(ActionEvent event) {
+
+        ObservableList<etatDeDossier> dossierList = FXCollections.observableArrayList();
+
+        String etat = this.tfetat.getText();
+        try {
+
+            etatDeDossier d = new etatDeDossier(etat);
+            dossierList.add(d);
+            tflistview1.setItems(dossierList);
+            if (d != null) {
+                tfshowetat.setGraphic(null);
+            } else {
+                GridPane gridPane = new GridPane();
+                gridPane.add(new Text("CIN:"), 0, 0);
+                //gridPane.add(new Text(dossier.getCin()), 0, 0);
+                gridPane.add(new Text("Etat:"), 0, 1);
+                gridPane.add(new Text(d.getEtat()), 1, 1);
+
+                tfshowetat.setGraphic(gridPane);
+            }
+        } catch (Exception e) {
+            // Set the items in the TableView
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(" Exception");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
 
     }
 

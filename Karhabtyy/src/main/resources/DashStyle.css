@@ -127,3 +127,27 @@
     -fx-border-color: #07b5bb; /* Set border color */
     -fx-border-width: 1px; /* Set border width */
 }
+#tfshowdemande
+{
+    -fx-background-color: #ffffff; /* Set background color */
+    -fx-text-fill: rgb(7, 181, 187); /* Set text color */
+    -fx-font-family: "Arial", sans-serif; /* Set font family */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 8px 16px; /* Set padding */
+    -fx-border-radius: 4px; /* Set border radius */
+    -fx-border-color: #07b5bb; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+
+}
+#tfshowetat
+{
+
+    -fx-background-color: #ffffff; /* Set background color */
+    -fx-text-fill: rgb(7, 181, 187); /* Set text color */
+    -fx-font-family: "Arial", sans-serif; /* Set font family */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-padding: 8px 16px; /* Set padding */
+    -fx-border-radius: 4px; /* Set border radius */
+    -fx-border-color: #07b5bb; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+}
