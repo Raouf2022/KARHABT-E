@@ -2,7 +2,7 @@ package edu.esprit.entities;
 
 import java.util.Objects;
 
-public class DossierDemande {
+public class DossierDemande extends Dossier {
     private String urlcin;
     private String urlCerRetenu;
     private String urlAttTravail;

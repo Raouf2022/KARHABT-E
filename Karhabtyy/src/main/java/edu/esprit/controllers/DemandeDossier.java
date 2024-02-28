@@ -3,6 +3,8 @@ import java.io.IOException;
 
 import edu.esprit.entities.DossierDemande;
 import edu.esprit.services.ServiceDemandeDossier;
+import edu.esprit.services.ServiceDossier;
+import edu.esprit.services.ServiceEtatDossier;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,10 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -29,6 +28,8 @@ public class DemandeDossier {
     @FXML
     private Button but_demande;
 
+    @FXML
+    private ListView<?> tflistview2;
     @FXML
     private Button but_etat;
 
@@ -50,10 +51,6 @@ public class DemandeDossier {
     @FXML
     private Pane tfinnerPane;
 
-    @FXML
-    private ListView<?> tflistview;
-    @FXML
-    private ListView<DossierDemande> tflistview2;
 
     @FXML
     private Button tfmodify;
@@ -117,63 +114,14 @@ public class DemandeDossier {
 
     }
 
-    @FXML
-    void SupprimerDossier(ActionEvent event) {
 
-    }
 
     @FXML
     void demandeDossier(ActionEvent event) {
 
     }
 
-    @FXML
-    void showdossier(ActionEvent event) {
-        ObservableList<edu.esprit.entities.DossierDemande> dossierList = FXCollections.observableArrayList();
 
-
-        String Cin = this.urlcin.getText();
-        String cerRetenu = this.urlCerRetenu.getText();
-        String AttTravail = this.urlAttTravail.getText();
-        String DecRevenu = this.urlDecRevenu.getText();
-        String ExtNaissance = this.urlExtNaissance.getText();
-        try {
-
-            edu.esprit.entities.DossierDemande d = new DossierDemande(Cin, cerRetenu, AttTravail, DecRevenu,ExtNaissance);
-            dossierList.add(d);
-            tflistview2.setItems(dossierList);
-            if (d != null) {
-                tfshow.setGraphic(null);
-            } else {
-                GridPane gridPane = new GridPane();
-                gridPane.add(new Text("CIN:"), 0, 0);
-                //gridPane.add(new Text(dossier.getCin()), 0, 0);
-                gridPane.add(new Text("CIN:"), 0, 1);
-                gridPane.add(new Text(d.getUrlcin()), 1, 1);
-                gridPane.add(new Text("Certificat de retenu :"), 0, 2);
-                gridPane.add(new Text(d.getUrlCerRetenu()), 1, 2);
-                gridPane.add(new Text("Attestation de travail:"), 0, 3);
-                gridPane.add(new Text(d.getUrlAttTravail()), 1, 3);
-                gridPane.add(new Text("Desc de revenu :"), 0, 4);
-                gridPane.add(new Text(d.getUrlDecRevenu()), 1, 4);
-                gridPane.add(new Text("extrait de naissance :"), 0, 5);
-                gridPane.add(new Text(d.getUrlExtNaissance()), 1, 5);
-
-
-
-                tfshow.setGraphic(gridPane);
-            }
-        } catch (Exception e) {
-            // Set the items in the TableView
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(" Exception");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
-
-
-    }
 
     public void dossierback(ActionEvent actionEvent) throws IOException {
 
@@ -230,6 +178,7 @@ public class DemandeDossier {
         fadeOutTransition.play();
 
     }
+
 
 
 }

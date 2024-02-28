@@ -26,7 +26,8 @@ import java.sql.Date;
 public class Dashboard {
     @FXML
     private TextField tfcin;
-
+    @FXML
+    private ListView<?> tflistview2;
     @FXML
     private Button but_etat;
 
@@ -200,8 +201,9 @@ public class Dashboard {
 
     @FXML
     void SupprimerDossier(ActionEvent event) {
+
         final ServiceDossier sp = new ServiceDossier();
-        Dossier d = tflistview.getSelectionModel().getSelectedItem();
+        Dossier d = (Dossier) tflistview.getSelectionModel().getSelectedItem();
 
         if (d != null) {
             try {

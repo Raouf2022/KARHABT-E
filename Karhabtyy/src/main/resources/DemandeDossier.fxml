@@ -115,8 +115,8 @@
                                         <Label layoutX="162.0" layoutY="14.0" text="Remplir les urls de votre dossier" />
                                         <Button fx:id="tfvalider" layoutX="19.0" layoutY="348.0" mnemonicParsing="false" onAction="#SaveEtatDossier" prefHeight="34.0" prefWidth="88.0" text="Ajouter" />
                                         <Button fx:id="tfmodify" layoutX="131.0" layoutY="348.0" mnemonicParsing="false" onAction="#ModifierDossier" prefHeight="34.0" prefWidth="92.0" text="Modifier" />
-                                        <Button fx:id="tfdelete" layoutX="128.0" layoutY="406.0" mnemonicParsing="false" onAction="#SupprimerDossier" text="Supprimer" />
-                                        <Button fx:id="tfshow" layoutX="252.0" layoutY="349.0" mnemonicParsing="false" onAction="#showdossier" prefHeight="27.0" prefWidth="84.0" text="Afficher" />
+                                        <Button fx:id="tfdelete" layoutX="128.0" layoutY="406.0" mnemonicParsing="false" onAction="#SupprimerDemande" text="Supprimer" />
+                                        <Button fx:id="tfshow" layoutX="252.0" layoutY="349.0" mnemonicParsing="false" onAction="#showetatdossier" prefHeight="27.0" prefWidth="84.0" text="Afficher" />
                                     </children>
                                     <cursor>
                                         <Cursor fx:constant="S_RESIZE" />

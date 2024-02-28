@@ -1,8 +1,7 @@
 package edu.esprit.services;
 
-
-import edu.esprit.entities.Dossier;
 import edu.esprit.entities.DossierDemande;
+import edu.esprit.controllers.DemandeDossier;
 import edu.esprit.entities.DossierDemande;
 import edu.esprit.tools.DataSource;
 
@@ -69,6 +68,20 @@ public class ServiceDemandeDossier implements IDemandeDossier<DossierDemande> {
             System.out.println(ex.getMessage());
         }
     }
+
+    @Override
+    public void supprimer(DossierDemande dossierDemande) {
+        try {
+            String requete = "DELETE FROM demandedossier WHERE id_demande =?";
+            System.out.println("demande supprimé");
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, dossierDemande.getId_demande());
+            pst.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
 
     @Override
     public DossierDemande getOneById(int id_demande) {
