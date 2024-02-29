@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="640.0" prefWidth="960.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.EnvoyerMessageAdmin">
+   <children>
+      <Pane prefHeight="46.0" prefWidth="997.0" style="-fx-background-color: #0460D9;">
+         <children>
+            <Text fx:id="textGestion1" fill="#fcfcfc" layoutX="173.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation  et méssagerie Admin" textAlignment="CENTER" wrappingWidth="654.4898681640625">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutY="46.0" prefHeight="51.0" prefWidth="992.0" style="-fx-background-color: #94BDF2;">
+         <children>
+            <Pane layoutX="14.0" layoutY="10.0" prefHeight="34.0" prefWidth="477.0" style="-fx-background-color: #6b7fab08;">
+               <children>
+                  <FontAwesomeIconView fill="#bf7601" glyphName="CHEVRON_LEFT" layoutY="24.0" size="25" wrappingWidth="60.399993896484375" />
+                  <Button fx:id="bRetourA" cache="true" focusTraversable="false" layoutX="-6.0" layoutY="-3.0" mnemonicParsing="false" onAction="#retourAcueilAdmin" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #6b7fab08;" text="retour" textFill="#bf7601">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="LesReclamationButton" cache="true" focusTraversable="false" layoutX="83.0" layoutY="-3.0" mnemonicParsing="false" onAction="#openLesReclamationAdminintern" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #6b7fab08;" text="Les reclamations" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="bLesReponsesR" cache="true" focusTraversable="false" layoutX="312.0" layoutY="-3.0" mnemonicParsing="false" onAction="#openLesReponsesR" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #6b7fab08;" text="Les réponses" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Button fx:id="bLesMessages" cache="true" focusTraversable="false" layoutX="749.0" layoutY="9.0" mnemonicParsing="false" onAction="#openLesMessages" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #6b7fab08;" text="Mes messages" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Button>
+            <Text fill="#084e99" layoutX="573.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Envoyer un message" underline="true" wrappingWidth="187.99992675781255">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <TextField fx:id="contenuMTF" layoutX="57.0" layoutY="330.0" prefHeight="152.0" prefWidth="398.0" promptText="Contenu du message" />
+      <Button fx:id="EnvoyerButton" layoutX="92.0" layoutY="514.0" mnemonicParsing="false" onAction="#EnvoyerMessageA" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #084e99;" text="Envoyer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="290.0" fitWidth="292.0" layoutX="658.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Downloads/iconEnvMessg.png" />
+         </image>
+      </ImageView>
+      <Text fill="#2582b4" layoutX="57.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez votre destinataire">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="destinataireChoiceBox" layoutX="57.0" layoutY="247.0" prefHeight="46.0" prefWidth="245.0" />
+      <Button fx:id="messagesEnvoyéesButton" layoutX="803.0" layoutY="123.0" mnemonicParsing="false" onAction="#openMessageEnvoyé" prefHeight="37.0" prefWidth="160.0" style="-fx-background-color: #084e99;" text="Messages envoyés" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <FontAwesomeIconView fill="#084e99" glyphName="CHEVRON_RIGHT" layoutX="773.0" layoutY="150.0" size="25" wrappingWidth="60.399993896484375" />
+   </children>
+</AnchorPane>

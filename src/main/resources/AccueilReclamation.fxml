@@ -10,9 +10,18 @@
 
 <AnchorPane prefHeight="640.0" prefWidth="960.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AccueilReclamation">
    <children>
+      <Pane layoutX="-25.0" layoutY="46.0" prefHeight="646.0" prefWidth="363.0" style="-fx-background-color: #BCECFF;">
+         <children>
+            <ImageView fitHeight="224.0" fitWidth="615.0" layoutX="-46.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/imgrec.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <Pane prefHeight="46.0" prefWidth="982.0" style="-fx-background-color: #0460D9;">
          <children>
-            <Text fx:id="textGestion" fill="#fcfcfc" layoutX="173.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation  et méssagerie" textAlignment="CENTER" wrappingWidth="654.4898681640625">
+            <Text fx:id="textGestion" fill="#fcfcfc" layoutX="173.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation  et méssagerie clientèle" textAlignment="CENTER" wrappingWidth="654.4898681640625">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -24,90 +33,61 @@
             </Text>
          </children>
       </Pane>
-      <Button fx:id="bsaisirR" alignment="CENTER" layoutX="64.0" layoutY="375.0" mnemonicParsing="false" onAction="#SaisirReclamation" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #0476D9;" text="Saisir une réclamation" textFill="WHITE">
+      <Button fx:id="bEnvoyerMA" layoutX="428.0" layoutY="577.0" mnemonicParsing="false" onAction="#openEnvoyerMessageA" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #0061C2;" text="Envoyer un message" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="bListReclamationA" layoutX="284.0" layoutY="375.0" mnemonicParsing="false" onAction="#openReclamationA" prefHeight="38.0" prefWidth="146.0" style="-fx-background-color: #0061C2;" text="Mes réclamations" textFill="WHITE">
+      <Button fx:id="bListMessagesA" layoutX="705.0" layoutY="577.0" mnemonicParsing="false" onAction="#openListMessagesA" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #0061C2;" text="Mes messages" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="bReponseRA" layoutX="503.0" layoutY="375.0" mnemonicParsing="false" onAction="#openReponseRA" prefHeight="38.0" prefWidth="154.0" style="-fx-background-color: #0061C2;" text="Réponse de réclamation" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Pane layoutX="64.0" layoutY="227.0" prefHeight="150.0" prefWidth="146.0" style="-fx-background-color: #0061C21A;">
+      <Pane layoutX="429.0" layoutY="457.0" prefHeight="120.0" prefWidth="161.0" style="-fx-background-color: #0061C21A;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-14.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="110.0" fitWidth="146.0" layoutX="24.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/imgAjoutR.png" />
+                  <Image url="@images/IMAGElESmMessages.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="284.0" layoutY="226.0" prefHeight="150.0" prefWidth="146.0" style="-fx-background-color: #0061C21A;">
+      <Pane layoutX="705.0" layoutY="457.0" prefHeight="120.0" prefWidth="162.0" style="-fx-background-color: #0061C21A;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="146.0" layoutX="4.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/imgMesR.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Button fx:id="bEnvoyerMA" layoutX="510.0" layoutY="583.0" mnemonicParsing="false" onAction="#openEnvoyerMessageA" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: #0061C2;" text="Envoyer un message" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="bListMessagesA" layoutX="317.0" layoutY="581.0" mnemonicParsing="false" onAction="#openListMessagesA" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: #0061C2;" text="Mes messages" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="bLesRepRA" layoutX="716.0" layoutY="378.0" mnemonicParsing="false" onAction="#openLesReponsesRA" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #0061C2;" text="Les réponses de réclamations" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="10.0" />
-         </font>
-      </Button>
-      <Pane layoutX="720.0" layoutY="228.0" prefHeight="150.0" prefWidth="146.0" style="-fx-background-color: #0061C21A;">
-         <children>
-            <ImageView fitHeight="145.0" fitWidth="174.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/list .png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="510.0" layoutY="433.0" prefHeight="150.0" prefWidth="146.0" style="-fx-background-color: #0061C21A;">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="110.0" fitWidth="150.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/imgMess.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="317.0" layoutY="433.0" prefHeight="150.0" prefWidth="146.0" style="-fx-background-color: #0061C21A;">
+      <Button fx:id="bListReclamationA" layoutX="700.0" layoutY="291.0" mnemonicParsing="false" onAction="#openReclamationA" prefHeight="51.0" prefWidth="155.0" style="-fx-background-color: #0061C2;" text="Mes réclamations" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Pane layoutX="705.0" layoutY="171.0" prefHeight="120.0" prefWidth="146.0" style="-fx-background-color: #0061C21A;">
          <children>
-            <ImageView fitHeight="110.0" fitWidth="146.0" layoutX="8.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="16.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/imgListM.png" />
+                  <Image url="@images/imgMesR.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="503.0" layoutY="224.0" prefHeight="150.0" prefWidth="154.0" style="-fx-background-color: #0061C21A;">
+      <Button fx:id="bsaisirR" alignment="CENTER" layoutX="432.0" layoutY="291.0" mnemonicParsing="false" onAction="#SaisirReclamation" prefHeight="46.0" prefWidth="155.0" style="-fx-background-color: #0476D9;" text="Saisir une réclamation" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Pane layoutX="432.0" layoutY="171.0" prefHeight="126.0" prefWidth="155.0" style="-fx-background-color: #0061C21A;">
          <children>
-            <ImageView fitHeight="145.0" fitWidth="225.0" layoutX="-17.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="120.0" fitWidth="178.0" layoutX="8.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/imgRepR.png" />
+                  <Image url="@images/imgAjoutR.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutY="46.0" prefHeight="51.0" prefWidth="982.0" style="-fx-background-color: #94BDF2;" />
    </children>
 </AnchorPane>

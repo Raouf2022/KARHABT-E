@@ -38,7 +38,7 @@ Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem
 //sr.create(r4);
 //System.out.println(sr.getById(14));
 
-//System.out.println(sr.getAll());
+//System.out.println(sr.getById(18));
 
 //sr.delete(17);
        Reclamation rr1= new Reclamation();
@@ -54,7 +54,9 @@ Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem
         //srepr.create(repr2);
         //srepr.create(repr3);
 
-           srepr.update2(32,repr2);
+       System.out.println(srepr.getAll());
+
+          // srepr.update2(32,repr2);
 
 
        // sar.delete(16);
@@ -63,10 +65,13 @@ Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem
         Messagerie m2= new Messagerie("couleur bonne",new Date(),u1,u2,true,false);
         Messagerie m3= new Messagerie("pouvez vous de me parler sur la voiture",new Date(),u1,u2,false,true);
 
-     //  sm.create(m3);
 
-       // System.out.println(sm.getById(9));
-      // System.out.println(sm.getAll());
+
+     //  sm.create(m3);
+        User u3 =new User();
+        u3.setIdU(27);
+      // System.out.println(sm.getMessagesBySender(24));
+        //System.out.println(sm.getById(20));
         //sm.delete(11);
 
     }

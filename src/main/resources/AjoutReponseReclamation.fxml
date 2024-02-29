@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="535.0" prefWidth="839.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjoutReponseReclamation">
+   <children>
+      <TextArea fx:id="contenuReponseField" layoutX="427.0" layoutY="157.0" prefHeight="287.0" prefWidth="402.0" promptText="Contenu de reponse" />
+      <Button fx:id="bEnregistrer" layoutX="602.0" layoutY="471.0" mnemonicParsing="false" onAction="#enregistrerReponse" prefHeight="34.0" prefWidth="98.0" style="-fx-background-color: #084e99;" text="Enregistrer" textFill="WHITE" />
+      <Pane layoutX="-2.0" prefHeight="46.0" prefWidth="874.0" style="-fx-background-color: #0460D9;">
+         <children>
+            <Text fx:id="textGestion1" fill="#fcfcfc" layoutX="87.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation  et méssagerie Admin" textAlignment="CENTER" wrappingWidth="654.4898681640625">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutY="46.0" prefHeight="51.0" prefWidth="873.0" style="-fx-background-color: #94BDF2;">
+         <children>
+            <Pane layoutX="14.0" layoutY="10.0" prefHeight="34.0" prefWidth="477.0" style="-fx-background-color: #6b7fab08;">
+               <children>
+                  <Text fill="#084e99" layoutX="283.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre réponse" textAlignment="CENTER" underline="true" wrappingWidth="281.5999633789063">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <ImageView fitHeight="269.0" fitWidth="294.0" layoutX="68.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/imageeeReponseR.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="tfIdR" layoutX="233.0" layoutY="171.0" visible="false" />
+      <Button fx:id="bRetourA" layoutX="29.0" layoutY="491.0" mnemonicParsing="false" onAction="#retourAccueilAdmin" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: #F29C50;" text="Annuler" textFill="WHITE" />
+   </children>
+</AnchorPane>

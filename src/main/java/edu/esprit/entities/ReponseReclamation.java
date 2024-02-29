@@ -31,6 +31,12 @@ public class ReponseReclamation {
     public ReponseReclamation(Reclamation rr1, String positive, String nonPanne, Date dateReponseR) {
     }
 
+    public ReponseReclamation(int idR) {
+    }
+
+    public ReponseReclamation(String contenu, Date date, Reclamation reclamation) {
+    }
+
     public int getIdReponseR() {
         return idReponseR;
     }
@@ -85,4 +91,6 @@ public class ReponseReclamation {
     public int hashCode() {
         return Objects.hash(idReponseR, reclamation, contenuReponse, dateReponseR);
     }
+
+
 }

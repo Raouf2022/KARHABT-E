@@ -14,6 +14,7 @@
 <AnchorPane prefHeight="640.0" prefWidth="960.0" style="-fx-background-color: #EBF2FA;" styleClass="main-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.MesReclamations">
 
    <children>
+      <Pagination fx:id="fxPagination" layoutX="25.0" layoutY="161.0" prefHeight="395.0" prefWidth="904.0" />
 
       <Label fx:id="emptyLabel" layoutX="395.0" layoutY="331.0" styleClass="empty-label" text="Aucune réclamation disponible" />
       <TilePane fx:id="reclamationsTilePane" hgap="20" layoutX="20" layoutY="20" prefColumns="3" prefTileHeight="150" prefTileWidth="200" styleClass="tile-pane" vgap="20" visible="false">
@@ -30,32 +31,38 @@
       </Pane>
       <Pane layoutY="46.0" prefHeight="51.0" prefWidth="970.0" style="-fx-background-color: #94BDF2;">
          <children>
-            <Text fill="#084e99" layoutX="590.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes réclamations" underline="true" wrappingWidth="151.20000000000005">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-            </Text>
             <Pane layoutX="14.0" layoutY="10.0" prefHeight="34.0" prefWidth="477.0" style="-fx-background-color: #6b7fab08;">
                <children>
-                  <Button fx:id="bNouvelleR" cache="true" focusTraversable="false" layoutX="193.0" mnemonicParsing="false" onAction="#openNouvelleReclamation" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #6b7fab08;" text="Nouvelle réclamation" textFill="WHITE" underline="true">
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font>
-                  </Button>
                   <FontAwesomeIconView fill="#bf7601" glyphName="CHEVRON_LEFT" layoutY="24.0" size="25" wrappingWidth="60.399993896484375" />
                   <Button fx:id="bRetour" cache="true" focusTraversable="false" layoutX="-6.0" layoutY="-3.0" mnemonicParsing="false" onAction="#retourAcueilR" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #6b7fab08;" text="retour" textFill="#bf7601">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Button>
-                  <!-- Ajouter les boutons Précédent et Suivant ici -->
-                  <Button fx:id="previousButton" mnemonicParsing="false" onAction="#handlePrevious" style="-fx-background-color: #6b7fab08;" text="Précédent" textFill="WHITE" />
-                  <Button fx:id="nextButton" mnemonicParsing="false" onAction="#handleNext" style="-fx-background-color: #6b7fab08;" text="Suivant" textFill="WHITE" />
+                  <Text fill="#084e99" layoutX="335.0" layoutY="23.0" onDragDetected="#openNouvelleReclamation" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes reclamations" underline="true" wrappingWidth="151.20000000000005">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="bneouvelleReclamation" cache="true" focusTraversable="false" layoutX="60.0" mnemonicParsing="false" onAction="#openNouvelleReclamation" prefHeight="34.0" prefWidth="222.0" style="-fx-background-color: #6b7fab08;" text="Nouvelle réclamation" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
+            <Button fx:id="bEnvoyerMessage" cache="true" focusTraversable="false" layoutX="581.0" layoutY="9.0" mnemonicParsing="false" onAction="#openEnvoyerMessage" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #6b7fab08;" text="Envoyer message" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="bLesMessages" cache="true" focusTraversable="false" layoutX="749.0" layoutY="9.0" mnemonicParsing="false" onAction="#openLesMessages" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #6b7fab08;" text="Mes messages" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
-      <Pagination fx:id="fxPagination" layoutX="25.0" layoutY="161.0" prefHeight="395.0" prefWidth="904.0" />
    </children>
 
    <stylesheets>

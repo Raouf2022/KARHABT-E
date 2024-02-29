@@ -26,7 +26,6 @@ public class Messagerie {
         this.deleted = deleted;
     }
 
-
     public Messagerie(String contenu, Date dateEnvoie, User sender, User receiver, boolean vu, boolean deleted) {
         this.contenu = contenu;
         this.dateEnvoie = dateEnvoie;
@@ -34,6 +33,9 @@ public class Messagerie {
         this.receiver = receiver;
         this.vu = vu;
         this.deleted = deleted;
+    }
+
+    public Messagerie(int sender, String contenu, java.sql.Date dateEnvoie, int sender1) {
     }
 
     public int getIdMessage() {
@@ -64,6 +66,15 @@ public class Messagerie {
         return sender;
     }
 
+    public int getIDSender() {
+        if (getSender() != null) {
+            return getSender().getIdU();
+        } else {
+            // Handle the case where sender is null (return a default value or throw an exception)
+            throw new IllegalStateException("Sender is null in messagerie.");
+        }
+    }
+
     public void setSender(User sender) {
         this.sender = sender;
     }
@@ -90,6 +101,14 @@ public class Messagerie {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public int getSenderId() {
+        return sender.getIdU();
+    }
+
+    public String getReceiverName() {
+        return receiver.getNom() + " " + receiver.getPrenom();
     }
 
     @Override

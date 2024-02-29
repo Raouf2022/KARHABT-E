@@ -31,7 +31,13 @@ public class AjouterReclamation {
 
     @FXML
     private Button bRetour;
+    @FXML
+    private Button bMesMessages;
 
+
+
+    @FXML
+    private Button bnouveauMessage;
     @FXML
     private Button bvalider;
 
@@ -52,61 +58,8 @@ public class AjouterReclamation {
     private TextField tfidUser;
 
 
-    @FXML
-    void openMessagerie(ActionEvent event) {
-
-    }
-
-    @FXML
-    void quiter(ActionEvent event) {
-
-    }
 
 
-
-    private final ServiceReclamation serviceReclamation = new ServiceReclamation();
-
-    @FXML
-    public void initialize() {
-        tfidUser.setText("24");  // Remplacez "1" par l'ID de l'utilisateur que vous voulez tester
-    }
-
-
-    @FXML
-    void validerReclamation(ActionEvent event) {
-        try {
-            String email = tfEmail.getText();
-            String sujet = tfSujet.getText();
-            String description = taDescription.getText();
-
-            String idUserText = tfidUser.getText();
-            int idU;
-            if (idUserText != null && !idUserText.isEmpty()) {
-                idU = Integer.parseInt(idUserText);
-                User user = new User(idU);
-
-
-                // Créer une nouvelle instance de User avec l'ID récupéré
-
-
-                // Créer une nouvelle instance de Reclamation
-                Reclamation reclamation = new Reclamation(sujet, description, new Date(), email, user);
-                // Ajouter la reclamation à la base de données
-                serviceReclamation.create(reclamation);
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setContentText("Reclamation ajoutée avec succès !");
-                alert.show();
-            } else {
-                System.out.println("ddddddddd");
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     @FXML
@@ -135,6 +88,63 @@ public class AjouterReclamation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private final ServiceReclamation serviceReclamation = new ServiceReclamation();
+
+    @FXML
+    public void initialize() {
+        tfidUser.setText("24");  // Remplacez "1" par l'ID de l'utilisateur que vous voulez tester
+    }
+
+
+    @FXML
+    void validerReclamation(ActionEvent event) {
+        try {
+            String email = tfEmail.getText();
+            String sujet = tfSujet.getText();
+            String description = taDescription.getText();
+            String idUserText = tfidUser.getText();
+
+            // Check if any of the fields are empty
+            if (email.isEmpty() || sujet.isEmpty() || description.isEmpty() || idUserText.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Veuillez remplir tous les champs !");
+                alert.show();
+                return; // Return to stop further processing
+            }
+
+            int idU = Integer.parseInt(idUserText);
+            User user = new User(idU);
+
+            // Validate email format
+            if (isValidEmail(email)) {
+                // Créer une nouvelle instance de Reclamation
+                Reclamation reclamation = new Reclamation(sujet, description, new Date(), email, user);
+                // Ajouter la reclamation à la base de données
+                serviceReclamation.create(reclamation);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Reclamation ajoutée avec succès !");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Adresse email invalide !");
+                alert.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean isValidEmail(String email) {
+
+            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+            return email.matches(emailRegex);
     }
 
 
@@ -168,7 +178,60 @@ public class AjouterReclamation {
         }
     }
 
+    public void openNouvelleMessage(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML
+            Parent root = FXMLLoader.load(getClass().getResource("/EnvoyerMessage.fxml"));
+
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle et le stage
+            Stage currentStage = (Stage) bnouveauMessage.getScene().getWindow();
+
+
+            // Créer une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), root);
+            fadeTransition.setFromValue(0.0);
+            fadeTransition.setToValue(1.0);
+            fadeTransition.play();
+
+            // Définir la nouvelle scène sur le stage et l'afficher
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    public void OpenMesMessages(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML
+            Parent root = FXMLLoader.load(getClass().getResource("/MessageRecuClient.fxml"));
+
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle et le stage
+            Stage currentStage = (Stage) bMesMessages.getScene().getWindow();
+
+
+            // Créer une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), root);
+            fadeTransition.setFromValue(0.0);
+            fadeTransition.setToValue(1.0);
+            fadeTransition.play();
+
+            // Définir la nouvelle scène sur le stage et l'afficher
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
 
 

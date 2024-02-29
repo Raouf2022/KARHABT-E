@@ -33,6 +33,9 @@ public class Reclamation {
         this.user = user;
     }
 
+    public Reclamation(int idR) {
+    }
+
 
     public int getIdR() {
         return idR;

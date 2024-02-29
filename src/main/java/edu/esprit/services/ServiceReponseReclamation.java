@@ -1,5 +1,6 @@
 package edu.esprit.services;
 
+import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.ReponseReclamation;
 import edu.esprit.tools.DataSource;
 
@@ -11,6 +12,10 @@ public class ServiceReponseReclamation implements  IService<ReponseReclamation> 
     private Connection cnx = DataSource.getInstance().getCnx();
 
     public ServiceReponseReclamation(Connection cnx) {
+    }
+
+    public ServiceReponseReclamation() {
+
     }
 
     @Override
@@ -79,13 +84,12 @@ public class ServiceReponseReclamation implements  IService<ReponseReclamation> 
     @Override
     public void update(ReponseReclamation entity) {
         try {
-            String query = "UPDATE ReponseReclamation SET idR=?, ContenuReponse=?, DateReponseR=? WHERE idReponseR=?";
+            String query = "UPDATE ReponseReclamation SET  ContenuReponse=?, DateReponseR=? WHERE idReponseR=?";
             PreparedStatement pstmt = cnx.prepareStatement(query);
 
-            pstmt.setInt(1, entity.getReclamation().getIdR());
-            pstmt.setString(2, entity.getContenuReponse());
-            pstmt.setDate(3, new java.sql.Date(entity.getDateReponseR().getTime()));
-            pstmt.setInt(4, entity.getIdReponseR());
+            pstmt.setString(1, entity.getContenuReponse());
+            pstmt.setDate(2, new java.sql.Date(entity.getDateReponseR().getTime()));
+            pstmt.setInt(3, entity.getIdReponseR());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -125,13 +129,24 @@ public class ServiceReponseReclamation implements  IService<ReponseReclamation> 
             }
         }
 
-        private ReponseReclamation mapResultSetToAvisReclamation (ResultSet rs) throws SQLException {
-            ReponseReclamation reponseReclamation = new ReponseReclamation();
-            reponseReclamation.setIdReponseR(rs.getInt("idReponseR"));
+    private ReponseReclamation mapResultSetToAvisReclamation(ResultSet rs) throws SQLException {
+        ReponseReclamation reponseReclamation = new ReponseReclamation();
+        reponseReclamation.setIdReponseR(rs.getInt("idReponseR"));
 
+        // Assuming idR is the foreign key linking ReponseReclamation to Reclamation
+        int reclamationId = rs.getInt("idR");
 
-            reponseReclamation.setContenuReponse(rs.getString("ContenuReponse"));
-            reponseReclamation.setDateReponseR(rs.getDate("DateReponseR"));
-            return reponseReclamation;
-        }
+        // Instantiate a ServiceReponseReclamation and get the Reclamation object by id
+        ServiceReclamation serviceReclamation= new ServiceReclamation();
+        Reclamation reclamation = serviceReclamation.getById(reclamationId);
+
+        // Set the Reclamation object in ReponseReclamation
+        reponseReclamation.setReclamation(reclamation);
+
+        reponseReclamation.setContenuReponse(rs.getString("contenuReponse"));
+        reponseReclamation.setDateReponseR(rs.getDate("DateReponseR"));
+
+        return reponseReclamation;
     }
+
+}

@@ -9,6 +9,14 @@
     -fx-border-radius: 5px;
     -fx-padding: 20px;
 }
+.Messagerie-pane{
+    -fx-background-color: #FFFFFF;
+    -fx-border-color:  #94BDF2;
+    -fx-border-width: 7px; /* Supprimé une des duplications */
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+
+}
 
 .label-title {
     -fx-font-weight: bold;
@@ -34,12 +42,14 @@
 .button-supprimer {
     -fx-background-color: #D9325E /* Red */
 }
+.repondreButton  {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-pref-width: 100px;
+    -fx-background-color:  #0460D9; /* Blue */
+}
+.Réponse{
+    -fx-background-color: #D9325E /* Red */
 
-.reclamation-attribute-vbox {
-    -fx-spacing: 8px; /* Slightly increase spacing between attributes */
 }
 
-/* Hover effect for buttons */
-.button-modifier:hover, .button-supprimer:hover {
-    -fx-background-color: derive(-fx-background-color, 20%);
-}
