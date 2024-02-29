@@ -32,7 +32,7 @@ public class Main {
         //serviceUser.supprimerUser(47);
         //client1.setIdU(26);
         //client1.setNom("dhoubeba");
-        //serviceClient.modifierUser(client1);
+        serviceUser.modifierUser(new User(131,"aaa","bbbb",java.sql.Date.valueOf(dateNaissance),28304486,"assilhammami36@gmail.com","aaaaa","Admin",""));
         //serviceClient.supprimerUser(16);
         //System.out.println(serviceAdmin.getOneById(19));
         //System.out.println(serviceAdmin.getAll());

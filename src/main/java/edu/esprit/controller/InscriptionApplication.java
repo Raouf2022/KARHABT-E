@@ -15,13 +15,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -33,6 +38,9 @@ public class InscriptionApplication{
 
     @FXML
     private Label fxTelError;
+    @FXML
+    private ImageView fximg;
+
 
     @FXML
     private DatePicker fxdate;
@@ -76,19 +84,17 @@ public class InscriptionApplication{
                 fxerrorMail.setVisible(true);
                 fxTelError.setVisible(false);
 
-            } else if (!(serviceUser.isValidPhoneNumber(Integer.parseInt(fxtel.getText())))){
+            } else if (!(serviceUser.isValidPhoneNumber(Integer.parseInt(fxtel.getText()))))
+            {
                 fxTelError.setVisible(true);
                 fxerrorMail.setVisible(false);
-            } else if (!(serviceUser.isValidPhoneNumber(Integer.parseInt(fxtel.getText()))) && !serviceUser.isValidEmail(fxmail.getText())) {
-
+            } else if (!(serviceUser.isValidPhoneNumber(Integer.parseInt(fxtel.getText()))) && !serviceUser.isValidEmail(fxmail.getText()))
+            {
                 fxTelError.setVisible(true);
                 fxerrorMail.setVisible(true);
-
             } else {
-
                 this.verificationCode = generateVerificationCode();
                 sendVerificationCode(String.valueOf(a), this.verificationCode);
-
                 boolean isCodeVerified = false;
                 while (!isCodeVerified) {
                     TextInputDialog dialog = new TextInputDialog();
@@ -102,7 +108,7 @@ public class InscriptionApplication{
                         if (inputCode.equals(this.verificationCode)) {
                             isCodeVerified = true;
                             //ken shih l code waktha najouti ala rouhi
-                            serviceUser.ajouterUser(new Client(fxnom.getText(), fxprenom.getText(), d, a, fxmail.getText(), fxpwd.getText()));
+                            serviceUser.ajouterUser(new Client(fxnom.getText(), fxprenom.getText(), d, a, fxmail.getText(), fxpwd.getText(),imagePath));
                             Parent root = null;
                             try {
                                 root = FXMLLoader.load(getClass().getResource("/loginApplication.fxml"));
@@ -135,6 +141,7 @@ public class InscriptionApplication{
         }
     }
     public String generateVerificationCode() {
+
         return String.format("%06d", new Random().nextInt(999999));
     }
     @FXML
@@ -165,5 +172,29 @@ public class InscriptionApplication{
                 new PhoneNumber(TWILIO_PHONE_NUMBER),
                 "Your verification code is: " + code
         ).create();
+    }
+    private String imagePath;
+    @FXML
+    public void ajouterPhoto(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sélectionner une photo");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String imagepath=null;
+        if (selectedFile != null)
+            imagepath = selectedFile.getAbsolutePath();
+        imagePath=imagepath;
+        String url1 = imagepath;
+
+        if(url1!=null) {
+            File file = new File(url1);
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            Image image = new Image(fis);
+            fximg.setImage(image);
+        }
     }
 }

@@ -13,11 +13,13 @@ public class User {
     private String passwd;
     private String role;
 
+    private  String imageUser;
     public int getIdU() {
         return this.idU;
     }
 
-    public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {
+
+    public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role, String imageUser) {
         this.nom = nom;
         this.prenom = prenom;
         DateNaissance = dateNaissance;
@@ -25,6 +27,15 @@ public class User {
         this.eMAIL = eMAIL;
         this.passwd = passwd;
         this.role = role;
+        this.imageUser= imageUser;
+    }
+
+    public String getImageUser() {
+        return imageUser;
+    }
+
+    public void setImageUser(String imageUser) {
+        this.imageUser = imageUser;
     }
 
     public void setIdU(int idU) {
@@ -91,7 +102,7 @@ public class User {
 
     };
 
-    public User(int idU, String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {
+    public User(int idU, String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role, String imageUser) {
         this.idU = idU;
         this.nom = nom;
         this.prenom = prenom;
@@ -100,15 +111,29 @@ public class User {
         this.eMAIL = eMAIL;
         this.passwd = passwd;
         this.role = role;
+        this.imageUser = imageUser;
     }
 
-    public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd) {
+    public User(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String imageUser) {
         this.nom = nom;
         this.prenom = prenom;
         DateNaissance = dateNaissance;
         this.numTel = numTel;
         this.eMAIL = eMAIL;
         this.passwd = passwd;
+        this.imageUser = imageUser;
+
+    }
+
+    public User(int idU, String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String imageUser) {
+        this.idU = idU;
+        this.nom = nom;
+        this.prenom = prenom;
+        DateNaissance = dateNaissance;
+        this.numTel = numTel;
+        this.eMAIL = eMAIL;
+        this.passwd = passwd;
+        this.imageUser = imageUser;
     }
 
     public User(String eMAIL, String passwd) {
@@ -118,13 +143,15 @@ public class User {
 
     @Override
     public String toString() {
-        return "nom=" + nom + '\'' +
+        return
+                "nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", DateNaissance=" + DateNaissance +
-                ", numTel='" + numTel + '\'' +
+                ", numTel=" + numTel +
                 ", eMAIL='" + eMAIL + '\'' +
                 ", passwd='" + passwd + '\'' +
-                ", role='" + role + '\'';
+                ", role='" + role + '\'' +
+                ", imageUser='" + imageUser + '\'';
     }
 
     @Override

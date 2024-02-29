@@ -7,7 +7,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -25,7 +28,7 @@
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="534.0" prefWidth="230.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="586.0" prefWidth="151.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="200.0" prefWidth="230.0">
                <children>
@@ -60,26 +63,17 @@
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label prefHeight="47.0" prefWidth="118.0" text="USERS">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Montserrat SemiBold" size="18.0" />
-               </font>
-            </Label>
-            <ScrollPane prefHeight="539.0" prefWidth="706.0">
-               <content>
-                  <HBox fx:id="userPane" alignment="CENTER" prefHeight="298.0" prefWidth="1228.0" style="-fx-background-color: white;" styleClass="pane" stylesheets="@style.css">
-                     <padding>
-                        <Insets left="10.0" top="10.0" />
-                     </padding>
-                  </HBox>
-               </content>
-            </ScrollPane>
-         </children>
-      </VBox>
+      <ScrollPane prefHeight="200.0" prefWidth="722.0" BorderPane.alignment="CENTER">
+         <content>
+            <GridPane fx:id="grid" prefHeight="360.0" prefWidth="282.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>

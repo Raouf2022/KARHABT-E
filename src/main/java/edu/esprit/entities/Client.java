@@ -6,15 +6,15 @@ public class Client extends User{
     public Client() {
     }
 
-    public Client(int idU, String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {
-        super(idU, nom, prenom, dateNaissance, numTel, eMAIL, passwd, "Client");
+    public Client(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role, String imageUser) {
+        super(nom, prenom, dateNaissance, numTel, eMAIL, passwd, "Client", imageUser);
     }
 
-    public Client(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role) {
-        super(nom, prenom, dateNaissance, numTel, eMAIL, passwd, "Client");
+    public Client(int idU, String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String role, String imageUser) {
+        super(idU, nom, prenom, dateNaissance, numTel, eMAIL, passwd, "Client", imageUser);
     }
 
-    public Client(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd) {
-        super(nom, prenom, dateNaissance, numTel, eMAIL, passwd);
+    public Client(String nom, String prenom, Date dateNaissance, int numTel, String eMAIL, String passwd, String imageUser) {
+        super(nom, prenom, dateNaissance, numTel, eMAIL, passwd, imageUser);
     }
 }

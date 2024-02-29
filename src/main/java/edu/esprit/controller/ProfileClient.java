@@ -54,7 +54,6 @@ public class ProfileClient {
     @FXML
     void SaveChangesProfile(ActionEvent event) {
 
-
     }
 
 }

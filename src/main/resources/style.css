@@ -116,3 +116,12 @@
     -fx-background-color : linear-gradient(to left,aquamarine, royalBlue);
 
 }
+.card {
+    -fx-padding: 10;
+    -fx-border-color: #87CEEB; /* Sky blue color */
+    -fx-border-width: 3;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 15; /* Rounded corners for the background */
+    -fx-border-radius: 15; /* Rounded corners for the border */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}

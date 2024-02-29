@@ -32,14 +32,10 @@ public class LoginApplication {
     private AnchorPane LayerLogin;
     @FXML
     private Pane fPane;
-
     @FXML
     private TextField fxLogin;
-
     @FXML
     private Button ToInscri;
-
-
     @FXML
     private PasswordField fxPass;
 
@@ -47,7 +43,6 @@ public class LoginApplication {
     void loginAccount(ActionEvent event) {
         String email = fxLogin.getText();
         String password = fxPass.getText();
-
         ServiceUser serviceUser = new ServiceUser();
         if (serviceUser.login(email, password).equals("Admin")) {
             loadScene("/adminPage.fxml", event);
@@ -91,17 +86,14 @@ public class LoginApplication {
         // Play the fade out transition
         fadeOutTransition.play();
     }
-
-
     private void sendEmailWithOTP(String toEmail, String otp) {
         final String username = "karhabte@gmail.com";
         final String password = "eara rwqr nlyi zuyl";
-
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true"); //marafthech chnia ama lezma hhhhhhh
+        props.put("mail.smtp.starttls.enable", "true"); //T7el communication chiffrée bel tls (protocol de transport)
         props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP server
-        props.put("mail.smtp.port", "587"); //port
+        props.put("mail.smtp.port", "587"); //port hedha howa li lezm yekhdm lel envoi mtaa l mails.
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
@@ -112,13 +104,10 @@ public class LoginApplication {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("karhabte@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(toEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject("2FA Authentication");
-            message.setText("Dear user,\n\nYour OTP is: " + otp);
-
+            message.setText("Dear user,\n\nYour 2FA code is: " + otp);
             Transport.send(message);
-
             System.out.println("OTP email sent successfully!");
 
         } catch (MessagingException e) {
@@ -153,4 +142,3 @@ public class LoginApplication {
         alert.showAndWait();
     }
 }
-

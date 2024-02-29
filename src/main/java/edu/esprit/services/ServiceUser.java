@@ -27,7 +27,7 @@ public class ServiceUser implements IUserService<User> {
     @Override
     public void ajouterUser(User user) {
         if (user instanceof Admin) {
-            String req = "INSERT INTO User(`nom`, `prenom`, `dateNaissance`, `numTel`, `eMail`, `passwd`, `role`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String req = "INSERT INTO User(`nom`, `prenom`, `dateNaissance`, `numTel`, `eMail`, `passwd`, `role`, `imageUser`) VALUES (?, ? , ?, ?, ?, ?, ?, ?)";
             try {
                 PreparedStatement ps = cnx.prepareStatement(req);
                 ps.setString(1, user.getNom());
@@ -45,13 +45,14 @@ public class ServiceUser implements IUserService<User> {
                 ps.setString(5, user.geteMAIL());
                 ps.setString(6, user.getPasswd());
                 ps.setString(7, "Admin");
+                ps.setString(8, user.getImageUser());
                 ps.executeUpdate();
                 System.out.println("Admin ajouté !");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'ajout de l'admin : " + e.getMessage());
             }
         } else if (user instanceof Client) {
-            String req = "INSERT INTO User(`nom`, `prenom`, `dateNaissance`, `numTel`, `eMail`, `passwd`, `role`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String req = "INSERT INTO User(`nom`, `prenom`, `dateNaissance`, `numTel`, `eMail`, `passwd`, `role`,`imageUser`) VALUES (?, ?, ?, ?, ? ,?, ?, ?)";
             try {
                 PreparedStatement ps = cnx.prepareStatement(req);
                 ps.setString(1, user.getNom());
@@ -69,6 +70,7 @@ public class ServiceUser implements IUserService<User> {
                 ps.setString(5, user.geteMAIL());
                 ps.setString(6, user.getPasswd());
                 ps.setString(7, "Client");
+                ps.setString(8, user.getImageUser());
                 ps.executeUpdate();
                 System.out.println("Client ajouté !");
             } catch (SQLException e) {
@@ -81,7 +83,7 @@ public class ServiceUser implements IUserService<User> {
 
     @Override
     public void modifierUser(User user) {
-        String req = "UPDATE User SET `nom`=?, `prenom`=?, `dateNaissance`=?, `numTel`=?, `eMail`=?, `passwd`=? WHERE `idU`=? AND `role`=?";
+        String req = "UPDATE User SET `nom`=?, `prenom`=?, `dateNaissance`=?, `numTel`=?, `eMAIL`=?, `passwd`=? ,`role`=?, `imageUser`=? WHERE `idU`=? ";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, user.getNom());
@@ -98,12 +100,11 @@ public class ServiceUser implements IUserService<User> {
             }
             ps.setString(5, user.geteMAIL());
             ps.setString(6, user.getPasswd());
-            ps.setInt(7, user.getIdU());
-            if (user instanceof Admin) {
-                ps.setString(8, "Admin");
-            } else if (user instanceof Client) {
-                ps.setString(8, "Client");
-            }
+            ps.setString(8, user.getImageUser());
+            ps.setInt(9, user.getIdU());
+            ps.setString(7, user.getRole());
+
+
             ps.executeUpdate();
             System.out.println("Utilisateur mis à jour !");
         } catch (SQLException e) {
@@ -147,10 +148,11 @@ public class ServiceUser implements IUserService<User> {
                 String eMail = res.getString("eMail");
                 String passwd = res.getString("passwd");
                 String role = res.getString("role");
+                String imageUser = res.getString("imageUser");
                 if (role.equals("Admin")) {
-                    user = new Admin(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role);
+                    user = new Admin(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role,imageUser );
                 } else if (role.equals("Client")) {
-                    user = new Client(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role);
+                    user = new Client(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role, imageUser);
                 }
             }
         } catch (SQLException e) {
@@ -175,10 +177,11 @@ public class ServiceUser implements IUserService<User> {
                 String eMail = res.getString("eMail");
                 String passwd = res.getString("passwd");
                 String role = res.getString("role");
+                String imageUser = res.getString("imageUser");
                 if (role.equals("Admin")) {
-                    users.add(new Admin(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role));
+                    users.add(new Admin(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role,imageUser));
                 } else if (role.equals("Client")) {
-                    users.add(new Client(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role));
+                    users.add(new Client(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role,imageUser));
                 }
             }
         } catch (SQLException e) {
