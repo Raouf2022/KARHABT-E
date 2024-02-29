@@ -97,7 +97,7 @@ public class AfficherVoiture {
         // Add labels to VBox
         vbox.getChildren().addAll(marqueLabel, modeleLabel, couleurLabel, prixLabel, descriptionLabel);
 
-        // Create a Modify button
+        // Create   Modify and delete button
         Button modifierButton = new Button("Modifier");
         modifierButton.getStyleClass().add("modify-button");
         modifierButton.setOnAction(event -> navigatetoModifierVoiture(voiture));

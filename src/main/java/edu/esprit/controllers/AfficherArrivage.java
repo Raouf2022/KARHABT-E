@@ -132,8 +132,14 @@ public class AfficherArrivage {
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 serviceArrivage.supprimer(id);
-// Refresh the list
-                loadArrivages();
+                //loadArrivages();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/AfficherArrivage.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                sidebar.getScene().setRoot(root);
             }
         });
     }

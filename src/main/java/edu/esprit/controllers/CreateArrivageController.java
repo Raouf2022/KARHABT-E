@@ -45,16 +45,33 @@ public class CreateArrivageController {
 
     @FXML
     void handleAddAction(ActionEvent event) {
-        if (voitureComboBox.getValue() == null || datePicker == null){
-
-            Alert alert = new Alert(Alert.AlertType.ERROR,  "le veuillez selectionnez une voiture et une date");
+        if (voitureComboBox.getValue() == null || datePicker.getValue() == null || quantiteField.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR,  "Veuillez sélectionner une voiture, une date et entrer une quantité");
             alert.showAndWait();
+            return;
         }
 
-
         int quantite = Integer.parseInt(quantiteField.getText());
+        // Check if quantity is positive
+        if (quantite <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "La quantité doit être positive.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Convert LocalDate to java.util.Date
+        LocalDate selectedDate = datePicker.getValue();
+        Date date = java.sql.Date.valueOf(selectedDate);
+
+        // Check if the date is in the future
+        if (date.after(new Date())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "La date  ne doit être une date future.");
+            alert.showAndWait();
+            return;
+        }
+
         Voiture voiture = voitureComboBox.getValue();
-        Arrivage arrivage = new Arrivage(quantite, java.sql.Date.valueOf(datePicker.getValue()), voiture);
+        Arrivage arrivage = new Arrivage(quantite, date, voiture);
         serviceArrivage.ajouter(arrivage);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Arrivage added successfully.");
