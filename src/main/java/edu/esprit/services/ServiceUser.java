@@ -160,7 +160,35 @@ public class ServiceUser implements IUserService<User> {
         }
         return user;
     }
+    public User getUserByEmailAndPassword(String email, String password) {
+        User user = null;
+        String query = "SELECT * FROM `User` WHERE eMail=? AND passwd=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int idU = rs.getInt("idU");
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom");
+                Date dateNaissance = rs.getDate("dateNaissance");
+                int numTel = rs.getInt("numTel");
+                String role = rs.getString("role");
+                String imageUser = rs.getString("imageUser");
 
+                // Instantiate the User object based on the retrieved data
+                if (role.equals("Admin")) {
+                    user = new Admin(idU, nom, prenom, dateNaissance, numTel, email, password, role, imageUser);
+                } else if (role.equals("Client")) {
+                    user = new Client(idU, nom, prenom, dateNaissance, numTel, email, password, role, imageUser);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
     @Override
     public Set<User> getAll() {
         Set<User> users = new HashSet<>();
@@ -217,6 +245,36 @@ public class ServiceUser implements IUserService<User> {
             System.out.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
         }
         return role;
+    }
+    public boolean updatePassword(String email, String newPassword) {
+        String req = "UPDATE User SET passwd = ? WHERE eMAIL = ?";
+        try {
+            // Assuming you have a method to get the database connection
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, newPassword); // You should hash the password
+            ps.setString(2, email);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean checkUserExists(String email) {
+        String req = "SELECT count(1) FROM `User` WHERE eMAIL=?";
+        boolean exists = false;
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, email);
+            ResultSet res = ps.executeQuery();
+            if (res.next()) {
+                // If count is greater than 0, then the user exists
+                exists = res.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error checking if user exists: " + e.getMessage());
+        }
+        return exists;
     }
 
 }

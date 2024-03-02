@@ -59,7 +59,6 @@ public class ModifierUser {
         int a = Integer.parseInt(fxxTel.getText());
         Date d = Date.valueOf(fxxNaissance.getValue());
 
-
             if (!serviceUser.isValidEmail(fxxMail.getText())) {
                 System.out.println("mail invalid!");
 
@@ -73,8 +72,6 @@ public class ModifierUser {
 
             } else {                User user = new User(iduser,fxxnom.getText(), fxxprenom.getText(), d, a, fxxMail.getText(), fxxPass.getText(),fxxRole.getText(),fxxImg.getText());
                 serviceUser.modifierUser(user);
-
-
                 try {
                     Parent root = FXMLLoader.load(getClass().getResource("/adminPage.fxml"));
                     fxxnom.getScene().setRoot(root);
@@ -104,7 +101,6 @@ public class ModifierUser {
 
     }
     private String imagePath;
-
     @FXML
     void choisirImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
