@@ -23,12 +23,13 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LesReclamationsAdmin {
+
+    @FXML
+    private Button statistiqueButton;
+
 
     @FXML
     private Button bEnvoyerMessage;
@@ -137,7 +138,7 @@ public class LesReclamationsAdmin {
             fxPagination.setVisible(true); // Afficher la pagination
 
             // Configurer la pagination
-            int itemsPerPage = 4; // Nombre d'éléments par page
+            int itemsPerPage = 3; // Nombre d'éléments par page
             int pageCount = (int) Math.ceil((double) reclamations.size() / itemsPerPage);
             fxPagination.setPageCount(pageCount);
 
@@ -148,7 +149,7 @@ public class LesReclamationsAdmin {
 
     // Méthode pour créer une page de la pagination
     private Node createPage(Set<Reclamation> reclamations, int pageIndex) {
-        int itemsPerPage = 2; // Nombre d'éléments par page
+        int itemsPerPage = 3; // Nombre d'éléments par page
         int fromIndex = pageIndex * itemsPerPage;
         int toIndex = Math.min(fromIndex + itemsPerPage, reclamations.size());
 
@@ -172,9 +173,9 @@ public class LesReclamationsAdmin {
     // Méthode de création de page pour la pagination
     private Node createReclamationPane(Reclamation reclamation) {
         VBox mainVBox = new VBox();
-        mainVBox.setPrefSize(300, 200);
+        mainVBox.setPrefSize(200, 100);
         mainVBox.getStyleClass().add("Reclamation-pane");
-        mainVBox.setSpacing(10);  // Set the vertical spacing between the children
+        mainVBox.setSpacing(13);  // Set the vertical spacing between the children
         // VBox for each attribute
 
         VBox sujetVBox = createAttributeVBox("Sujet", reclamation.getSujet());
@@ -280,4 +281,28 @@ public class LesReclamationsAdmin {
         }
 
     }
+    ////////metier :
+    @FXML
+    void voirLesStatistiques(ActionEvent event) {
+        try {
+            // Charger le fichier FXML pour la page des statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TriReclamations.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Créer une nouvelle fenêtre modale
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Gérer les exceptions correctement dans votre application
+        }
+    }
+
+
+
 }

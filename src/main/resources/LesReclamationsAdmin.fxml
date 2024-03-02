@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="640.0" prefWidth="960.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.LesReclamationsAdmin">
    <children>
-      <Pagination fx:id="fxPagination" layoutX="35.0" layoutY="171.0" prefHeight="395.0" prefWidth="904.0" />
+      <Pagination fx:id="fxPagination" layoutX="63.0" layoutY="136.0" prefHeight="395.0" prefWidth="767.0" />
       <Pane layoutX="3.0" prefHeight="46.0" prefWidth="992.0" style="-fx-background-color: #0460D9;">
          <children>
             <Text fx:id="textGestion1" fill="#fcfcfc" layoutX="173.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation  et méssagerie Admin" textAlignment="CENTER" wrappingWidth="654.4898681640625">
@@ -66,8 +66,13 @@
       </Pane>
       <Label fx:id="emptyLabel" layoutX="416.0" layoutY="320.0" text="Aucune réclamation disponible" />
       <TilePane fx:id="reclamationsTilePane" layoutX="86.0" layoutY="171.0" prefHeight="318.0" prefWidth="209.0" />
+      <Button fx:id="statistiqueButton" layoutX="813.0" layoutY="579.0" mnemonicParsing="false" onAction="#voirLesStatistiques" prefHeight="46.0" prefWidth="167.0" text="Réclamations triées" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
    <stylesheets>
-      <URL value="@style.css" />
+      <URL value="@style2.css" />
    </stylesheets>
 </AnchorPane>

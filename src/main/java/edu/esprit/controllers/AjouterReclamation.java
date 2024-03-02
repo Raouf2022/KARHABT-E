@@ -3,8 +3,8 @@ package edu.esprit.controllers;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.User;
 import edu.esprit.services.ServiceReclamation;
+import edu.esprit.tools.DataSource;
 import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,15 +14,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 public class AjouterReclamation {
 
@@ -33,7 +37,6 @@ public class AjouterReclamation {
     private Button bRetour;
     @FXML
     private Button bMesMessages;
-
 
 
     @FXML
@@ -58,8 +61,7 @@ public class AjouterReclamation {
     private TextField tfidUser;
 
 
-
-
+    private Connection cnx = DataSource.getInstance().getCnx();
 
 
     @FXML
@@ -117,19 +119,42 @@ public class AjouterReclamation {
             }
 
             int idU = Integer.parseInt(idUserText);
-            User user = new User(idU);
+            User user = new User();
+            user.setIdU(idU);
+            user.setNom("Abouda"); // Remplacez par le nom réel de l'utilisateur
+            user.setPrenom("Mariem");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                user.setDateNaissance(sdf.parse("15/11/2001")); // Remplacez par la vraie date de naissance
+            user.setNumTel(55683199); // Remplacez par le vrai numéro de téléphone
+            user.seteMAIL("mariem.abouda@gmail.com");
+            user.setPasswd("hamdoullah");
+            user.setRole("client");
+
+            User userA = getAdminUser();
 
             // Validate email format
             if (isValidEmail(email)) {
-                // Créer une nouvelle instance de Reclamation
-                Reclamation reclamation = new Reclamation(sujet, description, new Date(), email, user);
-                // Ajouter la reclamation à la base de données
-                serviceReclamation.create(reclamation);
+                // Check if a similar Reclamation already exists in the database
+                if (!serviceReclamation.exists(email, sujet, description)) {
+                    // Créer une nouvelle instance de Reclamation
+                    Reclamation reclamation = new Reclamation(sujet, description, new Date(), email, user);
+                    System.out.println(reclamation);
+                    // Ajouter la reclamation à la base de données
+                    serviceReclamation.create(reclamation);
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setContentText("Reclamation ajoutée avec succès !");
-                alert.show();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setContentText("Reclamation ajoutée avec succès !");
+                    alert.show();
+
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Cette réclamation existe déjà !");
+                    alert.show();
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -141,41 +166,19 @@ public class AjouterReclamation {
         }
     }
 
+
+
+
     private boolean isValidEmail(String email) {
 
-            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-            return email.matches(emailRegex);
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
     }
 
 
     @FXML
     void retourAcueilR(ActionEvent event) {
-        try {
-            // Charger le fichier FXML de l'accueil
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilReclamation.fxml"));
-            Parent root = loader.load();
 
-            // Créer une nouvelle scène avec le contenu de AccuielReclamation.fxml
-            Scene scene = new Scene(root);
-
-            // Obtenir la scène actuelle à partir du bouton cliqué
-            Scene currentScene = bRetour.getScene();
-
-            // Configurer la transition
-            TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
-            transition.setFromX(-currentScene.getWidth());
-            transition.setToX(0);
-
-            // Afficher la nouvelle scène avec une transition
-            Stage stage = (Stage) currentScene.getWindow();
-            stage.setScene(scene);
-
-            // Démarrer la transition
-            transition.play();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Gérer les exceptions correctement dans votre application
-        }
     }
 
     public void openNouvelleMessage(ActionEvent actionEvent) {
@@ -230,6 +233,36 @@ public class AjouterReclamation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    ////////////user :
+
+    private User getAdminUser() {
+        try {
+            String query = "SELECT * FROM User WHERE role = 'Admin' LIMIT 1";
+            try (PreparedStatement pst = cnx.prepareStatement(query)) {
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    return mapResultSetToUser(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private User mapResultSetToUser(ResultSet rs) throws SQLException {
+        User user = new User(rs.getInt("idU"));
+        user.setNom(rs.getString("nom"));
+        user.setPrenom(rs.getString("prenom"));
+        user.setDateNaissance(rs.getDate("DateNaissance"));
+        user.setNumTel(rs.getInt("numTel"));  // Ajoutez le numéro de téléphone si nécessaire
+        user.seteMAIL(rs.getString("eMAIL"));
+        user.setPasswd(rs.getString("passwd"));  // Correction ici
+        user.setRole(rs.getString("role"));
+        // Ajoutez d'autres attributs selon votre modèle de données
+        return user;
     }
 }
 

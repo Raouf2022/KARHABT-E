@@ -5,24 +5,24 @@ import edu.esprit.entities.User;
 import edu.esprit.tools.DataSource;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Date;
+import java.util.*;
 
 public class ServiceReclamation implements IService<Reclamation> {
 
     Connection cnx = DataSource.getInstance().getCnx();
 
 
-
     public ServiceReclamation(Connection cnx) {
     }
 
     public ServiceReclamation() {
-        
+
     }
 
     @Override
     public void create(Reclamation entity) {
+
         try {
             // Validate email format
             if (!isValidEmail(entity.getEmailUtilisateur())) {
@@ -68,7 +68,7 @@ public class ServiceReclamation implements IService<Reclamation> {
                     "u.DateNaissance AS userDateNaissance, u.numTel AS userNumTel, " +
                     "u.eMAIL AS userEmail, u.passwd AS userPasswd, u.role AS userRole " +
                     "FROM reclamation r " +
-                    "JOIN user u ON r.user = u.idU " +
+                    "JOIN user u ON r.idU = u.idU " +
                     "WHERE r.idR = ?";
             PreparedStatement pstmt = cnx.prepareStatement(query);
             pstmt.setInt(1, id);
@@ -153,6 +153,12 @@ public class ServiceReclamation implements IService<Reclamation> {
     @Override
     public void update(Reclamation entity) {
         try {
+            if (entity.getUser() == null || entity.getUser().getIdU() <= 0) {
+                // Handle the case where the User is null or has an invalid idU
+                // You may want to throw an exception or log an error
+                return;
+            }
+
             String query = "UPDATE reclamation SET sujet=?, description=?, dateReclamation=?, emailUser=?, idU=? WHERE idR=?";
             PreparedStatement pstmt = cnx.prepareStatement(query);
 
@@ -168,6 +174,7 @@ public class ServiceReclamation implements IService<Reclamation> {
             e.printStackTrace();
         }
     }
+
 
     public void update2(int id, Reclamation newReclamation) {
         try {
@@ -215,4 +222,73 @@ public class ServiceReclamation implements IService<Reclamation> {
 
         return reclamation;
     }
+    // In ServiceReclamation class
+
+    public boolean exists(String email, String sujet, String description) {
+        try {
+            String query = "SELECT COUNT(*) FROM reclamation WHERE emailUser = ? AND sujet = ? AND description = ?";
+            PreparedStatement pstmt = cnx.prepareStatement(query);
+            pstmt.setString(1, email);
+            pstmt.setString(2, sujet);
+            pstmt.setString(3, description);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    ////////////////METIER
+    public Set<Reclamation> triReclamationsParDate() {
+        Set<Reclamation> reclamationsTriees = new TreeSet<>(Comparator.comparing(Reclamation::getDateReclamation));
+
+        try {
+            String query = "SELECT r.idR, r.sujet, r.description, r.dateReclamation, r.emailUser, " +
+                    "u.nom AS userNom, u.prenom AS userPrenom, " +
+                    "u.DateNaissance AS userDateNaissance, u.numTel AS userNumTel, " +
+                    "u.eMAIL AS userEmail, u.passwd AS userPasswd, u.role AS userRole " +
+                    "FROM reclamation r " +
+                    "JOIN user u ON r.idU = u.idU " +
+                    "ORDER BY r.dateReclamation ASC";
+
+            Statement stmt = cnx.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                Reclamation reclamation = new Reclamation();
+                reclamation.setIdR(rs.getInt("idR"));
+                reclamation.setSujet(rs.getString("sujet"));
+                reclamation.setDescription(rs.getString("description"));
+                reclamation.setDateReclamation(rs.getDate("dateReclamation"));
+                reclamation.setEmailUtilisateur(rs.getString("emailUser"));
+
+                // Créer un utilisateur associé à la réclamation
+                User user = new User();
+                user.setNom(rs.getString("userNom"));
+                user.setPrenom(rs.getString("userPrenom"));
+                user.setDateNaissance(rs.getDate("userDateNaissance"));
+                user.setNumTel(rs.getInt("userNumTel"));
+                user.seteMAIL(rs.getString("userEmail"));
+                user.setPasswd(rs.getString("userPasswd"));
+                user.setRole(rs.getString("userRole"));
+
+                // Associer l'utilisateur à la réclamation
+                reclamation.setUser(user);
+
+                reclamationsTriees.add(reclamation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reclamationsTriees;
+    }
+
+
+
 }

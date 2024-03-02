@@ -42,28 +42,49 @@ public class AjoutReponseReclamation {
 
     @FXML
     void enregistrerReponse() {
-        // Récupérer le contenu de la réponse depuis le champ TextArea
-        String contenuReponse = contenuReponseField.getText();
+        try {
+            // Récupérer le contenu de la réponse depuis le champ TextArea
+            String contenuReponse = contenuReponseField.getText();
 
-        // Vérifier si le contenu de la réponse est vide
-        if (contenuReponse.isEmpty()) {
-            // Gérer le cas où le champ de réponse est vide (afficher un message d'erreur, etc.)
-            System.out.println("Le champ de réponse ne peut pas être vide.");
-            return;
+            // Vérifier si le contenu de la réponse est vide
+            if (contenuReponse.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Veuillez remplir tous les champs !");
+                alert.show();
+                return; // Return to stop further processing
+            }
+
+            // Check if a similar response already exists in the database
+            if (!serviceReponseReclamation.exists(reclamation.getIdR())) {
+                // Créer un objet ReponseReclamation
+                ReponseReclamation reponseReclamation = new ReponseReclamation();
+                reponseReclamation.setReclamation(reclamation);
+                reponseReclamation.setContenuReponse(contenuReponse);
+                reponseReclamation.setDateReponseR(new Date());
+
+                // Enregistrer la réponse dans la base de données
+                serviceReponseReclamation.create(reponseReclamation);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Reponse ajoutée avec succès !");
+                alert.show();
+
+
+                // Fermer la fenêtre du formulaire après l'enregistrement
+                closeForm();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Une réponse pour cette réclamation existe déjà !");
+                alert.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        // Créer un objet ReponseReclamation
-        ReponseReclamation reponseReclamation = new ReponseReclamation();
-        reponseReclamation.setReclamation(reclamation);
-        reponseReclamation.setContenuReponse(contenuReponse);
-        reponseReclamation.setDateReponseR(new Date());
-
-        // Enregistrer la réponse dans la base de données
-        serviceReponseReclamation.create(reponseReclamation);
-
-        // Fermer la fenêtre du formulaire après l'enregistrement
-        closeForm();
     }
+
 
     @FXML
     void retourAccueilAdmin() {

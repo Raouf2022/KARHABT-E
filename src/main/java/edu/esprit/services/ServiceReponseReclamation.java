@@ -149,4 +149,21 @@ public class ServiceReponseReclamation implements  IService<ReponseReclamation> 
         return reponseReclamation;
     }
 
+    public boolean exists(int reclamationId) {
+        try {
+            String query = "SELECT COUNT(*) FROM ReponseReclamation WHERE idR = ?";
+            PreparedStatement pstmt = cnx.prepareStatement(query);
+            pstmt.setInt(1, reclamationId);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="640.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.LesReponsesReclamations">
    <children>
       <Pane prefHeight="46.0" prefWidth="992.0" style="-fx-background-color: #0460D9;">
@@ -60,4 +61,7 @@
       <Label fx:id="emptyLabel" layoutX="405.0" layoutY="341.0" styleClass="empty-label" text="Aucune réclamation disponible" />
       <TilePane fx:id="repRecTP" layoutX="96.0" layoutY="241.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+   </stylesheets>
 </AnchorPane>

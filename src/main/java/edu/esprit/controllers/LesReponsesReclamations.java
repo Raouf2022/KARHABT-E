@@ -4,6 +4,7 @@ import edu.esprit.entities.Messagerie;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.ReponseReclamation;
 import edu.esprit.services.ServiceMessagerie;
+import edu.esprit.services.ServiceReclamation;
 import edu.esprit.services.ServiceReponseReclamation;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -58,11 +59,10 @@ public class LesReponsesReclamations {
 
 
 
-    private ServiceReponseReclamation serviceReponseReclamation;
+
 
     // Default constructor (no-argument)
-    public LesReponsesReclamations() {
-    }
+    private ServiceReponseReclamation serviceReponseReclamation= new ServiceReponseReclamation();
 
     // Setter for serviceReponseReclamation
 

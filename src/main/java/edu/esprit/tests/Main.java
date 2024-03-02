@@ -74,6 +74,10 @@ Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem
         //System.out.println(sm.getById(20));
         //sm.delete(11);
 
+
+        System.out.println(sr.triReclamationsParDate());
+
+
     }
 
 

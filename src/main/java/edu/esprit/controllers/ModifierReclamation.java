@@ -1,6 +1,7 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Reclamation;
+import edu.esprit.entities.User;
 import edu.esprit.services.ServiceReclamation;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -46,12 +47,26 @@ public class ModifierReclamation {
         // Appliquer les modifications à la réclamation
         reclamation.setSujet(sujetTextField.getText());
         reclamation.setDescription(taDescription.getText());
-        // Appliquez les autres modifications aux autres attributs...
-        serviceReclamation.update(reclamation);
+
+        // Fetch the user from the database using email or another identifier
+        User user =new User();
+        user.setIdU(24);
+
+        if (user != null) {
+            reclamation.setUser(user);
+            // Appliquez les autres modifications aux autres attributs...
+            serviceReclamation.update(reclamation);
+        } else {
+            // Handle the case where the user is not found
+            // You may want to show an error message or log the issue
+            System.err.println("User not found for email: " + reclamation.getEmailUtilisateur());
+        }
+
         // Fermer la fenêtre de modification
         Stage stage = (Stage) sujetTextField.getScene().getWindow();
         stage.close();
     }
+
 
     @FXML
     private void handleAnnuler() {

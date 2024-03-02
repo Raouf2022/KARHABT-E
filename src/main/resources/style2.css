@@ -1,0 +1,90 @@
+/* style.css */
+
+/* Apply styles to the AnchorPane */
+.root {
+    -fx-background-color: #EBF2FA;
+}
+
+/* Apply styles to the Pane with blue background */
+.Pane {
+    -fx-background-color: #0460D9;
+}
+
+/* Apply styles to the second Pane with light blue background */
+.Pane > Pane {
+    -fx-background-color: #94BDF2;
+}
+
+/* Apply styles to the Text inside the second Pane */
+#textGestion1 {
+    -fx-fill: #fcfcfc;
+}
+
+/* Apply styles to Buttons */
+.button {
+    -fx-background-color: rgb(0, 97, 194);
+  /* Set the preferred width */
+    -fx-alignment: center; /* Center the text within the button */
+}
+
+.Pane > Pane {
+    -fx-background-color: #94BDF2;
+    -fx-alignment: center; /* Center the buttons */
+}
+
+/* Apply styles to the TilePane */
+#reclamationsTilePane {
+    -fx-padding: 10;
+}
+
+/* Apply styles to the Label */
+#emptyLabel {
+    -fx-font-size: 18.0;
+    -fx-text-fill: #000000; /* Change the color accordingly */
+}
+
+/* Apply styles to Pagination */
+#fxPagination {
+    -fx-padding: 10;
+}
+
+/* Apply styles to the VBox containing each reclamation */
+.VBox {
+    -fx-spacing: 10;
+    -fx-pref-width: 300;
+    -fx-pref-height: 200;
+}
+
+/* Apply styles to the labels inside the VBox */
+.label,
+.label-attribute {
+    -fx-font-size: 14.0;
+}
+
+/* Apply styles to the titles inside the VBox */
+.label-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: #084e99; /* Change the color accordingly */
+}
+
+/* Apply styles to the main VBox inside the Pane */
+.reclamation-pane {
+    -fx-padding: 10;
+    -fx-border-width: 1;
+    -fx-border-color: #5bbedc; /* Change the color accordingly */
+}
+
+/* Apply styles to the ImageView */
+#reclamationsTilePane ImageView {
+    -fx-fit-height: 62.0;
+    -fx-fit-width: 60.0;
+}
+
+/* Apply styles to the Button with green background */
+#bLesMessages,
+#bEnvoyerMessage,
+#bReponsesA,
+#bRetourA {
+    -fx-background-color: rgba(104, 121, 159, 0.03);
+    -fx-text-fill: #94bdf2;
+}

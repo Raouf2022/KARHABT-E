@@ -39,7 +39,7 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Text fill="#084e99" layoutX="335.0" layoutY="23.0" onDragDetected="#openNouvelleReclamation" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes reclamations" underline="true" wrappingWidth="151.20000000000005">
+                  <Text fill="#084e99" layoutX="341.0" layoutY="20.0" onDragDetected="#openNouvelleReclamation" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes reclamations" underline="true" wrappingWidth="151.20000000000005">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
@@ -51,7 +51,7 @@
                   </Button>
                </children>
             </Pane>
-            <Button fx:id="bEnvoyerMessage" cache="true" focusTraversable="false" layoutX="581.0" layoutY="9.0" mnemonicParsing="false" onAction="#openEnvoyerMessage" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #6b7fab08;" text="Envoyer message" textFill="WHITE" underline="true">
+            <Button fx:id="bEnvoyerMessage" cache="true" focusTraversable="false" layoutX="539.0" layoutY="9.0" mnemonicParsing="false" onAction="#openEnvoyerMessage" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #6b7fab08;" text="Envoyer message" textFill="WHITE" underline="true">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
