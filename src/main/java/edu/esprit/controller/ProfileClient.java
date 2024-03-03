@@ -4,8 +4,6 @@ import edu.esprit.entities.User;
 import edu.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -17,11 +15,9 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
+
 
 public class ProfileClient {
 

@@ -1,6 +1,5 @@
 package edu.esprit.controller;
 
-import edu.esprit.entities.Client;
 import edu.esprit.entities.User;
 import edu.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;

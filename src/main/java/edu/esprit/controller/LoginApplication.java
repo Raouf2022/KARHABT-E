@@ -14,8 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -29,17 +27,13 @@ import java.util.Random;
 
 
 public class LoginApplication {
-    @FXML
-    private AnchorPane LayerLogin;
-    @FXML
-    private Pane fPane;
+
     @FXML
     private TextField fxLogin;
     @FXML
     private Button ToInscri;
     @FXML
     private PasswordField fxPass;
-
     @FXML
     void loginAccount(ActionEvent event) {
         String email = fxLogin.getText();
@@ -73,7 +67,6 @@ public class LoginApplication {
             showAlert("Login Failed", "Incorrect email or password!");
         }
     }
-
     @FXML
     void ToInscription(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/inscriptionApplication.fxml"));

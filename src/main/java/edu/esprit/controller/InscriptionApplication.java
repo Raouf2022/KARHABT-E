@@ -17,9 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,11 +25,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Date;
 import java.util.*;
-import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class InscriptionApplication{
 
@@ -64,8 +58,6 @@ public class InscriptionApplication{
     private TextField fxtel;
     @FXML
     private Button ToLog;
-    @FXML
-    private ProgressBar progressBar;
 
     public static final String ACCOUNT_SID = "ACdeb3ac77312a4d6c224e0572404e95aa";
     public static final String AUTH_TOKEN = "e8deb0ffaa2061a0f7631748de36cc67";
