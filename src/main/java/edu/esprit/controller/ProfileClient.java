@@ -4,15 +4,21 @@ import edu.esprit.entities.User;
 import edu.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -45,7 +51,25 @@ public class ProfileClient {
 
     @FXML
     void saveUserDetails(ActionEvent event) {
+        int a = Integer.parseInt(telU.getText());
+        Date d = Date.valueOf(dateU.getValue());
 
+        if (!serviceUser.isValidEmail(mailU.getText())) {
+            System.out.println("mail invalid!");
+        } else if (!serviceUser.isValidPhoneNumber(Integer.parseInt(telU.getText()))) {
+            System.out.println("tel invalid!");
+        } else if (!serviceUser.isValidPhoneNumber(Integer.parseInt(telU.getText())) && !serviceUser.isValidEmail(mailU.getText())) {
+            System.out.println("tel & mail invalid!");
+        } else {
+            User user = new User(iduser, nomU.getText(), prenomU.getText(), d, a, mailU.getText(), mdpU.getText(),"Client", imagePath);
+            serviceUser.modifierUser(user);
+
+            // Show a successful message
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("User details saved successfully!");
+            alert.setTitle("Success");
+            alert.show();
+        }
     }
     @FXML
     public void SetProfile(User user) {
@@ -83,6 +107,14 @@ this.user=user;
 
         // Set the image in your ImageView
         imageU.setImage(image);
+        // radit'ha kil FB mdawra x))) njarreb sorry monsieur :p
+        Circle circleClip = new Circle();
+        imageU.setPreserveRatio(true);
+        circleClip.setCenterX(imageU.getFitWidth() / 2);
+        circleClip.setCenterY(imageU.getFitHeight() / 2);
+        circleClip.setRadius(Math.min(imageU.getFitWidth(), imageU.getFitHeight()) / 2);
+        imageU.setClip(circleClip);
+        imageU.setStyle("-fx-effect: dropshadow(gaussian, black, 10, 0, 0, 0);");
 
     }
     private String imagePath;
@@ -96,7 +128,7 @@ this.user=user;
         if (selectedFile != null)
             imagepath = selectedFile.getAbsolutePath();
         imagePath=imagepath;
-        System.out.println(imagepath);
+        //System.out.println(imagepath);
         String url1 = imagepath;
 
         if(url1!=null) {

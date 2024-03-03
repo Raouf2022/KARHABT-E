@@ -18,13 +18,13 @@
    <children>
       <ImageView fitHeight="664.0" fitWidth="939.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/bck.jpg" />
+            <Image url="@img/welcomepage.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="-2.0" layoutY="-6.0" prefHeight="673.0" prefWidth="274.0" style="-fx-border-color: gray;">
          <children>
-            <ImageView fx:id="imageU" fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Button layoutX="211.0" layoutY="150.0" mnemonicParsing="false" onAction="#choisirImage" prefHeight="27.0" prefWidth="32.0">
+            <ImageView fx:id="imageU" fitHeight="150.0" fitWidth="150.0" layoutX="62.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="176.0" layoutY="136.0" mnemonicParsing="false" onAction="#choisirImage" prefHeight="27.0" prefWidth="32.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,11 +90,11 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="320.5">
                            <children>
-                              <TextField fx:id="nomU" prefHeight="62.0" prefWidth="321.0" style="-fx-background-color: transparent; -fx-border-color: white;" stylesheets="@style.css" />
+                              <TextField fx:id="nomU" prefHeight="62.0" prefWidth="321.0" style="-fx-text-inner-color: white; -fx-background-color: transparent;" stylesheets="@style.css" />
                               <Separator prefHeight="100.0" prefWidth="321.0" style="-fx-background-color: transparent;" visible="false" />
-                              <TextField fx:id="prenomU" prefHeight="62.0" prefWidth="321.0" style="-fx-background-color: transparent; -fx-border-color: white;" stylesheets="@style.css" />
+                              <TextField fx:id="prenomU" prefHeight="62.0" prefWidth="321.0" style="-fx-text-inner-color: white; -fx-background-color: transparent;" stylesheets="@style.css" />
                               <Separator prefHeight="97.0" prefWidth="321.0" style="-fx-background-color: transparent;" visible="false" />
-                              <DatePicker fx:id="dateU" prefHeight="31.0" prefWidth="321.0" style="-fx-background-color: transparent;" />
+                              <DatePicker fx:id="dateU" prefHeight="31.0" prefWidth="321.0" />
                            </children>
                         </VBox>
                      </children>
@@ -142,11 +142,11 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="320.5">
                            <children>
-                              <TextField fx:id="telU" prefHeight="62.0" prefWidth="321.0" style="-fx-background-color: transparent; -fx-border-color: white;" stylesheets="@style.css" />
+                              <TextField fx:id="telU" prefHeight="62.0" prefWidth="321.0" style="-fx-text-inner-color: white; -fx-background-color: transparent;" stylesheets="@style.css" />
                               <Separator prefHeight="100.0" prefWidth="321.0" style="-fx-background-color: transparent;" visible="false" />
-                              <TextField fx:id="mailU" prefHeight="62.0" prefWidth="321.0" style="-fx-background-color: transparent; -fx-border-color: white;" stylesheets="@style.css" />
+                              <TextField fx:id="mailU" prefHeight="62.0" prefWidth="321.0" style="-fx-text-inner-color: white; -fx-background-color: transparent;" stylesheets="@style.css" />
                               <Separator prefHeight="97.0" prefWidth="321.0" style="-fx-background-color: transparent;" visible="false" />
-                              <TextField fx:id="mdpU" prefHeight="62.0" prefWidth="321.0" style="-fx-background-color: transparent; -fx-border-color: white;" stylesheets="@style.css" />
+                              <TextField fx:id="mdpU" prefHeight="62.0" prefWidth="321.0" style="-fx-text-inner-color: white; -fx-background-color: transparent;" stylesheets="@style.css" />
                            </children>
                         </VBox>
                      </children>

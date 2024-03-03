@@ -52,14 +52,16 @@ public class LoginApplication {
                 loadScene("/adminPage.fxml", event);
             } else if (loggedInUser.getRole().equals("Client")) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/profileClient.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/WelcomePage.fxml"));
                     Parent root = loader.load();
 
-                    ProfileClient controller = loader.getController();
-                    controller.SetProfile(loggedInUser);
+                    WelcomePage controller = loader.getController();
+                    controller.setLoggedInUser(loggedInUser);
+                    controller.rotateWheel();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(root));
                     stage.show();
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
