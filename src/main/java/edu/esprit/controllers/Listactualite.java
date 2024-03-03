@@ -182,8 +182,29 @@ public class Listactualite {
          // Ajout du champ de texte et du bouton à la section des commentaires
         commentsSection.getChildren().addAll(newCommentField, submitCommentButton);
 
-        //§§§§§§§§!
-        //
+        Rating rating = new Rating(5);
+        rating.setPartialRating(true);
+
+        double actualiteRating = actualite.getRating();
+
+        System.out.println(actualiteRating);
+        if (actualiteRating > 0) {
+            rating.setRating(actualiteRating);
+        } else {
+            rating.setRating(0);
+        }
+
+        rating.ratingProperty().addListener((observable, oldValue, newValue) -> {
+            actualite.setRating(newValue.doubleValue());
+            try {
+                actualiteService.modifier(actualite);
+                System.out.println("Rating updated for actualité " + actualite.getTitre());
+            } catch (SQLException e) {
+                e.printStackTrace();
+                showAlert("Error", "An error occurred while updating the rating: " + e.getMessage());
+            }
+        });
+        textVBox.getChildren().add(rating);
 
 // Création d'une boîte verticale (VBox) pour contenir l'actualité et les commentaires
         VBox container = new VBox(actualiteSection, commentsSection);
