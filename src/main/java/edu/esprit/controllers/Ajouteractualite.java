@@ -45,26 +45,19 @@ public class Ajouteractualite {
 
     @FXML
     void Ajouteractualite(ActionEvent event) {
-
         try {
             // Récupération des valeurs des champs
             String titreText = titre.getText();
             String contenueText = contenue.getText();
             String imageText = image.getText();
 
-
             // Validation des champs
-            if (titreText.isEmpty() || contenueText.isEmpty() || imageText.isEmpty() ) {
+            if (titreText.isEmpty() || contenueText.isEmpty() || imageText.isEmpty()) {
                 throw new IllegalArgumentException("Veuillez remplir tous les champs.");
             }
 
-            // Conversion de la chaîne ID utilisateur en entier
-//            int idU =12;
-//            User user =new User(idU);
-
-
             // Création de l'objet Actualite
-            Actualite actualite = new Actualite(titreText, imageText,contenueText );
+            Actualite actualite = new Actualite(titreText, imageText, contenueText);
 
             // Appel du service pour ajouter l'actualité dans la base de données
             Actualiteservice actualiteservice = new Actualiteservice();
@@ -74,6 +67,12 @@ public class Ajouteractualite {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("L'actualité a été ajoutée avec succès");
             alert.show();
+
+            // Réinitialisation des champs après ajout réussi
+            titre.clear();
+            contenue.clear();
+            image.clear();
+
         } catch (Exception e) {
             // En cas d'erreur, affichage d'une alerte d'erreur
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -84,7 +83,8 @@ public class Ajouteractualite {
 
 
 
-        @FXML
+
+    @FXML
         void Importerimage(ActionEvent event) {
             // Création d'un objet FileChooser pour permettre à l'utilisateur de choisir un fichier
             FileChooser fileChooser = new FileChooser();

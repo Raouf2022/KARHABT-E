@@ -160,11 +160,11 @@ public class Main {
 //        } catch (SQLException e) {
 //            System.out.println(e.getMessage());
 //             }
-        try {
-            System.out.println((rs.getOneById(6)));
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            System.out.println((rs.getOneById(6)));
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
 
 
 

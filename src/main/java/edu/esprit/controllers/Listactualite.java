@@ -52,7 +52,7 @@ public class Listactualite {
     private VBox actualitesContainer;
     @FXML
     private TextField searchField;
-    private Actualiteservice actualiteService; // Actualite service
+    private Actualiteservice actualiteService;
 
     private Commentaireservice commentaireservice ;
 
@@ -191,9 +191,6 @@ public class Listactualite {
 
         return container;
     }
-
-
-
 
 
     private Button createIconButton(String iconGlyphName, Color iconColor, int iconSize, EventHandler<ActionEvent> actionHandler) {
