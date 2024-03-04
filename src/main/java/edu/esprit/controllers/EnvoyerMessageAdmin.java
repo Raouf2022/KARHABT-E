@@ -204,8 +204,7 @@ public class EnvoyerMessageAdmin implements Initializable {
             // Appelez le service CRUD pour enregistrer le message dans la base de données
             ServiceMessagerie serviceMessagerie = new ServiceMessagerie();
             serviceMessagerie.create(nouveauMessage);
-            MessageRecuClient messageRecuClientController = new MessageRecuClient() ;/* récupérez la référence au contrôleur MessageRecuClient */;
-            messageRecuClientController.ajouterMessageRecu(nouveauMessage);
+            System.out.println(nouveauMessage);
             // Affichez un message ou effectuez toute autre action nécessaire après l'enregistrement du message
             System.out.println("Message envoyé avec succès à l'administrateur.");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -220,7 +219,6 @@ public class EnvoyerMessageAdmin implements Initializable {
             System.out.println("Veuillez sélectionner un destinataire.");
         }
     }
-
 
 
     @FXML

@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.Pane;
@@ -23,6 +24,8 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class LesReclamationsAdmin {
@@ -55,6 +58,14 @@ public class LesReclamationsAdmin {
 
     @FXML
     private Text textGestion1;
+
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
+    private Button searchButton;
+
+
 
     @FXML
     void openEnvoyerMessage(ActionEvent event) {
@@ -144,6 +155,16 @@ public class LesReclamationsAdmin {
 
             // Ajouter une usine de pages pour la pagination
             fxPagination.setPageFactory(pageIndex -> createPage(reclamations, pageIndex));
+
+            int itemsPerPagee = 3; // Nombre d'éléments par page
+            int pageCountt = (int) Math.ceil((double) reclamations.size() / itemsPerPagee);
+            fxPagination.setPageCount(pageCountt);
+
+            // Ajouter une usine de pages pour la pagination
+            fxPagination.setPageFactory(pageIndex -> createPage(reclamations, pageIndex));
+
+            // Configurer le gestionnaire d'événements pour le bouton de recherche
+            searchButton.setOnAction(this::searchByDate);
         }
     }
 
@@ -303,6 +324,24 @@ public class LesReclamationsAdmin {
         }
     }
 
+    @FXML
+    void searchByDate(ActionEvent event) {
+        LocalDate selectedDate = datePicker.getValue();
+
+        if (selectedDate != null) {
+            // Convert LocalDate to java.sql.Date
+            java.sql.Date searchDate = java.sql.Date.valueOf(selectedDate);
+
+            // Call your service to get the list of reclamations filtered by date
+            Set<Reclamation> filteredReclamations = serviceReclamation.getByDate(searchDate);
+
+            // Update the displayed list
+            updateTilePane(new ArrayList<>(filteredReclamations));
+        } else {
+            // Handle the case where no date is selected
+            System.out.println("Veuillez sélectionner une date");
+        }
+    }
 
 
 }

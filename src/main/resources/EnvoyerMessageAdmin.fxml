@@ -3,11 +3,13 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -56,28 +58,33 @@
             </Text>
          </children>
       </Pane>
-      <TextField fx:id="contenuMTF" layoutX="57.0" layoutY="330.0" prefHeight="152.0" prefWidth="398.0" promptText="Contenu du message" />
-      <Button fx:id="EnvoyerButton" layoutX="92.0" layoutY="514.0" mnemonicParsing="false" onAction="#EnvoyerMessageA" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #084e99;" text="Envoyer" textFill="WHITE">
+      <TextField fx:id="contenuMTF" layoutX="43.0" layoutY="497.0" prefHeight="51.0" prefWidth="330.0" promptText="Contenu du message" />
+      <Button fx:id="EnvoyerButton" layoutX="381.0" layoutY="509.0" mnemonicParsing="false" onAction="#EnvoyerMessageA" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #084e99;" text="Envoyer" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Button>
       <ImageView fitHeight="290.0" fitWidth="292.0" layoutX="658.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Downloads/iconEnvMessg.png" />
+            <Image url="@images/iconEnvMessg.png" />
          </image>
       </ImageView>
-      <Text fill="#2582b4" layoutX="57.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez votre destinataire">
+      <Text fill="#2582b4" layoutX="42.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez votre destinataire">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="destinataireChoiceBox" layoutX="57.0" layoutY="247.0" prefHeight="46.0" prefWidth="245.0" />
+      <ChoiceBox fx:id="destinataireChoiceBox" layoutX="34.0" layoutY="169.0" prefHeight="46.0" prefWidth="245.0" />
       <Button fx:id="messagesEnvoyéesButton" layoutX="803.0" layoutY="123.0" mnemonicParsing="false" onAction="#openMessageEnvoyé" prefHeight="37.0" prefWidth="160.0" style="-fx-background-color: #084e99;" text="Messages envoyés" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
       <FontAwesomeIconView fill="#084e99" glyphName="CHEVRON_RIGHT" layoutX="773.0" layoutY="150.0" size="25" wrappingWidth="60.399993896484375" />
+      <ScrollPane fx:id="scrollpanemessg" layoutX="43.0" layoutY="255.0" prefHeight="234.0" prefWidth="398.0">
+         <content>
+            <VBox fx:id="vboxMessg" prefHeight="200.0" prefWidth="100.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

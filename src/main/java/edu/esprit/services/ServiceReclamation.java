@@ -217,7 +217,7 @@ public class ServiceReclamation implements IService<Reclamation> {
         reclamation.setDateReclamation(rs.getDate("dateReclamation"));
         reclamation.setEmailUtilisateur(rs.getString("emailUser"));
         User user = new User();
-        user.setIdU(rs.getInt("user"));
+        user.setIdU(rs.getInt("idU"));
         reclamation.setUser(user);
 
         return reclamation;
@@ -290,5 +290,22 @@ public class ServiceReclamation implements IService<Reclamation> {
     }
 
 
+    public Set<Reclamation> getByDate(Date searchDate) {
+        Set<Reclamation> reclamations = new HashSet<>();
+        try {
+            String query = "SELECT * FROM reclamation WHERE dateReclamation = ?";
+            PreparedStatement pstmt = cnx.prepareStatement(query);
+            pstmt.setDate(1, new java.sql.Date(searchDate.getTime())); // Convert Date to java.sql.Date
 
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Reclamation reclamation = mapResultSetToReclamation(rs);
+                reclamations.add(reclamation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reclamations;
+    }
 }

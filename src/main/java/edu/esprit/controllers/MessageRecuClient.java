@@ -250,6 +250,8 @@ public class MessageRecuClient {
 
         private void mettreAJourInterfaceUtilisateur() {
                 // Mettez à jour l'interface utilisateur en utilisant la liste des messages reçus
+                System.out.println(repRecTP);
+
                 repRecTP.getChildren().clear();
 
                 // Parcourez la liste des messages reçus et ajoutez-les à l'interface utilisateur

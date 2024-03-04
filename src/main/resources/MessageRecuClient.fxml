@@ -25,7 +25,7 @@
       </Pane>
       <Pagination fx:id="fxPagination" layoutX="55.0" layoutY="191.0" prefHeight="395.0" prefWidth="904.0" />
       <Label fx:id="emptyLabel" layoutX="425.0" layoutY="361.0" styleClass="empty-label" text="Aucun message disponible" />
-      <TilePane fx:id="repRecTP" layoutX="116.0" layoutY="261.0" prefHeight="200.0" prefWidth="200.0" />
+      <TilePane fx:id="repRecTP" layoutX="96.0" layoutY="223.0" prefHeight="238.0" prefWidth="220.0" />
       <Pane layoutY="46.0" prefHeight="51.0" prefWidth="992.0" style="-fx-background-color: #94BDF2;">
          <children>
             <ImageView fitHeight="59.0" fitWidth="70.0" layoutX="828.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">

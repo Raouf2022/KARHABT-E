@@ -28,7 +28,7 @@ public class Main {
 User u1 = new User();
 u1.setIdU(24);
 User u2 =new User();
-u2.setIdU(25);
+u2.setIdU(27);
 Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem.abouda@gmail.com",u1);
         Reclamation r2=new Reclamation("couleur pas bonne","heyyyyy",new Date(),"mariem.abouda@gmail.com",u1);
         Reclamation r3=new Reclamation("mauvais service","pas respect ",new Date(),"hafsa.alia@gmail.com",u1);
@@ -67,15 +67,15 @@ Reclamation r1=new Reclamation("moteur en panne","mmmmmmmmmm",new Date(),"mariem
 
 
 
-     //  sm.create(m3);
+      sm.create(m3);
         User u3 =new User();
         u3.setIdU(27);
-      // System.out.println(sm.getMessagesBySender(24));
+      System.out.println(sm.getMessagesBySender(24));
         //System.out.println(sm.getById(20));
         //sm.delete(11);
 
 
-        System.out.println(sr.triReclamationsParDate());
+       // System.out.println(sr.triReclamationsParDate());
 
 
     }

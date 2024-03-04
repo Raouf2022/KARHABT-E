@@ -30,20 +30,21 @@ public ServiceMessagerie(){}
                 pst.setBoolean(5, entity.isVu());
                 pst.setBoolean(6, entity.isDeleted());
 
-                pst.executeUpdate();
+                int rowsAffected = pst.executeUpdate();
 
-                ResultSet rs = pst.getGeneratedKeys();
-                if (rs.next()) {
-                    entity.setIdMessage(rs.getInt(1));
+                if (rowsAffected > 0) {
+                    try (ResultSet rs = pst.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            entity.setIdMessage(rs.getInt(1));
+                        }
+                    }
                 }
             }
         } catch (SQLException e) {
+            // Handle the exception (throw custom exception, log, etc.)
             e.printStackTrace();
         }
     }
-
-
-
 
 
 
