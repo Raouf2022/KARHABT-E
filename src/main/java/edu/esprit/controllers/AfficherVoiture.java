@@ -87,6 +87,7 @@ public class AfficherVoiture {
 
         vbox.getChildren().add(imageView); // Add ImageView to VBox
 
+
         // Create labels for car attributes
         Label marqueLabel = new Label("Marque: " + voiture.getMarque());
         Label modeleLabel = new Label("Modele: " + voiture.getModele());

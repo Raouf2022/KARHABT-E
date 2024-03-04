@@ -15,7 +15,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" styleClass="sidebar-image">
                      <image>
-                        <Image url="@416744892_1122423038769416_6907435235726289881_n.png" />
+                        <Image url="@images/416744892_1122423038769416_6907435235726289881_n.png" />
                      </image>
                   </ImageView>
                </children>

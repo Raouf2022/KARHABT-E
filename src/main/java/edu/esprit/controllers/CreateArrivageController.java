@@ -46,7 +46,7 @@ public class CreateArrivageController {
     @FXML
     void handleAddAction(ActionEvent event) {
         if (voitureComboBox.getValue() == null || datePicker.getValue() == null || quantiteField.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR,  "Veuillez sélectionner une voiture, une date et entrer une quantité");
+            Alert alert = new Alert(Alert.AlertType.ERROR,  "Veuillez remplir les champs");
             alert.showAndWait();
             return;
         }
@@ -73,6 +73,7 @@ public class CreateArrivageController {
         Voiture voiture = voitureComboBox.getValue();
         Arrivage arrivage = new Arrivage(quantite, date, voiture);
         serviceArrivage.ajouter(arrivage);
+
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Arrivage added successfully.");
         alert.showAndWait();

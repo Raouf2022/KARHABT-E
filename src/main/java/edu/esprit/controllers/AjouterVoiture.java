@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.io.File;
@@ -88,8 +89,9 @@ private final ServiceVoiture sv = new ServiceVoiture();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an Image");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
-        );
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+
+
 
         File selectedFile = fileChooser.showOpenDialog(new Stage());
         if (selectedFile != null) {
@@ -112,9 +114,14 @@ private final ServiceVoiture sv = new ServiceVoiture();
                 alert.showAndWait();
             }
         }
-
-
     }
+
+
+
+
+
+
+
 
     @FXML
     private void retourAction(ActionEvent event) {

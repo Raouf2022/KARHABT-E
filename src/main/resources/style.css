@@ -35,6 +35,7 @@
     -fx-spacing: 15;
     -fx-alignment: center-left;
     -fx-padding: 10;
+    -fx-background-color: #5784BA;
 }
 
 /* Car listing tile */
