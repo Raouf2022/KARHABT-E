@@ -1,5 +1,6 @@
 package edu.esprit.controllers;
 
+
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.User;
 import edu.esprit.services.ServiceReclamation;
@@ -8,6 +9,7 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -19,7 +21,14 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
+
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +36,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+
+import static org.controlsfx.control.Notifications.create;
+
 
 public class AjouterReclamation {
 
@@ -98,11 +110,12 @@ public class AjouterReclamation {
     @FXML
     public void initialize() {
         tfidUser.setText("24");  // Remplacez "1" par l'ID de l'utilisateur que vous voulez tester
+
     }
 
 
     @FXML
-    void validerReclamation(ActionEvent event) {
+    void validerReclamation(ActionEvent event) throws IOException {
         try {
             String email = tfEmail.getText();
             String sujet = tfSujet.getText();
@@ -121,32 +134,38 @@ public class AjouterReclamation {
             int idU = Integer.parseInt(idUserText);
             User user = new User();
             user.setIdU(idU);
-            user.setNom("Abouda"); // Remplacez par le nom réel de l'utilisateur
-            user.setPrenom("Mariem");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-                user.setDateNaissance(sdf.parse("15/11/2001")); // Remplacez par la vraie date de naissance
-            user.setNumTel(55683199); // Remplacez par le vrai numéro de téléphone
-            user.seteMAIL("mariem.abouda@gmail.com");
-            user.setPasswd("hamdoullah");
-            user.setRole("client");
+            int idUA = 27;
+            User userA = new User();
+            user.setIdU(idUA);
 
-            User userA = getAdminUser();
-
+            System.out.println(userA.geteMAIL());
             // Validate email format
             if (isValidEmail(email)) {
                 // Check if a similar Reclamation already exists in the database
                 if (!serviceReclamation.exists(email, sujet, description)) {
                     // Créer une nouvelle instance de Reclamation
                     Reclamation reclamation = new Reclamation(sujet, description, new Date(), email, user);
+
                     System.out.println(reclamation);
                     // Ajouter la reclamation à la base de données
                     serviceReclamation.create(reclamation);
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setContentText("Reclamation ajoutée avec succès !");
-                    alert.show();
+                    create()
+                            .styleClass(
+                                    "-fx-background-color: #28a745; " + // Couleur de fond
+                                            "-fx-text-fill: white; " + // Couleur du texte
+                                            "-fx-background-radius: 5px; " + // Bord arrondi
+                                            "-fx-border-color: #ffffff; " + // Couleur de la bordure
+                                            "-fx-border-width: 2px;" // Largeur de la bordure
+                            )
+                            .title("achat Ajouté avec succès")
+                            .position(Pos.TOP_RIGHT) // Modifier la position ici
+                            .hideAfter(Duration.seconds(20))
+                            .show();
+                    System.out.println(userA.getIdU());
+
+                    System.out.println(userA.geteMAIL());
 
 
                 } else {
@@ -264,6 +283,8 @@ public class AjouterReclamation {
         // Ajoutez d'autres attributs selon votre modèle de données
         return user;
     }
+
+
 }
 
 

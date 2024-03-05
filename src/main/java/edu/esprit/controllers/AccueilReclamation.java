@@ -5,6 +5,8 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 
@@ -37,6 +40,18 @@ public class AccueilReclamation {
     @FXML
     private Text textGestion;
 
+
+
+    public void afficherNotificationNouveauMessage() {
+        // Créer une notification de type INFORMATION
+        Notifications.create()
+                .title("Nouveau Message")
+                .text("Vous avez reçu un nouveau message.")
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.BOTTOM_RIGHT) // Affichage à côté du bouton peut nécessiter un ajustement de position
+                .showInformation();
+    }
+
     @FXML
     void SaisirReclamation(ActionEvent event) {
         try {
@@ -46,6 +61,7 @@ public class AccueilReclamation {
 
             // Créer une nouvelle scène avec le contenu de ajou.fxml
             Scene scene = new Scene(root);
+
 
             // Obtenir la scène actuelle à partir du bouton cliqué
             Scene currentScene = bEnvoyerMA.getScene();
@@ -108,10 +124,15 @@ public class AccueilReclamation {
 
             // Créer une nouvelle scène avec le contenu de ajou.fxml
             Scene scene = new Scene(root);
+            if (GestionnaireNotifications.estMessageEnvoye()) {
+                afficherNotificationNouveauMessage();
+                GestionnaireNotifications.setMessageEnvoye(false); // Réinitialiser pour les futurs messages
+            }
+
 
             // Obtenir la scène actuelle à partir du bouton cliqué
             Scene currentScene = bEnvoyerMA.getScene();
-
+            afficherNotificationNouveauMessage();
             // Configurer la transition
             TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
             transition.setFromX(currentScene.getWidth());
@@ -123,6 +144,7 @@ public class AccueilReclamation {
 
             // Démarrer la transition
             transition.play();
+
 
         } catch (IOException e) {
             e.printStackTrace(); // Gérer les exceptions correctement dans votre application
@@ -161,4 +183,6 @@ public class AccueilReclamation {
         }
     }
     }
+
+
 

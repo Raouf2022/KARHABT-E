@@ -10,10 +10,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -21,17 +26,28 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.List;
 
 public class LesReclamationsAdmin {
 
     @FXML
     private Button statistiqueButton;
+    @FXML
+    private BarChart<String, Number> voirLesStatistiquess;
+
 
 
     @FXML
@@ -64,6 +80,7 @@ public class LesReclamationsAdmin {
 
     @FXML
     private Button searchButton;
+
 
 
 
@@ -165,6 +182,10 @@ public class LesReclamationsAdmin {
 
             // Configurer le gestionnaire d'événements pour le bouton de recherche
             searchButton.setOnAction(this::searchByDate);
+
+            loadStatistiques();
+
+
         }
     }
 
@@ -208,7 +229,17 @@ public class LesReclamationsAdmin {
         Button repondreButton = new Button("Répondre");
         repondreButton.setOnAction(event -> openReponseForm(reclamation));
 
-        mainVBox.getChildren().addAll( sujetVBox, descriptionVBox, dateVBox, emailVBox, repondreButton);
+        Button DetailsButton = new Button("->Détails");
+        DetailsButton.setOnAction(event -> generatePDF(reclamation));
+
+
+        HBox buttonHBox = new HBox();
+        buttonHBox.setSpacing(10);  // Set the horizontal spacing between the buttons
+        // Ajout des boutons à l'HBox
+        buttonHBox.getChildren().addAll(repondreButton, DetailsButton);
+
+        // Ajout de tous les éléments au VBox principal
+        mainVBox.getChildren().addAll(sujetVBox, descriptionVBox, dateVBox, emailVBox, buttonHBox);
 
 
   
@@ -218,7 +249,75 @@ public class LesReclamationsAdmin {
 
         return mainPane;
     }
+    private void generatePDF(Reclamation reclamation) {
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
+            // Définir la police et la taille du texte
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+
+            // Positions et dimensions
+            float margin = 50;
+            float yStart = 750;
+            float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
+            float rowHeight = 20;
+            float colWidth = tableWidth / 2;
+            float textX = margin + 2;
+            float textY = yStart - 15;
+
+            // Dessiner le tableau
+            // Lignes horizontales
+            float nextY = yStart;
+            for (int i = 0; i <= 4; i++) {
+                contentStream.moveTo(margin, nextY);
+                contentStream.lineTo(margin + tableWidth, nextY);
+                contentStream.stroke();
+                nextY -= rowHeight;
+            }
+
+            // Lignes verticales
+            contentStream.moveTo(margin, yStart);
+            contentStream.lineTo(margin, yStart - 4 * rowHeight);
+            contentStream.moveTo(margin + colWidth, yStart);
+            contentStream.lineTo(margin + colWidth, yStart - 4 * rowHeight);
+            contentStream.moveTo(margin + tableWidth, yStart);
+            contentStream.lineTo(margin + tableWidth, yStart - 4 * rowHeight);
+            contentStream.stroke();
+
+            // Ajouter le texte
+            String[] labels = {"Sujet:", "Description:", "Date:", "Email:"};
+            String[] values = {
+                    reclamation.getSujet(),
+                    reclamation.getDescription(),
+                    formatDate(reclamation.getDateReclamation()),
+                    reclamation.getEmailUtilisateur()
+            };
+
+            for (int i = 0; i < labels.length; i++) {
+                contentStream.beginText();
+                contentStream.newLineAtOffset(textX, textY - i * rowHeight);
+                contentStream.showText(labels[i]);
+                contentStream.endText();
+
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.HELVETICA, 12); // Police normale pour les valeurs
+                contentStream.newLineAtOffset(textX + colWidth, textY - i * rowHeight);
+                contentStream.showText(values[i]);
+                contentStream.endText();
+            }
+
+            contentStream.close();
+
+            // Sauvegarder le document PDF
+            File file = new File("details_reclamation.pdf");
+            document.save(file);
+            Desktop.getDesktop().open(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void openReponseForm(Reclamation reclamation) {
         try {
             // Charger le fichier FXML du formulaire de réponse
@@ -249,7 +348,7 @@ public class LesReclamationsAdmin {
 
 
     private String formatDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
     }
     private VBox createAttributeVBox(String label, String value) {
@@ -343,5 +442,23 @@ public class LesReclamationsAdmin {
         }
     }
 
+
+    private void loadStatistiques() {
+        // Supposons que getStatistiqueReclamations() est appelé ici et retourne Map<Date, Integer>
+        Map<java.sql.Date, Integer> statistiques = serviceReclamation.getStatistiqueReclamations();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Nombre de réclamations par date"); // Nom de la série
+
+        for (Map.Entry<java.sql.Date, Integer> entry : statistiques.entrySet()) {
+            // Convertir Date en String ou autre format si nécessaire
+            String dateAsString = entry.getKey().toString();
+            Integer count = entry.getValue();
+
+            series.getData().add(new XYChart.Data<>(dateAsString, count));
+        }
+
+        voirLesStatistiquess.getData().add(series);
+    }
 
 }

@@ -7,11 +7,16 @@ import edu.esprit.services.ServiceReclamation;
 import edu.esprit.services.ServiceReponseReclamation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import java.util.Date;
+
+import static org.controlsfx.control.Notifications.*;
 
 public class AjoutReponseReclamation {
 
@@ -66,14 +71,25 @@ public class AjoutReponseReclamation {
                 // Enregistrer la réponse dans la base de données
                 serviceReponseReclamation.create(reponseReclamation);
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setContentText("Reponse ajoutée avec succès !");
-                alert.show();
-
+               // Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              //  alert.setTitle("Success");
+               // alert.setContentText("Reponse ajoutée avec succès !");
+               // alert.show();
+                create()
+                        .styleClass(
+                                "-fx-background-color: #28a745; " + // Couleur de fond
+                                        "-fx-text-fill: white; " + // Couleur du texte
+                                        "-fx-background-radius: 5px; " + // Bord arrondi
+                                        "-fx-border-color: #ffffff; " + // Couleur de la bordure
+                                        "-fx-border-width: 2px;" // Largeur de la bordure
+                        )
+                        .title("achat Ajouté avec succès")
+                        .position(Pos.TOP_RIGHT) // Modifier la position ici
+                        .hideAfter(Duration.seconds(20))
+                        .show();
 
                 // Fermer la fenêtre du formulaire après l'enregistrement
-                closeForm();
+
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");

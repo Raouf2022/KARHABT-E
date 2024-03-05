@@ -308,4 +308,22 @@ public class ServiceReclamation implements IService<Reclamation> {
         }
         return reclamations;
     }
+
+    public Map<Date, Integer> getStatistiqueReclamations() {
+        Map<Date, Integer> statistiques = new HashMap<>();
+        String query = "SELECT dateReclamation, COUNT(*) AS nbReclamations FROM reclamation GROUP BY dateReclamation";
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Date dateReclamation = rs.getDate("dateReclamation");
+                int nbReclamations = rs.getInt("nbReclamations");
+                statistiques.put(dateReclamation, nbReclamations);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return statistiques;
+    }
 }

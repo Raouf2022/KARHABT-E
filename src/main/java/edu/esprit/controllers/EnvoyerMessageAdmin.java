@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static org.controlsfx.control.Notifications.create;
 
 public class EnvoyerMessageAdmin implements Initializable {
 
@@ -206,11 +209,21 @@ public class EnvoyerMessageAdmin implements Initializable {
             serviceMessagerie.create(nouveauMessage);
             System.out.println(nouveauMessage);
             // Affichez un message ou effectuez toute autre action nécessaire après l'enregistrement du message
-            System.out.println("Message envoyé avec succès à l'administrateur.");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("Message Envoyé  avec succès !");
-            alert.show();
+            System.out.println("Message envoyé avec succès ");
+            create()
+                    .styleClass(
+                            "-fx-background-color: #28a745; " + // Couleur de fond
+                                    "-fx-text-fill: white; " + // Couleur du texte
+                                    "-fx-background-radius: 5px; " + // Bord arrondi
+                                    "-fx-border-color: #ffffff; " + // Couleur de la bordure
+                                    "-fx-border-width: 2px;" // Largeur de la bordure
+                    )
+                    .title("Message envoyé avec succès")
+                    .position(Pos.TOP_RIGHT) // Modifier la position ici
+                    .hideAfter(Duration.seconds(20))
+                    .show();
+            // Après avoir envoyé le message, notifier que le message a été envoyé
+            GestionnaireNotifications.setMessageEnvoye(true);
 // Affiche
             // Affichez un message ou effectuez toute autre action nécessaire après l'enregistrement du message
             System.out.println("Message envoyé avec succès à un destinataire spécifique.");

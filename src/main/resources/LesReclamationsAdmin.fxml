@@ -2,6 +2,9 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.net.URL?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -16,7 +19,7 @@
 
 <AnchorPane prefHeight="640.0" prefWidth="960.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.LesReclamationsAdmin">
    <children>
-      <Pagination fx:id="fxPagination" layoutX="86.0" layoutY="176.0" prefHeight="395.0" prefWidth="767.0" />
+      <Pagination fx:id="fxPagination" layoutX="32.0" layoutY="188.0" onDragDetected="#voirLesStatistiques" prefHeight="395.0" prefWidth="628.0" />
       <Pane layoutX="3.0" prefHeight="46.0" prefWidth="992.0" style="-fx-background-color: #0460D9;">
          <children>
             <Text fx:id="textGestion1" fill="#fcfcfc" layoutX="173.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation  et méssagerie Admin" textAlignment="CENTER" wrappingWidth="654.4898681640625">
@@ -28,12 +31,12 @@
       </Pane>
       <Pane layoutX="2.0" layoutY="46.0" prefHeight="51.0" prefWidth="992.0" style="-fx-background-color: #94BDF2;">
          <children>
-            <ImageView fitHeight="62.0" fitWidth="60.0" layoutX="866.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="62.0" fitWidth="60.0" layoutX="932.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/iconAalarmMessagerie.png" />
                </image>
             </ImageView>
-            <Button fx:id="bLesMessages" cache="true" focusTraversable="false" layoutX="866.0" layoutY="9.0" mnemonicParsing="false" onAction="#openLesMessages" prefHeight="21.0" prefWidth="77.0" style="-fx-background-color: #6b7fab08;" text="Mes messages" textFill="#94bdf2" underline="true">
+            <Button fx:id="bLesMessages" cache="true" focusTraversable="false" layoutX="915.0" layoutY="5.0" mnemonicParsing="false" onAction="#openLesMessages" prefHeight="21.0" prefWidth="77.0" style="-fx-background-color: #6b7fab08;" text="Mes messages" textFill="#94bdf2" underline="true">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -65,15 +68,23 @@
             </Button>
          </children>
       </Pane>
-      <Label fx:id="emptyLabel" layoutX="416.0" layoutY="320.0" text="Aucune réclamation disponible" />
+      <Label fx:id="emptyLabel" layoutX="196.0" layoutY="320.0" text="Aucune réclamation disponible" />
       <TilePane fx:id="reclamationsTilePane" layoutX="86.0" layoutY="171.0" prefHeight="318.0" prefWidth="209.0" />
-      <Button fx:id="statistiqueButton" layoutX="813.0" layoutY="579.0" mnemonicParsing="false" onAction="#voirLesStatistiques" prefHeight="46.0" prefWidth="167.0" text="Réclamations triées" textFill="WHITE">
+      <Button fx:id="statistiqueButton" layoutX="296.0" layoutY="583.0" mnemonicParsing="false" onAction="#voirLesStatistiques" prefHeight="42.0" prefWidth="231.0" text="Réclamations triées" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <DatePicker fx:id="datePicker" layoutX="707.0" layoutY="115.0" prefHeight="26.0" prefWidth="201.0" />
-      <Button fx:id="searchButton" layoutX="827.0" layoutY="146.0" mnemonicParsing="false" onAction="#searchByDate" text="rechercher" />
+      <DatePicker fx:id="datePicker" layoutX="45.0" layoutY="118.0" prefHeight="26.0" prefWidth="201.0" />
+      <Button fx:id="searchButton" layoutX="253.0" layoutY="111.0" mnemonicParsing="false" onAction="#searchByDate" prefHeight="34.0" prefWidth="117.0" text="rechercher" />
+      <BarChart fx:id="voirLesStatistiquess" layoutX="669.0" layoutY="219.0" prefHeight="348.0" prefWidth="311.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
    </children>
    <stylesheets>
       <URL value="@style2.css" />

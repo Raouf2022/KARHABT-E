@@ -8,6 +8,7 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -24,6 +25,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+
+import static org.controlsfx.control.Notifications.create;
 
 public class EnvoyerMessage {
     @FXML
@@ -88,10 +91,18 @@ public class EnvoyerMessage {
 
             // Affichez un message ou effectuez toute autre action nécessaire après l'enregistrement du message
             System.out.println("Message envoyé avec succès à l'administrateur.");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("Message Envoyé  avec succès !");
-            alert.show();
+            create()
+                    .styleClass(
+                            "-fx-background-color: #28a745; " + // Couleur de fond
+                                    "-fx-text-fill: white; " + // Couleur du texte
+                                    "-fx-background-radius: 5px; " + // Bord arrondi
+                                    "-fx-border-color: #ffffff; " + // Couleur de la bordure
+                                    "-fx-border-width: 2px;" // Largeur de la bordure
+                    )
+                    .title("Message envoyé avec succès à l'administrateur.")
+                    .position(Pos.TOP_RIGHT) // Modifier la position ici
+                    .hideAfter(Duration.seconds(20))
+                    .show();
         } else {
             // Si aucun destinataire n'est trouvé
             System.out.println("Aucun administrateur trouvé pour l'envoi du message.");

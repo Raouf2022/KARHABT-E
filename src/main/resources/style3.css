@@ -1,0 +1,54 @@
+/* Enhanced global styles for a cleaner and more modern look */
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom, #FAFAFA, #EAEAEA); /* Subtle gradient background */
+}
+
+/* Improved pagination styling for better visual integration */
+.pagination {
+    -fx-background-radius: 10px; /* More pronounced rounded corners */
+    -fx-border-color: #D0D0D0; /* Soft border color */
+    -fx-border-radius: 10px; /* Rounded borders to match */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); /* Soft shadow for depth */
+}
+
+/* Label styling with a more distinctive and modern appearance */
+.label {
+    -fx-font-size: 16px; /* Slightly larger font size for emphasis */
+    -fx-text-fill: #4A4A4A; /* Darker text for better readability */
+    -fx-background-color: linear-gradient(to bottom, #FFFFFF, #F0F0F0); /* Gradient background */
+    -fx-padding: 10px; /* Increased padding for a larger clickable area */
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded background corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 3, 0, 0, 2); /* Subtle shadow for depth */
+}
+
+/* TilePane adjustments for a cohesive and organized display */
+.tile-pane {
+    -fx-background-color: #FFFFFF; /* Clear background */
+    -fx-padding: 15px; /* Increased padding for better spacing */
+    -fx-hgap: 15px; /* More horizontal gap */
+    -fx-vgap: 15px; /* More vertical gap */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 10, 0, 0, 5); /* Shadow for depth */
+}
+
+/* Specific styling for .Réponse elements to make them stand out */
+.Réponse {
+    -fx-background-color: linear-gradient(to right, #D9325E, #E74561); /* Gradient red background */
+    -fx-text-fill: #FFFFFF; /* White text for contrast */
+    -fx-padding: 10px 20px; /* Generous padding for a substantial look */
+    -fx-border-radius: 15px; /* Softly rounded corners for a modern feel */
+    -fx-background-radius: 15px; /* Matching background radius */
+    -fx-font-weight: bold; /* Bold font for text */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 4); /* Pronounced shadow for a lifted effect */
+    -fx-cursor: hand; /* Cursor change to indicate interactivity */
+}
+
+/* Adding transitions for a smoother interactive experience */
+.button, .pagination, .Réponse {
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.button:hover, .pagination:hover, .Réponse:hover {
+    -fx-scale: 1.05; /* Slightly enlarge on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.25), 6, 0, 0, 6); /* Enhanced shadow for emphasis */
+}

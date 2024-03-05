@@ -63,6 +63,7 @@
             </Button>
          </children>
       </Pane>
+      <Button fx:id="reponsesb" layoutX="839.0" layoutY="135.0" mnemonicParsing="false" onAction="#openReponses" text="Mes reponses" />
    </children>
 
    <stylesheets>

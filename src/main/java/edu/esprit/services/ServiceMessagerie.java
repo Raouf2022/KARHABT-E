@@ -105,6 +105,61 @@ public ServiceMessagerie(){}
         return messages;
     }
 
+    public List<Messagerie> getMessagesByReceiver(int receiverId) {
+        List<Messagerie> messages = new ArrayList<>();
+
+        String query = "SELECT m.idMessage, m.contenu, m.dateEnvoie, m.Sender, m.Receiver, m.vu, m.deleted, "
+                + "uSender.idU AS senderId, uSender.nom AS senderNom, uSender.prenom AS senderPrenom, "
+                + "uSender.DateNaissance AS senderDateNaissance, uSender.numTel AS senderNumTel, "
+                + "uSender.eMAIL AS senderEmail, uSender.passwd AS senderPasswd, uSender.role AS senderRole, "
+                + "uReceiver.nom AS receiverNom, uReceiver.prenom AS receiverPrenom "
+                + "FROM Messagerie m "
+                + "JOIN User uSender ON m.Sender = uSender.idU "
+                + "JOIN User uReceiver ON m.Receiver = uReceiver.idU "
+                + "WHERE m.Receiver = ?";
+
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            pst.setInt(1, receiverId);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Messagerie messagerie = new Messagerie();
+                    messagerie.setIdMessage(rs.getInt("idMessage"));
+                    messagerie.setContenu(rs.getString("contenu"));
+                    messagerie.setDateEnvoie(rs.getTimestamp("dateEnvoie"));
+
+                    // Set sender data
+                    User sender = new User(
+                            rs.getInt("senderId"),
+                            rs.getString("senderNom"),
+                            rs.getString("senderPrenom"),
+                            rs.getDate("senderDateNaissance"),
+                            rs.getInt("senderNumTel"),
+                            rs.getString("senderEmail"),
+                            rs.getString("senderPasswd"),
+                            rs.getString("senderRole")
+                    );
+                    messagerie.setSender(sender);
+
+                    // Set receiver data
+                    User receiver = new User();
+                    receiver.setIdU(rs.getInt("Receiver"));
+                    receiver.setNom(rs.getString("receiverNom"));
+                    receiver.setPrenom(rs.getString("receiverPrenom"));
+                    messagerie.setReceiver(receiver);
+
+                    messagerie.setVu(rs.getBoolean("vu"));
+                    messagerie.setDeleted(rs.getBoolean("deleted"));
+
+                    messages.add(messagerie);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return messages;
+    }
 
 
     @Override

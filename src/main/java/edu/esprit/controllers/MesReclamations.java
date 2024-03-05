@@ -30,6 +30,9 @@ import java.util.Set;
 
 public class MesReclamations {
 
+    @FXML
+    private Button reponsesb;
+
 
     @FXML
     private Button bEnvoyerMessage;
@@ -385,6 +388,36 @@ public class MesReclamations {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    @FXML
+    void openReponses(ActionEvent event) {
+
+        try {
+            // Charger le fichier FXML pour la page d'ajout
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LesReponsesReclamationsClient.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle et le stage
+            Stage currentStage = (Stage) reponsesb.getScene().getWindow();
+
+            // Créer une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), root);
+            fadeTransition.setFromValue(0.0);
+            fadeTransition.setToValue(1.0);
+            fadeTransition.play();
+
+            // Définir la nouvelle scène sur le stage et l'afficher
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

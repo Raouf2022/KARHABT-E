@@ -1,90 +1,53 @@
-/* style.css */
-
-/* Apply styles to the AnchorPane */
-.root {
+/* Couleur de fond pour l'ensemble de l'AnchorPane */
+.anchor-pane {
     -fx-background-color: #EBF2FA;
 }
 
-/* Apply styles to the Pane with blue background */
-.Pane {
+/* Styles pour le Pane en haut avec le fond bleu */
+#paneTop {
     -fx-background-color: #0460D9;
 }
 
-/* Apply styles to the second Pane with light blue background */
-.Pane > Pane {
-    -fx-background-color: #94BDF2;
-}
-
-/* Apply styles to the Text inside the second Pane */
+/* Styles pour le texte dans le Pane en haut */
 #textGestion1 {
     -fx-fill: #fcfcfc;
-}
-
-/* Apply styles to Buttons */
-.button {
-    -fx-background-color: rgb(0, 97, 194);
-  /* Set the preferred width */
-    -fx-alignment: center; /* Center the text within the button */
-}
-
-.Pane > Pane {
-    -fx-background-color: #94BDF2;
-    -fx-alignment: center; /* Center the buttons */
-}
-
-/* Apply styles to the TilePane */
-#reclamationsTilePane {
-    -fx-padding: 10;
-}
-
-/* Apply styles to the Label */
-#emptyLabel {
-    -fx-font-size: 18.0;
-    -fx-text-fill: #000000; /* Change the color accordingly */
-}
-
-/* Apply styles to Pagination */
-#fxPagination {
-    -fx-padding: 10;
-}
-
-/* Apply styles to the VBox containing each reclamation */
-.VBox {
-    -fx-spacing: 10;
-    -fx-pref-width: 300;
-    -fx-pref-height: 200;
-}
-
-/* Apply styles to the labels inside the VBox */
-.label,
-.label-attribute {
-    -fx-font-size: 14.0;
-}
-
-/* Apply styles to the titles inside the VBox */
-.label-title {
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #084e99; /* Change the color accordingly */
 }
 
-/* Apply styles to the main VBox inside the Pane */
-.reclamation-pane {
-    -fx-padding: 10;
-    -fx-border-width: 1;
-    -fx-border-color: #5bbedc; /* Change the color accordingly */
+/* Styles pour le Pane en dessous du paneTop avec le fond plus clair */
+#paneBelowTop {
+    -fx-background-color: #94BDF2;
 }
 
-/* Apply styles to the ImageView */
-#reclamationsTilePane ImageView {
-    -fx-fit-height: 62.0;
-    -fx-fit-width: 60.0;
+/* Styles pour les boutons généraux */
+.button {
+    -fx-background-color: #6b7fab08;
+    -fx-text-fill: #5bbedc;
+    -fx-underline: true;
+    -fx-font-weight: bold;
+    -fx-font-size: 10px;
 }
 
-/* Apply styles to the Button with green background */
-#bLesMessages,
-#bEnvoyerMessage,
-#bReponsesA,
-#bRetourA {
-    -fx-background-color: rgba(104, 121, 159, 0.03);
+/* Styles spécifiques pour le bouton des messages */
+#bLesMessages {
+    -fx-background-color: transparent;
     -fx-text-fill: #94bdf2;
+}
+
+/* Styles pour l'étiquette quand il n'y a pas de réclamations */
+#emptyLabel {
+    -fx-text-fill: grey;
+    -fx-font-size: 16px;
+}
+
+/* Styles pour le Pagination */
+#fxPagination {
+    -fx-border-color: #0460D9;
+    -fx-border-width: 2px;
+}
+
+/* Styles pour le BarChart */
+#voirLesStatistiquess {
+    -fx-bar-fill: #0460D9;
 }
