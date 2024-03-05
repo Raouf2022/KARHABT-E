@@ -63,8 +63,11 @@ public class MessageRecuClient {
         public void initialize() {
                 // Appeler votre service pour obtenir la liste de messages
                 // Replace with the actual sender's ID
-                int idU=24;
-                List<Messagerie> messagesByReceiver = serviceMessagerie.getMessagesByReceiver(idU);
+
+                        int receiverId = 24; // Exemple d'ID de récepteur
+                        List<Messagerie> messagesByReceiver = serviceMessagerie.getActiveMessagesByReceiver(receiverId);
+                        // Continuez avec la logique d'affichage existante, mais utilisez `messagesActifs`
+
 
                 // Gérer l'affichage du message si la liste est vide
                 if (messagesByReceiver.isEmpty()) {
@@ -130,6 +133,11 @@ public class MessageRecuClient {
 
                 // Add VBoxes and buttons to the main VBox
                 mainVBox.getChildren().addAll(contenuVBox, dateVBox,vuVBox);
+                if(message.isDeleted()) {
+                        Label deletedLabel = new Label("Supprimé");
+                        deletedLabel.getStyleClass().addAll("label", "label-deleted"); // Ensure you have CSS for this
+                        mainVBox.getChildren().add(deletedLabel);
+                }
 
                 // Add main VBox to a Pane
                 Pane mainPane = new Pane(mainVBox);

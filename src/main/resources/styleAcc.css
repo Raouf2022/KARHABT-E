@@ -1,0 +1,37 @@
+.root {
+    -fx-background-color: #EBF2FA;
+}
+
+.pane {
+    -fx-background-radius: 5;
+    -fx-background-color: #BCECFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+
+.button {
+    -fx-background-color: #0061C2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+}
+
+.button:hover {
+    -fx-background-color: #0476D9;
+}
+
+.text {
+    -fx-fill: white;
+    -fx-font-weight: bold;
+}
+
+#textGestion {
+    -fx-font-size: 20px;
+}
+
+#bsaisirR, #bListReclamationA, #bEnvoyerMA, #bListMessagesA {
+    -fx-background-radius: 15;
+}
+
+.pane:hover {
+    -fx-background-color: #BCECFF88;
+}

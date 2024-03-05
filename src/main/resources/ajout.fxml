@@ -13,6 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="640.0" prefWidth="960.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterReclamation">
    <children>
       <Pane layoutY="46.0" prefHeight="51.0" prefWidth="960.0" style="-fx-background-color: #94BDF2;">
@@ -92,6 +93,8 @@
       </ImageView>
 
    </children>
-
+   <stylesheets>
+      <URL value="@styleAjout.css" />
+   </stylesheets>
 
 </AnchorPane>

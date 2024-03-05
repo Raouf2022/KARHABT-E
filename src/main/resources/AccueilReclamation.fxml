@@ -8,6 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="640.0" prefWidth="960.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AccueilReclamation">
    <children>
       <Pane layoutX="-25.0" layoutY="46.0" prefHeight="646.0" prefWidth="363.0" style="-fx-background-color: #BCECFF;">
@@ -90,4 +91,7 @@
          </children>
       </Pane>
    </children>
+   <stylesheets>
+      <URL value="@styleAcc.css" />
+   </stylesheets>
 </AnchorPane>

@@ -2,54 +2,62 @@
     -fx-background-color: #EBF2FA;
 }
 
-.reclamation-pane {
+.reclamation-pane, .Messagerie-pane {
     -fx-background-color: #FFFFFF;
-    -fx-border-color:  #94BDF2;
-    -fx-border-width: 7px; /* Supprimé une des duplications */
-    -fx-border-radius: 5px;
-    -fx-padding: 20px;
-}
-.Messagerie-pane{
-    -fx-background-color: #FFFFFF;
-    -fx-border-color:  #94BDF2;
-    -fx-border-width: 7px; /* Supprimé une des duplications */
-    -fx-border-radius: 5px;
-    -fx-padding: 5px;
-
+    -fx-border-color: #94BDF2;
+    -fx-border-width: 3px; /* Ajustement pour un look plus subtil */
+    -fx-border-radius: 10px; /* Arrondir davantage les coins pour un look moderne */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10); /* Ajouter une ombre douce pour un effet de profondeur */
+    -fx-padding: 15px; /* Uniformiser le padding */
 }
 
 .label-title {
+    -fx-font-family: "Arial"; /* Assurer la cohérence de la police à travers l'interface */
     -fx-font-weight: bold;
-    -fx-font-size: 16px;
-    -fx-text-fill: #333333; /* Set text color for consistency */
+    -fx-font-size: 18px; /* Légère augmentation de la taille pour mettre en valeur */
+    -fx-text-fill: #084e99; /* Couleur bleue foncée pour un contraste agréable */
 }
 
 .label-attribute {
+    -fx-font-family: "Arial";
     -fx-font-size: 14px;
-    -fx-text-fill: #555555; /* Slightly lighter text color */
+    -fx-text-fill: #666666; /* Gris foncé pour améliorer la lisibilité */
 }
 
-.button-modifier, .button-supprimer {
+.button-modifier, .button-supprimer, .repondreButton {
+    -fx-font-family: "Arial";
     -fx-font-size: 14px;
     -fx-text-fill: white;
-    -fx-pref-width: 100px; /* Set a preferred width for consistency */
+    -fx-pref-width: 120px; /* Ajustement pour donner plus d'espace */
+    -fx-background-radius: 5px; /* Boutons arrondis */
 }
 
 .button-modifier {
-    -fx-background-color:  #0460D9; /* Green */
+    -fx-background-color: #3183c8; /* Bleu plus doux */
 }
 
 .button-supprimer {
-    -fx-background-color: #D9325E /* Red */
+    -fx-background-color: #e57373; /* Rouge plus doux */
 }
-.repondreButton  {
-    -fx-font-size: 14px;
-    -fx-text-fill: white;
-    -fx-pref-width: 100px;
-    -fx-background-color:  #0460D9; /* Blue */
-}
-.Réponse{
-    -fx-background-color: #D9325E /* Red */
 
+.repondreButton {
+    -fx-background-color: #4caf50; /* Vert, ajustement pour différencier de modifier */
+}
+
+.button-modifier:hover, .button-supprimer:hover, .repondreButton:hover {
+    -fx-opacity: 0.8; /* Effet de survol pour améliorer l'interaction */
+}
+
+.Réponse {
+    -fx-background-color: #f8bbd0; /* Rouge plus clair pour une distinction subtile */
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+/* Ajout d'un style général pour les TextField et TextArea pour une cohérence visuelle */
+.text-field, .text-area {
+    -fx-border-color: #94BDF2;
+    -fx-border-radius: 5px;
+    -fx-padding: 4px 8px;
 }
 

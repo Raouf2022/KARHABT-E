@@ -1,53 +1,42 @@
-/* Couleur de fond pour l'ensemble de l'AnchorPane */
-.anchor-pane {
+.root {
     -fx-background-color: #EBF2FA;
 }
 
-/* Styles pour le Pane en haut avec le fond bleu */
-#paneTop {
+.reclamation-pane, .Messagerie-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #94BDF2;
+    -fx-border-width: 7px;
+    -fx-border-radius: 5px;
+    -fx-padding: 20px;
+}
+
+.label-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+}
+
+.label-attribute {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+.button-modifier, .button-supprimer, .repondreButton {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-pref-width: 100px;
+    -fx-background-radius: 5px; /* Added border-radius */
+}
+
+.button-modifier, .repondreButton {
     -fx-background-color: #0460D9;
 }
 
-/* Styles pour le texte dans le Pane en haut */
-#textGestion1 {
-    -fx-fill: #fcfcfc;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
+.button-supprimer, .Réponse {
+    -fx-background-color: #D9325E;
 }
 
-/* Styles pour le Pane en dessous du paneTop avec le fond plus clair */
-#paneBelowTop {
-    -fx-background-color: #94BDF2;
-}
-
-/* Styles pour les boutons généraux */
-.button {
-    -fx-background-color: #6b7fab08;
-    -fx-text-fill: #5bbedc;
-    -fx-underline: true;
-    -fx-font-weight: bold;
-    -fx-font-size: 10px;
-}
-
-/* Styles spécifiques pour le bouton des messages */
-#bLesMessages {
-    -fx-background-color: transparent;
-    -fx-text-fill: #94bdf2;
-}
-
-/* Styles pour l'étiquette quand il n'y a pas de réclamations */
-#emptyLabel {
-    -fx-text-fill: grey;
-    -fx-font-size: 16px;
-}
-
-/* Styles pour le Pagination */
-#fxPagination {
-    -fx-border-color: #0460D9;
-    -fx-border-width: 2px;
-}
-
-/* Styles pour le BarChart */
-#voirLesStatistiquess {
-    -fx-bar-fill: #0460D9;
+/* Ajout de transitions pour les boutons */
+.button-modifier:hover, .button-supprimer:hover, .repondreButton:hover {
+    -fx-opacity: 0.8;
 }
