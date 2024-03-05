@@ -52,6 +52,11 @@
             <artifactId>okhttp</artifactId>
             <version>4.9.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.1.2</version>
+          </dependency>
 
     </dependencies>
     <build>
