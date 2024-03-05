@@ -309,8 +309,8 @@ public class ServiceReclamation implements IService<Reclamation> {
         return reclamations;
     }
 
-    public Map<Date, Integer> getStatistiqueReclamations() {
-        Map<Date, Integer> statistiques = new HashMap<>();
+    public Map<java.util.Date, Integer> getStatistiqueReclamations() {
+        Map<java.util.Date, Integer> statistiques = new HashMap<>();
         String query = "SELECT dateReclamation, COUNT(*) AS nbReclamations FROM reclamation GROUP BY dateReclamation";
 
         try (PreparedStatement pstmt = cnx.prepareStatement(query)) {

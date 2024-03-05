@@ -23,9 +23,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -33,8 +36,11 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.awt.*;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -48,7 +54,8 @@ public class LesReclamationsAdmin {
     @FXML
     private BarChart<String, Number> voirLesStatistiquess;
 
-
+    @FXML
+    private Button telechargerstat;
 
     @FXML
     private Button bEnvoyerMessage;
@@ -445,12 +452,12 @@ public class LesReclamationsAdmin {
 
     private void loadStatistiques() {
         // Supposons que getStatistiqueReclamations() est appelé ici et retourne Map<Date, Integer>
-        Map<java.sql.Date, Integer> statistiques = serviceReclamation.getStatistiqueReclamations();
+        Map<Date, Integer> statistiques = serviceReclamation.getStatistiqueReclamations();
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Nombre de réclamations par date"); // Nom de la série
 
-        for (Map.Entry<java.sql.Date, Integer> entry : statistiques.entrySet()) {
+        for (Map.Entry<Date, Integer> entry : statistiques.entrySet()) {
             // Convertir Date en String ou autre format si nécessaire
             String dateAsString = entry.getKey().toString();
             Integer count = entry.getValue();
@@ -460,5 +467,33 @@ public class LesReclamationsAdmin {
 
         voirLesStatistiquess.getData().add(series);
     }
+
+
+    @FXML
+    public void telechargerStatististiques(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sauvegarder les statistiques");
+        fileChooser.setInitialFileName("statistiques_reclamations.csv");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv"));
+        File file = fileChooser.showSaveDialog(null); // Remplacer null par votre Stage
+
+        if (file != null) {
+            try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(file.toURI()));
+                 CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withDelimiter(';').withHeader("Date", "Nombre de Réclamations"))) {
+                Map<Date, Integer> statistiques = serviceReclamation.getStatistiqueReclamations();
+                statistiques.forEach((date, count) -> {
+                    try {
+                        csvPrinter.printRecord(date.toString(), count);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                csvPrinter.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }
