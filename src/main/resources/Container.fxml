@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="360.0" prefWidth="282.0" styleClass="card" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controller.Container">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="282.0" styleClass="card" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controller.Container">
    <children>
-      <ImageView fx:id="contImg" fitHeight="81.0" fitWidth="122.0" layoutX="80.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="modifyUser" layoutX="37.0" layoutY="300.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="98.0" stylesheets="@style.css" text="Bloquer" />
+      <ImageView fx:id="contImg" fitHeight="100.0" fitWidth="100.0" layoutX="91.0" layoutY="14.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="banUser" layoutX="37.0" layoutY="300.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="98.0" stylesheets="@style.css" text="Banner" />
       <Button fx:id="delBtn" layoutX="149.0" layoutY="300.0" mnemonicParsing="false" stylesheets="@style.css" text="Supprimer" />
       <VBox layoutX="35.0" layoutY="114.0" prefHeight="182.0" prefWidth="100.0">
          <children>

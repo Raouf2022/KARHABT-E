@@ -44,4 +44,5 @@
         </font>
     </Label>
    <Hyperlink layoutX="111.0" layoutY="356.0" onAction="#changePassword" prefHeight="24.0" prefWidth="134.0" text="Mot de passe oublié ? " />
+   <Button layoutX="111.0" layoutY="466.0" mnemonicParsing="false" onAction="#FaceID" prefHeight="34.0" prefWidth="258.0" stylesheets="@style.css" text="Face ID" />
 </AnchorPane>

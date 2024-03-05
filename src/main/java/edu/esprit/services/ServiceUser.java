@@ -189,6 +189,34 @@ public class ServiceUser implements IUserService<User> {
         }
         return user;
     }
+    public User getOneByEmail(String email) {
+        String req = "SELECT * FROM `User` WHERE eMAIL=?";
+        User user = null;
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, email);
+            ResultSet res = ps.executeQuery();
+            if (res.next()) {
+                int idU = res.getInt("idU");
+                String nom = res.getString("nom");
+                String prenom = res.getString("prenom");
+                Date dateNaissance = res.getDate("dateNaissance");
+                int numTel = res.getInt("numTel");
+                String eMail = res.getString("eMail");
+                String passwd = res.getString("passwd");
+                String role = res.getString("role");
+                String imageUser = res.getString("imageUser");
+                if (role.equals("Admin")) {
+                    user = new Admin(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role,imageUser );
+                } else if (role.equals("Client")) {
+                    user = new Client(idU, nom, prenom, dateNaissance, numTel, eMail, passwd, role, imageUser);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération de l'utilisateur : " + e.getMessage());
+        }
+        return user;
+    }
     @Override
     public Set<User> getAll() {
         Set<User> users = new HashSet<>();

@@ -18,22 +18,23 @@ public class WelcomePage {
 
     @FXML
     private ImageView wheel;
-    private User loggedInUser;
+    private User user;
 
     // Create a method to set the logged-in user
     public void setLoggedInUser(User user) {
-        this.loggedInUser = user;
+        this.user = user;
     }
 
 
     @FXML
     void versPageClient(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProfileClient.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/profileClient.fxml"));
         Parent root = loader.load();
 
         // Get the ProfileClient controller and set the user
         ProfileClient profileController = loader.getController();
-        profileController.SetProfile(loggedInUser); // Pass the logged-in user to the profile
+        profileController.SetProfile(user);
+        profileController.refreshUserData();
 
         Scene newScene = new Scene(root);
         Stage stage = (Stage) wheel.getScene().getWindow();

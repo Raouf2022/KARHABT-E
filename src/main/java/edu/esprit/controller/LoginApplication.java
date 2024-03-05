@@ -16,6 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.videoio.VideoCapture;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -195,5 +199,10 @@ public class LoginApplication {
                 showAlert("Invalid Email", "The email you entered does not exist in our system.");
             }
         });
+    }
+    ServiceUser serviceUser = new ServiceUser();
+    @FXML
+    void FaceID(ActionEvent event){
+
     }
 }

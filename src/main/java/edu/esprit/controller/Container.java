@@ -53,7 +53,7 @@ public class Container {
     @FXML
     private Button versPageModif;
     @FXML
-    private Button modifyUser;
+    private Button banUser;
 
     ServiceUser serviceUser = new ServiceUser();
     private User user;
@@ -99,7 +99,7 @@ public class Container {
 
         });
 
-        modifyUser.setOnAction((event)->{
+        banUser.setOnAction((event)->{
             //System.out.println(user.getIdU());
             try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/modifierUser.fxml"));

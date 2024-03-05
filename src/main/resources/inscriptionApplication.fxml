@@ -20,7 +20,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Text fx:id="fwelcome" fill="#087cff" layoutX="623.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer Votre Compte" textAlignment="CENTER" wrappingWidth="137.33673095703125">
+      <Text fx:id="fwelcome" fill="#087cff" layoutX="624.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer Votre Compte" textAlignment="CENTER" wrappingWidth="137.33673095703125">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -75,12 +75,12 @@
             <Button fx:id="ToLog" layoutX="164.0" layoutY="332.0" mnemonicParsing="false" onAction="#ToLogin" prefHeight="34.0" prefWidth="119.0" text="Se connecter" />
          </children>
       </Pane>
-      <ImageView fitHeight="103.0" fitWidth="361.0" layoutX="641.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="103.0" fitWidth="361.0" layoutX="641.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/karhabt-e.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="fximg" fitHeight="114.0" fitWidth="156.0" layoutX="513.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="760.0" layoutY="485.0" mnemonicParsing="false" onAction="#ajouterPhoto" text="Button" />
+      <ImageView fx:id="fximg" fitHeight="114.0" fitWidth="156.0" layoutX="719.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="513.0" layoutY="488.0" mnemonicParsing="false" onAction="#ajouterPhoto" prefHeight="34.0" prefWidth="156.0" text="Choisir image" />
    </children>
 </AnchorPane>

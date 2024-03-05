@@ -67,10 +67,31 @@ public class InscriptionApplication{
 
     ServiceUser serviceUser = new ServiceUser();
     public void createAccount(ActionEvent actionEvent) {
+
+        if (fxnom.getText().trim().isEmpty() || fxprenom.getText().trim().isEmpty() || fxmail.getText().trim().isEmpty() ||
+                fxtel.getText().trim().isEmpty() || fxpwd.getText().trim().isEmpty() || fxdate.getValue() == null || imagePath == null || imagePath.isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Missing Information");
+            alert.setHeaderText("All fields are required");
+            alert.setContentText("Please ensure all fields are filled and a photo is selected.");
+            alert.showAndWait();
+            return; // Exit the method to prevent further execution
+        }
         int a = Integer.parseInt(fxtel.getText());
         Date d = Date.valueOf(fxdate.getValue());
 
         try {
+            // Check if the email already exists
+            if (serviceUser.checkUserExists(fxmail.getText())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING); // Correctly instantiate the alert with AlertType.WARNING
+                alert.setTitle("WARNING");
+                alert.setHeaderText(null);
+                alert.setContentText("Email already in use. Please use a different email.");
+                alert.showAndWait();
+
+                return; // Exit the method to prevent further execution
+            }
             if (!serviceUser.isValidEmail(fxmail.getText())) {
 
                 fxerrorMail.setVisible(true);
