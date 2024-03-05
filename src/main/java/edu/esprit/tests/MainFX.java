@@ -6,18 +6,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class AjoutReclamationInterface extends Application {
-
+public class MainFX extends Application {
 
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilReclamationAdmin.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilReclamation.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Gestion Reclamation");
         stage.show();
+
     }
 
 

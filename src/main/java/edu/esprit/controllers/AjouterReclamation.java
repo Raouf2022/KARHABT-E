@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -73,6 +75,9 @@ public class AjouterReclamation {
     @FXML
     private TextField tfidUser;
 
+    @FXML
+    private WebView webb;
+
 
     private Connection cnx = DataSource.getInstance().getCnx();
 
@@ -112,6 +117,7 @@ public class AjouterReclamation {
     public void initialize() {
         tfidUser.setText("24");  // Remplacez "1" par l'ID de l'utilisateur que vous voulez tester
 
+        webb.getEngine().load("http://localhost/captcha.html");
     }
 
 
@@ -130,6 +136,27 @@ public class AjouterReclamation {
                 alert.setContentText("Veuillez remplir tous les champs !");
                 alert.show();
                 return; // Return to stop further processing
+            }
+            try{
+                WebEngine engine = webb.getEngine();
+                String result = (String) engine.executeScript(
+                        "function isRecaptchaVerified() {" +
+                                " var isVerified = grecaptcha.getResponse().length > 0;" +
+                                " return String(isVerified);" +
+                                "} " +
+                                "isRecaptchaVerified();"
+                );
+                if(result.equals("false")){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("captcha");
+                    alert.setContentText("s'il vous plais resoudre le captcha");
+                    alert.showAndWait();
+                    System.out.println("erreur");
+                    return;
+
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             int idU = Integer.parseInt(idUserText);
