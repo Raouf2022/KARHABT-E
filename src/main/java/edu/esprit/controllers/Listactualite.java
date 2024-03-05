@@ -8,6 +8,7 @@ import edu.esprit.entities.User;
 import edu.esprit.services.Actualiteservice;
 import edu.esprit.services.Commentaireservice;
 import edu.esprit.services.Reponseservice;
+import edu.esprit.traduction.TranslatorText;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,6 +34,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import okhttp3.Response;
 import org.controlsfx.control.Rating;
 
 import java.io.File;
@@ -134,9 +136,84 @@ public class Listactualite {
         deleteButton.setUserData(actualite);
         Button modifyButton = createIconButton("PENCIL", Color.BLACK, 20, this::handleModify);
         modifyButton.setUserData(actualite);
+        Button myButtonTraduire = createIconButtonT("Traduire",0,0,70 );
+        myButtonTraduire.setOnAction(event -> {
+            TranslatorText translatorText = TranslatorText.getInstance();
+
+            String textToTranslate = contentText.getText();
+            System.out.println(textToTranslate);
+            String from = "fr";
+            String to = "en";
+
+            System.out.println("Envoi de la requête à l'API de traduction...");
+
+            try {
+                Response response = translatorText.post(textToTranslate, from, to);
+
+                System.out.println("Réponse brute de l'API :");
+                String responseBody = response.body().string();
+                System.out.println(responseBody);
+
+                // Additional logging for debugging
+                int statusCode = response.code();
+                System.out.println("\nCode de statut HTTP : " + statusCode);
+
+                // Afficher uniquement le texte traduit
+                String translatedText = translatorText.extractTranslatedText(responseBody);
+                System.out.println("\nTexte traduit :");
+                System.out.println(translatedText);
+                contentText.setText(translatedText);
+//                textAreaContenu.setText(textContenu.getText());
+
+
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+
+
+
+        });
+        Button myButtonAnnuler = createIconButtonT("AnnulerTraduction",0,0,70 );
+        myButtonAnnuler.setOnAction(event -> {
+            TranslatorText translatorText = TranslatorText.getInstance();
+
+            String textToTranslate = contentText.getText();
+            System.out.println(textToTranslate);
+            String from = "en";
+            String to = "fr";
+
+            System.out.println("Envoi de la requête à l'API de traduction...");
+
+            try {
+                Response response = translatorText.post(textToTranslate, from, to);
+
+                System.out.println("Réponse brute de l'API :");
+                String responseBody = response.body().string();
+                System.out.println(responseBody);
+
+                // Additional logging for debugging
+                int statusCode = response.code();
+                System.out.println("\nCode de statut HTTP : " + statusCode);
+
+                // Afficher uniquement le texte traduit
+                String translatedText = translatorText.extractTranslatedText(responseBody);
+                System.out.println("\nTexte traduit :");
+                System.out.println(translatedText);
+                contentText.setText(translatedText);
+
+
+
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+
+
+
+        });
 
         // Ajout des boutons dans HBox
-        buttonHBox.getChildren().addAll(modifyButton, deleteButton);
+        buttonHBox.getChildren().addAll(modifyButton, deleteButton,myButtonTraduire,myButtonAnnuler);
+
         hbox.getChildren().add(buttonHBox);
 
 
@@ -227,6 +304,17 @@ public class Listactualite {
 
         return button;
     }
+    private Button createIconButtonT(String text, double x, double y,double xx) {
+        Button button = new Button();
+        button.setText(text);
+        button.setLayoutX(x);
+        button.setLayoutY(y);
+        button.setPrefWidth(xx);
+
+
+        return button;
+    }
+
 
 
 
@@ -383,7 +471,7 @@ public class Listactualite {
     }
 
     private void handleEditResponse(Reponse response, Commentaire comment, VBox responsesContainer) {
-      //fonction edit
+      //alert fonction edit
         TextInputDialog dialog = new TextInputDialog(response.getContinueR());
         dialog.setTitle("Edit Response");
         dialog.setHeaderText("Edit your response");
@@ -410,7 +498,6 @@ public class Listactualite {
     }
 
     private void refreshResponses(Commentaire comment, VBox responsesContainer) throws SQLException {
-        //refresh reponse apres delete ou update
 
         List<Reponse> updatedResponses = reponseService.getResponsesForComment(comment.getIdComnt());
 
@@ -424,7 +511,7 @@ public class Listactualite {
     }
 
     private void handleDeleteResponse(Reponse response, Commentaire comment, VBox responsesContainer) {
-        //fonction delete
+        //alert fonction delete
 
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirm Deletion");

@@ -99,22 +99,12 @@ public class Ajouteractualite {
                 actualiteservice.ajouter(actualite);
 
                 // Affichage d'une alerte de succès
-               // Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                //alert.setContentText("L'actualité a été ajoutée avec succès");
-                //alert.show();
+               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("L'actualité a été ajoutée avec succès");
+                alert.show();
 
-                Notifications.create()
-                        .styleClass(
-                                "-fx-background-color: #28a745; " + // Couleur de fond
-                                        "-fx-text-fill: white; " + // Couleur du texte
-                                        "-fx-background-radius: 5px; " + // Bord arrondi
-                                        "-fx-border-color: #ffffff; " + // Couleur de la bordure
-                                        "-fx-border-width: 2px;" // Largeur de la bordure
-                        )
-                        .title("achat Ajouté avec succès")
-                        .position(Pos.TOP_RIGHT) // Modifier la position ici
-                        .hideAfter(Duration.seconds(20))
-                        .show();
+
+
 
 
                 // Réinitialisation des champs après ajout réussi
