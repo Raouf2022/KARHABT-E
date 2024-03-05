@@ -15,10 +15,9 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -56,6 +55,9 @@ public class LesReclamationsAdmin {
 
     @FXML
     private Button statistiqueButton;
+
+    @FXML
+    private ChoiceBox<String> trichoiceBox;
     @FXML
     private BarChart<String, Number> voirLesStatistiquess;
 
@@ -164,6 +166,12 @@ public class LesReclamationsAdmin {
 
     @FXML
     public void initialize() {
+        trichoiceBox.getItems().addAll("Date", "Email");
+        trichoiceBox.setValue("Date"); // Valeur par défaut
+
+        // Ajouter un écouteur sur le ChoiceBox pour détecter les changements de sélection
+        trichoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> trierReclamations(newVal));
+
         // Appeler votre service pour obtenir la liste de réclamations
         Set<Reclamation> reclamations = serviceReclamation.getAll();
 
@@ -195,11 +203,33 @@ public class LesReclamationsAdmin {
             // Configurer le gestionnaire d'événements pour le bouton de recherche
             searchButton.setOnAction(this::searchByDate);
 
+
+
             loadStatistiques();
             appliquerAnimationBouton(statistiqueButton);
 
+
+
         }
     }
+
+    private void trierReclamations(String critereDeTri) {
+        Set<Reclamation> reclamationsTriees;
+
+        switch (critereDeTri) {
+            case "Email":
+                reclamationsTriees = serviceReclamation.triReclamationsParEmail();
+                break;
+            case "Date":
+            default:
+                reclamationsTriees = serviceReclamation.triReclamationsParDate();
+                break;
+        }
+
+        // Mise à jour de l'affichage
+        updateTilePane(new ArrayList<>(reclamationsTriees));
+    }
+
 
     // Méthode pour créer une page de la pagination
     private Node createPage(Set<Reclamation> reclamations, int pageIndex) {

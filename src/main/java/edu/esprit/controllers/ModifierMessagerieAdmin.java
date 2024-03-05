@@ -5,6 +5,7 @@ import edu.esprit.services.ServiceMessagerie;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -26,6 +27,8 @@ public class ModifierMessagerieAdmin {
     private Messagerie messagerie;
     private ServiceMessagerie serviceMessagerie;
     private Stage modifierStage;
+    @FXML
+    private ChoiceBox<?> trichoiceBox;
 
     public void setMessagerie(Messagerie messagerie, ServiceMessagerie serviceMessagerie) {
         this.messagerie = messagerie;

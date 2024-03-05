@@ -183,6 +183,36 @@ public class LesReponsesReclamationsClient {
 
         @FXML
     void retourAcueil(ActionEvent event) {
+            try {
+                // Charger le fichier FXML de l'accueil
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilReclamation.fxml"));
+                Parent root = loader.load();
+
+                // Créer une nouvelle scène avec le contenu de AccuielReclamation.fxml
+                Scene scene = new Scene(root);
+
+                // Obtenir la scène actuelle à partir du bouton cliqué
+                Scene currentScene = bRetourA.getScene();
+
+                // Configurer la transition
+                TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
+                transition.setFromX(-currentScene.getWidth());
+                transition.setToX(0);
+
+                // Afficher la nouvelle scène avec une transition
+                Stage stage = (Stage) currentScene.getWindow();
+                stage.setScene(scene);
+
+                // Démarrer la transition
+                transition.play();
+
+            } catch (IOException e) {
+                e.printStackTrace(); // Gérer les exceptions correctement dans votre application
+            }
+
+
+
+        }
 
     }
-}
+

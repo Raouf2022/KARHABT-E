@@ -34,7 +34,7 @@
                     </font>
                 </Text>
             </children></TilePane>
-        <Button fx:id="rButton" layoutX="29.0" layoutY="630.0" mnemonicParsing="false" onAction="#retourEcrireMessages" style="-fx-background-color: #F2AA52;" text="Retour" textFill="WHITE" />
+        <Button fx:id="rButton" layoutX="19.0" layoutY="594.0" mnemonicParsing="false" onAction="#retourEcrireMessages" style="-fx-background-color: #F2AA52;" text="Retour" textFill="WHITE" />
     </children>
 
     <stylesheets>

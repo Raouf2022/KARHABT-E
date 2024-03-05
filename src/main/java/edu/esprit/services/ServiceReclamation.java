@@ -326,4 +326,50 @@ public class ServiceReclamation implements IService<Reclamation> {
 
         return statistiques;
     }
+
+    public Set<Reclamation> triReclamationsParEmail() {
+        // Utiliser un TreeSet avec un comparateur personnalisé pour trier les réclamations par email
+        Set<Reclamation> reclamationsTriees = new TreeSet<>(Comparator.comparing(reclamation -> reclamation.getUser().geteMAIL()));
+
+        try {
+            String query = "SELECT r.idR, r.sujet, r.description, r.dateReclamation, r.emailUser, " +
+                    "u.nom AS userNom, u.prenom AS userPrenom, " +
+                    "u.DateNaissance AS userDateNaissance, u.numTel AS userNumTel, " +
+                    "u.eMAIL AS userEmail, u.passwd AS userPasswd, u.role AS userRole " +
+                    "FROM reclamation r " +
+                    "JOIN user u ON r.idU = u.idU " +
+                    "ORDER BY u.eMAIL ASC"; // Tri par email ASC
+
+            Statement stmt = cnx.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                Reclamation reclamation = new Reclamation();
+                reclamation.setIdR(rs.getInt("idR"));
+                reclamation.setSujet(rs.getString("sujet"));
+                reclamation.setDescription(rs.getString("description"));
+                reclamation.setDateReclamation(rs.getDate("dateReclamation"));
+                reclamation.setEmailUtilisateur(rs.getString("emailUser"));
+
+                // Créer un utilisateur associé à la réclamation
+                User user = new User();
+                user.setNom(rs.getString("userNom"));
+                user.setPrenom(rs.getString("userPrenom"));
+                user.setDateNaissance(rs.getDate("userDateNaissance"));
+                user.setNumTel(rs.getInt("userNumTel"));
+                user.seteMAIL(rs.getString("userEmail"));
+                user.setPasswd(rs.getString("userPasswd"));
+                user.setRole(rs.getString("userRole"));
+
+                // Associer l'utilisateur à la réclamation
+                reclamation.setUser(user);
+
+                reclamationsTriees.add(reclamation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reclamationsTriees;
+    }
+
 }
