@@ -65,6 +65,7 @@ public class Listactualite {
     void ajouteract(ActionEvent event) throws IOException {
         transitionToScene("/Ajouteractualite.fxml" , Ajouter);
     }
+
     @FXML
     public void initialize() throws SQLException {
         actualiteService = new Actualiteservice();
@@ -104,6 +105,7 @@ public class Listactualite {
 
         // Création de VBox pour le texte de l'actualité
         VBox textVBox = new VBox(5);
+
         textVBox.setAlignment(Pos.CENTER_LEFT);
 
          // Ajout du titre, de la date et du contenu
@@ -209,7 +211,6 @@ public class Listactualite {
 // Création d'une boîte verticale (VBox) pour contenir l'actualité et les commentaires
         VBox container = new VBox(actualiteSection, commentsSection);
         container.getStyleClass().add("actualite-item-container");
-
         return container;
     }
 
@@ -226,6 +227,9 @@ public class Listactualite {
 
         return button;
     }
+
+
+
     private VBox createCommentBox(Commentaire comment) {
 
         //Box pour le commentaire et les reponses
@@ -602,9 +606,9 @@ public class Listactualite {
     }
     @FXML
     private void onSearchKeyReleased(KeyEvent event) {
-        //metierrechrche avec filtre
         String searchText = searchField.getText().toLowerCase();
         actualitesContainer.getChildren().clear();
+
 
         try {
             // Filtrage des actualités en fonction du texte de recherche
@@ -640,4 +644,8 @@ public class Listactualite {
         });
         fadeOutTransition.play();
     }
+
+
+
+
 }

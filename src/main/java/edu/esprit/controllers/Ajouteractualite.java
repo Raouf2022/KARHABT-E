@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import edu.esprit.entities.Actualite;
@@ -26,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+
 public class Ajouteractualite {
 
     @FXML
@@ -42,6 +44,31 @@ public class Ajouteractualite {
 
     @FXML
     private TextField titre;
+    @FXML
+    private TextField validateCaptcha;
+    @FXML
+    private TextField captchaCodeValue;
+    private  String a ="";
+
+    public static String createCaptchaValue(){
+        Random random = new Random();
+        int length=7+(Math.abs(random.nextInt()) % 3);
+        StringBuffer captchaStrBuffer = new StringBuffer() ;
+        for (int i=0; i<length;i++) {
+            int baseCharacterNumber = Math.abs(random.nextInt()%62);
+            int characterNumber = 0 ;
+            if(baseCharacterNumber < 26) {
+                characterNumber= 65 + baseCharacterNumber ;
+            } else if (baseCharacterNumber < 52) {
+                characterNumber = 97 + (baseCharacterNumber - 26);
+            }else {
+                characterNumber = 48 + (baseCharacterNumber-52);
+            }
+            captchaStrBuffer.append((char)characterNumber);
+        }
+        return captchaStrBuffer.toString();
+    }
+
 
     @FXML
     void Ajouteractualite(ActionEvent event) {
@@ -51,27 +78,40 @@ public class Ajouteractualite {
             String contenueText = contenue.getText();
             String imageText = image.getText();
 
+
             // Validation des champs
             if (titreText.isEmpty() || contenueText.isEmpty() || imageText.isEmpty()) {
                 throw new IllegalArgumentException("Veuillez remplir tous les champs.");
             }
+            if (validateCaptcha.getText().equals(a)){
 
-            // Création de l'objet Actualite
-            Actualite actualite = new Actualite(titreText, imageText, contenueText);
 
-            // Appel du service pour ajouter l'actualité dans la base de données
-            Actualiteservice actualiteservice = new Actualiteservice();
-            actualiteservice.ajouter(actualite);
 
-            // Affichage d'une alerte de succès
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("L'actualité a été ajoutée avec succès");
-            alert.show();
 
-            // Réinitialisation des champs après ajout réussi
-            titre.clear();
-            contenue.clear();
-            image.clear();
+                // Création de l'objet Actualite
+                Actualite actualite = new Actualite(titreText, imageText, contenueText);
+
+                // Appel du service pour ajouter l'actualité dans la base de données
+                Actualiteservice actualiteservice = new Actualiteservice();
+                actualiteservice.ajouter(actualite);
+
+                // Affichage d'une alerte de succès
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("L'actualité a été ajoutée avec succès");
+                alert.show();
+
+                // Réinitialisation des champs après ajout réussi
+                titre.clear();
+                contenue.clear();
+                image.clear();
+
+
+
+            } else {  Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("code captcha invalide  : " );
+                alert.show(); }
+
+
 
         } catch (Exception e) {
             // En cas d'erreur, affichage d'une alerte d'erreur
@@ -79,7 +119,14 @@ public class Ajouteractualite {
             alert.setContentText("Erreur lors de l'ajout de l'actualité : " + e.getMessage());
             alert.show();
         }
+
+
+
+
+
     }
+
+
 
 
 
@@ -143,8 +190,11 @@ public class Ajouteractualite {
         }
     }
 
-
-
+    @FXML
+    void initialize() {
+     a = createCaptchaValue();
+     captchaCodeValue.setText(a);
+    }
 
 
 

@@ -40,6 +40,8 @@
       </Text>
       <TextArea fx:id="contenue" layoutX="383.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" promptText="Contenue" />
     <Button layoutX="726.0" layoutY="34.0" mnemonicParsing="false" onAction="#goBack" text="&lt;--" />
+      <TextField fx:id="captchaCodeValue" editable="false" layoutX="595.0" layoutY="364.0" />
+      <TextField fx:id="validateCaptcha" layoutX="596.0" layoutY="401.0" promptText="CAPTCHA" />
 
    </children>
 </AnchorPane>
