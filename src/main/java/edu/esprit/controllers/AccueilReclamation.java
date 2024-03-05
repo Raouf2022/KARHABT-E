@@ -182,7 +182,10 @@ public class AccueilReclamation {
             e.printStackTrace(); // Gérer les exceptions correctement dans votre application
         }
     }
+
+    public void retourAcueilAdmin(ActionEvent actionEvent) {
     }
+}
 
 
 

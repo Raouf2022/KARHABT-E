@@ -1,6 +1,7 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Reclamation;
+import edu.esprit.entities.User;
 import edu.esprit.services.ServiceReclamation;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -22,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -29,16 +31,19 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -191,7 +196,7 @@ public class LesReclamationsAdmin {
             searchButton.setOnAction(this::searchByDate);
 
             loadStatistiques();
-
+            appliquerAnimationBouton(statistiqueButton);
 
         }
     }
@@ -226,6 +231,10 @@ public class LesReclamationsAdmin {
         mainVBox.getStyleClass().add("Reclamation-pane");
         mainVBox.setSpacing(13);  // Set the vertical spacing between the children
         // VBox for each attribute
+
+        Label titleLabel = new Label("Réclamation");
+        titleLabel.getStyleClass().add("reclamation-title"); // Utilisez cette classe dans votre CSS pour styliser le titre
+
 
         VBox sujetVBox = createAttributeVBox("Sujet", reclamation.getSujet());
         VBox descriptionVBox = createAttributeVBox("Description", reclamation.getDescription());
@@ -262,8 +271,27 @@ public class LesReclamationsAdmin {
             document.addPage(page);
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            // Définir la police et la taille du texte
+            // Charger et ajouter l'image du logo
+            try (InputStream logoStream = getClass().getResourceAsStream("/images/logoP.png")) {
+                byte[] bytes = IOUtils.toByteArray(logoStream);
+                PDImageXObject logoImage = PDImageXObject.createFromByteArray(document, bytes, "logoP");
+                contentStream.drawImage(logoImage, 50, 700, 100, 100); // Ajustez la position et la taille selon vos besoins
+            } catch (IOException e) {
+                System.err.println("Erreur lors du chargement de l'image du logo: " + e.getMessage());
+            }
+
+            // Reste du code pour ajouter texte, tableau, etc.
+
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
+            contentStream.setNonStrokingColor(Color.BLUE);
+            contentStream.newLineAtOffset(200, 800);
+            contentStream.showText("Détails de la Réclamation");
+            contentStream.endText();
+
+            // Définir la police et la taille pour les labels
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.setNonStrokingColor(Color.BLACK);
 
             // Positions et dimensions
             float margin = 50;
@@ -272,59 +300,61 @@ public class LesReclamationsAdmin {
             float rowHeight = 20;
             float colWidth = tableWidth / 2;
             float textX = margin + 2;
-            float textY = yStart - 15;
+            float textY = yStart - 100; // Décalage après l'image du logo
 
-            // Dessiner le tableau
-            // Lignes horizontales
-            float nextY = yStart;
-            for (int i = 0; i <= 4; i++) {
-                contentStream.moveTo(margin, nextY);
-                contentStream.lineTo(margin + tableWidth, nextY);
-                contentStream.stroke();
-                nextY -= rowHeight;
-            }
+            // Dessiner le tableau avec des lignes colorées
+            contentStream.setStrokingColor(Color.LIGHT_GRAY); // Couleur des lignes
 
-            // Lignes verticales
-            contentStream.moveTo(margin, yStart);
-            contentStream.lineTo(margin, yStart - 4 * rowHeight);
-            contentStream.moveTo(margin + colWidth, yStart);
-            contentStream.lineTo(margin + colWidth, yStart - 4 * rowHeight);
-            contentStream.moveTo(margin + tableWidth, yStart);
-            contentStream.lineTo(margin + tableWidth, yStart - 4 * rowHeight);
-            contentStream.stroke();
-
-            // Ajouter le texte
-            String[] labels = {"Sujet:", "Description:", "Date:", "Email:"};
+            // Ajout du texte avec distinction entre labels et valeurs
+            String[] labels = {"Sujet:", "Description:", "Date:", "Email:", "Nom:", "Prénom:", "Date de Naissance:", "Numéro de Téléphone:"};
+            User user = reclamation.getUser();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String[] values = {
                     reclamation.getSujet(),
                     reclamation.getDescription(),
-                    formatDate(reclamation.getDateReclamation()),
-                    reclamation.getEmailUtilisateur()
+                    sdf.format(reclamation.getDateReclamation()),
+                    reclamation.getEmailUtilisateur(),
+                    user.getNom(),
+                    user.getPrenom(),
+                    sdf.format(user.getDateNaissance()),
+                    String.valueOf(user.getNumTel())
             };
 
             for (int i = 0; i < labels.length; i++) {
                 contentStream.beginText();
-                contentStream.newLineAtOffset(textX, textY - i * rowHeight);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12); // Labels en gras
+                contentStream.newLineAtOffset(textX, textY - rowHeight * i);
                 contentStream.showText(labels[i]);
                 contentStream.endText();
 
                 contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA, 12); // Police normale pour les valeurs
-                contentStream.newLineAtOffset(textX + colWidth, textY - i * rowHeight);
+                contentStream.setFont(PDType1Font.HELVETICA, 12); // Valeurs en police normale
+                contentStream.newLineAtOffset(textX + colWidth, textY - rowHeight * i);
                 contentStream.showText(values[i]);
                 contentStream.endText();
             }
 
+            // Pied de page
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_OBLIQUE, 12);
+            contentStream.setNonStrokingColor(Color.GRAY);
+            contentStream.newLineAtOffset(250, 50);
+            contentStream.showText("Page 1");
+            contentStream.endText();
+
             contentStream.close();
 
-            // Sauvegarder le document PDF
+            // Sauvegarder et ouvrir le document
             File file = new File("details_reclamation.pdf");
             document.save(file);
             Desktop.getDesktop().open(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
+
+
     private void openReponseForm(Reclamation reclamation) {
         try {
             // Charger le fichier FXML du formulaire de réponse
@@ -466,7 +496,35 @@ public class LesReclamationsAdmin {
         }
 
         voirLesStatistiquess.getData().add(series);
+
+        // Assurez-vous que la mise à jour des couleurs se fait après l'ajout des données
+        updateBarChartColors(voirLesStatistiquess);
     }
+
+    // Assurez-vous d'inclure la méthode updateBarChartColors dans la même classe que loadStatistiques
+    private void updateBarChartColors(BarChart<String, Number> barChart) {
+        for (XYChart.Series<String, Number> series : barChart.getData()) {
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                Node node = data.getNode();
+                double value = data.getYValue().doubleValue();
+                if (value > 5) {
+                    node.setStyle("-fx-bar-fill: red;"); // Rouge si la valeur dépasse 7
+                } else {
+                    node.setStyle("-fx-bar-fill: green;"); // Vert autrement
+                }
+            }
+        }
+    }
+
+    private void appliquerAnimationBouton(Button bouton) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), bouton);
+        fadeTransition.setFromValue(1.0); // Complètement opaque
+        fadeTransition.setToValue(0.3); // Partiellement transparent
+        fadeTransition.setAutoReverse(true); // Revenir à l'état initial après la transition
+        fadeTransition.setCycleCount(FadeTransition.INDEFINITE); // Répéter indéfiniment
+        fadeTransition.play(); // Démarrer l'animation
+    }
+
 
 
     @FXML

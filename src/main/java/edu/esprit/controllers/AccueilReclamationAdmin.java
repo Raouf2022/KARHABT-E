@@ -163,4 +163,6 @@ public class AccueilReclamationAdmin {
         }
 
 
+    public void retourAcueilAdmin(ActionEvent actionEvent) {
+    }
 }

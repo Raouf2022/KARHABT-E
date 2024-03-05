@@ -89,7 +89,7 @@ public class LesReponsesReclamations {
             fxPagination.setVisible(true); // Afficher la pagination
 
             // Configurer la pagination
-            int itemsPerPage = 4; // Nombre d'éléments par page
+            int itemsPerPage = 6; // Nombre d'éléments par page
             int pageCount = (int) Math.ceil((double) repReclamations.size() / itemsPerPage);
             fxPagination.setPageCount(pageCount);
 
@@ -107,7 +107,7 @@ public class LesReponsesReclamations {
 
     // Méthode pour créer une page de la pagination
     private Node createPage(Set<ReponseReclamation> repReclamations, int pageIndex) {
-        int itemsPerPage = 4; // Nombre d'éléments par page
+        int itemsPerPage = 6; // Nombre d'éléments par page
         int fromIndex = pageIndex * itemsPerPage;
         int toIndex = Math.min(fromIndex + itemsPerPage, repReclamations.size());
 

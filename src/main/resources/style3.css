@@ -1,54 +1,70 @@
-/* Enhanced global styles for a cleaner and more modern look */
-.anchor-pane {
-    -fx-background-color: linear-gradient(to bottom, #FAFAFA, #EAEAEA); /* Subtle gradient background */
+.root {
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    -fx-base: #606060;
+    -fx-background: #F2F2F2;
 }
 
-/* Improved pagination styling for better visual integration */
-.pagination {
-    -fx-background-radius: 10px; /* More pronounced rounded corners */
-    -fx-border-color: #D0D0D0; /* Soft border color */
-    -fx-border-radius: 10px; /* Rounded borders to match */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); /* Soft shadow for depth */
-}
-
-/* Label styling with a more distinctive and modern appearance */
 .label {
-    -fx-font-size: 16px; /* Slightly larger font size for emphasis */
-    -fx-text-fill: #4A4A4A; /* Darker text for better readability */
-    -fx-background-color: linear-gradient(to bottom, #FFFFFF, #F0F0F0); /* Gradient background */
-    -fx-padding: 10px; /* Increased padding for a larger clickable area */
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-background-radius: 10px; /* Rounded background corners */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 3, 0, 0, 2); /* Subtle shadow for depth */
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
 }
 
-/* TilePane adjustments for a cohesive and organized display */
-.tile-pane {
-    -fx-background-color: #FFFFFF; /* Clear background */
-    -fx-padding: 15px; /* Increased padding for better spacing */
-    -fx-hgap: 15px; /* More horizontal gap */
-    -fx-vgap: 15px; /* More vertical gap */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 10, 0, 0, 5); /* Shadow for depth */
+.label-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #000;
 }
 
-/* Specific styling for .Réponse elements to make them stand out */
-.Réponse {
-    -fx-background-color: linear-gradient(to right, #D9325E, #E74561); /* Gradient red background */
-    -fx-text-fill: #FFFFFF; /* White text for contrast */
-    -fx-padding: 10px 20px; /* Generous padding for a substantial look */
-    -fx-border-radius: 15px; /* Softly rounded corners for a modern feel */
-    -fx-background-radius: 15px; /* Matching background radius */
-    -fx-font-weight: bold; /* Bold font for text */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 4); /* Pronounced shadow for a lifted effect */
-    -fx-cursor: hand; /* Cursor change to indicate interactivity */
+.label-attribute {
+    -fx-padding: 2px;
 }
 
-/* Adding transitions for a smoother interactive experience */
-.button, .pagination, .Réponse {
-    -fx-transition: all 0.3s ease-in-out;
+.Reclamation-pane {
+    -fx-border-color: #D8D8D8;
+    -fx-border-width: 1px;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-padding: 10px;
 }
 
-.button:hover, .pagination:hover, .Réponse:hover {
-    -fx-scale: 1.05; /* Slightly enlarge on hover */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.25), 6, 0, 0, 6); /* Enhanced shadow for emphasis */
+.Button {
+    -fx-background-color:
+            #1d1d1d,
+            linear-gradient(#282828 0%, #1d1d1d 50%, #282828 75%, #383838 100%),
+            linear-gradient(#2a2a2a, #1d1d1d),
+            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0, 0, 1);
+    -fx-font-size: 12px;
+    -fx-padding: 5px 10px 5px 10px;
+}
+
+.Button:hover {
+    -fx-background-color:
+            linear-gradient(#2a2a2a, #1d1d1d),
+            linear-gradient(#383838 0%, #282828 50%, #1d1d1d 75%, #1d1d1d 100%),
+            linear-gradient(#2a2a2a, #1d1d1d),
+            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+}
+
+.Pagination {
+    -fx-page-information-visible: false;
+    -fx-arrow-button-visible: true;
+    -fx-page-information-alignment: center;
+}
+
+.TilePane {
+    -fx-padding: 10px;
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}
+
+.VBox {
+    -fx-spacing: 5px;
+}
+
+.HBox {
+    -fx-spacing: 10px;
 }

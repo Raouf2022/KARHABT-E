@@ -1,6 +1,7 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Reclamation;
+import edu.esprit.entities.User;
 import edu.esprit.services.ServiceReclamation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,15 +13,27 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.pdfbox.io.IOUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 public class TriReclamations {
     @FXML
@@ -61,7 +74,7 @@ public class TriReclamations {
             fxPagination.setVisible(true); // Afficher la pagination
 
             // Configurer la pagination
-            int itemsPerPage = 3; // Nombre d'éléments par page
+            int itemsPerPage = 4; // Nombre d'éléments par page
             int pageCount = (int) Math.ceil((double) reclamationsTriees.size() / itemsPerPage);
             fxPagination.setPageCount(pageCount);
 
@@ -72,7 +85,7 @@ public class TriReclamations {
 
     // Méthode pour créer une page de la pagination
     private Node createPage(Set<Reclamation> reclamationsTriees, int pageIndex) {
-        int itemsPerPage = 3; // Nombre d'éléments par page
+        int itemsPerPage = 4; // Nombre d'éléments par page
         int fromIndex = pageIndex * itemsPerPage;
         int toIndex = Math.min(fromIndex + itemsPerPage, reclamationsTriees.size());
 
@@ -111,7 +124,17 @@ public class TriReclamations {
         Button repondreButton = new Button("Répondre");
         repondreButton.setOnAction(event -> openReponseForm(reclamationtriees));
 
-        mainVBox.getChildren().addAll( sujetVBox, descriptionVBox, dateVBox, emailVBox, repondreButton);
+        Button DetailsButton = new Button("->Détails");
+        DetailsButton.setOnAction(event -> generatePDF(reclamationtriees));
+
+
+        HBox buttonHBox = new HBox();
+        buttonHBox.setSpacing(10);  // Set the horizontal spacing between the buttons
+        // Ajout des boutons à l'HBox
+        buttonHBox.getChildren().addAll(repondreButton, DetailsButton);
+
+        // Ajout de tous les éléments au VBox principal
+        mainVBox.getChildren().addAll(sujetVBox, descriptionVBox, dateVBox, emailVBox, buttonHBox);
 
 
 
@@ -120,6 +143,95 @@ public class TriReclamations {
         mainPane.getStyleClass().add("reclamation-pane");
 
         return mainPane;
+    }
+
+    private void generatePDF(Reclamation reclamation) {
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            // Charger et ajouter l'image du logo
+            try (InputStream logoStream = getClass().getResourceAsStream("/images/logoP.png")) {
+                byte[] bytes = IOUtils.toByteArray(logoStream);
+                PDImageXObject logoImage = PDImageXObject.createFromByteArray(document, bytes, "logoP");
+                contentStream.drawImage(logoImage, 50, 700, 100, 100); // Ajustez la position et la taille selon vos besoins
+            } catch (IOException e) {
+                System.err.println("Erreur lors du chargement de l'image du logo: " + e.getMessage());
+            }
+
+            // Reste du code pour ajouter texte, tableau, etc.
+
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
+            contentStream.setNonStrokingColor(Color.BLUE);
+            contentStream.newLineAtOffset(200, 800);
+            contentStream.showText("Détails de la Réclamation");
+            contentStream.endText();
+
+            // Définir la police et la taille pour les labels
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.setNonStrokingColor(Color.BLACK);
+
+            // Positions et dimensions
+            float margin = 50;
+            float yStart = 750;
+            float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
+            float rowHeight = 20;
+            float colWidth = tableWidth / 2;
+            float textX = margin + 2;
+            float textY = yStart - 100; // Décalage après l'image du logo
+
+            // Dessiner le tableau avec des lignes colorées
+            contentStream.setStrokingColor(Color.LIGHT_GRAY); // Couleur des lignes
+
+            // Ajout du texte avec distinction entre labels et valeurs
+            String[] labels = {"Sujet:", "Description:", "Date:", "Email:", "Nom:", "Prénom:", "Date de Naissance:", "Numéro de Téléphone:"};
+            User user = reclamation.getUser();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String[] values = {
+                    reclamation.getSujet(),
+                    reclamation.getDescription(),
+                    sdf.format(reclamation.getDateReclamation()),
+                    reclamation.getEmailUtilisateur(),
+                    user.getNom(),
+                    user.getPrenom(),
+                    sdf.format(user.getDateNaissance()),
+                    String.valueOf(user.getNumTel())
+            };
+
+            for (int i = 0; i < labels.length; i++) {
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12); // Labels en gras
+                contentStream.newLineAtOffset(textX, textY - rowHeight * i);
+                contentStream.showText(labels[i]);
+                contentStream.endText();
+
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.HELVETICA, 12); // Valeurs en police normale
+                contentStream.newLineAtOffset(textX + colWidth, textY - rowHeight * i);
+                contentStream.showText(values[i]);
+                contentStream.endText();
+            }
+
+            // Pied de page
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_OBLIQUE, 12);
+            contentStream.setNonStrokingColor(Color.GRAY);
+            contentStream.newLineAtOffset(250, 50);
+            contentStream.showText("Page 1");
+            contentStream.endText();
+
+            contentStream.close();
+
+            // Sauvegarder et ouvrir le document
+            File file = new File("details_reclamation.pdf");
+            document.save(file);
+            Desktop.getDesktop().open(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private VBox createAttributeVBox(String label, String value) {

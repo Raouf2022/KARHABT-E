@@ -126,13 +126,12 @@ public class MessageRecuClient {
                 VBox contenuVBox = createAttributeVBox("Contenu", message.getContenu());
                 VBox dateVBox = createAttributeVBox("Date", formatDate(message.getDateEnvoie()));
 
-                String vuStatus = message.isVu() ? "Vu" : "Non vu";
-                VBox vuVBox = createAttributeVBox("Vu", vuStatus);
+
 
                 // Buttons for modification and deletion
 
                 // Add VBoxes and buttons to the main VBox
-                mainVBox.getChildren().addAll(contenuVBox, dateVBox,vuVBox);
+                mainVBox.getChildren().addAll(contenuVBox, dateVBox);
                 if(message.isDeleted()) {
                         Label deletedLabel = new Label("Supprimé");
                         deletedLabel.getStyleClass().addAll("label", "label-deleted"); // Ensure you have CSS for this
