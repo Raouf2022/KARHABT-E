@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="243.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Dossier">
+   <top>
+      <HBox prefHeight="65.0" prefWidth="243.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="68.0" prefWidth="117.0" text="Dossier :" textFill="#11abd9">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ImageView fitHeight="62.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Downloads/document-file-icon-paper-doc-sign-free-png.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="50.0" top="5.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="39.0" prefWidth="243.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="buttadd" mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../Downloads/add-1-icon--flatastic-1-iconset--custom-icon-design-0.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="28.0" prefWidth="13.0" />
+            <Button fx:id="buttdel" mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../Downloads/5028066.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="183.0" prefWidth="243.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="25.0" prefWidth="243.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="90.0" text="CIN :">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="fxxcin" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: transparent;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="243.0">
+               <children>
+                  <Label prefHeight="41.0" prefWidth="90.0" text="Nom :">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="fxxname" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: transparent;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="243.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="90.0" text="Prenom :">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="fxx2name" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: transparent;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="243.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="90.0" text="Region :">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="fxxregion" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: transparent;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="243.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="90.0" text="Naissance :">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <DatePicker fx:id="fxxdate" style="-fx-background-color: transparent;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="243.0">
+               <children>
+                  <Label prefHeight="38.0" prefWidth="90.0" text="Montant :">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="fxxmontant" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: transparent;" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
