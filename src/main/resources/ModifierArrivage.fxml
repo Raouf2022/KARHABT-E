@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierArrivageController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierArrivageController">
     <children>
         <VBox alignment="CENTER" layoutX="255.0" layoutY="135.0" prefHeight="292.0" prefWidth="417.0" spacing="20">
             <children>
@@ -41,7 +41,7 @@
         </VBox>
       <Pane layoutY="8.0" prefHeight="649.0" prefWidth="191.0" styleClass="pane">
          <children>
-            <Button fx:id="NouvelleV" layoutX="14.0" layoutY="184.0" mnemonicParsing="false" onAction="#navigatetoAjouterVoitureAction" prefHeight="41.0" prefWidth="155.0" styleClass="button" text="Nouvelle Voiture" />
+            <Button fx:id="NouvelleV" layoutX="14.0" layoutY="184.0" mnemonicParsing="false" onAction="#navigatetoAjouterVoitureAction" prefHeight="41.0" prefWidth="155.0" styleClass="button" stylesheets="@style.css" text="Nouvelle Voiture" />
             <Button fx:id="GetArrivage" layoutX="14.0" layoutY="264.0" mnemonicParsing="false" onAction="#navigatetoAfficherArrivageAction" prefHeight="41.0" prefWidth="155.0" styleClass="button" text="Afficher Arrivage" />
             <ImageView fitHeight="137.0" fitWidth="142.0" layoutX="44.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
                <image>

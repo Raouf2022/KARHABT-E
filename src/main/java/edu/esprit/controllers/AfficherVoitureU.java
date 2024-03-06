@@ -4,8 +4,11 @@ import edu.esprit.entities.Voiture;
 import edu.esprit.services.ServiceVoiture;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -29,9 +33,13 @@ public class AfficherVoitureU {
 
     @FXML
     private TextField modeleTextField;
+    @FXML
+    private Button btnArrivages;
 
     @FXML
     private Button rechercheButton;
+
+
 
 
     @FXML
@@ -161,6 +169,24 @@ return pane;
         }
 
 
+
+    }
+    @FXML
+    void navigatetoArrivageAction(ActionEvent event) {
+
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherArrivageU.fxml"));
+            btnArrivages.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Désolé");
+            alert.setTitle("Erreur");
+            alert.show();
+
+
+        }
 
     }
 

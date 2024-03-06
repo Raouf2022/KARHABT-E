@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class MainFX extends Application {
 
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Stat.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherVoitureU.fxml"));
         Parent root;
         root = loader.load();
         Scene scene = new Scene(root);

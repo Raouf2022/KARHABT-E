@@ -1,5 +1,5 @@
 package edu.esprit.controllers;
-
+import edu.esprit.controllers.StatController;
 import edu.esprit.entities.Arrivage;
 import edu.esprit.entities.Voiture;
 import edu.esprit.services.ServiceArrivage;
@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -42,7 +44,9 @@ public class AfficherArrivage {
     @FXML
     private Button NouvelleV;
     @FXML
-    private Canvas chartCanvas;
+    private Button Stat;
+    //@FXML
+   // private Canvas chartCanvas;
     private final ServiceArrivage serviceArrivage = new ServiceArrivage();
 
     @FXML
@@ -202,6 +206,47 @@ public class AfficherArrivage {
 
         }
     }
+    @FXML
+    void navigatetoStatAction(ActionEvent event) {
+        try {
+            // Charger la vue Stat
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Stat.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir le contrôleur de la vue Stat
+            StatController statController = loader.getController();
+            // Appeler la méthode drawChart du contrôleur Stat
+            statController.drawChart();
+
+            // Créer une nouvelle fenêtre modale
+            Stage statStage = new Stage();
+            statStage.setTitle("Statistiques");
+            statStage.setScene(new Scene(root));
+
+            // Bloquer la fenêtre principale pendant que la nouvelle fenêtre est ouverte
+            statStage.initModality(Modality.APPLICATION_MODAL);
+            statStage.initOwner(NouvelleV.getScene().getWindow());
+
+            // Afficher la nouvelle fenêtre
+            statStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Désolé");
+            alert.setTitle("Erreur");
+            alert.show();
+        }
+    }
+
+
+    }
+
+
+
+
+
+
+
 
 
 
@@ -241,4 +286,3 @@ public class AfficherArrivage {
         g2d.clearRect(0, 0, (int) chartCanvas.getWidth(), (int) chartCanvas.getHeight());
         barChart.draw(g2d, new java.awt.Rectangle((int) chartCanvas.getWidth(), (int) chartCanvas.getHeight()));
     }*/
-}

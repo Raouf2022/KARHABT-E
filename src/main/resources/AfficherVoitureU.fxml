@@ -7,12 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherVoitureU">
+<AnchorPane fx:id="GetArrivage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherVoitureU">
    <children>
-      <ScrollPane layoutX="-10.0" layoutY="67.0" prefHeight="650.0" prefWidth="814.0">
+      <ScrollPane layoutX="3.0" layoutY="104.0" prefHeight="610.0" prefWidth="793.0">
          <content>
-            <HBox fx:id="voitureTitlePane" prefHeight="650.0" prefWidth="1702.0" styleClass="hbox" stylesheets="@style.css" />
+            <HBox fx:id="voitureTitlePane" prefHeight="638.0" prefWidth="1688.0" styleClass="hbox" stylesheets="@style.css" />
          </content>
       </ScrollPane>
       <TextField fx:id="marqueTextField" layoutX="65.0" layoutY="21.0" prefHeight="23.0" prefWidth="116.0" />
@@ -24,5 +23,6 @@
       <Label layoutX="191.0" layoutY="24.0" text="modele" />
       <Label layoutX="369.0" layoutY="25.0" text="minPrix" />
       <Label layoutX="510.0" layoutY="23.0" text="maxPrix" />
+      <Button fx:id="btnArrivages" layoutX="65.0" layoutY="59.0" mnemonicParsing="false" onAction="#navigatetoArrivageAction" prefHeight="23.0" prefWidth="138.0" text="Arrivages" />
    </children>
 </AnchorPane>

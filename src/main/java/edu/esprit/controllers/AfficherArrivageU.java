@@ -3,19 +3,29 @@ package edu.esprit.controllers;
 import edu.esprit.entities.Arrivage;
 import edu.esprit.entities.Voiture;
 import edu.esprit.services.ServiceArrivage;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.Set;
 
 public class AfficherArrivageU {
 
     @FXML
     private TilePane arrivageTilePane;
+
+    @FXML
+    private Button btnReturn;
+
 
     @FXML
     private ScrollPane scrollPane;
@@ -71,5 +81,24 @@ public class AfficherArrivageU {
         box.getChildren().addAll(quantiteLabel, dateEntreeLabel, marqueLabel, modeleLabel, couleurLabel, prixLabel);
 return box;
     }
-}
+    @FXML
+    void returntoVoituresAction(ActionEvent event) {
+        try {
+            // Load the Afficher Voiture view
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherVoitureU.fxml"));
+            btnReturn.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load the Afficher Voiture view.");
+            alert.showAndWait();
+        }
+    }
+
+
+
+    }
+
+
+
+
 
