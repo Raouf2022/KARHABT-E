@@ -178,7 +178,7 @@ public class Ajouteractualite {
     void goBack(ActionEvent event) {
         try {
             // Charger le fichier FXML
-            Parent root = FXMLLoader.load(getClass().getResource("/listeactualite.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/listeactualiteAdmin.fxml"));
 
             // Créer une nouvelle scène
             Scene scene = new Scene(root);

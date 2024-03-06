@@ -45,8 +45,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Listactualite {
+public class ListeactualiteAdmin {
 
+    @FXML
+    private Button Ajouter;
 
     @FXML
     private VBox actualitesContainer;
@@ -61,7 +63,10 @@ public class Listactualite {
 
     private Map<Integer, TextField> actualiteToTextFieldMap = new HashMap<>();
     private Map<Integer, Button> actualiteToButtonMap = new HashMap<>();
-
+    @FXML
+    void ajouteract(ActionEvent event) throws IOException {
+        transitionToScene("/Ajouteractualite.fxml" , Ajouter);
+    }
 
     @FXML
     public void initialize() throws SQLException {
@@ -105,7 +110,7 @@ public class Listactualite {
 
         textVBox.setAlignment(Pos.CENTER_LEFT);
 
-         // Ajout du titre, de la date et du contenu
+        // Ajout du titre, de la date et du contenu
         Label titleLabel = new Label(actualite.getTitre());
         titleLabel.setFont(new Font("Arial Rounded MT Bold", 12));
         titleLabel.setStyle("-fx-text-fill: white;"); // Définir la couleur du texte en blanc
@@ -126,9 +131,11 @@ public class Listactualite {
 
         HBox buttonHBox = new HBox(5);
         buttonHBox.setAlignment(Pos.CENTER_RIGHT);
-          // Création des boutons
-
-
+        // Création des boutons
+        Button deleteButton = createIconButton("TRASH", Color.RED, 20, this::handleDelete);
+        deleteButton.setUserData(actualite);
+        Button modifyButton = createIconButton("PENCIL", Color.BLACK, 20, this::handleModify);
+        modifyButton.setUserData(actualite);
         Button myButtonTraduire = createIconButtonT("Traduire",0,0,70 );
         myButtonTraduire.setOnAction(event -> {
             TranslatorText translatorText = TranslatorText.getInstance();
@@ -205,9 +212,7 @@ public class Listactualite {
         });
 
         // Ajout des boutons dans HBox
-
-        buttonHBox.getChildren().addAll(myButtonTraduire,myButtonAnnuler);
-
+        buttonHBox.getChildren().addAll(modifyButton, deleteButton,myButtonTraduire,myButtonAnnuler);
 
         hbox.getChildren().add(buttonHBox);
 
@@ -253,32 +258,32 @@ public class Listactualite {
             handleCommentAction(actualite, newCommentField, submitCommentButton, commentText, commentsSection);
         });
 
-         // Ajout du champ de texte et du bouton à la section des commentaires
+        // Ajout du champ de texte et du bouton à la section des commentaires
         commentsSection.getChildren().addAll(newCommentField, submitCommentButton);
 
-        Rating rating = new Rating(5);
-        rating.setPartialRating(true);
-
-        double actualiteRating = actualite.getRating();
-
-        System.out.println(actualiteRating);
-        if (actualiteRating > 0) {
-            rating.setRating(actualiteRating);
-        } else {
-            rating.setRating(0);
-        }
-
-        rating.ratingProperty().addListener((observable, oldValue, newValue) -> {
-            actualite.setRating(newValue.doubleValue());
-            try {
-                actualiteService.modifier(actualite);
-                System.out.println("Rating updated for actualité " + actualite.getTitre());
-            } catch (SQLException e) {
-                e.printStackTrace();
-                showAlert("Error", "An error occurred while updating the rating: " + e.getMessage());
-            }
-        });
-        textVBox.getChildren().add(rating);
+//        Rating rating = new Rating(5);
+//        rating.setPartialRating(true);
+//
+//        double actualiteRating = actualite.getRating();
+//
+//        System.out.println(actualiteRating);
+//        if (actualiteRating > 0) {
+//            rating.setRating(actualiteRating);
+//        } else {
+//            rating.setRating(0);
+//        }
+//
+//        rating.ratingProperty().addListener((observable, oldValue, newValue) -> {
+//            actualite.setRating(newValue.doubleValue());
+//            try {
+//                actualiteService.modifier(actualite);
+//                System.out.println("Rating updated for actualité " + actualite.getTitre());
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//                showAlert("Error", "An error occurred while updating the rating: " + e.getMessage());
+//            }
+//        });
+    //    textVBox.getChildren().add(rating);
 
 // Création d'une boîte verticale (VBox) pour contenir l'actualité et les commentaires
         VBox container = new VBox(actualiteSection, commentsSection);
@@ -287,18 +292,18 @@ public class Listactualite {
     }
 
 
-//    private Button createIconButton(String iconGlyphName, Color iconColor, int iconSize, EventHandler<ActionEvent> actionHandler) {
-//        FontAwesomeIconView icon = new FontAwesomeIconView();
-//        icon.setGlyphName(iconGlyphName);
-//        icon.setSize(String.valueOf(iconSize));
-//        icon.setFill(iconColor);
-//
-//        Button button = new Button();
-//        button.setGraphic(icon);
-//        button.setOnAction(actionHandler);
-//
-//        return button;
-//    }
+    private Button createIconButton(String iconGlyphName, Color iconColor, int iconSize, EventHandler<ActionEvent> actionHandler) {
+        FontAwesomeIconView icon = new FontAwesomeIconView();
+        icon.setGlyphName(iconGlyphName);
+        icon.setSize(String.valueOf(iconSize));
+        icon.setFill(iconColor);
+
+        Button button = new Button();
+        button.setGraphic(icon);
+        button.setOnAction(actionHandler);
+
+        return button;
+    }
     private Button createIconButtonT(String text, double x, double y,double xx) {
         Button button = new Button();
         button.setText(text);
@@ -312,7 +317,7 @@ public class Listactualite {
 
 
 
-
+///////////////////////////////////////////////////////////////
     private VBox createCommentBox(Commentaire comment) {
 
         //Box pour le commentaire et les reponses
@@ -324,7 +329,7 @@ public class Listactualite {
         avatarIcon.setFitHeight(30);
         avatarIcon.setFitWidth(30);
 
-  //nom de user ( 12 ) dans la base
+        //nom de user ( 12 ) dans la base
         Label userName = new Label(comment.getUser().getNom());
         userName.setFont(new Font("Arial", 12));
         userName.setStyle("-fx-text-fill: #7A90A4;");
@@ -374,7 +379,7 @@ public class Listactualite {
             displayResponseField(comment, commentBox);
         });
 
-      //  label +nombre de réponses
+        //  label +nombre de réponses
         Label responseCountLabel = new Label("Les réponses : " + reponseService.getNumberOfResponses(comment.getIdComnt()));
         responseCountLabel.getStyleClass().add("label-response-count");
 
@@ -384,7 +389,7 @@ public class Listactualite {
 
             displayResponsesForComment(comment, commentBox);
         });
-          // Ajout des éléments à la boîte d'en-tête (head)
+        // Ajout des éléments à la boîte d'en-tête (head)
         headerBox.getChildren().addAll(avatarIcon, userName, threeDotsButton, responseButton, responseCountLabel);
         commentBox.getChildren().addAll(headerBox, commentContent);
 
@@ -434,7 +439,7 @@ public class Listactualite {
             VBox responsesContainer = new VBox();
             responsesContainer.getStyleClass().add("response-container");
 
-               //a chaque reponse un hbox pour afficher liste des reps
+            //a chaque reponse un hbox pour afficher liste des reps
             List<Reponse> responses = reponseService.getResponsesForComment(comment.getIdComnt());
             for (Reponse response : responses) {
                 HBox responseBox = new HBox(5);
@@ -452,7 +457,7 @@ public class Listactualite {
                 deleteButton.setOnAction(event -> handleDeleteResponse(response, comment, responsesContainer));
 
 
-                   // Ajout des boutons à la boîte de réponse
+                // Ajout des boutons à la boîte de réponse
                 responseBox.getChildren().addAll(editButton, deleteButton);
 
 
@@ -466,7 +471,7 @@ public class Listactualite {
     }
 
     private void handleEditResponse(Reponse response, Commentaire comment, VBox responsesContainer) {
-      //alert fonction edit
+        //alert fonction edit
         TextInputDialog dialog = new TextInputDialog(response.getContinueR());
         dialog.setTitle("Edit Response");
         dialog.setHeaderText("Edit your response");
@@ -573,34 +578,34 @@ public class Listactualite {
     private void refreshResponseSection(Commentaire comment, VBox responseContainer) throws SQLException {
         //refresh que la reponsesection quand l'ajout
         responseContainer.getChildren().clear();
-            VBox responseBox = createCommentBox( comment);
-            responseContainer.getChildren().add(responseBox);
+        VBox responseBox = createCommentBox( comment);
+        responseContainer.getChildren().add(responseBox);
     }
-//    private void handleModify(ActionEvent event) {
-//        //modifier actualite
-//        Button modifyButton = (Button) event.getSource();
-//
-//        Actualite actualiteToModify = (Actualite) modifyButton.getUserData();
-//
-//        try {
-//
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Modifieractualite.fxml"));
-//            Parent root = loader.load();
-//
-//
-//            Modifieractualite modifierController = loader.getController();
-//
-//            modifierController.setActualiteToModify(actualiteToModify);
-//
-//
-//            Scene newScene = new Scene(root);
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            stage.setScene(newScene);
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void handleModify(ActionEvent event) {
+        //modifier actualite
+        Button modifyButton = (Button) event.getSource();
+
+        Actualite actualiteToModify = (Actualite) modifyButton.getUserData();
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Modifieractualite.fxml"));
+            Parent root = loader.load();
+
+
+            Modifieractualite modifierController = loader.getController();
+
+            modifierController.setActualiteToModify(actualiteToModify);
+
+
+            Scene newScene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(newScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void displayAllActualites() throws SQLException {
         //afficahge de tout les  act
@@ -611,34 +616,34 @@ public class Listactualite {
             actualitesContainer.getChildren().add(actualiteItem);
         }
     }
-//    private void handleDelete(ActionEvent event) {
-//        Button sourceButton = (Button) event.getSource();
-//        Actualite actualiteToDelete = (Actualite) sourceButton.getUserData();
-//
-//          // Création d'une boîte de dialogue de confirmation
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        alert.setTitle("Delete Confirmation");
-//        alert.setHeaderText("Delete Actualité");
-//        alert.setContentText("Are you sure you want to delete this actualité: " + actualiteToDelete.getTitre() + "?");
-//
-//
-//        alert.showAndWait().ifPresent(response -> {
-//            if (response == ButtonType.OK) {
-//                try {
-//                    actualiteService.supprimer(actualiteToDelete.getIdAct());
-//                    displayAllActualites(); // Refresh the list of actualités
-//                } catch (SQLException e) {
-//                    e.printStackTrace(); // Handle the exception appropriately
-//
-//                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-//                    errorAlert.setTitle("Error");
-//                    errorAlert.setHeaderText("Deletion Error");
-//                    errorAlert.setContentText("There was an error deleting the actualité: " + e.getMessage());
-//                    errorAlert.showAndWait();
-//                }
-//            }
-//        });
-//    }
+    private void handleDelete(ActionEvent event) {
+        Button sourceButton = (Button) event.getSource();
+        Actualite actualiteToDelete = (Actualite) sourceButton.getUserData();
+
+        // Création d'une boîte de dialogue de confirmation
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Confirmation");
+        alert.setHeaderText("Delete Actualité");
+        alert.setContentText("Are you sure you want to delete this actualité: " + actualiteToDelete.getTitre() + "?");
+
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    actualiteService.supprimer(actualiteToDelete.getIdAct());
+                    displayAllActualites(); // Refresh the list of actualités
+                } catch (SQLException e) {
+                    e.printStackTrace(); // Handle the exception appropriately
+
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setTitle("Error");
+                    errorAlert.setHeaderText("Deletion Error");
+                    errorAlert.setContentText("There was an error deleting the actualité: " + e.getMessage());
+                    errorAlert.showAndWait();
+                }
+            }
+        });
+    }
 
     private void refreshCommentsSection(Actualite actualite, VBox commentsSection) throws SQLException {
         //refresh section quand ajouter comnt
@@ -731,3 +736,4 @@ public class Listactualite {
 
 
 }
+
