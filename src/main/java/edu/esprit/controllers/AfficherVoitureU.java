@@ -2,21 +2,41 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Voiture;
 import edu.esprit.services.ServiceVoiture;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class AfficherVoitureU {
+    @FXML
+    private TextField marqueTextField;
+
+    @FXML
+    private TextField maxPrixTextField;
+
+    @FXML
+    private TextField minPrixTextField;
+
+    @FXML
+    private TextField modeleTextField;
+
+    @FXML
+    private Button rechercheButton;
+
 
     @FXML
     private HBox voitureTitlePane;
+
     private final ServiceVoiture sv = new ServiceVoiture();
 
 
@@ -95,6 +115,63 @@ public class AfficherVoitureU {
         pane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 return pane;
     }
+    @FXML
+    void rechercheAction(ActionEvent event) {
+        Double minPrix = parseDouble(minPrixTextField.getText());
+        Double maxPrix = parseDouble(maxPrixTextField.getText());
+        String marque = marqueTextField.getText().trim();
+        String modele = modeleTextField.getText().trim();
+
+        // Appeler la fonction de recherche avancée
+        Set<Voiture> result = sv.advancedSearch(minPrix, maxPrix, marque, modele);
+
+        // Mettre à jour l'affichage avec les résultats de la recherche
+        updateTilePane(new ArrayList<>(result));
+    }
+
+    private Double parseDouble(String text) {
+        try {
+            return Double.parseDouble(text);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    private void updateTilePane(ArrayList<Voiture> voitures) {
+        voitureTitlePane.getChildren().clear(); // Effacer le contenu actuel
+
+        if (voitures.isEmpty()) {
+            // Aucune voiture trouvée, afficher un message ou effectuer une action appropriée
+            Label noResultsLabel = new Label("Aucun résultat trouvé.");
+            voitureTitlePane.getChildren().add(noResultsLabel);
+        } else {
+            // Des voitures ont été trouvées, afficher les résultats
+            TilePane voituresTilePane = new TilePane();
+            voituresTilePane.setPrefColumns(3);
+            voituresTilePane.setHgap(10);
+            voituresTilePane.setVgap(10);
+            voituresTilePane.setAlignment(Pos.TOP_CENTER);
+
+            for (Voiture voiture : voitures) {
+                Pane pane = createVoiturePane(voiture);
+                voituresTilePane.getChildren().add(pane);
+            }
+
+            voitureTitlePane.getChildren().add(voituresTilePane);
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
 }
 
 

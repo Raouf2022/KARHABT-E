@@ -64,8 +64,22 @@ public class ModifierArrivageController {
 
     @FXML
     void handleAddAction(ActionEvent event) {
+
         int quantite = Integer.parseInt(quantiteField.getText());
+        // Check if quantity is positive
+        if (quantite <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "La quantité doit être positive.");
+            alert.showAndWait();
+            return;
+        }
         Date date = Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        // Check if the date is in the future
+        if (date.after(new Date())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "La date  ne doit être une date future.");
+            alert.showAndWait();
+            return;
+        }
         Voiture selectedVoiture = voitureComboBox.getValue();
 
         currentArrivage.setQuantite(quantite);

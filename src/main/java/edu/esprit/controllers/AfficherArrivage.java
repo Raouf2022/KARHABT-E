@@ -25,6 +25,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.fx.FXGraphics2D;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class AfficherArrivage {
@@ -46,7 +48,7 @@ public class AfficherArrivage {
     @FXML
     public void initialize() {
         loadArrivages();
-        drawChart();
+        //drawChart();
     }
 
     private void loadArrivages() {
@@ -123,7 +125,6 @@ public class AfficherArrivage {
     }
 
 
-
     private void deleteArrivage(int id) {
         // Show confirmation dialog before deletion
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this arrivage?");
@@ -157,7 +158,7 @@ public class AfficherArrivage {
         }
     }
 
-    public void navigatetoAjouterVoitureAction(ActionEvent event){
+    public void navigatetoAjouterVoitureAction(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/AjouterVoiture.fxml"));
             NouvelleV.getScene().setRoot(root);
@@ -201,14 +202,31 @@ public class AfficherArrivage {
 
         }
     }
-    private void drawChart() {
+
+
+
+
+    /*void drawChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         // Assume serviceArrivage.getAll() returns all Arrivage instances
         Set<Arrivage> arrivages = serviceArrivage.getAll();
+
+        // Create a map to accumulate quantities by model
+        Map<String, Integer> modelQuantities = new HashMap<>();
+
         for (Arrivage arrivage : arrivages) {
-            dataset.addValue(arrivage.getQuantite(), "Quantité", arrivage.getV().getModele());
+            String modele = arrivage.getV().getModele();
+            int currentQuantity = arrivage.getQuantite();
+
+            // Add the current quantity to the existing total (if any)
+            modelQuantities.merge(modele, currentQuantity, Integer::sum);
         }
+
+        // Populate the dataset with accumulated quantities
+        modelQuantities.forEach((modele, totalQuantity) -> {
+            dataset.addValue(totalQuantity, "Quantité", modele);
+        });
 
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Quantité par Modèle de Voiture", // Chart title
@@ -222,6 +240,5 @@ public class AfficherArrivage {
         FXGraphics2D g2d = new FXGraphics2D(gc);
         g2d.clearRect(0, 0, (int) chartCanvas.getWidth(), (int) chartCanvas.getHeight());
         barChart.draw(g2d, new java.awt.Rectangle((int) chartCanvas.getWidth(), (int) chartCanvas.getHeight()));
-    }
-
+    }*/
 }

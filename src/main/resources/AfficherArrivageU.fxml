@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="AfficherArrivageU"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="628.0" prefWidth="876.0" styleClass="sidebar-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherArrivageU">
+   <children>
+      <ScrollPane fx:id="scrollPane" layoutX="206.0" layoutY="54.0" prefHeight="600.0" prefWidth="600.0">
+         <content>
+            <TilePane fx:id="arrivageTilePane" prefColumns="3" prefHeight="582.0" prefWidth="769.0" />
+         </content>
+      </ScrollPane>
+      <VBox fx:id="sidebar" prefHeight="49.0" prefWidth="171.0" stylesheets="@style.css" />
+      <Label fx:id="emptyLabel" layoutX="23.0" layoutY="18.0" prefHeight="71.0" prefWidth="206.0" text="Aucun arrivage disponible" />
+   </children>
 </AnchorPane>

@@ -122,4 +122,66 @@ public class ServiceVoiture implements IService <Voiture>{
 
         return voitures;
     }
+    public Set<Voiture> advancedSearch(Double minPrix, Double maxPrix, String marque, String modele) {
+        Set<Voiture> voitures = new HashSet<>();
+
+        StringBuilder reqBuilder = new StringBuilder("SELECT * FROM Voiture WHERE 1=1");
+
+        // Ajouter des conditions basées sur les critères fournis
+        if (minPrix != null) {
+            reqBuilder.append(" AND prix >= ").append(minPrix);
+        }
+        if (maxPrix != null) {
+            reqBuilder.append(" AND prix <= ").append(maxPrix);
+        }
+        if (marque != null && !marque.isEmpty()) {
+            reqBuilder.append(" AND marque LIKE '%").append(marque).append("%'");
+        }
+        if (modele != null && !modele.isEmpty()) {
+            reqBuilder.append(" AND modele LIKE '%").append(modele).append("%'");
+        }
+
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet res = st.executeQuery(reqBuilder.toString());
+            while (res.next()) {
+                int idV = res.getInt("idV");
+                String marqueRes = res.getString("marque");
+                String modeleRes = res.getString("modele");
+                String couleur = res.getString("couleur");
+                double prix = res.getDouble("prix");
+                String img = res.getString("img");
+                String description = res.getString("description");
+                Voiture v = new Voiture(idV, marqueRes, modeleRes, couleur, prix, img, description);
+                voitures.add(v);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return voitures;
+    }
+
+    public boolean voitureExiste(String marque, String modele) {
+        String req = "SELECT * FROM Voiture WHERE marque = ? AND modele = ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, marque);
+            ps.setString(2, modele);
+            ResultSet res = ps.executeQuery();
+            return res.next(); // Retourne true si la voiture existe déjà, sinon false
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
 }

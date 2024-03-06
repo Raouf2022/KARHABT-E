@@ -60,6 +60,16 @@ private final ServiceVoiture sv = new ServiceVoiture();
     try {
 
 
+        if (sv.voitureExiste(TFmarque.getText(), TFmodele.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setContentText("Cette voiture existe déjà !");
+            alert.showAndWait();
+            return; // Arrêter le traitement supplémentaire
+        }
+
+
+
         double prix = Double.parseDouble(TFprix.getText());
 
         sv.ajouter(new Voiture(TFmarque.getText(), TFmodele.getText(), TFcouleur.getText(), prix, TFimage.getText(), TFdescription.getText()));
