@@ -1,0 +1,16 @@
+edu\esprit\controllers\AdminEtatdossier.class
+edu\esprit\services\ServiceEtatDossier.class
+edu\esprit\controllers\DossierCard.class
+edu\esprit\controllers\Etatdossier.class
+edu\esprit\controllers\DemandeDossier.class
+edu\esprit\controllers\ModifierDossier.class
+edu\esprit\test\MainFX.class
+edu\esprit\services\ServiceDemandeDossier.class
+edu\esprit\services\IDemandeDossier.class
+edu\esprit\services\IEtatDossier.class
+edu\esprit\controllers\AdminDemandeDossier.class
+edu\esprit\controllers\Etatdossier$MyController.class
+edu\esprit\entities\DossierDemande.class
+edu\esprit\controllers\Dashboard.class
+edu\esprit\test\Main.class
+edu\esprit\tools\DataSource.class

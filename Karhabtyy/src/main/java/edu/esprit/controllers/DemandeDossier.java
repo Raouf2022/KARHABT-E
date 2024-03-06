@@ -1,46 +1,100 @@
 package edu.esprit.controllers;
+import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
+import com.itextpdf.text.DocumentException;
 import edu.esprit.entities.Dossier;
 import edu.esprit.entities.DossierDemande;
 import edu.esprit.services.ServiceDemandeDossier;
 import edu.esprit.services.ServiceDossier;
 import javafx.animation.FadeTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class DemandeDossier {
+    @FXML
+    private ImageView cin_img;
+    @FXML
+    private Button AttesTrav;
+
+    @FXML
+    private ImageView AttesTrav_img;
+
+    @FXML
+    private Button DecReve;
+
+    @FXML
+    private ImageView DecReve_img;
+
+    @FXML
+    private TableColumn<?, ?> att_col;
 
     @FXML
     private Button but_demande;
+
+    @FXML
+    private Button butt_dos;
+
+    @FXML
+    private Button cerRetn;
+
+    @FXML
+    private ImageView cerRetn_img;
+
+    @FXML
+    private TableColumn<?, ?> certif_col;
+
+    @FXML
+    private Button cin;
+
+    @FXML
+    private TableColumn<?, ?> cin_col;
+
+
+
+    @FXML
+    private TableColumn<?, ?> dec_col;
+
+    @FXML
+    private Button etaatbutt;
+
+    @FXML
+    private TableColumn<?, ?> ext_col;
+
+    @FXML
+    private Button extnais;
+
+    @FXML
+    private ImageView extnais_img;
+
+    @FXML
+    private Pane most_inner_pane;
+
+
+    @FXML
+    private HBox root;
 
     @FXML
     private ListView<DossierDemande> tflistview2;
     @FXML
     private Button but_etat;
 
-    @FXML
-    private Button butt_dos;
-
-    @FXML
-    private Pane most_inner_pane;
-
-    @FXML
-    private HBox root;
 
     @FXML
     private TextField search;
@@ -54,8 +108,7 @@ public class DemandeDossier {
 
     @FXML
     private Button tfmodify;
-    @FXML
-    private Button etaatbutt;
+
 
     @FXML
     private Button tfshowdemande;
@@ -66,26 +119,9 @@ public class DemandeDossier {
     @FXML
     private Button tfvalider;
 
-    @FXML
-    private TextField urlAttTravail;
 
-    @FXML
-    private TextField urlCerRetenu;
-
-    @FXML
-    private TextField urlDecRevenu;
-
-    @FXML
-    private TextField urlExtNaissance;
-
-    @FXML
-    private TextField urlcin;
     private final ServiceDemandeDossier sp = new ServiceDemandeDossier();
-    @FXML
-    void Etatdossier(ActionEvent event) {
 
-
-    }
 
     @FXML
     void ModifierDossier(MouseEvent event) {
@@ -95,15 +131,20 @@ public class DemandeDossier {
     @FXML
     void SaveEtatDossier(ActionEvent event) {
 
-        String Cin = this.urlcin.getText();
-        String cerRetenu = this.urlCerRetenu.getText();
-        String AttTravail = this.urlAttTravail.getText();
-        String DecRevenu = this.urlDecRevenu.getText();
-        String ExtNaissance = this.urlExtNaissance.getText();
-
+        Image Cin = this.cin_img.getImage();
+        Image cerRetenu = this.cerRetn_img.getImage();
+        Image AttTravail = this.AttesTrav_img.getImage();
+        Image DecRevenu = this.DecReve_img.getImage();
+        Image ExtNaissance = this.extnais_img.getImage();
+        //ImageFrame.class.getResource()
         try {
-            DossierDemande d = new DossierDemande(Cin, cerRetenu, AttTravail, DecRevenu,ExtNaissance);
-          this.sp.ajouter(d);
+            DossierDemande d = new DossierDemande(Cin.getUrl(), cerRetenu.getUrl(), AttTravail.getUrl(), DecRevenu.getUrl(), ExtNaissance.getUrl());
+            this.sp.ajouter(d);
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Success");
+            successAlert.setContentText("Dossier added successfully!");
+            successAlert.showAndWait();
+
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -113,14 +154,6 @@ public class DemandeDossier {
         }
 
     }
-
-
-
-    @FXML
-    void demandeDossier(ActionEvent event) {
-
-    }
-
 
 
     public void dossierback(ActionEvent actionEvent) throws IOException {
@@ -206,48 +239,108 @@ public class DemandeDossier {
     }
 
 
-
     @FXML
     void showdemandedossier(ActionEvent event) {
 
-        ObservableList<edu.esprit.entities.DossierDemande> dossierList = FXCollections.observableArrayList();
 
-        String urlCin = this.urlcin.getText();
-        String cerRetenu = this.urlCerRetenu.getText();
-        String AttTravail = this.urlAttTravail.getText();
-        String DecRevenu = this.urlDecRevenu.getText();
-        String ExtNaissance = this.urlExtNaissance.getText();
-        try {
-
-            edu.esprit.entities.DossierDemande d = new DossierDemande(urlCin, cerRetenu, AttTravail, DecRevenu,ExtNaissance);
-            dossierList.add(d);
-            tflistview2.setItems(dossierList);
-            if (d != null) {
-                tfshowdemande.setGraphic(null);
-            } else {
-                GridPane gridPane = new GridPane();
-
-                gridPane.add(new Text("Cin:"), 0, 1);
-                gridPane.add(new Text(d.getUrlcin()), 1, 1);
-                gridPane.add(new Text("cerRetenu:"), 0, 2);
-                gridPane.add(new Text(d.getUrlCerRetenu()), 1, 2);
-                gridPane.add(new Text("AttTravail:"), 0, 3);
-                gridPane.add(new Text(d.getUrlAttTravail()), 1, 3);
-                gridPane.add(new Text("DecRevenu:"), 0, 3);
-                gridPane.add(new Text(d.getUrlDecRevenu()), 1, 3);
-                gridPane.add(new Text("ExtNaissance:"), 0, 3);
-                gridPane.add(new Text(d.getUrlExtNaissance()), 1, 3);
-
-                tfshowdemande.setGraphic(gridPane);
-            }
-        } catch (Exception e) {
-            // Set the items in the TableView
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(" Exception");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
     }
-}
+        public void chooseImagecin () {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+            );
+
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if (selectedFile != null) {
+                // Load the selected image and display it
+                Image imageCin = new Image(selectedFile.toURI().toString());
+                cin_img.setImage(imageCin);
+
+            }
+        }
+    @FXML
+    void generateInvoice(Dossier event) throws IOException, DocumentException, SQLException {
+        Dossier d = new Dossier();
+        ServiceDossier sd = new ServiceDossier();
+        sd.getAll();
+
+        generateInvoice(d);
+    }
+        @FXML
+        void chooseImageAttTrav(ActionEvent event){
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+            );
+
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if (selectedFile != null) {
+
+                Image imageAttesTrav = new Image(selectedFile.toURI().toString());
+
+                AttesTrav_img.setImage(imageAttesTrav);
+
+            }
+        }
+        @FXML
+        void chooseImageCertRev (ActionEvent event){
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+            );
+
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if (selectedFile != null) {
+                // Load the selected image and display it
+                ;
+                Image imagecerRetn = new Image(selectedFile.toURI().toString());
+
+                cerRetn_img.setImage(imagecerRetn);
+            }
+        }
+
+        @FXML
+        void chooseImageDecRev (ActionEvent event){
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+            );
+
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if (selectedFile != null) {
+                // Load the selected image and display it
+
+                Image imageDecReve = new Image(selectedFile.toURI().toString());
+
+                DecReve_img.setImage(imageDecReve);
+
+            }
+        }
+
+        @FXML
+        void chooseImageExtNai (ActionEvent event){
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+            );
+
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if (selectedFile != null) {
+                // Load the selected image and display it
+
+                Image imageExtNaiss = new Image(selectedFile.toURI().toString());
+
+                extnais_img.setImage(imageExtNaiss);
+
+            }
+        }
+    @FXML
+    void demandeDossier(ActionEvent event) {
+
+    }
+
+
+    }
+
+
 

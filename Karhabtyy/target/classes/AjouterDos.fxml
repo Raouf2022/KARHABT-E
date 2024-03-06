@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="939.0" styleClass="root" stylesheets="@DashStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="586.0" prefWidth="186.0" styleClass="root" stylesheets="@DashStyle.css">
+         <children>
+            <AnchorPane fx:id="tfsideBar" prefHeight="586.0" prefWidth="186.0" styleClass="tfsideBar" stylesheets="@DashStyle.css">
+               <children>
+                  <Pane fx:id="tfinnerPane" layoutX="12.0" layoutY="22.0" prefHeight="47.0" prefWidth="162.0" styleClass="tfinnerPane" stylesheets="@DashStyle.css">
+                     <children>
+                        <ImageView fitHeight="38.0" fitWidth="34.0" layoutX="128.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Downloads/8666601_more_vertical_icon.png" />
+                           </image>
+                        </ImageView>
+                        <Pane fx:id="most_inner_pane" layoutY="1.0" prefHeight="47.0" prefWidth="43.0" styleClass="most_inner_pane" stylesheets="@DashStyle.css">
+                           <children>
+                              <ImageView fitHeight="41.0" fitWidth="43.0" layoutX="1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@karhabt-e-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children></Pane>
+                  <Button fx:id="but_usr" layoutX="19.0" layoutY="94.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="148.0" styleClass="butt_usr" stylesheets="@DashStyle.css" text="User" textAlignment="RIGHT" textFill="WHITE" />
+                  <Pane fx:id="most_inner_pane2" layoutX="19.0" layoutY="92.0" prefHeight="34.0" prefWidth="34.0" styleClass="most_inner_pane" stylesheets="@DashStyle.css">
+                     <children>
+                        <ImageView fitHeight="34.0" fitWidth="27.0" layoutX="4.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Downloads/9024006_user_circle_fill_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <Pane fx:id="most_inner_pane1" prefHeight="47.0" prefWidth="43.0" styleClass="most_inner_pane" stylesheets="@DashStyle.css" />
+         </children>
+      </VBox>
+   </children>
+</HBox>

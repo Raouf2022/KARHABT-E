@@ -172,30 +172,12 @@ public class ModifierDossier {
             Parent root = loader.load();
             ServiceDossier d = new ServiceDossier();
 
-
-            // Assuming the root node in other_fxml_file.fxml is the ListView
-            // TableView<Dossier> otherListView = (dossier_table<Dossier>) root;
-            // otherListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);//Dossier d = tflistview.getSelectionModel().getSelectedItem();
-            // otherListViewgetSelectionModel().getSelectedItems().addListener((ListChangeListener<? super Dossier>) c -> selectionChanged());
-            //}
-
-       /* private void selectionChanged() {
-            ObservableList<Dossier> selectedItems = listView.getSelectionModel().getSelectedItems();
-            String selectedText = selectedItems.isEmpty() ? "No Selected Item" : selectedItems.toString();
-            selection.setText(selectedText);
-        }*/
-            // Now you can manipulate otherListView as needed
-            // For example:
             int montant = Integer.parseInt(this.tfmontant.getText());
             int cin = Integer.parseInt(this.tfcin.getText());
             String nom = this.tfnom.getText();
             String prenom = this.tfprenom.getText();
             Date date = Date.valueOf(tfdate.getValue());
             String region = this.tfregion.getText();
-
-
-            //  otherListView.getItems().add(new Dossier (cin, nom, prenom, region, date, montant));
-            //  d.modifier(Dossier);
 
             ServiceDossier sd = new ServiceDossier();
             Dossier Dossier = new Dossier(cin, nom, prenom, region, date, montant);

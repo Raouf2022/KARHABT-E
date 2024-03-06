@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 
-
 public class ServiceDossier implements IDossierService<Dossier> {
 
     Connection cnx = DataSource.getInstance().getCnx();
@@ -110,7 +109,7 @@ public class ServiceDossier implements IDossierService<Dossier> {
     }
 
 
-/*
+
     @Override
     public void supprimer(int cin) {
         try {
@@ -122,10 +121,10 @@ public class ServiceDossier implements IDossierService<Dossier> {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-    }*/
+    }
 
 
-/*
+
     @Override
     public void supprimer(Dossier d) {
         try {
@@ -138,7 +137,7 @@ public class ServiceDossier implements IDossierService<Dossier> {
             System.out.println(ex.getMessage());
         }
     }
-*/
+
 
    /*@Override
     public void supprimerid(Dossier d) {
@@ -155,12 +154,12 @@ public class ServiceDossier implements IDossierService<Dossier> {
 
 
     @Override
-    public void supprimerid(int id) {
+    public void supprimerid(int id_dossier) {
         try {
-            String requete = "DELETE  FROM dossierb WHERE id_dossier=?";
+            String requete = "DELETE FROM dossierb WHERE id_dossier=?";
             System.out.println("dossier DELETED");
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(1, id);
+            pst.setInt(1, id_dossier);
             pst.executeUpdate();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -199,33 +198,27 @@ public class ServiceDossier implements IDossierService<Dossier> {
 
 
     @Override
-    public Set<Dossier> getAll()  {
-        Set<Dossier> dossierSet = new HashSet<>();
+    public  List<Dossier> getAll() throws SQLException {
         String query = "SELECT * FROM dossierb";
-try {
-    PreparedStatement preparedStatement = cnx.prepareStatement(query);
-    ResultSet resultSet = preparedStatement.executeQuery();
+        List<Dossier> dossierSet = new ArrayList<>();
+        PreparedStatement preparedStatement = cnx.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-    while (resultSet.next()) {
-        Dossier dossier = new Dossier(
-                resultSet.getInt("cin"),
-                resultSet.getString("nom"),
-                resultSet.getString("prenom"),
-                resultSet.getString("region"),
-                resultSet.getDate("date"),
-                resultSet.getInt("MONTANT")
-        );
-        dossierSet.add(dossier);
-    }
-}catch (SQLException e) {
-            System.out.println("Error retrieving dossier: " + e.getMessage());
-
+        while (resultSet.next()){
+            dossierSet.add(new Dossier(
+                    resultSet.getInt("cin"),
+                    resultSet.getString("nom"),
+                    resultSet.getString("prenom"),
+                    resultSet.getString("region"),
+                    resultSet.getDate("date"),
+                    resultSet.getInt("id_dossier"),
+                    resultSet.getInt("MONTANT")
+            ));
         }
+
         return dossierSet;
     }
 
-    public int getId_dossier() {
-        return getId_dossier();
-    }
+
 }
 

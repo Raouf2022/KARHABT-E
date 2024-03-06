@@ -36,8 +36,8 @@ public class Main {
 
 
 
-       // d.ajouter(d2);
-    // d.supprimerid(d2.getId_dossier());
+      //e.ajouter(e2);
+     //e.supprimerD(e2);
        /* d.ajouter(d2);
         d.ajouter(d3);*/
 //sd.supprimer(12423142);

@@ -1,5 +1,7 @@
 package edu.esprit.entities;
 
+import javafx.scene.image.Image;
+
 import java.util.Objects;
 
 public class DossierDemande extends Dossier {
@@ -8,6 +10,7 @@ public class DossierDemande extends Dossier {
     private String urlAttTravail;
     private String urlDecRevenu;
     private String urlExtNaissance;
+
     private int id_demande;
     public DossierDemande() {
 
@@ -21,6 +24,7 @@ public class DossierDemande extends Dossier {
         this.urlDecRevenu = urlDecRevenu;
         this.urlExtNaissance = urlExtNaissance;
     }
+
     public int getId_demande() {
         return id_demande;
     }

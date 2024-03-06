@@ -3,6 +3,8 @@ import edu.esprit.controllers.Etatdossier;
 import edu.esprit.entities.Dossier;
 import edu.esprit.entities.etatDeDossier;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 public interface IEtatDossier <T> {
 
@@ -13,7 +15,7 @@ public interface IEtatDossier <T> {
     public void supprimerD(T t);
 
     public T getOneById(int id_etat);
-    public Set<T> getAll();
+    public List<T> getAll() throws SQLException;
 
     void ajouter(etatDeDossier etatDeDossier);
 }

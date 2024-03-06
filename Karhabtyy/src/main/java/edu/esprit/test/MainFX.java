@@ -22,7 +22,7 @@ public class MainFX extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            String css = getClass().getResource("/Style.css").toExternalForm();
+            String css = getClass().getResource("/DashStyle.css").toExternalForm();
             root.getStylesheets().add(css);
             stage.setTitle("Gestion Dossier");
             stage.show();

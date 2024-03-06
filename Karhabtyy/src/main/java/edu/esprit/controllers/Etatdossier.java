@@ -1,9 +1,11 @@
 package edu.esprit.controllers;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import edu.esprit.entities.Dossier;
 import edu.esprit.entities.etatDeDossier;
+import edu.esprit.services.ServiceDossier;
 import edu.esprit.services.ServiceEtatDossier;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
@@ -17,15 +19,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.control.ComboBox;
 
 public class Etatdossier {
 
+    @FXML
+    private TableView<etatDeDossier> etat_table;
+    @FXML
+    private ComboBox<?> combo;
     @FXML
     private ListView<etatDeDossier> tflistview1;
     @FXML
@@ -39,6 +44,8 @@ public class Etatdossier {
     @FXML
     private Button butt_dos;
 
+    @FXML
+    private TableColumn<?, ?> idEtat_col;
     @FXML
     private Pane most_inner_pane;
 
@@ -72,92 +79,146 @@ public class Etatdossier {
 
     private final ServiceEtatDossier sp = new ServiceEtatDossier();
 
+
     @FXML
     void ModifierEtatDossier(MouseEvent event) {
-
-    }
-
-    @FXML
-    void SaveEtatDossier(ActionEvent event) {
-
-        String etat = this.tfetat.getText();
-
         try {
-            edu.esprit.entities.etatDeDossier d = new etatDeDossier(etat);
-            this.sp.ajouter(d);
+            ServiceEtatDossier sd = new ServiceEtatDossier();
+            String etat = (String) combo.getValue();
 
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(" Exception");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            // Création d'un objet Dossier modifié
+
+
+
+
+            // Appel d'une méthode de service ou de repository pour mettre à jour le dossier dans la base de données
+
+
+            // Actualisation de l'affichage
+
+        } catch (NumberFormatException e) {
         }
 
     }
-
+    private Dossier d;
+    public  void setId_dossier(Dossier d)
+    {
+        this.d=d;
+    }
     @FXML
-    void SupprimerEtatDossier(ActionEvent event) {
+    void SaveEtatDossier(ActionEvent event) {
+        String etat = String.valueOf(this.combo.getValue());
 
-        final ServiceEtatDossier sp = new ServiceEtatDossier();
-        etatDeDossier d = (etatDeDossier) tflistview1.getSelectionModel().getSelectedItem();
-
-        if (d != null) {
+        if (etat != null && !etat.isEmpty()) {
             try {
 
-                sp.supprimerD(d); // Assuming you have a method to delete a dossier
-                tflistview1.getItems().remove(d); // Remove from the ListView
+                edu.esprit.entities.etatDeDossier d = new etatDeDossier(etat);
+
+                this.sp.ajouter(d);
+
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                successAlert.setTitle("Success");
+                successAlert.setContentText("Etat saved successfully!");
+                successAlert.showAndWait();
+            } catch (Exception e) {
+                // Handle exceptions (e.g., database errors)
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setContentText("An error occurred while saving: " + e.getMessage());
+                errorAlert.showAndWait();
+            }
+        } else {
+            // Value is null or empty, show an alert
+            Alert nullValueAlert = new Alert(Alert.AlertType.WARNING);
+            nullValueAlert.setTitle("Warning");
+            nullValueAlert.setContentText("Please select an etat before saving.");
+            nullValueAlert.showAndWait();
+        }
+    }
+
+
+    @FXML
+    void SupprimerEtatDossier(ActionEvent event) throws SQLException {
+/*
+       final  ServiceEtatDossier sp = new ServiceEtatDossier();
+   etatDeDossier e = (etatDeDossier) etat_table.getSelectionModel().getSelectedItem();
+
+       // ObservableList<etatDeDossier> etatList = FXCollections.observableArrayList(sp.getAll());
+        if(e != null)
+        try {
+            sp.supprimerD(e);
+
+        } catch (Exception ee) {
+            System.err.println(ee.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Exception");
+            alert.setContentText(ee.getMessage());
+            alert.showAndWait();
+        }
+*/
+        final ServiceEtatDossier sp = new ServiceEtatDossier();
+        etatDeDossier d = etat_table.getSelectionModel().getSelectedItem();
+        System.out.println(d.getId_etat());
+        if (d != null) {
+            try {
+                //System.out.println(d.getId_etat());
+                sp.supprimerD(d);
+
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Exception");
-                alert.setContentText("Error deleting etat: " + e.getMessage());
+                alert.setContentText("Error deleting dossier: " + e.getMessage());
                 alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
-            alert.setContentText("Please select a etat to delete.");
+            alert.setContentText("Please select a dossier to delete.");
             alert.showAndWait();
         }
 
 
     }
-
     @FXML
-    void showEtatdossier(ActionEvent event) {
+    public void showEtatdossier() throws SQLException {
+        ServiceEtatDossier sp = new ServiceEtatDossier();
 
-        ObservableList<etatDeDossier> dossierList = FXCollections.observableArrayList();
+        ObservableList<etatDeDossier> etatList = FXCollections.observableArrayList(sp.getAll());
 
-        String etat = this.tfetat.getText();
         try {
-
-            etatDeDossier d = new etatDeDossier(etat);
-            dossierList.add(d);
-            tflistview1.setItems(dossierList);
-            if (d != null) {
-                tfshowetat.setGraphic(null);
-            } else {
-                GridPane gridPane = new GridPane();
-                gridPane.add(new Text("CIN:"), 0, 0);
-                //gridPane.add(new Text(dossier.getCin()), 0, 0);
-                gridPane.add(new Text("Etat:"), 0, 1);
-                gridPane.add(new Text(d.getEtat()), 1, 1);
-
-                tfshowetat.setGraphic(gridPane);
+            for (etatDeDossier etatDeDossier : etatList) {
+                System.out.println(etatList);
             }
-        } catch (Exception e) {
-            // Set the items in the TableView
+            etat_table.setItems(etatList);
+            etat_col.setCellValueFactory(new PropertyValueFactory<>("etat"));
+            idEtat_col.setCellValueFactory(new PropertyValueFactory<>("id_etat"));
 
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(" Exception");
+            alert.setTitle("Exception");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }
 
+
+
+    public void displayDetailsInTextField() {
+        etat_table.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && (!etat_table.getSelectionModel().isEmpty())) {
+
+                etatDeDossier selectedItem = etat_table.getSelectionModel().getSelectedItem();
+                System.out.println(selectedItem.getId_etat());
+
+
+            }
+        });
     }
 
     @FXML
     void dashdossier(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/AdminDossier.fxml"));
         Scene newScene = new Scene(root);
 
         Stage stage = (Stage) butt_dos.getScene().getWindow();
@@ -186,7 +247,7 @@ public class Etatdossier {
     }
 
     public void bttdossier(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/AdminDossier.fxml"));
         Scene newScene = new Scene(root);
 
         Stage stage = (Stage) butt_dos.getScene().getWindow();
@@ -216,7 +277,7 @@ public class Etatdossier {
 
     public void demandedoss(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/DemandeDossier.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/AdminDemandeDossier.fxml"));
         Scene newScene = new Scene(root);
 
         Stage stage = (Stage) butt_dos.getScene().getWindow();
@@ -241,4 +302,26 @@ public class Etatdossier {
         // Play the fade out transition
         fadeOutTransition.play();
     }
-}
+
+
+    public class MyController {
+        @FXML
+        private ComboBox<String> comboBox; // Your ComboBox in the FXML
+
+        public void initialize() {
+            // Clear existing items (optional)
+            comboBox.getItems().clear();
+
+
+            // Add choices
+            comboBox.getItems().addAll("En cours", "Validé", "Non validé");
+
+            // Set an initial selection (optional)
+           // comboBox.getSelectionModel().select("Option B");
+        }
+    }
+    public void initialize() throws SQLException {
+
+        idEtat_col.setVisible(false);
+    }
+  }

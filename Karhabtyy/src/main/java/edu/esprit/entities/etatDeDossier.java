@@ -1,13 +1,15 @@
 package edu.esprit.entities;
 
-import java.util.Date;
 import java.util.Objects;
 public class etatDeDossier {
 
     private String etat;
     private int id_etat;
+   // private int id_dossier;
 
-    public etatDeDossier() {
+    public etatDeDossier(String etat, int id_etat) {
+        this.etat=etat;
+        this.id_etat=id_etat;
     }
 
     @Override
@@ -32,8 +34,11 @@ public class etatDeDossier {
         return id_etat;
     }
 
+
+
+
     public void setId_etat(int id_etat) {
-        this.etat = etat;
+        this.id_etat = id_etat;
     }
     public String getEtat() {
         return etat;
@@ -46,4 +51,6 @@ public class etatDeDossier {
     public etatDeDossier(String etat) {
         this.etat = etat;
     }
+
+
 }

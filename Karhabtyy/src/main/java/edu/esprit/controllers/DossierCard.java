@@ -2,20 +2,29 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Dossier;
 import edu.esprit.services.ServiceDossier;
-import javafx.animation.FadeTransition;
+import edu.esprit.services.ServiceEtatDossier;
+import edu.esprit.test.MainFX;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import javafx.event.ActionEvent;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class DossierCard {
 
@@ -42,11 +51,10 @@ public class DossierCard {
 
     @FXML
     private TextField fxxregion;
-    ServiceDossier serviceDossier = new ServiceDossier();
 
+    private Dossier d = new Dossier();
 
-private Dossier dossier = new Dossier();
-    public void setDossier(Dossier d){
+    private void setDossier() {
 
         fxxcin.setText(String.valueOf(d.getCin()));
         fxxname.setText(d.getNom());
@@ -54,21 +62,23 @@ private Dossier dossier = new Dossier();
         fxxdate.setValue(d.getDate().toLocalDate());
         fxxregion.setText(d.getRegion());
         fxxmontant.setText(String.valueOf(d.getMontant()));
-    buttdel.setOnAction((event) -> {
-        this.serviceDossier.supprimerid(d.getId_dossier());
-    });
-
     }
-    private void loadScene(String fxmlPath, ActionEvent event){
+
+    @FXML
+    private void handleEdit(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(MainFX.class.getResource("/ModifierDossier.fxml"));
+            Parent root = fxmlLoader.load();
+            ModifierDossier controller = fxmlLoader.getController();
+           // controller.initialize(Dossier);
+            Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle("Edit Commande");
             stage.show();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
     }
 
-}
