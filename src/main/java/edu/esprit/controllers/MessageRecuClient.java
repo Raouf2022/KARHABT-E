@@ -2,8 +2,10 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Messagerie;
 import edu.esprit.entities.Reclamation;
+import edu.esprit.entities.User;
 import edu.esprit.services.ServiceMessagerie;
 import edu.esprit.services.ServiceReclamation;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,12 +61,14 @@ public class MessageRecuClient {
 
         private ServiceMessagerie serviceMessagerie = new ServiceMessagerie();
 
+        User user=new User();
+
         @FXML
         public void initialize() {
                 // Appeler votre service pour obtenir la liste de messages
                 // Replace with the actual sender's ID
 
-                        int receiverId = 24; // Exemple d'ID de récepteur
+                        int receiverId = user.getIdU(); // Exemple d'ID de récepteur
                         List<Messagerie> messagesByReceiver = serviceMessagerie.getActiveMessagesByReceiver(receiverId);
                         // Continuez avec la logique d'affichage existante, mais utilisez `messagesActifs`
 
@@ -168,143 +172,123 @@ public class MessageRecuClient {
 
 
         @FXML
-        void openEnvoyerMessage(ActionEvent event) {
-                try {
-                        // Charger le fichier FXML de l'accueil
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EnvoyerMessage.fxml"));
-                        Parent root = loader.load();
+        void openEnvoyerMessage(ActionEvent event) throws IOException {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/EnvoyerMessage.fxml"));
+                Parent root = loader.load();
 
-                        // Créer une nouvelle scène avec le contenu de AccuielReclamation.fxml
-                        Scene scene = new Scene(root);
+                // Get the ProfileClient controller and set the user
+                EnvoyerMessage profileController = loader.getController();
+                profileController.SetPage(user);
+                System.out.println(user.getIdU());
+                profileController.initialize();
 
-                        // Obtenir la scène actuelle à partir du bouton cliqué
-                        Scene currentScene = bEnvoyerMessage.getScene();
-
-                        // Configurer la transition
-                        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
-                        transition.setFromX(-currentScene.getWidth());
-                        transition.setToX(0);
-
-                        // Afficher la nouvelle scène avec une transition
-                        Stage stage = (Stage) currentScene.getWindow();
-                        stage.setScene(scene);
-
-                        // Démarrer la transition
-                        transition.play();
-
-                } catch (IOException e) {
-                        e.printStackTrace(); // Gérer les exceptions correctement dans votre application
-                }
-
-
-
-
+                Scene newScene = new Scene(root);
+                Stage stage = (Stage) bEnvoyerMessage.getScene().getWindow();
+                // Set opacity of new scene's root to 0 to make it invisible initially
+                root.setOpacity(0);
+                // Create a fade transition for the old scene
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(0.5), stage.getScene().getRoot());
+                fadeOutTransition.setToValue(0); // Fade out to fully transparent
+                // Set the action to be performed after the transition
+                fadeOutTransition.setOnFinished(e -> {
+                        stage.setScene(newScene);
+                        FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(0.5), root);
+                        fadeInTransition.setToValue(1);
+                        fadeInTransition.play();
+                });
+                // Play the fade out transition
+                fadeOutTransition.play();
         }
 
         @FXML
-        void openLesReclamations(ActionEvent event) {
-                try {
-                        // Charger le fichier FXML de l'accueil
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesReclamations.fxml"));
-                        Parent root = loader.load();
+        void openLesReclamations(ActionEvent event) throws IOException {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesReclamations.fxml"));
+                Parent root = loader.load();
 
-                        // Créer une nouvelle scène avec le contenu de AccuielReclamation.fxml
-                        Scene scene = new Scene(root);
+                // Get the ProfileClient controller and set the user
+                MesReclamations profileController = loader.getController();
+                profileController.SetPage(user);
+                System.out.println(user.getIdU());
+                profileController.initialize();
 
-                        // Obtenir la scène actuelle à partir du bouton cliqué
-                        Scene currentScene = bLesReclamations.getScene();
-
-                        // Configurer la transition
-                        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
-                        transition.setFromX(-currentScene.getWidth());
-                        transition.setToX(0);
-
-                        // Afficher la nouvelle scène avec une transition
-                        Stage stage = (Stage) currentScene.getWindow();
-                        stage.setScene(scene);
-
-                        // Démarrer la transition
-                        transition.play();
-
-                } catch (IOException e) {
-                        e.printStackTrace(); // Gérer les exceptions correctement dans votre application
-                }
-
-
-
+                Scene newScene = new Scene(root);
+                Stage stage = (Stage) bLesReclamations.getScene().getWindow();
+                // Set opacity of new scene's root to 0 to make it invisible initially
+                root.setOpacity(0);
+                // Create a fade transition for the old scene
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(0.5), stage.getScene().getRoot());
+                fadeOutTransition.setToValue(0); // Fade out to fully transparent
+                // Set the action to be performed after the transition
+                fadeOutTransition.setOnFinished(e -> {
+                        stage.setScene(newScene);
+                        FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(0.5), root);
+                        fadeInTransition.setToValue(1);
+                        fadeInTransition.play();
+                });
+                // Play the fade out transition
+                fadeOutTransition.play();
         }
 
         @FXML
-        void openLesReponses(ActionEvent event) {
+        void openLesReponses(ActionEvent event) throws IOException {
 
-                        try {
-                                // Charger le fichier FXML de l'accueil
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/LesReponesReclamations.fxml"));
-                                Parent root = loader.load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/LesReponsesReclamationsClient.fxml"));
+                Parent root = loader.load();
 
-                                // Créer une nouvelle scène avec le contenu de AccuielReclamation.fxml
-                                Scene scene = new Scene(root);
+                // Get the ProfileClient controller and set the user
+                LesReponsesReclamationsClient profileController = loader.getController();
+                profileController.SetPage(user);
+                System.out.println(user.getIdU());
+                profileController.initialize();
 
-                                // Obtenir la scène actuelle à partir du bouton cliqué
-                                Scene currentScene = bReponsesA.getScene();
-
-                                // Configurer la transition
-                                TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
-                                transition.setFromX(-currentScene.getWidth());
-                                transition.setToX(0);
-
-                                // Afficher la nouvelle scène avec une transition
-                                Stage stage = (Stage) currentScene.getWindow();
-                                stage.setScene(scene);
-
-                                // Démarrer la transition
-                                transition.play();
-
-                        } catch (IOException e) {
-                                e.printStackTrace(); // Gérer les exceptions correctement dans votre application
-                        }
-
-
-
-
-
+                Scene newScene = new Scene(root);
+                Stage stage = (Stage) bReponsesA.getScene().getWindow();
+                // Set opacity of new scene's root to 0 to make it invisible initially
+                root.setOpacity(0);
+                // Create a fade transition for the old scene
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(0.5), stage.getScene().getRoot());
+                fadeOutTransition.setToValue(0); // Fade out to fully transparent
+                // Set the action to be performed after the transition
+                fadeOutTransition.setOnFinished(e -> {
+                        stage.setScene(newScene);
+                        FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(0.5), root);
+                        fadeInTransition.setToValue(1);
+                        fadeInTransition.play();
+                });
+                // Play the fade out transition
+                fadeOutTransition.play();
         }
 
 
 
         @FXML
-        void retourAcueil(ActionEvent event) {
-                try {
-                        // Charger le fichier FXML de l'accueil
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilReclamation.fxml"));
-                        Parent root = loader.load();
+        void retourAcueil(ActionEvent event) throws IOException {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccueilReclamation.fxml"));
+                Parent root = loader.load();
 
-                        // Créer une nouvelle scène avec le contenu de AccuielReclamation.fxml
-                        Scene scene = new Scene(root);
+                // Get the ProfileClient controller and set the user
+                AccueilReclamation profileController = loader.getController();
+                profileController.SetPage(user);
+                System.out.println(user.getIdU());
+                profileController.initialize();
 
-                        // Obtenir la scène actuelle à partir du bouton cliqué
-                        Scene currentScene = bRetourA.getScene();
-
-                        // Configurer la transition
-                        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), root);
-                        transition.setFromX(-currentScene.getWidth());
-                        transition.setToX(0);
-
-                        // Afficher la nouvelle scène avec une transition
-                        Stage stage = (Stage) currentScene.getWindow();
-                        stage.setScene(scene);
-
-                        // Démarrer la transition
-                        transition.play();
-
-                } catch (IOException e) {
-                        e.printStackTrace(); // Gérer les exceptions correctement dans votre application
-                }
-
-
-
+                Scene newScene = new Scene(root);
+                Stage stage = (Stage) bRetourA.getScene().getWindow();
+                // Set opacity of new scene's root to 0 to make it invisible initially
+                root.setOpacity(0);
+                // Create a fade transition for the old scene
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(0.5), stage.getScene().getRoot());
+                fadeOutTransition.setToValue(0); // Fade out to fully transparent
+                // Set the action to be performed after the transition
+                fadeOutTransition.setOnFinished(e -> {
+                        stage.setScene(newScene);
+                        FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(0.5), root);
+                        fadeInTransition.setToValue(1);
+                        fadeInTransition.play();
+                });
+                // Play the fade out transition
+                fadeOutTransition.play();
         }
-
         private String formatDate(Date date) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy ");
                 return sdf.format(date);
@@ -313,8 +297,23 @@ public class MessageRecuClient {
         // Méthode utilitaire pour créer un VBox pour un attribut spécifique
 
 
+        private int iduser;
+        public void SetPage(User user) {
+                this.user=user;
+                iduser=user.getIdU();
 
 
 
+        }
+
+
+        private int iduserr;
+        public void SetPageAdmin(User user) {
+                this.user=user;
+                iduserr=user.getIdU();
+
+
+
+        }
 }
 

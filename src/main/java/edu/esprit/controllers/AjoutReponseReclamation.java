@@ -35,6 +35,8 @@ public class AjoutReponseReclamation {
     @FXML
     private TextField tfIdR;
 
+    User user=new User();
+
     private Reclamation reclamation; // Réclamation à laquelle on répond
 
     private ServiceReponseReclamation serviceReponseReclamation = new ServiceReponseReclamation();
@@ -83,7 +85,7 @@ public class AjoutReponseReclamation {
                                         "-fx-border-color: #ffffff; " + // Couleur de la bordure
                                         "-fx-border-width: 2px;" // Largeur de la bordure
                         )
-                        .title("achat Ajouté avec succès")
+                        .title("la réponse est ajouté avec succès")
                         .position(Pos.TOP_RIGHT) // Modifier la position ici
                         .hideAfter(Duration.seconds(20))
                         .show();
@@ -114,5 +116,14 @@ public class AjoutReponseReclamation {
 
         // Fermer la fenêtre du formulaire
         stage.close();
+    }
+
+    private int iduser;
+    public void SetPage(User user) {
+        this.user=user;
+        iduser=user.getIdU();
+
+
+
     }
 }

@@ -44,6 +44,7 @@ public class MessagesEnvoyesClient {
     private Text textGestion1;
     private ServiceMessagerie serviceMessagerie;
 
+    User user=new User();
 
     public MessagesEnvoyesClient() {
         // Initialize your service here
@@ -54,7 +55,7 @@ public class MessagesEnvoyesClient {
     public void initialize() {
         // Appeler votre service pour obtenir la liste de messages
         // Replace with the actual sender's ID
-      int idU=24;
+      int idU= user.getIdU();
         List<Messagerie> messagesBySender = serviceMessagerie.getMessagesBySender(idU);
 
         // Gérer l'affichage du message si la liste est vide

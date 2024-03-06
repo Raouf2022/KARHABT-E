@@ -46,6 +46,6 @@
         <TilePane fx:id="repRecTP" layoutX="96.0" layoutY="241.0" prefHeight="200.0" prefWidth="200.0" />
     </children>
     <stylesheets>
-        <URL value="@style.css" />
+        <URL value="@style2.css" />
     </stylesheets>
 </AnchorPane>

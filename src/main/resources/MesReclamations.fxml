@@ -67,7 +67,7 @@
    </children>
 
    <stylesheets>
-      <URL value="@style.css" />
+      <URL value="@styleee.css" />
    </stylesheets>
 
 </AnchorPane>

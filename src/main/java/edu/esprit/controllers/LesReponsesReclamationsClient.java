@@ -1,6 +1,7 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.ReponseReclamation;
+import edu.esprit.entities.User;
 import edu.esprit.services.ServiceReponseReclamation;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -43,7 +44,7 @@ public class LesReponsesReclamationsClient {
 
     @FXML
     private Text textGestion1;
-
+    User user=new User();
 
     private ServiceReponseReclamation serviceReponseReclamation= new ServiceReponseReclamation();
 
@@ -213,6 +214,13 @@ public class LesReponsesReclamationsClient {
 
 
         }
+    private int iduser;
+    public void SetPage(User user) {
+        this.user=user;
+        iduser=user.getIdU();
+
+
+    }
 
     }
 
