@@ -11,7 +11,7 @@ import edu.esprit.tools.DataSource;
 import edu.esprit.services.ServiceEtatDossier;
 
 import java.sql.Connection;
-import java.util.Date;
+import java.sql.Date;
 
 public class Main {
 
@@ -30,12 +30,14 @@ public class Main {
         Dossier d1 =new Dossier(12423142,"eva","eoeo","Gafsa", new Date(2425,3,4), 2);
         Dossier d2 =new Dossier(24365483,"BOBO","TEJ","Bizert", new Date(28,02,2002),2);
         Dossier d3 =new Dossier(73528463,"RGE","RBT","SOUSSE", new Date(28,02,2002),4);
-        etatDeDossier e1 = new etatDeDossier("encours");
+        etatDeDossier e2 = new etatDeDossier("maaaarysssy");
+        etatDeDossier e3 = new etatDeDossier("ABOUDA");
 
 
 
-      d.ajouter(d1);
-      d.supprimerid(d1.getId_dossier());
+
+       // d.ajouter(d2);
+    // d.supprimerid(d2.getId_dossier());
        /* d.ajouter(d2);
         d.ajouter(d3);*/
 //sd.supprimer(12423142);

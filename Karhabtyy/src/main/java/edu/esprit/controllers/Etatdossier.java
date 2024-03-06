@@ -1,6 +1,8 @@
 package edu.esprit.controllers;
 import java.io.IOException;
+import java.sql.SQLException;
 
+import edu.esprit.entities.Dossier;
 import edu.esprit.entities.etatDeDossier;
 import edu.esprit.services.ServiceEtatDossier;
 import javafx.animation.FadeTransition;
@@ -11,10 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -30,10 +30,12 @@ public class Etatdossier {
     private ListView<etatDeDossier> tflistview1;
     @FXML
     private Button but_demande;
-
+    @FXML
+    private TableColumn<?, ?> etat_col;
     @FXML
     private Button but_etat;
-
+    @FXML
+    private Pane dossier_table1;
     @FXML
     private Button butt_dos;
 
@@ -95,13 +97,14 @@ public class Etatdossier {
 
     @FXML
     void SupprimerEtatDossier(ActionEvent event) {
+
         final ServiceEtatDossier sp = new ServiceEtatDossier();
         etatDeDossier d = (etatDeDossier) tflistview1.getSelectionModel().getSelectedItem();
 
         if (d != null) {
             try {
 
-                sp.supprimer(d); // Assuming you have a method to delete a dossier
+                sp.supprimerD(d); // Assuming you have a method to delete a dossier
                 tflistview1.getItems().remove(d); // Remove from the ListView
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -207,7 +210,6 @@ public class Etatdossier {
 
         // Play the fade out transition
         fadeOutTransition.play();
-
 
 
     }

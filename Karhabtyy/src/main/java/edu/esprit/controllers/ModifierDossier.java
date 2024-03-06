@@ -4,6 +4,8 @@ import com.sun.javafx.charts.Legend;
 import edu.esprit.entities.Dossier;
 import edu.esprit.services.ServiceDossier;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -87,11 +89,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 
 public class ModifierDossier {
 
@@ -118,7 +122,26 @@ public class ModifierDossier {
     private TextField tfregion;
     @FXML
     private Button tfbackmenu;
+    @FXML
+    private TableColumn<Dossier, Integer> cin_col;
 
+    @FXML
+    private TableColumn<Dossier, Date> date_col;
+
+    @FXML
+    private TableView<Dossier> dossier_table;
+
+    @FXML
+    private TableColumn<Dossier, Integer> montant_col;
+
+    @FXML
+    private TableColumn<Dossier, String> nom_col;
+
+    @FXML
+    private TableColumn<Dossier, String> prenom_col;
+
+    @FXML
+    private TableColumn<Dossier, String> region_col;
 
 
     @FXML
@@ -145,18 +168,18 @@ public class ModifierDossier {
     @FXML
     void ModifierDossier(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterDossier.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
             Parent root = loader.load();
             ServiceDossier d = new ServiceDossier();
 
 
             // Assuming the root node in other_fxml_file.fxml is the ListView
-            ListView<Dossier> otherListView = (ListView<Dossier>) root;
-           // otherListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);//Dossier d = tflistview.getSelectionModel().getSelectedItem();
-           // otherListViewgetSelectionModel().getSelectedItems().addListener((ListChangeListener<? super Dossier>) c -> selectionChanged());
-        //}
+            // TableView<Dossier> otherListView = (dossier_table<Dossier>) root;
+            // otherListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);//Dossier d = tflistview.getSelectionModel().getSelectedItem();
+            // otherListViewgetSelectionModel().getSelectedItems().addListener((ListChangeListener<? super Dossier>) c -> selectionChanged());
+            //}
 
-        /*private void selectionChanged() {
+       /* private void selectionChanged() {
             ObservableList<Dossier> selectedItems = listView.getSelectionModel().getSelectedItems();
             String selectedText = selectedItems.isEmpty() ? "No Selected Item" : selectedItems.toString();
             selection.setText(selectedText);
@@ -171,11 +194,11 @@ public class ModifierDossier {
             String region = this.tfregion.getText();
 
 
-          //  otherListView.getItems().add(new Dossier (cin, nom, prenom, region, date, montant));
-          //  d.modifier(Dossier);
+            //  otherListView.getItems().add(new Dossier (cin, nom, prenom, region, date, montant));
+            //  d.modifier(Dossier);
 
-            ServiceDossier sd =new ServiceDossier();
-            Dossier Dossier = new Dossier (cin, nom, prenom, region, date, montant);
+            ServiceDossier sd = new ServiceDossier();
+            Dossier Dossier = new Dossier(cin, nom, prenom, region, date, montant);
             int montantm = Integer.parseInt(this.tfmontantm.getText());
             int cinm = Integer.parseInt(this.tfcinm.getText());
             String nomm = this.tfnomm.getText();
@@ -183,7 +206,7 @@ public class ModifierDossier {
             Date datem = Date.valueOf(tfdatem.getValue());
             String regionm = this.tfregionm.getText();
 
-            sd.modifierD( d.getId_dossier(),Dossier);
+            sd.modifier(Dossier);
 
             // Set up the stage and show the scene
             Stage stage = new Stage();
@@ -193,6 +216,34 @@ public class ModifierDossier {
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    void showdossier() throws SQLException {
+
+        final ServiceDossier sp = new ServiceDossier();
+        ObservableList<Dossier> dossierList = FXCollections.observableArrayList(sp.getAll());
+        try {
+
+            dossier_table.setItems(dossierList);
+            cin_col.setCellValueFactory(new PropertyValueFactory<>("cin"));
+            nom_col.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            prenom_col.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+            region_col.setCellValueFactory(new PropertyValueFactory<>("region"));
+            date_col.setCellValueFactory(new PropertyValueFactory<>("date"));
+            montant_col.setCellValueFactory(new PropertyValueFactory<>("montant"));
+            dossier_table.setItems(dossierList);
+
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Exception");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+
+
+    }
+
     @FXML
     void backAction(ActionEvent event) throws IOException {
 
@@ -221,7 +272,6 @@ public class ModifierDossier {
         // Play the fade out transition
         fadeOutTransition.play();
     }
-
-    }
+}
 
 

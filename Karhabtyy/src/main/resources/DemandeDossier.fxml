@@ -5,8 +5,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -57,9 +58,9 @@
                                 <Image url="@../../../../../../../Downloads/exam.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="190.0" fitWidth="172.0" layoutX="22.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="196.0" fitWidth="219.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../../../Downloads/karhabt-e.png" />
+                                <Image url="@karhabt-e-removebg-preview.png" />
                             </image>
                         </ImageView>
                     </children>
@@ -89,7 +90,7 @@
                                 </ImageView>
                             </buttons>
                         </ButtonBar>
-                        <ImageView fitHeight="19.0" fitWidth="28.0" layoutX="385.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="376.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../../../../../Downloads/loupe.png" />
                             </image>
@@ -105,8 +106,8 @@
                                         <Label layoutX="21.0" layoutY="63.0" text="URL Cin" />
                                         <Label layoutX="17.0" layoutY="106.0" text="Certificat de retenue d’impôt" />
                                         <Label layoutX="21.0" layoutY="166.0" text="Attestation de travail" />
-                                        <Label layoutX="19.0" layoutY="223.0" text="Déclaration des revenus annuels" />
-                                        <Label layoutX="19.0" layoutY="282.0" text="Extrait de naissance" />
+                                        <Label layoutX="19.0" layoutY="223.0" text="Attestation de travail" />
+                                        <Label layoutX="19.0" layoutY="282.0" text="Attestation de travail" />
                                         <TextField fx:id="urlcin" layoutX="196.0" layoutY="59.0" />
                                         <TextField fx:id="urlCerRetenu" layoutX="196.0" layoutY="102.0" />
                                         <TextField fx:id="urlAttTravail" layoutX="196.0" layoutY="162.0" />
@@ -127,7 +128,16 @@
                                 <Insets />
                             </opaqueInsets>
                         </ScrollPane>
-                        <ListView fx:id="tflistview2" layoutX="44.0" layoutY="124.0" onMouseClicked="#ModifierDossier" prefHeight="198.0" prefWidth="306.0" />
+                  <TableView prefHeight="458.0" prefWidth="347.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="cin" />
+                      <TableColumn prefWidth="75.0" text="nom" />
+                      <TableColumn prefWidth="75.0" text="prenom" />
+                        <TableColumn prefWidth="75.0" text="region" />
+                        <TableColumn prefWidth="75.0" text="date" />
+                        <TableColumn prefWidth="75.0" text="montant" />
+                    </columns>
+                  </TableView>
                     </children>
                 </HBox>
                 <Label layoutX="14.0" layoutY="53.0" prefHeight="17.0" prefWidth="272.0" text="Bienvenue">

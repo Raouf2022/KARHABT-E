@@ -25,13 +25,20 @@ public class ServiceDemandeDossier implements IDemandeDossier<DossierDemande> {
             ps.setString(5, dossierDemande.getUrlExtNaissance());
 
             ps.executeUpdate();
-            System.out.println("Demande added !");
+            // Vérification des valeurs saisies
+            if (dossierDemande.getUrlcin() == null || dossierDemande.getUrlcin().isEmpty()) {
+                throw new IllegalArgumentException("L'URL du CIN ne peut pas être vide.");
+            }
+            if (dossierDemande.getUrlCerRetenu() == null || dossierDemande.getUrlCerRetenu().isEmpty()) {
+                throw new IllegalArgumentException("L'URL du certificat de retenue ne peut pas être vide.");
+
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
-    @Override
+        @Override
     public void modifier(int id_demande, DossierDemande dossierDemande) {
 
         String req = "UPDATE demandedossier SET urlcin= ?, urlCerRetenu = ?, urlAttTravail= ?, urlDecRevenu = ? , urlExtNaissance= ?  WHERE id_demande = ?";

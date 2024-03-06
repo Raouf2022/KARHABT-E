@@ -155,7 +155,7 @@ public class AjouterDossier {
         if (d != null) {
             try {
 
-                sp.supprimer(d); // Assuming you have a method to delete a dossier
+                sp.supprimerid(d.getId_dossier()); // Assuming you have a method to delete a dossier
                 tflistview.getItems().remove(d); // Remove from the ListView
             } catch (Exception e) {
                 Alert alert = new Alert(AlertType.ERROR);

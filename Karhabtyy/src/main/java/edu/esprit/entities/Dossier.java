@@ -1,6 +1,6 @@
 package edu.esprit.entities;
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 public class Dossier {
 
@@ -20,8 +20,16 @@ public class Dossier {
         this.region=region;
         this.date=date;
         this.montant=montant;
+    }
 
-
+    public Dossier(int cin, String nom, String prenom, String region, Date date, int id_dossier, int montant) {
+        this.cin = cin;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.region = region;
+        this.date = date;
+        this.id_dossier = id_dossier;
+        this.montant = montant;
     }
 
     public Dossier() {

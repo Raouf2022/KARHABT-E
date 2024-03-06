@@ -67,15 +67,7 @@
     -fx-background-radius: 20px;
 
 }
-#buttadd{
 
-    -fx-background-color: rgb(241, 242, 244);
-    -fx-border-width : 2px 2px 2px 2px ;
-    -fx-border-radius:20px;
-    -fx-background-radius: 20px;
-    -fx-border-style:solid;
-    -fx-border-color: #07b5bb;
-}
 
 .button:hover {
     -fx-background-color: #0056b3; /* Set background color on hover */
@@ -150,4 +142,13 @@
     -fx-border-radius: 4px; /* Set border radius */
     -fx-border-color: #07b5bb; /* Set border color */
     -fx-border-width: 1px; /* Set border width */
+}
+.shadowpane
+{
+    -fx-background-color: rgba(203, 201, 201, 0.44); /* Set background color */
+}
+.panedshadowdos
+{
+    -fx-background-color: rgba(203, 201, 201, 0.44); /* Set background color */
+
 }
