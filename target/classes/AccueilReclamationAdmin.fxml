@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="640.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AccueilReclamationAdmin">
+   <children>
+      <Text fx:id="textGestion" fill="#fcfcfc" layoutX="183.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation  et méssagerie clientèle" textAlignment="CENTER" wrappingWidth="654.4898681640625">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Pane prefHeight="62.0" prefWidth="1015.0" style="-fx-background-color: #0460D9;">
+         <children>
+            <Text fx:id="textGestion1" fill="#fcfcfc" layoutX="173.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion de réclamation  et méssagerie Admin" textAlignment="CENTER" wrappingWidth="654.4898681640625">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <Button fx:id="bRetourA" cache="true" focusTraversable="false" layoutX="25.0" layoutY="12.0" mnemonicParsing="false" onAction="#retourAcueilAdmin" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #6b7fab08;" text="retour" textFill="#bf7601">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Button fx:id="bListMessagesA" layoutX="693.0" layoutY="596.0" mnemonicParsing="false" onAction="#openListMessagesA" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #0061C2;" text="Mes messages" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Pane layoutX="690.0" layoutY="472.0" prefHeight="128.0" prefWidth="174.0" style="-fx-background-color: #0061C21A;">
+         <children>
+            <ImageView fitHeight="128.0" fitWidth="162.0" layoutX="9.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/imgMess.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="62.0" prefHeight="638.0" prefWidth="324.0" style="-fx-background-color: #BCECFF;">
+         <children>
+            <ImageView fitHeight="226.0" fitWidth="228.0" layoutX="48.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/accuileimageee.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Line endX="-309.0" endY="-43.599998474121094" layoutX="309.0" layoutY="106.0" startX="698.0999755859375" startY="-43.599998474121094" stroke="#2a3d73" strokeLineCap="ROUND" strokeWidth="5.0" />
+      <Line endX="-309.0" endY="-42.79998779296875" layoutX="309.0" layoutY="747.0" startX="690.0" startY="-42.79998779296875" stroke="#2a5073" strokeLineCap="ROUND" strokeWidth="5.0" />
+      <Button fx:id="bListReclamationA" layoutX="450.0" layoutY="296.0" mnemonicParsing="false" onAction="#openReclamationA" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #0061C2;" text="Les réclamations" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Pane layoutX="450.0" layoutY="168.0" prefHeight="128.0" prefWidth="174.0" style="-fx-background-color: #0061C21A;">
+         <children>
+            <ImageView fitHeight="136.0" fitWidth="152.0" layoutX="13.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/imgMesR.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button fx:id="bLesRepRA" layoutX="683.0" layoutY="296.0" mnemonicParsing="false" onAction="#openLesReponsesRA" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #0061C2;" text="Les réponses de réclamations" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Button>
+      <Pane layoutX="683.0" layoutY="168.0" prefHeight="128.0" prefWidth="174.0" style="-fx-background-color: #0061C21A;">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="181.0" layoutX="21.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/imageeeReponseR.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button fx:id="bEnvoyerMA" layoutX="445.0" layoutY="596.0" mnemonicParsing="false" onAction="#openEnvoyerMessageA" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #0061C2;" text="Envoyer un message" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Pane layoutX="445.0" layoutY="468.0" prefHeight="128.0" prefWidth="174.0" style="-fx-background-color: #0061C21A;">
+         <children>
+            <ImageView fitHeight="106.0" fitWidth="123.0" layoutX="32.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IMAGElESmMessages.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="72.0" fitWidth="100.0" layoutX="908.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/logoP.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

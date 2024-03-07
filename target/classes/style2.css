@@ -1,0 +1,127 @@
+/* .root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-base: #F0F0F0;
+}
+
+/* Amélioration du style du Pane de l'en-tête */
+.pane {
+    -fx-background-color: linear-gradient(#4F81BD, #356AA0);
+    -fx-padding: 10px;
+}
+
+/* Améliorations des boutons */
+.button {
+    -fx-background-color: linear-gradient(#6CA6CD, #4A90E2);
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#4A90E2, #3D7EBB);
+}
+
+/* Amélioration du style des textes */
+.text {
+    -fx-fill: #030303;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Style amélioré spécifique pour le label 'emptyLabel' */
+#emptyLabel {
+    -fx-text-fill: #204E6D;
+    -fx-font-size: 20px;
+    -fx-font-style: italic;
+}
+
+/* Améliorations des TilePane et Pagination */
+.tile-pane, .pagination {
+    -fx-background-color: #E3EAF3;
+}
+
+/* Améliorations des champs DatePicker et des BarCharts */
+.date-picker, .bar-chart {
+    -fx-font-size: 16px;
+}
+
+/* Amélioration du style de Pagination */
+.pagination .button {
+    -fx-background-radius: 5em;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.6), 5, 0.5, 0, 1);
+}
+
+/* Améliorations pour le BarChart */
+.bar-chart .chart-series-bar {
+    -fx-bar-fill: linear-gradient(#4A90E2, #2171B5);
+}
+
+/* Ajout d'un style pour les étiquettes (labels) */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* Style pour les DatePicker */
+.date-picker {
+    -fx-background-radius: 5px;
+}
+
+/* Style pour les champs de texte et les zones de texte */
+.text-field, .text-area {
+    -fx-border-color: #C4C4C4;
+    -fx-border-radius: 5px;
+}
+
+/* Effet de focus pour les champs de texte */
+.text-field:focused, .text-area:focused {
+    -fx-border-color: #4A90E2;
+    -fx-border-width: 2px;
+}
+
+.reclamation-title {
+    -fx-text-fill: #0460D9; /* Couleur du texte */
+    -fx-font-size: 18px; /* Taille du texte */
+    -fx-font-weight: bold; /* Gras */
+    -fx-padding: 5px; /* Espacement autour du texte */
+    -fx-background-color: #EBF2FA; /* Couleur d'arrière-plan */
+    -fx-background-radius: 5px; /* Arrondir les coins */
+}
+
+/* Styliser les axes du BarChart */
+.chart-line-symbol, .axis {
+    -fx-padding: 5px;
+}
+
+.axis-label {
+    -fx-text-fill: #333333; /* Couleur des étiquettes d'axe */
+    -fx-font-size: 14px; /* Taille des étiquettes d'axe */
+}
+
+.axis-tick-label {
+    -fx-fill: #666666; /* Couleur des étiquettes des graduations */
+    -fx-font-size: 12px; /* Taille des étiquettes des graduations */
+}
+
+/* Styliser les barres du BarChart */
+.bar-chart .data0 .chart-bar {
+    -fx-bar-fill: #4A90E2; /* Couleur des barres pour la première série de données */
+}
+
+.bar-chart .data1 .chart-bar {
+    -fx-bar-fill: #E14A90E2; /* Couleur des barres pour la deuxième série de données, si applicable */
+}
+
+/* Styliser le fond du BarChart */
+.chart-content {
+    -fx-background-color: #EBF2FA;
+}
+
+/* Styliser la légende du BarChart */
+.chart-legend {
+    -fx-background-color: #FFFFFF; /* Fond blanc pour la légende */
+    -fx-border-color: #CCCCCC; /* Bordure grise pour la légende */
+    -fx-padding: 5px; /* Espacement intérieur pour la légende */
+}

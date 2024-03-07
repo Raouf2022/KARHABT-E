@@ -1,0 +1,72 @@
+.root {
+    -fx-base: #60A0FF;
+    -fx-background-color: #F4F4F4;
+}
+
+.button {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #0076a3;
+    -fx-border-width: 2;
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(#084e99, #003366);
+    -fx-font-weight: bold;
+    -fx-padding: 10 20 10 20;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#0076a3, #084e99);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.text-area, .text-field {
+    -fx-font-size: 14px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}
+
+.pane {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+}
+
+#bRetourA, #bEnregistrer {
+    -fx-background-color: linear-gradient(#F29C50, #E68A00), linear-gradient(#ffef84, #f2ba44);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0,1;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+}
+
+#bRetourA:hover, #bEnregistrer:hover {
+    -fx-background-color: linear-gradient(#ffef84, #f2ba44), linear-gradient(#F29C50, #E68A00);
+}
+
+.text {
+    -fx-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0);
+}
+
+/* Ajoute une petite animation de rotation au logo ou à l'image */
+.image-view:hover {
+    -fx-transform: rotate(10deg);
+    -fx-transition: transform 0.5s ease;
+}
+
+/* Styles spécifiques pour les Pane en entête */
+.pane-header {
+    -fx-background-color: #0460D9;
+    -fx-text-fill: #FFFFFF;
+}
+
+.pane-sub-header {
+    -fx-background-color: #94BDF2;
+    -fx-text-fill: #084e99;
+}

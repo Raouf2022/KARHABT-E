@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="dsn">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/dsn.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/gimap.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/imap.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/mailapi.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/pop3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/smtp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/mail.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/dsn.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/gimap.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/imap.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/mailapi.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/pop3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/lib/smtp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/mail.jar!/" />
+    </excluded>
+  </library>
+</component>

@@ -1,0 +1,54 @@
+.root {
+    -fx-background-color: #EBF2FA; /* Couleur de fond douce pour l'ensemble de l'interface */
+}
+
+.pane {
+    -fx-background-radius: 10px; /* Ajoute des bordures arrondies aux panneaux */
+}
+
+#paneTop, .button {
+    -fx-background-color: #0460D9; /* Couleur bleue principale pour une harmonie visuelle */
+    -fx-text-fill: white; /* Texte blanc pour un contraste élevé */
+    -fx-font-family: "Arial", sans-serif; /* Police moderne et lisible */
+    -fx-font-weight: bold; /* Rend le texte plus impactant */
+    -fx-background-radius: 5px; /* Bordures arrondies pour les boutons */
+}
+
+.button {
+    -fx-padding: 10px 20px; /* Plus d'espace autour du texte pour un clic facile */
+    -fx-border-color: white; /* Bordure blanche pour distinguer les boutons */
+    -fx-border-width: 2px; /* Épaisseur de la bordure */
+}
+
+.button:hover {
+    -fx-opacity: 0.8; /* Effet d'opacité au survol pour une interaction visuelle */
+}
+
+.textField {
+    -fx-font-size: 14px; /* Taille de police adaptée pour les champs de texte */
+    -fx-border-color: #94BDF2; /* Couleur de bordure légère pour les champs de texte */
+    -fx-border-radius: 5px; /* Bordures arrondies pour les champs de texte */
+    -fx-padding: 10px; /* Padding intérieur pour un meilleur esthétisme */
+}
+
+#textGestion1, #bLesMessages, .text {
+    -fx-font-size: 18px; /* Taille de police augmentée pour l'importance */
+    -fx-font-weight: bold; /* Gras pour plus d'impact */
+}
+
+.imageView {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 10); /* Ombre portée pour les images */
+}
+
+.fa-icon {
+    -fx-fill: #bf7601; /* Couleur personnalisée pour les icônes FontAwesome */
+}
+
+#messagesEnvoyéesButton, #EnvoyerButton {
+    -fx-background-color: #084e99; /* Bleu plus foncé pour les actions importantes */
+}
+
+#messagesEnvoyéesButton:hover, #EnvoyerButton:hover {
+    -fx-background-color: #063d7a; /* Variation de couleur au survol */
+}
+

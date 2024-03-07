@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="demo">
+    <CLASSES />
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/docs/javadocs" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/demo" />
+      <root url="file://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/demo/client" />
+      <root url="file://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/demo/logging" />
+      <root url="file://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/demo/outlook" />
+      <root url="file://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/demo/servlet" />
+      <root url="file://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/demo/webapp/src/classes" />
+      <root url="file://$PROJECT_DIR$/../../../../javamail1_4_7/javamail-1.4.7/demo/webapp/src/taglib" />
+    </SOURCES>
+  </library>
+</component>

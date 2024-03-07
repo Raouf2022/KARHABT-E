@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ca148372-56a6-4d4f-bea7-c1960bb8978b" name="Changes" comment="ajout d'une api captcha" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2c8YjVjgNmDCnJ7iVNrh6blRl73" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AjoutWindow.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Maven.gestionMariem3A4444 [deploy].executor": "Run",
+    "Maven.gestionMariem3A4444 [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/marie/IdeaProjects/gestionMariem3A4/src/main/java",
+    "last_opened_file_path": "C:/Users/marie/IdeaProjects/gestionMariem3A4/src/main/resources",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/marie/IdeaProjects/gestionMariem3A4/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\marie\IdeaProjects\gestionMariem3A4\src\main\resources" />
+      <recent name="C:\Users\marie\IdeaProjects\gestionMariem3A4\src\main\java\edu\esprit\services" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marie\IdeaProjects\gestionMariem3A4\src\main\resources\images" />
+      <recent name="C:\Users\marie\IdeaProjects\gestionMariem3A4\src\main\resources" />
+      <recent name="C:\Users\marie\IdeaProjects\gestionMariem3A4\src\main\java\edu\esprit\entities" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.esprit.controllers" />
+      <recent name="edu.esprit.entities" />
+      <recent name="edu.esprit.services" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="AjoutWindow" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="edu.esprit.tests.AjoutReclamationInterface" />
+      <module name="gestionMariem3A4444" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml " />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.esprit.tests.Main" />
+      <module name="gestionMariem3A4444" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.esprit.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-jbrsdk-17.0.9-4caba194b151-b614c381" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ca148372-56a6-4d4f-bea7-c1960bb8978b" name="Changes" comment="" />
+      <created>1707494810385</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707494810385</updated>
+      <workItem from="1707494811454" duration="7795000" />
+      <workItem from="1707561997734" duration="26043000" />
+      <workItem from="1707728775139" duration="7096000" />
+      <workItem from="1707770980720" duration="7829000" />
+      <workItem from="1707847968506" duration="16860000" />
+      <workItem from="1707913156070" duration="24885000" />
+      <workItem from="1708001445596" duration="19000" />
+      <workItem from="1708009479009" duration="1496000" />
+      <workItem from="1708032903483" duration="14592000" />
+      <workItem from="1708121217590" duration="5409000" />
+      <workItem from="1708183075347" duration="9320000" />
+      <workItem from="1708293460601" duration="7988000" />
+      <workItem from="1708374362946" duration="13208000" />
+      <workItem from="1708426482693" duration="43390000" />
+      <workItem from="1708594849083" duration="1428000" />
+      <workItem from="1708606040159" duration="7746000" />
+      <workItem from="1708706922453" duration="17908000" />
+      <workItem from="1708781450893" duration="9510000" />
+      <workItem from="1708813443731" duration="17635000" />
+      <workItem from="1708866552678" duration="23208000" />
+      <workItem from="1708971448240" duration="16874000" />
+      <workItem from="1709045853899" duration="316000" />
+      <workItem from="1709047540219" duration="598000" />
+      <workItem from="1709055844944" duration="5894000" />
+      <workItem from="1709066220824" duration="12648000" />
+      <workItem from="1709121406294" duration="31620000" />
+      <workItem from="1709171044050" duration="379000" />
+      <workItem from="1709197800978" duration="5423000" />
+      <workItem from="1709224033107" duration="4694000" />
+      <workItem from="1709303757588" duration="11575000" />
+      <workItem from="1709335014763" duration="5693000" />
+      <workItem from="1709341121570" duration="1652000" />
+      <workItem from="1709377270460" duration="17715000" />
+      <workItem from="1709473958350" duration="8671000" />
+      <workItem from="1709561854834" duration="17033000" />
+      <workItem from="1709589288313" duration="17649000" />
+      <workItem from="1709609743318" duration="1841000" />
+      <workItem from="1709627191552" duration="23458000" />
+      <workItem from="1709673008701" duration="39326000" />
+    </task>
+    <task id="LOCAL-00001" summary="Ajout de  contrôle  de saisie dans ServiceAvisReclamation">
+      <option name="closed" value="true" />
+      <created>1707918616312</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707918616312</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Ajout de  contrôle  de saisie dans ServiceMessagerie">
+      <option name="closed" value="true" />
+      <created>1707951183913</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1707951183913</updated>
+    </task>
+    <task id="LOCAL-00003" summary="modification code">
+      <option name="closed" value="true" />
+      <created>1707954283758</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707954283758</updated>
+    </task>
+    <task id="LOCAL-00004" summary="modification code">
+      <option name="closed" value="true" />
+      <created>1707957313389</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707957313389</updated>
+    </task>
+    <task id="LOCAL-00005" summary="modification code">
+      <option name="closed" value="true" />
+      <created>1708045448531</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708045448531</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ajout enumération (avisType)">
+      <option name="closed" value="true" />
+      <created>1708123001152</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708123001152</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ajout interfaces">
+      <option name="closed" value="true" />
+      <created>1708594911302</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708594911302</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Modification d'une entité avec ses CRUD + Amelioration code">
+      <option name="closed" value="true" />
+      <created>1708710300637</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708710300637</updated>
+    </task>
+    <task id="LOCAL-00009" summary="amelioration des interface de lentité Reclamation">
+      <option name="closed" value="true" />
+      <created>1708791046094</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708791046094</updated>
+    </task>
+    <task id="LOCAL-00010" summary="modification de code">
+      <option name="closed" value="true" />
+      <created>1709171131187</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1709171131187</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ajout du metier : tri des reclamation">
+      <option name="closed" value="true" />
+      <created>1709421747153</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1709421747153</updated>
+    </task>
+    <task id="LOCAL-00012" summary="ajout du metier : recherche d'une reclamation avec calendrier">
+      <option name="closed" value="true" />
+      <created>1709571485505</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709571485505</updated>
+    </task>
+    <task id="LOCAL-00013" summary="ajout du metier : statistique des recmlamations par jour + api notifocations + api pdf">
+      <option name="closed" value="true" />
+      <created>1709607613203</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709607613203</updated>
+    </task>
+    <task id="LOCAL-00014" summary="ajout api : telecharger statistique sous format .csv">
+      <option name="closed" value="true" />
+      <created>1709611524051</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1709611524051</updated>
+    </task>
+    <task id="LOCAL-00015" summary="amelioration des interfaces">
+      <option name="closed" value="true" />
+      <created>1709636428375</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709636428375</updated>
+    </task>
+    <task id="LOCAL-00016" summary="amelioration des interfaces">
+      <option name="closed" value="true" />
+      <created>1709661162843</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1709661162843</updated>
+    </task>
+    <task id="LOCAL-00017" summary="    amelioration des interfaces">
+      <option name="closed" value="true" />
+      <created>1709677223519</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1709677223519</updated>
+    </task>
+    <task id="LOCAL-00018" summary="ajout d'une api captcha">
+      <option name="closed" value="true" />
+      <created>1709682596001</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1709682596001</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ajout de  contrôle  de saisie dans ServiceAvisReclamation" />
+    <MESSAGE value="Ajout de  contrôle  de saisie dans ServiceMessagerie" />
+    <MESSAGE value="modification code" />
+    <MESSAGE value="ajout enumération (avisType)" />
+    <MESSAGE value="ajout interfaces" />
+    <MESSAGE value="Modification d'une entité avec ses CRUD + Amelioration code" />
+    <MESSAGE value="amelioration des interface de lentité Reclamation" />
+    <MESSAGE value="modification de code" />
+    <MESSAGE value="ajout du metier : tri des reclamation" />
+    <MESSAGE value="ajout du metier : recherche d'une reclamation avec calendrier" />
+    <MESSAGE value="ajout du metier : statistique des recmlamations par jour + api notifocations + api pdf" />
+    <MESSAGE value="ajout api : telecharger statistique sous format .csv" />
+    <MESSAGE value="amelioration des interfaces" />
+    <MESSAGE value="    amelioration des interfaces" />
+    <MESSAGE value="ajout d'une api captcha" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout d'une api captcha" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/gestionMariem3A4$AjoutWindow.ic" NAME="AjoutWindow Coverage Results" MODIFIED="1708190508441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>edu.esprit.tests.*</FILTER>
+    </SUITE>
+  </component>
+</project>

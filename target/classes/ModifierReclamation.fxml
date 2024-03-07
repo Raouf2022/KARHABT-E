@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="393.0" prefWidth="614.0" style="-fx-background-color: #EBF2FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierReclamation">
+    <children>
+        <TextField fx:id="sujetTextField" layoutX="105.0" layoutY="123.0" prefHeight="62.0" prefWidth="358.0" promptText="Entrez le sujet" />
+
+        <Label layoutX="27.0" layoutY="261.0" text="Description:" textFill="#013069" underline="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+
+        <!-- Ajoutez d'autres champs de saisie pour les autres attributs si nécessaire -->
+
+        <Button fx:id="enregistrerButton" layoutX="247.0" layoutY="351.0" onAction="#handleEnregistrer" style="-fx-background-color: #0061C2;" text="Enregistrer" textFill="WHITE" />
+        <Button fx:id="annulerButton" layoutX="624.0" layoutY="351.0" onAction="#handleAnnuler" style="-fx-background-color: #F2CA52;" text="Annuler" textFill="WHITE" />
+
+
+
+        <Pane prefHeight="91.0" prefWidth="696.0" style="-fx-background-color: #0460D9;">
+         <children>
+            <Text fx:id="textGestion" fill="WHITE" layoutX="169.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier votre réclamation" textAlignment="CENTER" wrappingWidth="365.68988037109375">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Label layoutX="47.0" layoutY="146.0" text="Sujet" textFill="#013069" underline="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="taDescription" layoutX="105.0" layoutY="196.0" prefHeight="146.0" prefWidth="358.0" promptText="Entrez la nouvelle description" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="482.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Downloads/iconModifier.png" />
+         </image>
+      </ImageView>
+    </children>
+
+</AnchorPane>
