@@ -1,0 +1,17 @@
+edu\esprit\entities\Client.class
+edu\esprit\controller\WelcomePage.class
+edu\esprit\controller\Container.class
+edu\esprit\controller\FaceRecognition.class
+edu\esprit\services\IUserService.class
+edu\esprit\controller\LoginApplication.class
+edu\esprit\controller\ProfileClient.class
+edu\esprit\test\MainFX.class
+edu\esprit\controller\InscriptionApplication.class
+edu\esprit\controller\LoginApplication$1.class
+edu\esprit\controller\ModifierUser.class
+edu\esprit\entities\Admin.class
+edu\esprit\controller\adminPage.class
+edu\esprit\services\ServiceUser.class
+edu\esprit\entities\User.class
+edu\esprit\test\Main.class
+edu\esprit\tools\DataSource.class

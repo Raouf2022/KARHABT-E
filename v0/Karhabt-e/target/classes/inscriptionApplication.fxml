@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="LayerInscri" accessibleRole="BUTTON" prefHeight="664.0" prefWidth="936.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controller.InscriptionApplication">
+   <children>
+      <TextField fx:id="fxnom" layoutX="513.0" layoutY="220.0" prefHeight="30.0" prefWidth="156.0" promptText="Nom" styleClass="text-field" stylesheets="@style.css">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Text fx:id="fwelcome" fill="#087cff" layoutX="624.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer Votre Compte" textAlignment="CENTER" wrappingWidth="137.33673095703125">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="fxprenom" layoutX="719.0" layoutY="219.0" prefHeight="32.0" prefWidth="156.0" promptText="Prenom" styleClass="text-field" stylesheets="@style.css" />
+      <DatePicker fx:id="fxdate" layoutX="513.0" layoutY="304.0" prefHeight="32.0" prefWidth="156.0" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="calendar-grid" />
+            <String fx:value="arrow-button" />
+            <String fx:value="date-picker-popup" />
+            <String fx:value="day-cell" />
+            <String fx:value="hovered" />
+            <String fx:value="month-year-label" />
+            <String fx:value="month-year-pane" />
+            <String fx:value="popup-content" />
+            <String fx:value="selected" />
+         </styleClass>
+      </DatePicker>
+      <TextField fx:id="fxtel" layoutX="765.0" layoutY="306.0" prefHeight="32.0" prefWidth="110.0" promptText="8 chiffres" styleClass="text-field" stylesheets="@style.css" />
+      <TextField fx:id="fxmail" layoutX="513.0" layoutY="396.0" prefHeight="32.0" prefWidth="156.0" promptText="Exemple@esprit.tn" styleClass="text-field" stylesheets="@style.css" />
+      <PasswordField fx:id="fxpwd" layoutX="719.0" layoutY="396.0" prefHeight="32.0" prefWidth="156.0" promptText="********" styleClass="text-field" stylesheets="@style.css" />
+      <Text layoutX="720.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :" />
+      <Label fx:id="fxTelError" layoutX="719.0" layoutY="339.0" prefHeight="18.0" prefWidth="186.0" text="Enter your Phone Number correctly !!" textFill="RED" visible="false">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Button fx:id="fxCreateAcc" layoutX="513.0" layoutY="580.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="34.0" prefWidth="360.0" stylesheets="@style.css" text="Créer un compte" />
+      <Label fx:id="fxerrorMail" layoutX="515.0" layoutY="436.0" prefHeight="18.0" prefWidth="156.0" text="Please enter your Email correctly !!" textFill="RED" visible="false">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <TextField editable="false" layoutX="720.0" layoutY="306.0" mouseTransparent="true" prefHeight="32.0" prefWidth="51.0" stylesheets="@style.css" text="+216" />
+      <Label layoutX="515.0" layoutY="196.0" prefHeight="18.0" prefWidth="61.0" text="Nom :" />
+      <Label layoutX="719.0" layoutY="197.0" text="Prenom :" />
+      <Label layoutX="513.0" layoutY="281.0" prefHeight="18.0" prefWidth="126.0" text="Date de naissance :" />
+      <Label layoutX="719.0" layoutY="282.0" prefHeight="18.0" prefWidth="166.0" text="Numéro de télephone :" />
+      <Label layoutX="515.0" layoutY="369.0" prefHeight="18.0" prefWidth="48.0" text="E-mail :" />
+      <Pane fx:id="fPane" prefHeight="664.0" prefWidth="446.0">
+         <children>
+            <ImageView fitHeight="717.0" fitWidth="446.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/background.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="80.0" layoutY="199.0" prefHeight="24.0" prefWidth="288.0" text="Vous avez déjà un compte ?" textFill="WHITE">
+               <font>
+                  <Font name="Montserrat ExtraBold" size="19.0" />
+               </font>
+            </Label>
+            <Button fx:id="ToLog" layoutX="164.0" layoutY="332.0" mnemonicParsing="false" onAction="#ToLogin" prefHeight="34.0" prefWidth="119.0" text="Se connecter" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="103.0" fitWidth="361.0" layoutX="641.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/karhabt-e.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="fximg" fitHeight="114.0" fitWidth="156.0" layoutX="719.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="513.0" layoutY="488.0" mnemonicParsing="false" onAction="#ajouterPhoto" prefHeight="34.0" prefWidth="156.0" text="Choisir image" />
+   </children>
+</AnchorPane>
